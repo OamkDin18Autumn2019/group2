@@ -39,21 +39,21 @@ router.post('/', function(req, res, next) {
       console.log(err);
     }) 
 });
-// router.delete('/:id', function(req, res, next) {
-//   book.delete(req.params.id, function(err, count) {
+router.delete('/:id', function(req, res, next) {
+  product.delete(req.params.id, function(err, count) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(count);
+    }
+  });
+});
+// router.put('/:id', function(req, res, next) {
+//   product.update(req.params.id, product, function(err, count) {
 //     if (err) {
 //       res.json(err);
 //     } else {
 //       res.json(count);
-//     }
-//   });
-// });
-// router.put('/:id', function(req, res, next) {
-//   user.update(req.params.id, req.body, function(err, rows) {
-//     if (err) {
-//       res.json(err);
-//     } else {
-//       res.json(rows);
 //     }
 //   });
 // });
