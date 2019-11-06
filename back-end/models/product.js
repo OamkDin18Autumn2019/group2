@@ -19,8 +19,8 @@ var product = {
   },
   update: function(id, product, callback) {
     return db.query(
-      "UPDATE `products` SET `idProduct` = ?, `idUser` = ?,price` = ?, `amountOfProduct` = ?, `name` = ?, `ratingProduct` = ?, `amountOfRates` = ?, `description` = ?, `dateOfAdding` = ?, `amountOfSoldProduct` = ?, `photos` = ?, `category` = ? WHERE `products`.`idProduct` = ?",
-      [product.idProduct, product.idUser, product.price, product.amountOfProduct, product.name, product.ratingProduct, amountOfRates, product.description, amountOfSoldProduct, product.photos, product.category, id],
+      "UPDATE `products` SET `idProduct` = ?, `idUser` = ?, `price` = ?, `amountOfProduct` = ?, `name` = ?, `ratingProduct` = ?, `amountOfRates` = ?, `description` = ?, `dateOfAdding` = ?, `amountOfSoldProduct` = ?, `photos` = ?, `category` = ? WHERE `products`.`idProduct` = ?",
+      [product.idProduct, product.idUser, product.price, product.amountOfProduct, product.name, product.ratingProduct, product.amountOfRates, product.description, product.dateOfAdding, product.amountOfSoldProduct, product.photos, product.category, id],
       callback
     );
   }

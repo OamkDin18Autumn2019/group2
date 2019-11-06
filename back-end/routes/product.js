@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
     req.body.forEach(element => {
       product.add(element, function(err, count) {
         if (err) {
-          console.log(error)
+          console.log(err)
         }
       });
     })]
@@ -48,13 +48,13 @@ router.delete('/:id', function(req, res, next) {
     }
   });
 });
-// router.put('/:id', function(req, res, next) {
-//   product.update(req.params.id, product, function(err, count) {
-//     if (err) {
-//       res.json(err);
-//     } else {
-//       res.json(count);
-//     }
-//   });
-// });
+router.put('/:id', function(req, res, next) {
+  product.update(req.params.id, req.body, function(err, count) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(count);
+    }
+  });
+});
 module.exports = router;
