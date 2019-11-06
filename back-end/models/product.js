@@ -4,15 +4,16 @@ var product = {
     return db.query('select * from products', callback);
   },
   getById: function(id, callback) {
+    console.log(id);
     return db.query('select * from products where idProduct=?', [id], callback);
   },
-  // add: function(user, callback) {
-    // return db.query(
-      // 'insert into users values(?,?,?,?)',
-      // [user.user_id, user.name, user.author, user.isbn],
-      // callback
-    // );
-  // },
+  add: function(product, callback) {
+    return db.query(
+      'insert into products (idUser, price, amountOfProduct, name, ratingProduct, amountOfRates, description, amountOfSoldProduct, photos, category) values (?,?,?,?,?,?,?,?,?,?)',
+      [product.idUser, product.price, product.amountOfProduct, product.name, 0, 0, product.description, 0, product.photos, product.category],
+      callback
+    );
+  },
   // delete: function(id, callback) {
     // return db.query('delete from users where user_id=?', [id], callback);
   // },
