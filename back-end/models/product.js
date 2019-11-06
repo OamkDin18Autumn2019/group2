@@ -14,15 +14,15 @@ var product = {
       callback
     );
   },
-  // delete: function(id, callback) {
-    // return db.query('delete from users where user_id=?', [id], callback);
-  // },
-  // update: function(id, user, callback) {
-    // return db.query(
-      // 'update book set name=?,author=?, isbn=? where book_id=?',
-      // [book.name, book.author, book.isbn, id],
-      // callback
-    // );
-  // }
+  delete: function(id, callback) {
+    return db.query('delete from products where idProduct=?', [id], callback);
+  },
+  update: function(id, product, callback) {
+    return db.query(
+      "UPDATE `products` SET `idProduct` = ?, `idUser` = ?,price` = ?, `amountOfProduct` = ?, `name` = ?, `ratingProduct` = ?, `amountOfRates` = ?, `description` = ?, `dateOfAdding` = ?, `amountOfSoldProduct` = ?, `photos` = ?, `category` = ? WHERE `products`.`idProduct` = ?",
+      [product.idProduct, product.idUser, product.price, product.amountOfProduct, product.name, product.ratingProduct, amountOfRates, product.description, amountOfSoldProduct, product.photos, product.category, id],
+      callback
+    );
+  }
 };
 module.exports = product;
