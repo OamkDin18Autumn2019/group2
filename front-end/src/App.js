@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LandingPage from './components/LandingPage';
+import Register from './components/Register';
 // import SearchPage from './components/SearchPage';
 // import ProfilePage from './components/ProfilePage';
 // import AdminPage from './components/AdminPage';
@@ -16,7 +17,10 @@ export default class App extends React.Component {
         <Router>
           <Route
             path="/"
-            exact render={(routerProps ) => <LandingPage  />} />
+            exact render={(routerProps) => <LandingPage />} />
+          <Route
+            path="/signup"
+            exact render={(routerProps) => <Register />} />
           {/* <Route
             path="/search"
             exact render={(routerProps ) => <SearchPage  />} />
@@ -27,14 +31,11 @@ export default class App extends React.Component {
             path="/admin"
             exact render={(routerProps ) => <AdminPage  />} />
           <Route
-            path="/signup"
-            exact render={(routerProps ) => <SignUp  />} />
-          <Route
             path="/login"
             exact render={(routerProps ) => <Login  />} />   */}
         </Router>
       </React.Fragment>
-      
+
     );
   }
 }
