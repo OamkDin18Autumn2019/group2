@@ -1,27 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import LandingPage from './components/LandingPage';
+// import SearchPage from './components/SearchPage';
+// import ProfilePage from './components/ProfilePage';
+// import AdminPage from './components/AdminPage';
+// import SignUp from './components/SignUp';
+// import Login from './components/Login';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. 
-        </p>
-        <p>Oh shit I'm sorry</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+
+  render() {
+    return (
+      <React.Fragment>
+        <Router>
+          <Route
+            path="/"
+            exact render={(routerProps ) => <LandingPage  />} />
+          {/* <Route
+            path="/search"
+            exact render={(routerProps ) => <SearchPage  />} />
+          <Route
+            path="/profile"
+            exact render={(routerProps ) => <ProfilePage  />} />  
+          <Route
+            path="/admin"
+            exact render={(routerProps ) => <AdminPage  />} />
+          <Route
+            path="/signup"
+            exact render={(routerProps ) => <SignUp  />} />
+          <Route
+            path="/login"
+            exact render={(routerProps ) => <Login  />} />   */}
+        </Router>
+      </React.Fragment>
+      
+    );
+  }
 }
 
-export default App;
