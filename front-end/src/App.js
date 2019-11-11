@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LandingPage from './components/LandingPage';
 import Register from './components/Register';
 import SearchPage from './components/SearchPage';
+import ProductPage from './components/ProductPage';
 // import SearchPage from './components/SearchPage';
 // import ProfilePage from './components/ProfilePage';
 // import AdminPage from './components/AdminPage';
@@ -25,6 +26,9 @@ export default class App extends React.Component {
           <Route
             path="/search"
             exact render={(routerProps) => <SearchPage />} />
+          <Route 
+            path="/product"
+            exact render={(routerProps) => <ProductPage />} />
           {/* 
           <Route
             path="/profile"
