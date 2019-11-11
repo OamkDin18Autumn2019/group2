@@ -1,9 +1,8 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var user = require('../models/user');
+var user = require("../models/user");
 
-
-router.get('/:id?', function(req, res, next) {
+router.get("/:id?", function(req, res, next) {
   if (req.params.id) {
     user.getById(req.params.id, function(err, rows) {
       if (err) {
@@ -23,17 +22,29 @@ router.get('/:id?', function(req, res, next) {
   }
 });
 
-router.post('/', function(req, res, next) {
+router.post("/register", function(req, res, next) {
   user.add(req.body, function(err, count) {
     if (err) {
       res.json(err);
     } else {
-      res.json(req.body); 
+      res.json(req.body);
     }
   });
 });
 
-router.delete('/:id', function(req, res, next) {
+router.post("/login", async function(req, res, next) {
+  const data = await user.login(req.body);
+  if (data.code == 1) {
+    res
+      .status(200)
+      .header("x-auth-token", data.token)
+      .json({ ...data, token: "" });
+  } else {
+    res.status(400).json({ ...data });
+  }
+});
+
+router.delete("/:id", function(req, res, next) {
   user.delete(req.params.id, function(err, count) {
     if (err) {
       res.json(err);
@@ -42,7 +53,7 @@ router.delete('/:id', function(req, res, next) {
     }
   });
 });
-router.put('/:id', function(req, res, next) {
+router.put("/:id", function(req, res, next) {
   user.update(req.params.id, req.body, function(err, rows) {
     if (err) {
       res.json(err);
