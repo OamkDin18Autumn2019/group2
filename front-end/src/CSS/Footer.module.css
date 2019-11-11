@@ -1,0 +1,74 @@
+img {
+    width: 1.3em;
+    height: 1.3em;
+    margin: 5px 5px 11px 5px ;
+}
+
+p {
+    margin-bottom: 0px;
+    /* font-size: 1.2em; */
+}
+
+.Footer {
+    width: 100vw;
+    position: absolute;
+    bottom: 0px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: rgb(31, 29, 29);
+    color: #D7D3DA;
+    padding-top: 8px;
+}
+
+h5 {
+    color: white;
+}
+
+.FooterInfo {
+    margin-bottom: 5px;
+}
+
+.Inline {
+    display: inline-block;
+}
+
+.Copyright {
+    font-size: 0.7em;
+}
+
+.PaymentMethods {
+    margin: 2px 20px;
+}
+
+.PaymentMethods > img {
+    width: 3em;
+    height: 3em;
+}
+
+.SocialMediaLogos > img {
+    width: 3em;
+    height: 3em;
+}
+
+@media (min-width: 320px) {
+    .FooterElement {
+        grid-column: span 3;
+        text-align: center;
+    }
+
+    .FooterElementBottom {
+        grid-column: span 3;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .FooterElement {
+        grid-column: span 1;
+    }
+    
+    .FooterElementBottom {
+        grid-column: span 3;
+        text-align: center;
+    }
+}

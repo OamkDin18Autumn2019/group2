@@ -1,3 +1,129 @@
-.header {
-    background-color: white;
+body {
+    font-family: 'Roboto', Helvetica, sans-serif;
 }
+
+.header {
+    background-color: rgb(31, 29, 29);
+    padding: 5px 5px
+}
+
+/* .GridTemplate {
+    display: grid;
+     grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 3px;
+} */
+
+.GridTemplate > div {
+    text-align: center;
+    margin: auto;
+    font-size: 1em;
+}
+
+.GridItem {
+    margin: 2px 5px;
+    text-align: center;
+    margin: auto;
+}
+
+.SearchBar {
+    padding: 4px 2px;
+    /* height: 30px; */
+    /* width: 100%; */
+}
+
+.BrandName {
+    grid-column: span 3;
+    color: white;
+}
+
+.Button {
+    background: white;
+    box-sizing: border-box;
+    text-align: center;
+    color: black;
+    border: 0px;
+}
+
+.LoginButton {
+    background: #7BE0AD;
+    border: 0px;
+    box-sizing: border-box;
+    text-align: center;
+    color: black;
+    /* width: 80px; */
+    /* height: 35px; */
+}
+
+.MenuLogo {
+    width: 30px;
+    height: 30px;
+}
+
+.ButtonMenu {
+    background: rgb(31, 29, 29);
+    box-sizing: border-box;
+    text-align: center;
+    border: 0px;
+}
+
+@media (min-width: 320px) {
+    .GridTemplate {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+  
+    .Menu {
+       grid-column: span 1;
+    }
+
+    .BrandNameGrid {
+        display: none;
+        /* color: white; */
+    }
+
+    .SearchBar {
+        grid-column: span 4;
+        width: 90%;
+    }
+
+    .SignUp {
+        grid-column: span 1;
+    }
+
+    .Login {
+        grid-column: span 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .GridTemplate {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+    }
+  
+    .Menu {
+       grid-column: span 1;
+    }
+
+    .BrandNameGrid {
+        grid-column: span 2;
+        color: white;
+        display: block;
+    }
+
+    .SearchBar {
+        grid-column: span 4;
+        width: 80%;
+        
+    }
+
+    .SignUp {
+        grid-column: span 1;
+    }
+
+    .Login {
+        grid-column: span 1;
+    }
+}
+

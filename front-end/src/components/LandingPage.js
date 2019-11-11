@@ -8,7 +8,7 @@ export default function LandingPage(props) {
     return(
         <React.Fragment>
             <Header />
-            
+
             <Footer />
         </React.Fragment>
     )
