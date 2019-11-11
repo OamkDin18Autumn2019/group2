@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LandingPage from './components/LandingPage';
 import Register from './components/Register';
+import SearchPage from './components/SearchPage';
 // import SearchPage from './components/SearchPage';
 // import ProfilePage from './components/ProfilePage';
 // import AdminPage from './components/AdminPage';
@@ -21,9 +22,10 @@ export default class App extends React.Component {
           <Route
             path="/signup"
             exact render={(routerProps) => <Register />} />
-          {/* <Route
+          <Route
             path="/search"
-            exact render={(routerProps ) => <SearchPage  />} />
+            exact render={(routerProps) => <SearchPage />} />
+          {/* 
           <Route
             path="/profile"
             exact render={(routerProps ) => <ProfilePage  />} />  
