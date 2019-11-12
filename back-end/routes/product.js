@@ -2,7 +2,11 @@ var express = require('express');
 var router = express.Router();
 var product = require('../models/product');
 
+// Create tables "categories" and "tags"
+product.createTableCategories();
+product.createTableTags();
 
+// CRUD endpoints for "product"
 router.get("/:id?", function(req, res, next) {
   if (req.params.id) {
     product.getById(req.params.id, {
@@ -55,4 +59,5 @@ router.put('/:id', function(req, res, next) {
     }
   });
 });
+
 module.exports = router;
