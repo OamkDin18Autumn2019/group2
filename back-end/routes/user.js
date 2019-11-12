@@ -23,11 +23,12 @@ router.get("/:id?", function(req, res, next) {
 });
 
 router.post("/register", function(req, res, next) {
-  user.add(req.body, function(err, count) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(req.body);
+  user.add(req.body, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(202).json({ code: 0, err });
     }
   });
 });

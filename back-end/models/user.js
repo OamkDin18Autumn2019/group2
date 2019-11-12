@@ -1,4 +1,4 @@
-var db = require("../database");
+var db = require("../database/database");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const saltRounds = 4;
@@ -15,19 +15,42 @@ function generateAuthToken(id, isAdmin = false) {
   return token;
 }
 var user = {
-  get: function(callback) {
-    return db.query("select * from users", callback);
+  createTable: async () => {
+    db.schema.hasTable("users").then(function(exists) {
+      if (!exists) {
+        return db.schema.createTable("users", function(t) {
+          t.increments("id").primary();
+          t.string("username", 255);
+          t.string("email", 255);
+          t.string("password", 255);
+          t.integer("ratingUser");
+          t.integer("amountOfRates");
+          t.timestamps();
+        });
+      } else {
+        return null;
+      }
+    });
   },
-  getById: function(id, callback) {
-    return db.query("select * from users where idUser=?", [id], callback);
+
+  get: async function() {
+    return db.from("users").select("*");
+  },
+  getById: function(id) {
+    return db("users")
+      .select("*")
+      .where("id", "=", id);
   },
   add: function(user, callback) {
     bcrypt.hash(user.password, saltRounds).then(hash => {
-      return db.query(
-        "insert into users (username, email, password, ratingUser, amountOfRates) values(?,?,?,?,?)",
-        [user.username, user.email, hash, 0, 0],
-        callback
-      );
+      return db("users")
+        .insert([{ ...user, password: hash }])
+        .then(data => {
+          callback.then(data);
+        })
+        .catch(err => {
+          callback.catch(err);
+        });
     });
   },
 

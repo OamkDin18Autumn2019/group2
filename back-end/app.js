@@ -20,9 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/user", usersRouter);
-app.use("/product", productsRouter);
+app.use("/v1/", indexRouter);
+app.use("/v1/user", usersRouter);
+app.use("/v1/product", productsRouter);
 
 const isAuth = require("./middlewares/isAuth");
 app.get("/protected", isAuth, (req, res, next) => {
