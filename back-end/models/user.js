@@ -1,4 +1,4 @@
-var db = require("../database/database");
+var knex = require("../database/database");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const saltRounds = 4;
@@ -16,9 +16,9 @@ function generateAuthToken(id, isAdmin = false) {
 }
 var user = {
   createTable: async () => {
-    db.schema.hasTable("users").then(function(exists) {
+    knex.schema.hasTable("users").then(function (exists) {
       if (!exists) {
-        return db.schema.createTable("users", function(t) {
+        return knex.schema.createTable("users", function (t) {
           t.increments("id").primary();
           t.string("username", 255);
           t.string("email", 255);
@@ -33,17 +33,33 @@ var user = {
     });
   },
 
-  get: async function() {
-    return db.from("users").select("*");
+  get: async function (callback) {
+    return knex.from("users").select("*").then(data => {
+      callback.then(data);
+    })
+      .catch(err => {
+        callback.catch(err);
+      });
   },
-  getById: function(id) {
-    return db("users")
-      .select("*")
-      .where("id", "=", id);
+
+  getById: async function (id, callback) {
+    console.log(id)
+    return knex
+      .from('users')
+      .select()
+      .where("id", id)
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+
   },
-  add: function(user, callback) {
+
+  add: function (user, callback) {
     bcrypt.hash(user.password, saltRounds).then(hash => {
-      return db("users")
+      return knex("users")
         .insert([{ ...user, password: hash }])
         .then(data => {
           callback.then(data);
@@ -53,21 +69,19 @@ var user = {
         });
     });
   },
-
-  login: async function(user, callback) {
-    let userData = await db.query("select * from users where username=?", [
-      user.username
-    ]);
+  login: async function (user, callback) {
+    let userData = await knex
+      .from('users')
+      .select()
+      .where("username", user.username)
     userData = userData[0];
     if (userData == null) {
       return { code: 0 };
     }
-
     const correctPasswordSwitch = await bcrypt.compare(
       user.password,
       userData.password
     );
-
     console.log(correctPasswordSwitch);
     if (correctPasswordSwitch) {
       return {
@@ -81,24 +95,69 @@ var user = {
       };
     }
   },
-  delete: function(id, callback) {
-    return db.query("delete from users where idUser=?", [id], callback);
+  delete: async function (id, callback) {
+    return knex
+      .from('users')
+      .delete()
+      .where('id', id)
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
   },
-  update: function(id, user, callback) {
-    bcrypt.hash(user.password, saltRounds).then(hash => {
-      return db.query(
-        "UPDATE `users` SET  `username` = ?, `email` = ?, `password` = ?, `ratingUser` = ?, `amountOfRates` = ? WHERE `users`.`idUser` = ?",
-        [
-          user.username,
-          user.email,
-          hash,
-          user.ratingUser,
-          user.amountOfRates,
-          id
-        ],
-        callback
-      );
+  update: function (id, user, callback) {
+    if (user.password) {
+         bcrypt.hash(user.password, saltRounds).then(hash => {
+      console.log(user);
+      return knex('users').where('id', id)
+        .update(
+          ({ 
+           ...user,
+            password: hash,
+          })
+        )
+        .then(data => {
+          callback.then(data);
+        })
+        .catch(err => {
+          callback.catch(err);
+        });
     });
+
+    } else {
+        return knex('users').where('id', id)
+          .update(
+            ({ 
+             ...user,
+           })
+          )
+          .then(data => {
+            callback.then(data);
+          })
+          .catch(err => {
+            callback.catch(err);
+          });
+    }
+ 
+      // return knex.raw(
+      //   "UPDATE `users` SET  `username` = ?, `email` = ?, `password` = ?, `ratingUser` = ?, `amountOfRates` = ? WHERE `users`.`idUser` = ?",
+      //   [
+      //     user.username,
+      //     user.email,
+      //     hash,
+      //     user.ratingUser,
+      //     user.amountOfRates,
+      //     id
+      //   ],
+      // )
+      // .then(data => {
+      //   callback.then(data);
+      // })
+      // .catch(err => {
+      //   callback.catch(err);
+      // });
   }
 };
 module.exports = user;

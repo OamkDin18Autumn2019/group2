@@ -1,10 +1,10 @@
 module.exports = {
   client: "mysql2",
   connection: {
-    host: "127.0.0.1",
+    host: "localhost",
     user: "root",
     password: "root",
-    database: "library",
-    port: 8889
+    database: "anystore2019",
+    // port: 8889
   }
 };
