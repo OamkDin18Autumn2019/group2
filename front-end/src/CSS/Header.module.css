@@ -2,17 +2,13 @@ body {
     font-family: 'Roboto', Helvetica, sans-serif;
 }
 
-.header {
-    background-color: rgb(31, 29, 29);
-    padding: 5px 5px
+header {
+    background-color: black;
+    padding: 0.3em;
+    top: 0;
+    width: 100%;
+    position: fixed;    
 }
-
-/* .GridTemplate {
-    display: grid;
-     grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 3px;
-} */
 
 .GridTemplate > div {
     text-align: center;
@@ -28,8 +24,6 @@ body {
 
 .SearchBar {
     padding: 4px 2px;
-    /* height: 30px; */
-    /* width: 100%; */
 }
 
 .BrandName {
@@ -51,8 +45,6 @@ body {
     box-sizing: border-box;
     text-align: center;
     color: black;
-    /* width: 80px; */
-    /* height: 35px; */
 }
 
 .MenuLogo {
@@ -61,10 +53,18 @@ body {
 }
 
 .ButtonMenu {
-    background: rgb(31, 29, 29);
+    background: black;
     box-sizing: border-box;
     text-align: center;
     border: 0px;
+}
+
+.SignUp {
+    margin: 0 0.2em;
+}
+
+.Login {
+    margin: 0 0.2em;
 }
 
 @media (min-width: 320px) {
@@ -93,6 +93,16 @@ body {
 
     .Login {
         grid-column: span 1;
+    }
+
+    .Button {
+        font-size: 0.8em;
+        padding: 1em;
+    }
+
+    .LoginButton {
+        font-size: 0.8em;
+        padding: 1em;
     }
 }
 
@@ -124,6 +134,16 @@ body {
 
     .Login {
         grid-column: span 1;
+    }
+
+    .Button {
+        font-size: 1.2em;
+        padding: 1em;
+    }
+
+    .LoginButton {
+        font-size: 1.2em;
+        padding: 1em;
     }
 }
 

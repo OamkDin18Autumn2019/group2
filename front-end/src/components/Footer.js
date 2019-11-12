@@ -15,7 +15,7 @@ export default function Footer() {
 
     return(
         <>
-            <div className={styles.Footer}>
+            <footer className={styles.Footer}>
                 <div className={styles.FooterElement}>
                     <h5> Contact Us</h5>
                     <div className={styles.FooterInfo}>
@@ -58,10 +58,10 @@ export default function Footer() {
                         <img src={MasterCardLogo} className={styles.PaymentMethods}/>
                     </div>
                     <div className={styles.Copyright}>
-                        <p>anyStore2019 (c) 2019 We sell everything. All rights reserved. Design stolen by Nursultan Akhmethzhanov</p>
+                        <p>mothersellers (c) 2019 We sell everything. All rights reserved. Design stolen by Nursultan Akhmethzhanov</p>
                     </div>
                 </div>
-            </div>
+            </footer>
         </>
     )
 }

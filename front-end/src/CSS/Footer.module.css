@@ -1,7 +1,7 @@
 img {
     width: 1.3em;
     height: 1.3em;
-    margin: 5px 5px 11px 5px ;
+    margin: 5px 5px 0px 5px ;
 }
 
 p {
@@ -9,23 +9,21 @@ p {
     /* font-size: 1.2em; */
 }
 
-.Footer {
+footer {
     width: 100vw;
-    position: absolute;
-    bottom: 0px;
+    /* position: relative; */
+    /* bottom: 0; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    background-color: rgb(31, 29, 29);
-    color: #D7D3DA;
+    background-color: black;
+    color: #8F9491;
     padding-top: 8px;
+    clear: both;
 }
 
 h5 {
     color: white;
-}
-
-.FooterInfo {
-    margin-bottom: 5px;
+    font-size: 1.1em;
 }
 
 .Inline {
@@ -34,6 +32,10 @@ h5 {
 
 .Copyright {
     font-size: 0.7em;
+}
+
+.FooterInfo {
+    margin-bottom: 5px;
 }
 
 .PaymentMethods {
@@ -71,4 +73,10 @@ h5 {
         grid-column: span 3;
         text-align: center;
     }
+    
+    .FooterInfo {
+        margin-bottom: 5px;
+        white-space: nowrap;
+    }
+
 }

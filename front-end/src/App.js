@@ -13,13 +13,34 @@ import './App.css';
 
 export default class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      NavbarOpen: false
+    }
+  }
+
+  NavbarClickHandler = () => {
+    this.setState((prevsState) => {
+      console.log("it works");
+      return {NavbarOpen: !prevsState.NavbarOpen};
+    });
+  };
+
+  BackdropClickHandler = () => {
+    this.setState({NavbarOpen: false})
+  }
+
   render() {
     return (
       <React.Fragment>
         <Router>
           <Route
             path="/"
-            exact render={(routerProps) => <LandingPage />} />
+            exact render={(routerProps) => <LandingPage NavbarClickHandler={this.NavbarClickHandler}
+                                                        NavbarState={this.state.NavbarOpen} 
+                                                        BackdropClickHandler={this.BackdropClickHandler}
+                                                        />} /> 
           <Route
             path="/signup"
             exact render={(routerProps) => <Register />} />
