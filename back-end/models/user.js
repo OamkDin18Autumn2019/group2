@@ -125,7 +125,6 @@ var user = {
           callback.catch(err);
         });
     });
-
     } else {
         return knex('users').where('id', id)
           .update(
