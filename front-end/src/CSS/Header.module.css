@@ -1,3 +1,149 @@
-.header {
-    background-color: white;
+body {
+    font-family: 'Roboto', Helvetica, sans-serif;
 }
+
+header {
+    background-color: black;
+    padding: 0.3em;
+    top: 0;
+    width: 100%;
+    position: fixed;    
+}
+
+.GridTemplate > div {
+    text-align: center;
+    margin: auto;
+    font-size: 1em;
+}
+
+.GridItem {
+    margin: 2px 5px;
+    text-align: center;
+    margin: auto;
+}
+
+.SearchBar {
+    padding: 4px 2px;
+}
+
+.BrandName {
+    grid-column: span 3;
+    color: white;
+}
+
+.Button {
+    background: white;
+    box-sizing: border-box;
+    text-align: center;
+    color: black;
+    border: 0px;
+}
+
+.LoginButton {
+    background: #7BE0AD;
+    border: 0px;
+    box-sizing: border-box;
+    text-align: center;
+    color: black;
+}
+
+.MenuLogo {
+    width: 30px;
+    height: 30px;
+}
+
+.ButtonMenu {
+    background: black;
+    box-sizing: border-box;
+    text-align: center;
+    border: 0px;
+}
+
+.SignUp {
+    margin: 0 0.2em;
+}
+
+.Login {
+    margin: 0 0.2em;
+}
+
+@media (min-width: 320px) {
+    .GridTemplate {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+  
+    .Menu {
+       grid-column: span 1;
+    }
+
+    .BrandNameGrid {
+        display: none;
+        /* color: white; */
+    }
+
+    .SearchBar {
+        grid-column: span 4;
+        width: 90%;
+    }
+
+    .SignUp {
+        grid-column: span 1;
+    }
+
+    .Login {
+        grid-column: span 1;
+    }
+
+    .Button {
+        font-size: 0.8em;
+        padding: 1em;
+    }
+
+    .LoginButton {
+        font-size: 0.8em;
+        padding: 1em;
+    }
+}
+
+@media (min-width: 768px) {
+    .GridTemplate {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+    }
+  
+    .Menu {
+       grid-column: span 1;
+    }
+
+    .BrandNameGrid {
+        grid-column: span 2;
+        color: white;
+        display: block;
+    }
+
+    .SearchBar {
+        grid-column: span 4;
+        width: 80%;
+        
+    }
+
+    .SignUp {
+        grid-column: span 1;
+    }
+
+    .Login {
+        grid-column: span 1;
+    }
+
+    .Button {
+        font-size: 1.2em;
+        padding: 1em;
+    }
+
+    .LoginButton {
+        font-size: 1.2em;
+        padding: 1em;
+    }
+}
+
