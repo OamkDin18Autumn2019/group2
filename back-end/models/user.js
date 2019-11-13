@@ -33,6 +33,30 @@ var user = {
       }
     });
   },
+  createTableHistory: async () => {
+    knex.schema.hasTable("history").then(function (exists) {
+      if (!exists) {
+        return knex.schema.createTable("history", function (t) {
+          t.increments("id").primary();
+          t.integer("idUser", 10)
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('users');
+          t.integer("idProduct", 10)
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('products');
+          t.integer("amount").defaultTo(1);
+          t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+          
+        });
+      } else {
+        return null;
+      }
+    });
+  },
 
   get: async function (callback) {
     return knex.from("users").select("*").then(data => {
