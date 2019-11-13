@@ -34,9 +34,9 @@ var user = {
     });
   },
   createTableHistory: async () => {
-    knex.schema.hasTable("users").then(function (exists) {
+    knex.schema.hasTable("history").then(function (exists) {
       if (!exists) {
-        return knex.schema.createTable("users", function (t) {
+        return knex.schema.createTable("history", function (t) {
           t.increments("id").primary();
           t.integer("idUser", 10)
           .unsigned()

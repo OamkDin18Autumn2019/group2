@@ -5,7 +5,9 @@ var product = require('../models/product');
 
 // Create tables "users" and "products"
 user.createTableUsers()
-.then(product.createTableProducts());
+.then(product.createTableProducts()
+.then());
+user.createTableHistory();
 
 // CRUD endpoints for "user"
 router.get("/:id?", function(req, res, next) {
