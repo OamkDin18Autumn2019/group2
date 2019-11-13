@@ -1,4 +1,48 @@
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 .LPbody {
-    top: 1000px;
+    position: relative;
+    /* top: 77px;x */
     /* position: relative; */
+    display: grid;
+}
+
+.WelcomeBlockPhoto > img {
+    width: 100vw; 
+    height: 600px;
+    margin: 0;
+    object-fit: cover;
+}
+
+.GetStarted {
+    position: absolute;
+    color: white; 
+    top: 3.5em;
+    left: 0;
+    font-size: 1.9em;
+    text-align: left;
+    margin-left: 2em;
+}
+
+.GetStartedButton {
+    font-size: 1em;
+    border: 0; 
+    background-color: white;
+    color: black;
+    padding: 1em;
+}
+
+.SellHer,
+.GetStartedText,
+.WelcomeText {
+    margin: 0.5em 0;
+}
+
+@media (min-width: 320px) {
+    .GetStartedButton {
+        font-size: 0.7em;
+    }
 }

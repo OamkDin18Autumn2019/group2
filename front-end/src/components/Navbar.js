@@ -10,7 +10,8 @@ export default function Navbar(props) {
     // console.log(categories)
     // console.log(categories.length);
     // console.log("yeah");
-    // console.log(props);
+    console.log(props);
+
     let NavBarClass;
     
     if (props.NavbarState === true) {
@@ -21,6 +22,7 @@ export default function Navbar(props) {
         <>
             <nav className={NavBarClass}>
                 <div >
+                    <h1>mothersell</h1>
                     <ul>
                         {/* {
                             categories.map((category) =>  <li> {category} </li>)
