@@ -15,7 +15,7 @@ function generateAuthToken(id, isAdmin = false) {
   return token;
 }
 var user = {
-  createTable: async () => {
+  createTableUsers: async () => {
     knex.schema.hasTable("users").then(function (exists) {
       if (!exists) {
         return knex.schema.createTable("users", function (t) {
@@ -23,9 +23,10 @@ var user = {
           t.string("username", 255);
           t.string("email", 255);
           t.string("password", 255);
-          t.integer("ratingUser");
-          t.integer("amountOfRates");
-          t.timestamps();
+          t.integer("ratingUser").defaultTo(0);
+          t.integer("amountOfRates").defaultTo(0);
+          t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+          t.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
         });
       } else {
         return null;

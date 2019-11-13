@@ -1,8 +1,13 @@
 var express = require("express");
 var router = express.Router();
 var user = require("../models/user");
+var product = require('../models/product');
 
+// Create tables "users" and "products"
+user.createTableUsers()
+.then(product.createTableProducts());
 
+// CRUD endpoints for "user"
 router.get("/:id?", function(req, res, next) {
   if (req.params.id) {
     user.getById(req.params.id, {
@@ -68,4 +73,5 @@ router.put("/:id", function(req, res, next) {
     }
   });
 });
+
 module.exports = router;
