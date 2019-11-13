@@ -1,60 +1,63 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var product = require('../models/product');
+var product = require("../models/product");
 
+// Create tables "categories" and "tags"
+product.createTableCategories();
+product.createTableTags();
 
-router.get('/:id?', function(req, res, next) {
+// CRUD endpoints for "product"
+router.get("/:id?", function(req, res, next) {
   if (req.params.id) {
-    product.getById(req.params.id, function(err, rows) {
-      if (err) {
-        res.json(err);
-      } else {
-        res.json(rows);
+    product.getById(req.params.id, {
+      then: rows => {
+        res.status(202).json({ code: 1, rows });
+      },
+      catch: err => {
+        res.status(500).json({ code: 0, err });
       }
     });
   } else {
-    product.get(function(err, rows) {
-      if (err) {
-        res.json(err);
-      } else {
-        res.json(rows);
+    product.get({
+      then: rows => {
+        res.status(202).json({ code: 1, rows });
+      },
+      catch: err => {
+        res.status(500).json({ code: 0, err });
       }
     });
   }
 });
 
-router.post('/', function(req, res, next) {
-  Promise.all([
-    req.body.forEach(element => {
-      product.add(element, function(err, count) {
-        if (err) {
-          console.log(err)
-        }
-      });
-    })]
-  ).then((response) => {
-      res.sendStatus(201);    
-  })
-    .catch((err) => {
-      console.log(err);
-    }) 
-});
-router.delete('/:id', function(req, res, next) {
-  product.delete(req.params.id, function(err, count) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(count);
+router.post("/", function(req, res, next) {
+  product.add(req.body, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
     }
   });
 });
-router.put('/:id', function(req, res, next) {
-  product.update(req.params.id, req.body, function(err, count) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(count);
+router.delete("/:id", function(req, res, next) {
+  product.delete(req.params.id, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
     }
   });
 });
+router.put("/:id", function(req, res, next) {
+  product.update(req.params.id, req.body, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
+
 module.exports = router;

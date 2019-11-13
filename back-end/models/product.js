@@ -1,28 +1,127 @@
 var db = require('../database');
+var knex = require("../database/database");
+
 var product = {
-  get: function(callback) {
-    return db.query('select * from products', callback);
+
+  createTableProducts: async () => {
+    knex.schema.hasTable("products").then(function (exists) {
+      if (!exists) {
+        return knex.schema.createTable("products", function (t) {
+          t.increments("id").primary();
+          t.integer("idUser", 10)
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('users');
+          t.text("name", 255);
+          t.text("description", 1024);
+          t.float("ratingProduct", 10, 3);
+          t.integer("amountOfRates");
+          t.string('tags', 512);
+          t.string('category');
+          t.integer('amountOfProduct');
+          t.integer('amountOfSoldProduct');
+          t.string('images', 1024);
+          t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+          t.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
+        });
+      } else {
+        return null;
+      }
+    });
   },
-  getById: function(id, callback) {
-    console.log(id);
-    return db.query('select * from products where idProduct=?', [id], callback);
+
+  createTableCategories: async () => {
+    knex.schema.hasTable("categories").then(function (exists) {
+      if (!exists) {
+        return knex.schema.createTable("categories", function (t) {
+          t.increments("id").primary();
+          t.string('nameOfCategory');
+        });
+      } else {
+        return null;
+      }
+    });
   },
-  add: function(product, callback) {
-    return db.query(
-      'insert into products (idUser, price, amountOfProduct, name, ratingProduct, amountOfRates, description, amountOfSoldProduct, photos, category) values (?,?,?,?,?,?,?,?,?,?)',
-      [product.idUser, product.price, product.amountOfProduct, product.name, 0, 0, product.description, 0, product.photos, product.category],
-      callback
-    );
+
+  createTableTags: async () => {
+    knex.schema.hasTable("tags").then(function (exists) {
+      if (!exists) {
+        return knex.schema.createTable("tags", function (t) {
+          t.increments("id").primary();
+          t.string('nameOfTag');
+        });
+      } else {
+        return null;
+      }
+    });
   },
-  delete: function(id, callback) {
-    return db.query('delete from products where idProduct=?', [id], callback);
+
+  get: async function (callback) {
+    return knex
+    .from("products")
+    .select()
+    .then(data => {
+      callback.then(data);
+    })
+      .catch(err => {
+        callback.catch(err);
+      });
   },
+
+  getById: async function (id, callback) {
+    console.log(id)
+    return knex
+      .from('products')
+      .select()
+      .where("id", id)
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+
+  },
+
+  add: async function(product, callback) {
+      return knex("products")
+        .insert([{ ...product }])
+        .then(data => {
+          callback.then(data);
+        })
+        .catch(err => {
+          callback.catch(err);
+        });
+  },
+
+  delete: async function (id, callback) {
+    return knex
+      .from('products')
+      .delete()
+      .where('id', id)
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+  },
+
   update: function(id, product, callback) {
-    return db.query(
-      "UPDATE `products` SET `idProduct` = ?, `idUser` = ?, `price` = ?, `amountOfProduct` = ?, `name` = ?, `ratingProduct` = ?, `amountOfRates` = ?, `description` = ?, `dateOfAdding` = ?, `amountOfSoldProduct` = ?, `photos` = ?, `category` = ? WHERE `products`.`idProduct` = ?",
-      [product.idProduct, product.idUser, product.price, product.amountOfProduct, product.name, product.ratingProduct, product.amountOfRates, product.description, product.dateOfAdding, product.amountOfSoldProduct, product.photos, product.category, id],
-      callback
-    );
+    return knex('products').where('id', id)
+    .update(
+      ({ 
+       ...product,
+      })
+    )
+    .then(data => {
+      callback.then(data);
+    })
+    .catch(err => {
+      callback.catch(err);
+    });
   }
 };
+
 module.exports = product;
