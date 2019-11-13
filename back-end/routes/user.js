@@ -1,9 +1,10 @@
 var express = require("express");
 var router = express.Router();
 var user = require("../models/user");
-var product = require('../models/product');
+var product = require("../models/product");
 
 // Create tables "users" and "products"
+
 user.createTableUsers()
 .then(product.createTableProducts()
 .then());
@@ -17,7 +18,7 @@ router.get("/:id?", function(req, res, next) {
         res.status(202).json({ code: 1, rows });
       },
       catch: err => {
-        res.status(202).json({ code: 0, err });
+        res.status(500).json({ code: 0, err });
       }
     });
   } else {
@@ -26,7 +27,7 @@ router.get("/:id?", function(req, res, next) {
         res.status(202).json({ code: 1, rows });
       },
       catch: err => {
-        res.status(202).json({ code: 0, err });
+        res.status(500).json({ code: 0, err });
       }
     });
   }
@@ -38,7 +39,7 @@ router.post("/register", function(req, res, next) {
       res.status(202).json({ code: 1, rows });
     },
     catch: err => {
-      res.status(202).json({ code: 0, err });
+      res.status(500).json({ code: 0, err });
     }
   });
 });
@@ -61,17 +62,17 @@ router.delete("/:id", function(req, res, next) {
       res.status(202).json({ code: 1, rows });
     },
     catch: err => {
-      res.status(202).json({ code: 0, err });
+      res.status(500).json({ code: 0, err });
     }
   });
 });
 router.put("/:id", function(req, res, next) {
-  user.update(req.params.id, req.body,  {
+  user.update(req.params.id, req.body, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
     },
     catch: err => {
-      res.status(202).json({ code: 0, err });
+      res.status(500).json({ code: 0, err });
     }
   });
 });
