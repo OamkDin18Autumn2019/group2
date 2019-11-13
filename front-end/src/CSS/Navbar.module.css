@@ -3,7 +3,7 @@ nav {
     background-color: black;
     width: 70%;
     max-width: 400px;
-    z-index: 3;
+    z-index: 300;
     position: fixed; 
     left: 0;
     top: 0;
@@ -11,7 +11,10 @@ nav {
     transition: transform 0.3s ease-out;
 }
 
-
+h1 {
+    color: white;
+    margin-left: 2em;
+}
 
 nav ul {
     height: 100%;

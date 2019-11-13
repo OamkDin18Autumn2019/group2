@@ -4,11 +4,7 @@ import LandingPage from './components/LandingPage';
 import Register from './components/Register';
 import SearchPage from './components/SearchPage';
 import ProductPage from './components/ProductPage';
-// import SearchPage from './components/SearchPage';
-// import ProfilePage from './components/ProfilePage';
-// import AdminPage from './components/AdminPage';
-// import SignUp from './components/SignUp';
-// import Login from './components/Login';
+
 import './App.css';
 
 export default class App extends React.Component {
@@ -16,20 +12,33 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      NavbarOpen: false
+      // NavbarOpen: false,
+      // backgroundColor: "rgba(0, 0, 0, 0)"
     }
   }
 
-  NavbarClickHandler = () => {
-    this.setState((prevsState) => {
-      console.log("it works");
-      return {NavbarOpen: !prevsState.NavbarOpen};
-    });
-  };
+  // listenScrollEvent = e => {
+  //   if (window.scrollY > 200) {
+  //     this.setState({color: 'black'})
+  //   } else {
+  //     this.setState({color: 'rgba(0, 0, 0, 0)'})
+  //   }
+  // }
 
-  BackdropClickHandler = () => {
-    this.setState({NavbarOpen: false})
-  }
+  // componentDidMount() {
+  //   window.addEventListener('scroll', this.listenScrollEvent)
+  // }
+
+  // NavbarClickHandler = () => {
+  //   this.setState((prevsState) => {
+  //     console.log("it works");
+  //     return {NavbarOpen: !prevsState.NavbarOpen};
+  //   });
+  // };
+
+  // BackdropClickHandler = () => {
+  //   this.setState({NavbarOpen: false})
+  // }
 
   render() {
     return (
@@ -37,9 +46,7 @@ export default class App extends React.Component {
         <Router>
           <Route
             path="/"
-            exact render={(routerProps) => <LandingPage NavbarClickHandler={this.NavbarClickHandler}
-                                                        NavbarState={this.state.NavbarOpen} 
-                                                        BackdropClickHandler={this.BackdropClickHandler}
+            exact render={(routerProps) => <LandingPage  
                                                         />} /> 
           <Route
             path="/signup"
@@ -67,3 +74,7 @@ export default class App extends React.Component {
   }
 }
 
+  // NavbarClickHandler={this.NavbarClickHandler}
+  // NavbarState={this.state.NavbarOpen} 
+  // BackdropClickHandler={this.BackdropClickHandler}
+  // backgroundColor={this.backgroundColor}
