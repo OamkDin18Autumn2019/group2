@@ -31,8 +31,8 @@ export default class ProductPage extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-3">
-                        <div className="border border-secondary">
-                            <img src={this.state.data.photo}></img>
+                        <div className="h-100 border border-secondary">
+                            <img className="h-100 w-100 no-gutters m-0" src={this.state.data.photo}></img>
                         </div>
                     </div>
                     <div className="col border border-secondary">
