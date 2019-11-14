@@ -17,7 +17,6 @@ export default class Register extends React.Component {
     
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
-        console.log(this.props.history);
     }
 
     handleSubmit = (event) => {
@@ -43,9 +42,6 @@ export default class Register extends React.Component {
             .catch(err => {
                 console.log(err);
                 return null;
-            })
-            .finally(res => {
-                console.log(res);
             })
         }
     }

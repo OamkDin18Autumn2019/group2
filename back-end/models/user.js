@@ -98,16 +98,17 @@ var user = {
     });
   },
   login: async function (user, callback) {
+    console.log(user.user);
     let userData = await knex
       .from('users')
       .select()
-      .where("username", user.username)
+      .where("username", user.user.username)
     userData = userData[0];
     if (userData == null) {
       return { code: 0 };
     }
     const correctPasswordSwitch = await bcrypt.compare(
-      user.password,
+      user.user.password,
       userData.password
     );
     console.log(correctPasswordSwitch);

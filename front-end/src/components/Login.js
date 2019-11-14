@@ -1,32 +1,40 @@
 import React from 'react';
 import styles from '../CSS/Login.module.css';
 
-export default function Login() {
+export default function Login(props) {
 
-    
+    function handleCancel(event) {
+        event.preventDefault();
+        props.history.goBack();
+    }
+
+    function handleSubmitHandler(event) {
+        event.preventDefault();
+        console.log(props);
+        props.handleSubmit();
+    }
+
+    function handleChangeHandler(event) {
+        event.preventDefault();
+        console.log(event.target.value);
+        props.handleChange(event.target.value, event.target.value);
+    }
+
+    console.log(props);
 
     return(
         <div className={styles.Container}>
         <form className={styles.Form}>
             <div className={styles.FormGroup}>
                 <label htmlFor="username" className={styles.Label}>Username</label><br/>
-                <input type="text" className={styles.Input} name="username" placeholder="Your username" value={this.state.username} onChange={this.handleChange} />
+                <input type="text" className={styles.Input} name="username" placeholder="Your username" value={props.user.username} onChange={handleChangeHandler} />
             </div>
             <div className={styles.FormGroup}>
                 <label htmlFor="password" className={styles.Label}>Password</label><br/>
-                <input type="password" className={styles.Input} name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
+                <input type="password" className={styles.Input} name="password" placeholder="Password" value={props.user.password} onChange={handleChangeHandler} />
             </div>
-            <div className={styles.FormGroup}>
-                <label htmlFor="passwordConfirmation" className={styles.Label}>Password confirmation</label><br/>
-                <input type="password" className={styles.Input} name="passwordConfirmation" placeholder="Type your password again" value={this.state.passwordConfirmation} onChange={this.handleChange} />
-            </div>
-            {this.state.passwordWarning}
-            <div className={styles.FormGroup}>
-                <label htmlFor="email" className={styles.Label}>Email</label><br/>
-                <input type="email" className={styles.Input} name="email" placeholder="Your email" value={this.state.email} onChange={this.handleChange} />
-            </div>
-            <button type="submit" className={styles.SubmitBtn} onClick={this.handleSubmit}>Register</button><br/>
-            <button className={styles.CancelBtn}>Cancel</button>
+            <button type="submit" className={styles.SubmitBtn} onClick={handleSubmitHandler}>Login</button><br/>
+            <button className={styles.CancelBtn} onClick={handleCancel}>Cancel</button>
         </form>
     </div>
     )

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import axios from 'axios';
 import LandingPage from './components/LandingPage';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -11,12 +12,42 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      user: {
+        username: '',
+        password: ''
+      }
     }
   }
 
-  
+  handleChange = (username, password) => {
+    console.log(username);
+    this.setState({ user: {
+      username,
+      password
+    }
+    });
+    
+  }
+
+  handleSubmit = () => {
+    console.log(this.state.user);
+
+    const user = {
+        username: this.state.user.username,
+        password: this.state.user.password
+    };
+
+    axios.post(`http://localhost:3000/v1/user/login`, { user })
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+        
+    })
+    .catch(err => {
+        console.log(err);
+        return null;
+    })
+}
 
   render() {
     return (
@@ -37,7 +68,9 @@ export default class App extends React.Component {
             exact render={(routerProps) => <ProductPage {...routerProps} />} />
           <Route
             path="/login"
-            exact render={(routerProps ) => <Login {...routerProps} />} />
+            exact render={(routerProps ) => <Login {...routerProps} user={this.state.user}
+                                                                    handleSubmit={this.handleSubmit}
+                                                                    handleChange={this.handleChange} />} />
           {/* 
           <Route
             path="/profile"
