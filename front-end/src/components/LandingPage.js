@@ -12,30 +12,20 @@ export default function LandingPage(props) {
 
     return(
         <React.Fragment>
-            <Header NavbarClickHandler={props.NavbarClickHandler}
-                    NavbarState={props.NavbarState} 
-                    BackdropClickHandler={props.BackdropClickHandler}
-                    backgroundColor={props.backgroundColor}
-                    />
-                <div className={styles.LPbody}>
-                    <div className={styles.WelcomeBlock}>
-                        <div className={styles.WelcomeBlockPhoto}>
-                            <div className={styles.GetStarted}>
-                                <h3 className={styles.WelcomeText}> We can sell anything. <br></br> Even your mother. </h3>
-                                <h4 className={styles.GetStartedText}>We can help you sell your mother.</h4>
-                                <h1 className={styles.SellHer}>Sell her.</h1>
-                                <button className={styles.GetStartedButton}> GET STARTED </button>
-                            </div>
-                            <img src={WelcomePhoto} />
-                        </div>
-                    </div>
-                    <div className={styles.ProductsCategories}>
-                        <div>
-                            
-                        </div>
-                    </div>
-                </div>
-            <Footer />
+         <div className={ styles.wrapper }>
+            <nav className={styles.mainNav}>
+                <ul>
+                    <li> <a href="#">Home</a></li>
+                    <li> <a href="#">Contact</a></li>
+                    <li> <a href="#">Help</a></li>
+                    <li> <a href="#"> Mother</a></li>
+                </ul>
+            </nav>
+            <section>
+                
+            </section>
+         </div>       
+          
         </React.Fragment>
     )
 }
