@@ -2,43 +2,21 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LandingPage from './components/LandingPage';
 import Register from './components/Register';
+import Login from './components/Login';
 import SearchPage from './components/SearchPage';
 import ProductPage from './components/ProductPage';
-
-import './App.css';
 
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      // NavbarOpen: false,
-      // backgroundColor: "rgba(0, 0, 0, 0)"
+      username: '',
+      password: ''
     }
   }
 
-  // listenScrollEvent = e => {
-  //   if (window.scrollY > 200) {
-  //     this.setState({color: 'black'})
-  //   } else {
-  //     this.setState({color: 'rgba(0, 0, 0, 0)'})
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   window.addEventListener('scroll', this.listenScrollEvent)
-  // }
-
-  // NavbarClickHandler = () => {
-  //   this.setState((prevsState) => {
-  //     console.log("it works");
-  //     return {NavbarOpen: !prevsState.NavbarOpen};
-  //   });
-  // };
-
-  // BackdropClickHandler = () => {
-  //   this.setState({NavbarOpen: false})
-  // }
+  
 
   render() {
     return (
@@ -49,7 +27,7 @@ export default class App extends React.Component {
             exact render={(routerProps) => <LandingPage  
                                                         />} /> 
           <Route
-            path="/signup"
+            path="/register"
             exact render={(routerProps) => <Register />} />
           <Route
             path="/search"
@@ -57,6 +35,9 @@ export default class App extends React.Component {
           <Route 
             path="/product"
             exact render={(routerProps) => <ProductPage />} />
+          <Route
+            path="/login"
+            exact render={(routerProps ) => <Login  />} />
           {/* 
           <Route
             path="/profile"
@@ -64,9 +45,7 @@ export default class App extends React.Component {
           <Route
             path="/admin"
             exact render={(routerProps ) => <AdminPage  />} />
-          <Route
-            path="/login"
-            exact render={(routerProps ) => <Login  />} />   */}
+             */}
         </Router>
       </React.Fragment>
 

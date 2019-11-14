@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from './Navbar';
+import { Link }  from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
-import menuLogo from '../icons/icons8-menu-50.png';
+// import menuLogo from '../icons/icons8-menu-50.png';
 import SearchLogo from '../icons/icons8_search_filled_50px.png';
 import ResetLogo from '../icons/icons8_close_window_filled_50px.png';
 
@@ -98,10 +99,11 @@ export default class Header extends React.Component {
                                 </form>
                             </div>
                             <div className={styles.SignUp}>
-                                <button className={styles.Button}>Register</button>
+                                <Link to="/register" >  <button className={styles.Button}>Register</button> </Link> 
                             </div>
                             <div className={styles.Login}>
-                                <button className={styles.LoginButton}>Login</button>
+                                <Link to="/login" >  <button className={styles.LoginButton}>Login</button> </Link> 
+                                
                             </div>
                         </div>
                     </header>
