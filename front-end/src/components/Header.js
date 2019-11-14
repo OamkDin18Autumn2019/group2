@@ -21,20 +21,30 @@ export default class Header extends React.Component {
     render() {
         if (loggedIn) {
             return(
-                <>
-                   <header>
-                       I'm logged in
-                    </header>
-                </>
+                
+                   <nav className={styles.mainNav}>
+                    <ul>
+                        <li> <a href="#">Home</a></li>
+                        <li> <a href="#">Contact</a></li>
+                        <li> <a href="#">Help</a></li>
+                        <li> <a href="#"> Mother</a></li>
+                    </ul>
+                    </nav>
+              
             )
         }
      else {
         return(
-            <>
-               <header>
-                    I'm not logged in
-               </header>
-            </>
+            
+                <nav className={styles.mainNav}>
+                    <ul>
+                        <li> <a href="#">Home</a></li>
+                        <li> <a href="#">Contact</a></li>
+                        <li> <a href="#">Help</a></li>
+                        <li> <a href="#"> Mother</a></li>
+                    </ul>
+                </nav>
+            
         )
     }
 }
