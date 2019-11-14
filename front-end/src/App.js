@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import LandingPage from './components/LandingPage';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -24,20 +24,20 @@ export default class App extends React.Component {
         <Router>
           <Route
             path="/"
-            exact render={(routerProps) => <LandingPage  
+            exact render={(routerProps) => <LandingPage {...routerProps} 
                                                         />} /> 
           <Route
             path="/register"
-            exact render={(routerProps) => <Register />} />
+            exact render={(routerProps) => <Register {...routerProps} />} />
           <Route
             path="/search"
-            exact render={(routerProps) => <SearchPage />} />
+            exact render={(routerProps) => <SearchPage {...routerProps} />} />
           <Route 
-            path="/product"
-            exact render={(routerProps) => <ProductPage />} />
+            path="/product/:id"
+            exact render={(routerProps) => <ProductPage {...routerProps} />} />
           <Route
             path="/login"
-            exact render={(routerProps ) => <Login  />} />
+            exact render={(routerProps ) => <Login {...routerProps} />} />
           {/* 
           <Route
             path="/profile"
@@ -47,13 +47,8 @@ export default class App extends React.Component {
             exact render={(routerProps ) => <AdminPage  />} />
              */}
         </Router>
-      </React.Fragment>
+       </React.Fragment>
 
     );
   }
 }
-
-  // NavbarClickHandler={this.NavbarClickHandler}
-  // NavbarState={this.state.NavbarOpen} 
-  // BackdropClickHandler={this.BackdropClickHandler}
-  // backgroundColor={this.backgroundColor}

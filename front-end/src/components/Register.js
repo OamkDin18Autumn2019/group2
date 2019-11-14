@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from '../CSS/Register.module.css';
 import axios from 'axios';
 
-export default class Register extends Component {
+export default class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,6 +17,7 @@ export default class Register extends Component {
     
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
+        console.log(this.props.history);
     }
 
     handleSubmit = (event) => {
@@ -35,18 +36,23 @@ export default class Register extends Component {
 
             axios.post(`http://localhost:3000/v1/user/register`, { user })
             .then(res => {
+                // console.log(req);
                 console.log(res);
                 console.log(res.data);
             })
             .catch(err => {
                 console.log(err);
                 return null;
-          })
+            })
+            .finally(res => {
+                console.log(res);
+            })
         }
     }
 
     handleCancel = (event) => {
-
+        event.preventDefault();
+        this.props.history.goBack();
     }
     
     render() {
@@ -71,7 +77,7 @@ export default class Register extends Component {
                         <input type="email" className={styles.Input} name="email" placeholder="Your email" value={this.state.email} onChange={this.handleChange} />
                     </div>
                     <button type="submit" className={styles.SubmitBtn} onClick={this.handleSubmit}>Register</button><br/>
-                    <button className={styles.CancelBtn} onClick={this.handleCancel}>Cancel</button>
+                    <button  className={styles.CancelBtn} onClick={this.handleCancel}>Cancel</button>
                 </form>
             </div>
         )

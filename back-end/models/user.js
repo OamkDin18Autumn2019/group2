@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const saltRounds = 4;
 const jwtKey = "BWWrCs!|M;e*oU.YWJ_W+6jposZKF-";
+
 function generateAuthToken(id, isAdmin = false) {
   const token = jwt.sign(
     {
@@ -83,14 +84,16 @@ var user = {
   },
 
   add: function (user, callback) {
-    bcrypt.hash(user.password, saltRounds).then(hash => {
+    // console.log(user.user.password);
+    bcrypt.hash(user.user.password, saltRounds).then(hash => {
       return knex("users")
-        .insert([{ ...user, password: hash }])
+        .insert([{ ...user.user, password: hash }])
         .then(data => {
           callback.then(data);
         })
         .catch(err => {
           callback.catch(err);
+          console.log(err);
         });
     });
   },
