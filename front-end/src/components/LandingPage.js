@@ -3,39 +3,124 @@ import Header from './Header';
 import Footer from './Footer';
 import styles from '../CSS/LandingPage.module.css';
 import WelcomePhoto from '../images/da.jpg'
-import Link  from "react-router-dom";
+import Link from "react-router-dom";
+import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
+import { IconContext } from "react-icons";
+import classNames from 'classnames';
 
 export default function LandingPage(props) {
 
     console.log(props);
     console.log(window.scrollY);
 
-    return(
+    return (
         <React.Fragment>
-            <Header NavbarClickHandler={props.NavbarClickHandler}
-                    NavbarState={props.NavbarState} 
-                    BackdropClickHandler={props.BackdropClickHandler}
-                    backgroundColor={props.backgroundColor}
-                    />
-                <div className={styles.LPbody}>
-                    <div className={styles.WelcomeBlock}>
-                        <div className={styles.WelcomeBlockPhoto}>
-                            <div className={styles.GetStarted}>
-                                <h3 className={styles.WelcomeText}> We can sell anything. <br></br> Even your mother. </h3>
-                                <h4 className={styles.GetStartedText}>We can help you sell your mother.</h4>
-                                <h1 className={styles.SellHer}>Sell her.</h1>
-                                <button className={styles.GetStartedButton}> GET STARTED </button>
-                            </div>
-                            <img src={WelcomePhoto} />
-                        </div>
+            <div className={styles.wrapper}>
+             <Header > </Header>
+                <section className={styles.topContainer}>
+                    <header className={styles.showCase}>
+                        <h1> We can sell everything</h1>
+                        <p> Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Curabitur nec gravida massa.
+                        Aenean ut libero. </p>
+                        <a href="#" className={styles.btn}> Get started </a>
+                    </header>
+                </section>
+                {/* <h2> Our products </h2> */}
+                <section className={styles.products}>
+
+                    <img src="https://source.unsplash.com/random/200x200" alt="img"/>
+                    <img src="https://source.unsplash.com/random/200x201" alt="img"/>
+                    <img src="https://source.unsplash.com/random/200x203" alt="img"/>
+                    <img src="https://source.unsplash.com/random/200x204" alt="img"/>
+                    <img src="https://source.unsplash.com/random/200x205" alt="img"/>
+                    <img src="https://source.unsplash.com/random/200x206" alt="img"/>
+                    <img src="https://source.unsplash.com/random/201x200" alt="img"/>
+                    <img src="https://source.unsplash.com/random/202x201" alt="img"/>
+                    <img src="https://source.unsplash.com/random/203x203" alt="img"/>
+                    <img src="https://source.unsplash.com/random/204x204" alt="img"/>
+                    <img src="https://source.unsplash.com/random/205x205" alt="img"/>
+                    <img src="https://source.unsplash.com/random/207x206" alt="img"/>
+                </section>
+
+                <section className={styles.middleContainer}>
+                    <header className={styles.showCaseMiddle}>
+                        <h1>We are universal</h1>
+                        <p> Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Curabitur nec gravida massa.
+                        Aenean ut libero. </p>
+                        <a href="#" className={styles.btn}> Buy now </a>
+                    </header>
+                </section>
+
+                <section className={styles.boxes}>
+                    <div className={styles.box}>
+                        <IconContext.Provider value={{ size: "4em" }}>
+                       <FaChartPie />
+                          <h3> Just </h3>
+                          <p> Lorem Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Curabitur </p>
+                        </IconContext.Provider>                        
                     </div>
-                    <div className={styles.ProductsCategories}>
+
+                    <div className={styles.box}>
+                        <IconContext.Provider value={{ size: "4em" }}>
+                       <FaGlobe />
+                          <h3> Stupid </h3>
+                          <p> Lorem Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Curabitur </p>
+                        </IconContext.Provider>                        
+                    </div>
+
+                    <div className={styles.box}>
+                        <IconContext.Provider value={{ size: "4em" }}>
+                       <FaCog />
+                          <h3> Words </h3>
+                          <p> Lorem Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Curabitur </p>
+                        </IconContext.Provider>                        
+                    </div>
+
+                    <div className={styles.box}>
+                        <IconContext.Provider value={{ size: "4em" }}>
+                       <FaUsers />
+                          <h3> Here </h3>
+                          <p> Lorem Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Curabitur </p>
+                        </IconContext.Provider>                        
+                    </div>
+                </section>
+                
+              
+
+                <section className={styles.info}>
+                    
+                        <img src="https://images.pexels.com/photos/2317408/pexels-photo-2317408.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt=""/>
                         <div>
-                            
+                        <h2> Start now</h2>
+                        <p> Lorem, ipsum dolor sit amet consectetur 
+                            adipisicing elit. Cum, omnis odit 
+                            provident saepe, repudiandae quo dolore 
+                            ab officiis veniam quibusdam velit nesciunt
+                             ut atque. Eum eos illo saepe magni vitae!
+                        </p>
+                        <a href="#" className={styles.btn}> Buy something now! </a>
+
                         </div>
-                    </div>
-                </div>
-            <Footer />
+
+                </section>
+              
+              <footer>
+                  <p>Kislenko Dmitrii &copy; 2019</p>
+              </footer>
+            </div>
+
         </React.Fragment>
     )
 }

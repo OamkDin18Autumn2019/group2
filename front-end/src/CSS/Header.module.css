@@ -1,217 +1,68 @@
-body {
-    font-family: 'Clarkson', Helvetica, sans-serif;
+.mainNav ul li a {
+    background-color: black;
+    height: 100%;
+    padding-top: auto;
+    padding-bottom: auto;
 }
 
-header {
-    padding: 0.3em;
-    top: 0;
+.mainNav ul li img {
+    width: 70%;
+}
+.mainNav ul li  {
+    height: 100%;
+}
+.mainNav {
     width: 100%;
-    position: fixed;    
-    z-index: 100;
-    transition: 0.35s ease-in-out;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.mainNav ul {
+    display: grid;
+
+    /* grid-gap: px; */
+    list-style: none;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.loginBtn1 {
+    border: 2px solid grey;
+    width: 65%;
+    height: 110%;
+    border-radius: 25px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.loginBtn1:hover{
+    border: 2px solid white;
+    width: 75%;
+    height: 110%;
+    border-radius: 15px;
+    background-color: rgba(250, 0, 0, 0);
 }
 
-.GridTemplate > div {
+.mainNav a {
+    background: var(--primary);
+    display: block;
+    text-decoration: none;
+    padding: 0.5rem;
+    padding-bottom: 0rem;
+    margin-bottom: -0.5rem;
     text-align: center;
-    margin: auto;
-    font-size: 1em;
-}
-
-.GridItem {
-    margin: 2px 5px;
-    text-align: center;
-    margin: auto;
-}
-
-.SearchBarForm {
-    /* padding: 4px 2px; */
-    /* white-space: nowrap; */
-    display: flex;
-    align-items: center;
+    color: var(--light);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    /* box-shadow: var(--shadow); */
 }
 
 
-.SearchButton,
-.ResetButton {
-    display: flex;
-    position: relative;
-    white-space: nowrap;
-    border: 0;
-    background-color: rgba(0, 0, 0, 0);
-}
 
-.SearchButton {
-    left: 0.2em;
-    /* top: 10px; */
-}
-
-.ResetButton {
-    left: -0.5em;
-}
-
-.ResetLogo {
-    width: 30px;
-    height: 30px;
-}
-
-.SearchButton > img {
-    width: 30px;
-    height: 30px;
-}
-
-.SearchBar {
-    width: 80%;
-    max-width: 400px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0;
-    height: 2em;
-    border-bottom: solid 1.5px white;
-    font-size: 1em;
-    font-weight: bold;
-    transform: translateX();
-    transition: 0.3s ease-in-out;
-}
-
-.SearchBar:active,
-.SearchBar:hover {
-    border-bottom: 0;
-
-}
-
-input::placeholder {
-    color: white;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.BrandName {
-    grid-column: span 3;
-    color: white;
-    font-size: 1.7em;
-}
-
-.Button {
-    background: white;
-    box-sizing: border-box;
-    text-align: center;
-    color: black;
-    border: 0px;
-}
-
-.LoginButton {
-    background: #7BE0AD;
-    border: 0px;
-    box-sizing: border-box;
-    text-align: center;
-    color: black;
-}
-
-.MenuLogo {
-    width: 30px;
-    height: 30px;
-}
-
-.ButtonMenu {
-    background: rgba(0, 0, 0, 0);
-    box-sizing: border-box;
-    text-align: center;
-    border: 0px;
-    color: white;
-    font-size: 1.8em;
-    transition: 0.1s ease-in-out;
-}
-
-.ButtonMenu:active,
-.ButtonMenu:hover {
-    font-size: 2.4em;
-}
-
-.SignUp {
-    margin: 0 0.2em;
-}
-
-.Login {
-    margin: 0 0.2em;
-}
-
-@media (min-width: 320px) {
-    .GridTemplate {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
+@media(max-width: 700px) {
+    .mainNav ul li a {
+        padding-bottom: 1rem;
     }
-  
-    .Menu {
-       grid-column: span 1;
+    .mainNav ul {
+        grid-template-columns: 1fr;
     }
 
-    .BrandNameGrid {
-        display: none;
-        /* color: white; */
-    }
-
-    .SearchBarDiv {
-        grid-column: span 4;
-        width: 90%;
-    }
-
-    .SignUp {
-        grid-column: span 1;
-    }
-
-    .Login {
-        grid-column: span 1;
-    }
-
-    .Button {
-        font-size: 0.8em;
-        padding: 0.8em;
-    }
-
-    .LoginButton {
-        font-size: 0.8em;
-        padding: 0.8em;
-    }
-}
-
-@media (min-width: 768px) {
-    .GridTemplate {
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-    }
-  
-    .Menu {
-       grid-column: span 1;
-    }
-
-    .BrandNameGrid {
-        grid-column: span 2;
-        color: white;
-        display: block;
-    }
-
-    .SearchBarDiv {
-        grid-column: span 4;
-        width: 80%;
-        
-    }
-
-    .SignUp {
-        grid-column: span 1;
-    }
-
-    .Login {
-        grid-column: span 1;
-    }
-
-    .Button {
-        font-size: 1.2em;
-        padding: 0.8em;
-    }
-
-    .LoginButton {
-        font-size: 1.2em;
-        padding: 0.8em;
-    }
-}
-
+} 

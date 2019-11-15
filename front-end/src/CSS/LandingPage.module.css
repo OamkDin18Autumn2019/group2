@@ -1,48 +1,224 @@
-body {
+:root {
+    --primary: #ddd;
+    --dark:#333;
+    --light:#fff;
+    --shadow:0 1px 5px rgba(104, 104, 104, 0.8);
+    --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+}
+
+html{
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--dark);
+}
+
+body{
+    background: #ccc;
+    line-height: 1.4;
+}
+
+.btn{
+    background-color: var(--dark);
+    color: var(--light);
+    padding: 0.6rem 1.3rem;
+    text-decoration: none;
+    border: 0;
+}
+
+img{
     max-width: 100%;
-    overflow-x: hidden;
 }
 
-.LPbody {
-    position: relative;
-    /* top: 77px;x */
-    /* position: relative; */
+.wrapper {
     display: grid;
+    grid-gap: 20px;
 }
 
-.WelcomeBlockPhoto > img {
-    width: 100vw; 
-    height: 600px;
-    margin: 0;
-    object-fit: cover;
+
+
+/* Top container */
+
+.topContainer {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: 
+    "showCase showCase"
+    "showCase showCase"
+    ;
 }
 
-.GetStarted {
-    position: absolute;
-    color: white; 
-    top: 3.5em;
-    left: 0;
-    font-size: 1.9em;
-    text-align: left;
-    margin-left: 2em;
+/*  Showcase */
+.showCase {
+    grid-area: showCase;
+    height: 100vh;
+    background: url(https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-size: cover;
+    background-position: center;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.GetStartedButton {
-    font-size: 1em;
-    border: 0; 
-    background-color: white;
-    color: black;
-    padding: 1em;
+.showCase h1 {
+    font-size: 4rem;
+    margin-bottom: 0;
+    color: var(--light);
 }
 
-.SellHer,
-.GetStartedText,
-.WelcomeText {
-    margin: 0.5em 0;
+.showCase p{
+    font-size: 1.3rem;
+    margin-top: 0;
+    color: var(--light);
 }
 
-@media (min-width: 320px) {
-    .GetStartedButton {
-        font-size: 0.7em;
+.topBox {
+    background: var(--primary);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    padding-top: 30%;
+    padding-bottom: 30%;
+
+}
+
+.topBox .price {
+    font-size: 2.5rem;
+}
+
+.middleContainer {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: 
+    "showCase showCase"
+    "showCase showCase"
+    ;
+}
+
+/*  Showcase */
+.showCaseMiddle {
+    grid-area: showCase;
+    height: 50vh;
+    background: url(https://images.pexels.com/photos/9379/drinking-alley-fun-bowling-9379.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-size: cover;
+    background-position: center;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.showCaseMiddle h1 {
+    font-size: 4rem;
+    margin-bottom: 0;
+    color: var(--light);
+}
+
+.showCaseMiddle p{
+    font-size: 1.3rem;
+    margin-top: 0;
+    color: var(--light);
+}
+
+
+
+
+/* Boxes */
+
+.boxes {
+    display: grid;
+    grid-gap: 20px;
+    margin: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax( 200px, 1fr));
+}
+
+.box {
+    background: var(--primary);
+    text-align: center;
+    padding:  1.5rem 2rem;
+    box-shadow: var(--shadow);
+}
+
+.info{
+    background: var(--primary);
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 3rem;
+    align-items: center;
+}
+.info img {
+    /* width: 50%; */
+}
+/* products */
+
+.products {
+    margin: 1rem;
+    display: grid;
+    grid-gap: 20px;
+
+    grid-template-columns: repeat(auto-fit, minmax( 200px, 1fr));
+}
+
+.products img {
+    width: 100%;
+    box-shadow: var(--shadow);
+}
+
+/* Footer */
+
+footer {
+    margin-top: 2rem;
+    background: black;
+    color: var(--light);
+    text-align: center;
+    padding: 1rem;
+}
+
+@media(max-width: 700px) {
+    .top-container {
+        grid-template-areas: 
+        'showCase showCase'
+        'topBoxA topBoxB'
+        ;
+    }
+    .showCase h1 {
+        font-size: 2.5rem;
+    }
+
+
+    .info {
+        grid-template-columns: 1fr;
+    }
+    .info .btn {
+        display: block;
+        text-align: center;
+        margin: auto;
+    }
+} 
+
+@media (max-width: 700px) {
+    .topContainer{
+        grid-template-areas: 
+        'showCase'
+        'topBoxA'
+        'topBoxB'
+        ;
     }
 }
+
