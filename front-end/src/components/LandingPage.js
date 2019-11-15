@@ -18,14 +18,14 @@ export default function LandingPage(props) {
             <div className={styles.wrapper}>
              <Header > </Header>
                 <section className={styles.topContainer}>
-                    <header className={styles.showCase}>
+                    <div className={styles.showCase}>
                         <h1> We can sell everything</h1>
                         <p> Lorem ipsum dolor sit amet,
                             consectetur adipiscing elit.
                             Curabitur nec gravida massa.
                         Aenean ut libero. </p>
                         <a href="#" className={styles.btn}> Get started </a>
-                    </header>
+                    </div>
                 </section>
                 {/* <h2> Our products </h2> */}
                 <section className={styles.products}>
@@ -116,9 +116,10 @@ export default function LandingPage(props) {
 
                 </section>
               
-              <footer>
+              {/* <footer>
                   <p>Kislenko Dmitrii &copy; 2019</p>
-              </footer>
+              </footer> */}
+              <Footer />
             </div>
 
         </React.Fragment>

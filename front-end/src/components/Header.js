@@ -55,7 +55,7 @@ export default class Header extends React.Component {
                 <nav className={styles.mainNav}>
                     <ul>
                     <li> <a href="#"> <img className={styles.logo}src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo"></img></a></li>
-                         
+
                     <li> </li>
                     <li> </li>
 
