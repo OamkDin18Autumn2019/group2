@@ -33,7 +33,7 @@ router.get("/:id?", function(req, res, next) {
   }
 });
 
-router.post("/register", function(req, res, next) {
+router.post("/register", function(req, res) {
   user.add(req.body, {
     then: rows => {
       res.status(202).json({ code: 1, rows });

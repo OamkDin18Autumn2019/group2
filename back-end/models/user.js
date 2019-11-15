@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const saltRounds = 4;
 const jwtKey = "BWWrCs!|M;e*oU.YWJ_W+6jposZKF-";
+
 function generateAuthToken(id, isAdmin = false) {
   const token = jwt.sign(
     {
@@ -83,28 +84,31 @@ var user = {
   },
 
   add: function (user, callback) {
-    bcrypt.hash(user.password, saltRounds).then(hash => {
+    // console.log(user.user.password);
+    bcrypt.hash(user.user.password, saltRounds).then(hash => {
       return knex("users")
-        .insert([{ ...user, password: hash }])
+        .insert([{ ...user.user, password: hash }])
         .then(data => {
           callback.then(data);
         })
         .catch(err => {
           callback.catch(err);
+          console.log(err);
         });
     });
   },
   login: async function (user, callback) {
+    console.log(user.user);
     let userData = await knex
       .from('users')
       .select()
-      .where("username", user.username)
+      .where("username", user.user.username)
     userData = userData[0];
     if (userData == null) {
       return { code: 0 };
     }
     const correctPasswordSwitch = await bcrypt.compare(
-      user.password,
+      user.user.password,
       userData.password
     );
     console.log(correctPasswordSwitch);

@@ -1,44 +1,53 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import axios from 'axios';
 import LandingPage from './components/LandingPage';
 import Register from './components/Register';
+import Login from './components/Login';
 import SearchPage from './components/SearchPage';
 import ProductPage from './components/ProductPage';
-
-import './App.css';
 
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      // NavbarOpen: false,
-      // backgroundColor: "rgba(0, 0, 0, 0)"
+      user: {
+        username: '',
+        password: ''
+      }
     }
   }
 
-  // listenScrollEvent = e => {
-  //   if (window.scrollY > 200) {
-  //     this.setState({color: 'black'})
-  //   } else {
-  //     this.setState({color: 'rgba(0, 0, 0, 0)'})
-  //   }
-  // }
+  handleChange = (username, password) => {
+    console.log(username);
+    this.setState({ user: {
+      username,
+      password
+    }
+    });
+    
+  }
 
-  // componentDidMount() {
-  //   window.addEventListener('scroll', this.listenScrollEvent)
-  // }
+  handleSubmit = () => {
+    console.log(this.state.user);
 
-  // NavbarClickHandler = () => {
-  //   this.setState((prevsState) => {
-  //     console.log("it works");
-  //     return {NavbarOpen: !prevsState.NavbarOpen};
-  //   });
-  // };
+    const user = {
+        username: this.state.user.username,
+        password: this.state.user.password
+    };
 
-  // BackdropClickHandler = () => {
-  //   this.setState({NavbarOpen: false})
-  // }
+    axios.post(`http://localhost:3000/v1/user/login`, { user })
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+        
+    })
+    .catch(err => {
+        console.log(err);
+        return null;
+    })
+}
 
   render() {
     return (
@@ -46,17 +55,22 @@ export default class App extends React.Component {
         <Router>
           <Route
             path="/"
-            exact render={(routerProps) => <LandingPage  
+            exact render={(routerProps) => <LandingPage {...routerProps} 
                                                         />} /> 
           <Route
-            path="/signup"
-            exact render={(routerProps) => <Register />} />
+            path="/register"
+            exact render={(routerProps) => <Register {...routerProps} />} />
           <Route
             path="/search"
-            exact render={(routerProps) => <SearchPage />} />
+            exact render={(routerProps) => <SearchPage {...routerProps} />} />
           <Route 
-            path="/product"
-            exact render={(routerProps) => <ProductPage />} />
+            path="/product/:id"
+            exact render={(routerProps) => <ProductPage {...routerProps} />} />
+          <Route
+            path="/login"
+            exact render={(routerProps ) => <Login {...routerProps} user={this.state.user}
+                                                                    handleSubmit={this.handleSubmit}
+                                                                    handleChange={this.handleChange} />} />
           {/* 
           <Route
             path="/profile"
@@ -64,17 +78,10 @@ export default class App extends React.Component {
           <Route
             path="/admin"
             exact render={(routerProps ) => <AdminPage  />} />
-          <Route
-            path="/login"
-            exact render={(routerProps ) => <Login  />} />   */}
+             */}
         </Router>
-      </React.Fragment>
+       </React.Fragment>
 
     );
   }
 }
-
-  // NavbarClickHandler={this.NavbarClickHandler}
-  // NavbarState={this.state.NavbarOpen} 
-  // BackdropClickHandler={this.BackdropClickHandler}
-  // backgroundColor={this.backgroundColor}
