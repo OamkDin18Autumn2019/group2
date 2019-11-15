@@ -116,9 +116,11 @@ export default function LandingPage(props) {
 
                 </section>
               
-              <footer>
+              {/* <footer>
                   <p>Kislenko Dmitrii &copy; 2019</p>
-              </footer>
+              </footer> */}
+
+              <Footer />
             </div>
 
         </React.Fragment>
