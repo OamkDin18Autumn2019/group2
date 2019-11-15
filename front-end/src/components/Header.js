@@ -17,17 +17,32 @@ export default class Header extends React.Component {
          
         }
       }
+
+       scroll = window.onscroll = function() {
+        var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
+        if(scrolled !== 0){
+          // Если прокрутка есть, то делаем блок прозрачным
+        //   document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
+        console.log(scrolled)
+        }else{
+          // Если нет, то делаем его полностью видимым
+        //   document.querySelector('#navbar').styles.mainNav.opacity = '1';
+        };
+      };
      
     render() {
         if (loggedIn) {
             return(
                 
-                   <nav className={styles.mainNav}>
+                   <nav id="navbar" className={styles.mainNav}>
                     <ul>
-                        <li> <a href="#">Home</a></li>
-                        <li> <a href="#">Contact</a></li>
-                        <li> <a href="#">Help</a></li>
-                        <li> <a href="#"> Mother</a></li>
+                        <li > <a href="#" className={styles.logo}>Logo</a></li>
+                        <div></div>
+                        <div></div>
+
+                        <li> <a type="button" href="#">Search</a></li>
+                        <li> <a href="#">Register</a></li>
+
                     </ul>
                     </nav>
               
@@ -38,10 +53,13 @@ export default class Header extends React.Component {
             
                 <nav className={styles.mainNav}>
                     <ul>
-                        <li> <a href="#">Home</a></li>
-                        <li> <a href="#">Contact</a></li>
-                        <li> <a href="#">Help</a></li>
-                        <li> <a href="#"> Mother</a></li>
+                    <li> <a href="#"> <img className={styles.logo}src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo"></img></a></li>
+                         
+                    <li> </li>
+                    <li> </li>
+
+                        <li> <a  href="#"> <div className={ styles.loginBtn} > Login</div> </a></li>
+                        <li> <a href="#">Register</a></li>
                     </ul>
                 </nav>
             
