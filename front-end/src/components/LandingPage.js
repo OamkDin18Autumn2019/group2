@@ -1,12 +1,14 @@
 import React from 'react';
 import Header from './Header';
-import Footer from './Footer';
 import styles from '../CSS/LandingPage.module.css';
-import WelcomePhoto from '../images/da.jpg'
-import Link from "react-router-dom";
 import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
 import { IconContext } from "react-icons";
-import classNames from 'classnames';
+import product from './Product'
+import Product from './Product';
+// import classNames from 'classnames';
+// import Footer from './Footer';
+// import WelcomePhoto from '../images/da.jpg'
+// import Link from "react-router-dom";
 
 export default function LandingPage(props) {
 
@@ -29,7 +31,7 @@ export default function LandingPage(props) {
                 </section>
                 {/* <h2> Our products </h2> */}
                 <section className={styles.products}>
-
+                    <Product />
                     <img src="https://source.unsplash.com/random/200x200" alt="img"/>
                     <img src="https://source.unsplash.com/random/200x201" alt="img"/>
                     <img src="https://source.unsplash.com/random/200x203" alt="img"/>

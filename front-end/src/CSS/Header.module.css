@@ -15,6 +15,7 @@
     width: 100%;
     background-color: black;
     position: fixed;
+    /* position: absolute; */
     top: 0;
     left: 0;
 }
@@ -42,7 +43,6 @@
 }
 
 .mainNav a {
-    background: var(--primary);
     display: block;
     text-decoration: none;
     padding: 0.5rem;

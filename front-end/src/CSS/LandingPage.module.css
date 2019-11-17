@@ -34,7 +34,12 @@ img{
     grid-gap: 20px;
 }
 
-
+.hide {
+    display: none;
+}
+.showMoreInfo{
+    display: block;
+}
 
 /* Top container */
 
@@ -176,7 +181,7 @@ img{
 }
 
 .products img {
-    width: 100%;
+    width: 99%;
     box-shadow: var(--shadow);
 }
 
