@@ -24,18 +24,16 @@ export default class Header extends React.Component {
         var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
         if(scrolled !== 0){
           // Если прокрутка есть, то делаем блок прозрачным
-        //   document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
         console.log(scrolled)
         }else{
           // Если нет, то делаем его полностью видимым
-        //   document.querySelector('#navbar').styles.mainNav.opacity = '1';
         };
       };
      
     render() {
         if (loggedIn) {
             return(
-                
+
                    <nav id="navbar" className={styles.mainNav}>
                     <ul>
                         <li > <a href="#" className={styles.logo}>Logo</a></li>

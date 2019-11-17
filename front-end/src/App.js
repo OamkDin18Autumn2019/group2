@@ -1,53 +1,53 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import axios from 'axios';
-import LandingPage from './components/LandingPage';
-import Register from './components/Register';
-import Login from './components/Login';
-import SearchPage from './components/SearchPage';
-import ProductPage from './components/ProductPage';
+import axios from "axios";
+import LandingPage from "./components/LandingPage";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import SearchPage from "./components/SearchPage";
+import ProductPage from "./components/ProductPage";
+import BasketPage from "./components/BasketPage";
 
 export default class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       user: {
-        username: '',
-        password: ''
+        username: "",
+        password: ""
       }
-    }
+    };
   }
 
   handleChange = (username, password) => {
     console.log(username);
-    this.setState({ user: {
-      username,
-      password
-    }
+    this.setState({
+      user: {
+        username,
+        password
+      }
     });
-    
-  }
+  };
 
   handleSubmit = () => {
     console.log(this.state.user);
 
     const user = {
-        username: this.state.user.username,
-        password: this.state.user.password
+      username: this.state.user.username,
+      password: this.state.user.password
     };
 
-    axios.post(`http://localhost:3000/v1/user/login`, { user })
-    .then(res => {
+    axios
+      .post(`http://localhost:3000/v1/user/login`, { user })
+      .then(res => {
         console.log(res);
         console.log(res.data);
-        
-    })
-    .catch(err => {
+      })
+      .catch(err => {
         console.log(err);
         return null;
-    })
-}
+      });
+  };
 
   render() {
     return (
@@ -55,22 +55,42 @@ export default class App extends React.Component {
         <Router>
           <Route
             path="/"
-            exact render={(routerProps) => <LandingPage {...routerProps} 
-                                                        />} /> 
+            exact
+            render={routerProps => <LandingPage {...routerProps} />}
+          />
           <Route
             path="/register"
-            exact render={(routerProps) => <Register {...routerProps} />} />
+            exact
+            render={routerProps => <Register {...routerProps} />}
+          />
           <Route
             path="/search"
-            exact render={(routerProps) => <SearchPage {...routerProps} />} />
-          <Route 
+            exact
+            render={routerProps => <SearchPage {...routerProps} />}
+          />
+          <Route
             path="/product/:id"
-            exact render={(routerProps) => <ProductPage {...routerProps} />} />
+            exact
+            render={routerProps => <ProductPage {...routerProps} />}
+          />
           <Route
             path="/login"
-            exact render={(routerProps ) => <Login {...routerProps} user={this.state.user}
-                                                                    handleSubmit={this.handleSubmit}
-                                                                    handleChange={this.handleChange} />} />
+            exact
+            render={routerProps => (
+              <Login
+                {...routerProps}
+                user={this.state.user}
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+              />
+            )}
+          />
+
+          <Route
+            path="/basket"
+            exact
+            render={routerProps => <BasketPage {...routerProps} />}
+          />
           {/* 
           <Route
             path="/profile"
@@ -80,8 +100,7 @@ export default class App extends React.Component {
             exact render={(routerProps ) => <AdminPage  />} />
              */}
         </Router>
-       </React.Fragment>
-
+      </React.Fragment>
     );
   }
 }
