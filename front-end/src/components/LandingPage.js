@@ -3,7 +3,7 @@ import Header from './Header';
 import styles from '../CSS/LandingPage.module.css';
 import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
 import { IconContext } from "react-icons";
-import product from './Product'
+// import product from './Product'
 import Product from './Product';
 // import classNames from 'classnames';
 // import Footer from './Footer';
@@ -12,8 +12,8 @@ import Product from './Product';
 
 export default function LandingPage(props) {
 
-    console.log(props);
-    console.log(window.scrollY);
+    // console.log(props);
+    // console.log(window.scrollY);
 
     return (
         <React.Fragment>
@@ -31,19 +31,20 @@ export default function LandingPage(props) {
                 </section>
                 {/* <h2> Our products </h2> */}
                 <section className={styles.products}>
-                    <Product />
-                    <img src="https://source.unsplash.com/random/200x200" alt="img"/>
-                    <img src="https://source.unsplash.com/random/200x201" alt="img"/>
-                    <img src="https://source.unsplash.com/random/200x203" alt="img"/>
-                    <img src="https://source.unsplash.com/random/200x204" alt="img"/>
-                    <img src="https://source.unsplash.com/random/200x205" alt="img"/>
-                    <img src="https://source.unsplash.com/random/200x206" alt="img"/>
-                    <img src="https://source.unsplash.com/random/201x200" alt="img"/>
-                    <img src="https://source.unsplash.com/random/202x201" alt="img"/>
-                    <img src="https://source.unsplash.com/random/203x203" alt="img"/>
-                    <img src="https://source.unsplash.com/random/204x204" alt="img"/>
-                    <img src="https://source.unsplash.com/random/205x205" alt="img"/>
-                    <img src="https://source.unsplash.com/random/207x206" alt="img"/>
+                    <Product >https://source.unsplash.com/random/200x200</Product> 
+                    <Product >https://source.unsplash.com/random/201x200</Product> 
+                    <Product >https://source.unsplash.com/random/202x200</Product> 
+                    <Product >https://source.unsplash.com/random/203x200</Product> 
+                    <Product >https://source.unsplash.com/random/204x200</Product> 
+                    <Product >https://source.unsplash.com/random/205x200</Product> 
+                    <Product >https://source.unsplash.com/random/206x200</Product> 
+                    <Product >https://source.unsplash.com/random/207x200</Product> 
+                    <Product >https://source.unsplash.com/random/208x200</Product> 
+                    <Product >https://source.unsplash.com/random/209x200</Product> 
+                    <Product >https://source.unsplash.com/random/210x210</Product> 
+                    <Product >https://source.unsplash.com/random/211x220</Product> 
+                    <Product >https://source.unsplash.com/random/212x230</Product> 
+
                 </section>
 
                 <section className={styles.middleContainer}>

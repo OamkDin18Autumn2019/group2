@@ -1,50 +1,42 @@
 
 import React from 'react';
-// import Navbar from './Navbar';
-import { Link }  from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styles from '../CSS/LandingPage.module.css';
-// import menuLogo from '../icons/icons8-menu-50.png';
 
-
-// const loggedIn = 0;
 
 export default class Product extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-         showProduct: styles.hide
+            showProduct: styles.hide
         }
-      }
-      showMore = () => {
-          console.log(this.props.showProduct)
-          if (this.state.showProduct === styles.hide) {
+    }
+    showMore = () => {
+        console.log(this.props.showProduct)
+        if (this.state.showProduct === styles.hide) {
             this.setState({
                 showProduct: styles.showMoreInfo
-            })   
-          } else {
+            })
+        } else {
             this.setState({
                 showProduct: styles.hide
-            })   
-          }
-       
-      }
-     
+            })
+        }
+
+    }
+
     render() {
-     
-        return(            
+
+        return (
             <>
-            <div className={styles.container} onClick = { this.showMore }>
-                <div >
-                    <img src="https://source.unsplash.com/random/207x206" alt="img" />
+                <div className = {styles.img_block}>
+                    <a  className = {styles.content_block}><img alt="product" src={ this.props.children } />
+                        <div className = {styles.over_block}></div>
+                        <span>45$</span>
+                    </a>
                 </div>
-            </div>
-            <div className = { this.state.showProduct }>
-                asdasd
-            </div>
-
-
-        </>
+            </>
         )
     }
 }
