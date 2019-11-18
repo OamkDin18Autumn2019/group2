@@ -65,7 +65,7 @@ export default class Header extends React.Component {
     render() {
         if (loggedIn) {
             return(
-                
+
                    <nav id="navbar" className={styles.mainNav}>
                     <ul>
                         <li > <a href="#" className={styles.logo}>Logo</a></li>
