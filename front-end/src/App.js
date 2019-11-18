@@ -14,7 +14,8 @@ export default class App extends React.Component {
     this.state = {
       user: {
         username: "",
-        password: ""
+        password: "",
+        token: "",
       }
     };
   }
@@ -40,8 +41,15 @@ export default class App extends React.Component {
     axios
       .post(`http://localhost:3000/v1/user/login`, { user })
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+        this.setState({
+          user:{ 
+            username: res.data.user.username,
+            token: res.data.token
+          }
+         
+        })
+        console.log(this.state);
+        // console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -71,7 +79,7 @@ export default class App extends React.Component {
           <Route
             path="/product/:id"
             exact
-            render={routerProps => <ProductPage {...routerProps} />}
+            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} />}
           />
           <Route
             path="/login"
