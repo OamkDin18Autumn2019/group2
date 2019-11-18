@@ -41,6 +41,7 @@ export default class ProductPage extends Component {
         this.setState({ amount: temporary_amount })
     }
     render() {
+
         //Conditional renderer for available product
         if (this.state.productAvailability === true) {
             return (
