@@ -58,7 +58,7 @@ export default function Footer() {
                         <img src={MasterCardLogo} className={styles.PaymentMethods}/>
                     </div>
                     <div className={styles.Copyright}>
-                        <p>mothersellers (c) 2019 We sell everything. All rights reserved. Design stolen by Nursultan Akhmethzhanov</p>
+                        <p>mothersell (c) 2019 We sell everything. All rights reserved. Design stolen by us</p>
                     </div>
                 </div>
             </footer>
