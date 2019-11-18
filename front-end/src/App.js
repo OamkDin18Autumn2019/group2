@@ -19,22 +19,14 @@ export default class App extends React.Component {
     };
   }
 
-  handleChange = (username, password) => {
-    console.log(username);
-    this.setState({
-      user: {
-        username,
-        password
-      }
-    });
-  };
-
-  handleSubmit = () => {
-    console.log(this.state.user);
+  handleSubmit = (un, pw) => {
+    // console.log(this.state.user);
+    console.log(un);
+    console.log(pw);
 
     const user = {
-      username: this.state.user.username,
-      password: this.state.user.password
+      username: un,
+      password: pw
     };
 
     axios
@@ -42,6 +34,14 @@ export default class App extends React.Component {
       .then(res => {
         console.log(res);
         console.log(res.data);
+        console.log(this.state.user);
+        this.setState({
+          user: {
+            username: un,
+            password: pw
+          }
+        });
+        // console.log(this.state.user);
       })
       .catch(err => {
         console.log(err);
@@ -81,7 +81,7 @@ export default class App extends React.Component {
                 {...routerProps}
                 user={this.state.user}
                 handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
+                handleClick={this.handleClick}
               />
             )}
           />

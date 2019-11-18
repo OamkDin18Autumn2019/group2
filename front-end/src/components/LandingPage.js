@@ -6,7 +6,7 @@ import { IconContext } from "react-icons";
 // import product from './Product'
 import Product from './Product';
 // import classNames from 'classnames';
-// import Footer from './Footer';
+import Footer from './Footer';
 // import WelcomePhoto from '../images/da.jpg'
 // import Link from "react-router-dom";
 
@@ -18,16 +18,16 @@ export default function LandingPage(props) {
     return (
         <React.Fragment>
             <div className={styles.wrapper}>
-             <Header > </Header>
+             <Header /> 
                 <section className={styles.topContainer}>
-                    <header className={styles.showCase}>
+                    <div className={styles.showCase}>
                         <h1> We can sell everything</h1>
                         <p> Lorem ipsum dolor sit amet,
                             consectetur adipiscing elit.
                             Curabitur nec gravida massa.
                         Aenean ut libero. </p>
                         <a href="#" className={styles.btn}> Get started </a>
-                    </header>
+                    </div>
                 </section>
                 {/* <h2> Our products </h2> */}
                 <section className={styles.products}>
@@ -118,10 +118,8 @@ export default function LandingPage(props) {
                         </div>
 
                 </section>
-              
-              <footer>
-                  <p>Kislenko Dmitrii &copy; 2019</p>
-              </footer>
+
+              <Footer />
             </div>
 
         </React.Fragment>

@@ -1,33 +1,54 @@
-.mainNav ul li a {
+/* .mainNav ul li a {
     background-color: black;
     height: 100%;
     padding-top: auto;
     padding-bottom: auto;
 }
 
-.mainNav ul li img {
-    width: 70%;
-}
 .mainNav ul li  {
     height: 100%;
-}
+} */
+
+
+
 .mainNav {
     width: 100%;
     background-color: black;
     position: fixed;
     overflow: hidden;   
     z-index: 10000;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     /* display: block; */
     /* position: absolute; */
     top: 0;
     left: 0;
 }
-.mainNav ul {
+
+.logo {
+    width: 50%;
+    margin-bottom: 15px;
+    /* background-color: red; */
+}
+
+/* .mainNav ul {
     display: grid;
 
-    /* grid-gap: px; */
+    grid-gap: px; 
     list-style: none;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    
+} */
+
+/* .loginButton {
+
+} */
+
+.Dropdown {
+    place-self: center;
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-column-start: 2;
+    grid-column-end: 4;
 }
 .loginBtn1 {
     border: 2px solid grey;
