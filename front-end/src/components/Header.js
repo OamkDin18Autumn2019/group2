@@ -2,6 +2,7 @@ import React from 'react';
 // import Navbar from './Navbar';
 import { Link }  from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
+import ButtonStyles from '../CSS/Buttons.module.css';
 // import menuLogo from '../icons/icons8-menu-50.png';
 import SearchLogo from '../icons/icons8_search_filled_50px.png';
 import ResetLogo from '../icons/icons8_close_window_filled_50px.png';
@@ -65,33 +66,25 @@ export default class Header extends React.Component {
     render() {
         if (loggedIn) {
             return(
-
                    <nav id="navbar" className={styles.mainNav}>
-                    <ul>
-                        <li > <a href="#" className={styles.logo}>Logo</a></li>
-                        <div></div>
-                        <div></div>
-
-                        <li> <a type="button" href="#">Search</a></li>
-                        <li> <a href="#">Register</a></li>
-
-                    </ul>
-                    </nav>
-              
+                      <a href="#" className={styles.logo}>Logo</a>
+                      <div className={styles.Dropdown}>
+                          <input className={styles.SearchBar} /> 
+                          <a type="button" href="#">Cart</a>
+                          <a href="#">Profile</a>
+                      </div>
+                </nav>      
             )
         }
      else {
         return(            
                 <nav className={styles.mainNav}>
-                    <ul>
-                    <li> <a href="#"> <img className={styles.logo}src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo"></img></a></li>
-                         
-                    <li> </li>
-                    <li> </li>
-
-                          <li className={styles.loginBtn}> <Link to="/login" > Login </Link></li> 
-                          <li className={styles.loginBtn}> <Link to="/register" > Register </Link></li> 
-                    </ul>
+                    <a href="#"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo"></img></a>
+                    <div className={styles.Dropdown}>
+                        <input className={styles.SearchBar} /> 
+                        <button className={ButtonStyles.PrimaryButton}> <Link to="/login" > Login </Link></button> 
+                        <button className={ButtonStyles.PrimaryButton}> <Link to="/register" > Register </Link></button> 
+                    </div>
                 </nav>
         )
     }

@@ -6,7 +6,7 @@ import { IconContext } from "react-icons";
 // import product from './Product'
 import Product from './Product';
 // import classNames from 'classnames';
-// import Footer from './Footer';
+import Footer from './Footer';
 // import WelcomePhoto from '../images/da.jpg'
 // import Link from "react-router-dom";
 
@@ -118,10 +118,6 @@ export default function LandingPage(props) {
                         </div>
 
                 </section>
-              
-              {/* <footer>
-                  <p>Kislenko Dmitrii &copy; 2019</p>
-              </footer> */}
 
               <Footer />
             </div>
