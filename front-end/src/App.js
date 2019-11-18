@@ -40,7 +40,7 @@ export default class App extends React.Component {
         this.setState({
           user: {
             username: un,
-            password: pw
+            password: pw,
             token: res.data.token
           }
         });
