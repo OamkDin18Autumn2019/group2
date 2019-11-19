@@ -1,7 +1,7 @@
 :root {
     --primary: white;
-    --dark:#333;
-    --light:#fff;
+    --dark:rgb(56, 56, 56);
+    --light:rgb(255, 255, 255);
     /* --shadow:0 1px 5px rgba(104, 104, 104, 0.8); */
     --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
 }
@@ -244,7 +244,7 @@ img{
     margin: 1rem;
     display: grid;
     grid-gap: 20px;
-
+    scroll-snap-type: x mandatory;
     grid-template-columns: repeat(auto-fit, minmax( 200px, 1fr));
 }
 

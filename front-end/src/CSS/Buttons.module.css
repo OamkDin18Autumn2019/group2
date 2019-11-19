@@ -2,3 +2,13 @@
     border: none;
     background-color: transparent;
 }
+
+.IconButtons {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.HiddenByDefault {
+    display: none;
+}
