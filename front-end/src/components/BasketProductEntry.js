@@ -9,7 +9,9 @@ export default props => {
   });
   return (
     <div className={styles.main}>
-      <div className={styles.productImage}></div>
+      <div className={styles.productImage}>
+        <img width="100px" height="100px"></img>
+      </div>
       <div className={styles.info}>
         <div className={styles.name}>{data.name}</div>
         <div className={styles.description}>{data.description}</div>
