@@ -6,6 +6,8 @@ import ButtonStyles from '../CSS/Buttons.module.css';
 // import menuLogo from '../icons/icons8-menu-50.png';
 import SearchLogo from '../icons/icons8_search_filled_50px.png';
 import ResetLogo from '../icons/icons8_close_window_filled_50px.png';
+import classNames from 'classnames';
+
 
 // It was initially a functional component but then, 
 // I realized that the code will be less coupled and easier to understand if it was a class component.
@@ -22,10 +24,12 @@ export default class Header extends React.Component {
         }
       }
 
+
         // we should not use that because it violates React principle
         scroll = window.onscroll = function() {
             var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
             if(scrolled !== 0){
+
             // If the scrollbar is scrolled it makes the background transparent
             // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
         console.log(scrolled)
@@ -64,6 +68,8 @@ export default class Header extends React.Component {
     // }
      
     render() {
+      console.log(this.props.style) 
+     
         if (loggedIn) {
             return(
                    <nav id="navbar" className={styles.mainNav}>
@@ -77,8 +83,8 @@ export default class Header extends React.Component {
             )
         }
      else {
-        return(            
-                <nav className={styles.mainNav}>
+        return(           
+                <nav className = {classNames(styles.mainNav)}>
                     <a href="#"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo"></img></a>
                     <div className={styles.Dropdown}>
                         <input className={styles.SearchBar} /> 
