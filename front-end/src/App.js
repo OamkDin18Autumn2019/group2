@@ -8,6 +8,7 @@ import SearchPage from "./components/SearchPage";
 import ProductPage from "./components/ProductPage";
 import BasketPage from "./components/BasketPage";
 import CreateProduct from "./components/CreateProduct";
+import Profile from './components/Profile';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -67,6 +68,11 @@ export default class App extends React.Component {
             path="/createProduct"
             exact
             render={routerProps => <CreateProduct {...routerProps} user={ this.state.user } />}
+          />
+             <Route
+            path="/profile"
+            exact
+            render={routerProps => <Profile {...routerProps} user={ this.state.user } />}
           />
           <Route
             path="/register"
