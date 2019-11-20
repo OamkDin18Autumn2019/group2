@@ -37,7 +37,7 @@ export default class Header extends React.Component {
 
             // If the scrollbar is scrolled it makes the background transparent
             // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
-        console.log(scrolled)
+        // console.log(scrolled)
             } else {
             // Если нет, то делаем его полностью видимым
             // else it makes the background visible

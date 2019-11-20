@@ -1,4 +1,4 @@
-.Container {
+/* .Container {
     width: 40vw;
     margin: auto;
     padding: auto;
@@ -69,4 +69,65 @@
 
     font-size: 18px;
     line-height: 22px;
+} */
+
+input:focus,
+button:focus {
+    outline: none;
+    border: #3A7BD8 solid 1px;
+}
+
+.h2 {
+    margin: 5px 0;
+    text-align: center;
+}
+
+.Login {
+    display: grid;
+    grid-template-columns: 25% 70px auto 70px 25%;
+    grid-template-rows: 25% auto 25%;
+}
+
+.LoginForm {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border: 2px solid rgb(187, 187, 187);
+    border-radius: 3px;
+    margin: auto;
+    padding: 10% 15%;
+}
+
+.Form {
+    display: grid;
+    grid-gap: 5px;
+}
+
+.EmailPassword {
+    display: grid;
+    grid-gap: 5px;
+}
+
+.RememberMe {
+    display: inline;
+    /* margin: 5px 0px; */
+}
+
+.Buttons {
+    display: grid;
+    grid-gap: 5px;
+}
+@media(max-width: 768px) {
+    .Login {
+        grid-template-columns: 40px auto 40px;
+    }
+
+    .LoginForm {
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
 }
