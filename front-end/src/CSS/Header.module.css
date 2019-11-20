@@ -9,16 +9,13 @@
     height: 100%;
 } */
 
-
-
-.mainNav,
-.mainNavExpanded {
+.mainNav, .mainNavExpanded {
     width: 100%;
     height: 10%;
     max-height: 10%;
     background-color: black;
     position: fixed;
-    overflow: hidden;   
+    overflow: hidden;
     z-index: 10000;
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -43,8 +40,7 @@
     /* background-color: red; */
 }
 
-.DropDownMenuCollapsed,
-.DropDownMenuExpanded {
+.DropDownMenuCollapsed, .DropDownMenuExpanded {
     /* place-self: center; */
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -93,10 +89,12 @@
     width: 65%;
     height: 110%;
     border-radius: 25px;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
     transition-duration: 0.4s;
 }
-.loginBtn1:hover{
+
+.loginBtn1:hover {
     border: 2px solid white;
     width: 75%;
     height: 110%;
@@ -104,8 +102,7 @@
     background-color: rgba(250, 0, 0, 0);
 }
 
-.ArrowDownCollapsed,
-.ArrowDownExpanded {
+.ArrowDownCollapsed, .ArrowDownExpanded {
     display: none;
     width: 30px;
 }
@@ -123,32 +120,27 @@ nav a {
     /* box-shadow: var(--shadow); */
 }
 
-
-
-@media(max-width: 768px) {
-
+@media(max-width: 580px) {
     .mainNav ul li a {
         padding-bottom: 1rem;
     }
-
-    .mainNav,
-    .mainNavExpanded {
+    /* .IconButtons {
+        margin-left: 12px ;
+        padding-right: auto ;
+    } */
+    .mainNav, .mainNavExpanded {
         grid-template-columns: 1fr;
         transition: all 0.4s ease-in-out;
     }
-
     .mainNavExpanded {
-        height: 20%;
+        height: 30%;
         max-height: 25%;
     }
-
     .mainNav {
         height: 10%;
         max-height: 20%;
     }
-
-    .DropDownMenuCollapsed,
-    .DropDownMenuExpanded {
+    .DropDownMenuCollapsed, .DropDownMenuExpanded {
         display: grid;
         grid-column: 1/2;
         grid-template-columns: 1fr;
@@ -157,53 +149,47 @@ nav a {
         display: block;
         transition: all 0.5s ease-in-out;
     }
-
     .DropDownMenuCollapsed {
         display: block;
         /* margin: 0;
         padding: 0; */
-        height: 0; 
-        line-height: 0; 
+        height: 0;
+        line-height: 0;
         opacity: 0;
     }
-
     .DropDownMenuCollapsed form button img {
         height: 0;
     }
-
     .DropDownMenuExpanded {
-        opacity: 1; 
+        opacity: 1;
     }
-
     .DropDownMenuExpanded form {
         grid-row: 2/3;
     }
-
     .ArrowDownCollapsed {
         display: block;
         position: relative;
         justify-self: center;
     }
-
     .ArrowDownExpanded {
         display: block;
         position: relative;
         justify-self: center;
     }
-
     .SearchBox {
+        width: 120%;
         /* place-self: center; */
         /* grid-column: 1/2; */
+        margin-left: 12px;
+        /* padding-right: auto; */
+        margin-bottom: 7%;
         grid-row: 1;
     }
-
     .LoginRegisterButtons {
         /* place-self: center; */
         grid-column: 1/2;
         grid-row: 2;
+        display: flex;
+        flex-flow: column wrap;
     }
-
-   
 }
-
- 
