@@ -5,7 +5,7 @@ import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 // import product from './Product'
 import Product from './Product';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 import Footer from './Footer';
 // import WelcomePhoto from '../images/da.jpg'
 // import Link from "react-router-dom";
