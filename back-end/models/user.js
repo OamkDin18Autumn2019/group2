@@ -84,7 +84,7 @@ var user = {
   },
 
   add: function (user, callback) {
-    // console.log(user.user.password);
+    console.log(user)
     bcrypt.hash(user.user.password, saltRounds).then(hash => {
       return knex("users")
         .insert([{ ...user.user, password: hash }])
@@ -98,7 +98,7 @@ var user = {
     });
   },
   login: async function (user, callback) {
-    console.log(user.user);
+    console.log(user);
     let userData = await knex
       .from('users')
       .select()

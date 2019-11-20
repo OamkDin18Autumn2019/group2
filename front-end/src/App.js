@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import SearchPage from "./components/SearchPage";
 import ProductPage from "./components/ProductPage";
 import BasketPage from "./components/BasketPage";
+import CreateProduct from "./components/CreateProduct";
+import Profile from './components/Profile';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,34 +16,38 @@ export default class App extends React.Component {
     this.state = {
       user: {
         username: "",
-        password: ""
+        password: "",
+        token: "",
       }
     };
   }
 
-  handleChange = (username, password) => {
-    console.log(username);
-    this.setState({
-      user: {
-        username,
-        password
-      }
-    });
-  };
-
-  handleSubmit = () => {
-    console.log(this.state.user);
+  handleSubmit = (un, pw) => {
+    // console.log(this.state.user);
+    console.log(un);
+    console.log(pw);
 
     const user = {
-      username: this.state.user.username,
-      password: this.state.user.password
+      username: un,
+      password: pw
     };
 
     axios
       .post(`http://localhost:3000/v1/user/login`, { user })
       .then(res => {
+
         console.log(res);
         console.log(res.data);
+        console.log(this.state.user);
+        this.setState({
+          user: {
+            username: un,
+            password: pw,
+            token: res.data.token
+          }
+        });
+        // console.log(this.state.user);
+
       })
       .catch(err => {
         console.log(err);
@@ -58,6 +64,16 @@ export default class App extends React.Component {
             exact
             render={routerProps => <LandingPage {...routerProps} />}
           />
+           <Route
+            path="/createProduct"
+            exact
+            render={routerProps => <CreateProduct {...routerProps} user={ this.state.user } />}
+          />
+             <Route
+            path="/profile"
+            exact
+            render={routerProps => <Profile {...routerProps} user={ this.state.user } />}
+          />
           <Route
             path="/register"
             exact
@@ -71,7 +87,7 @@ export default class App extends React.Component {
           <Route
             path="/product/:id"
             exact
-            render={routerProps => <ProductPage {...routerProps} />}
+            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} />}
           />
           <Route
             path="/login"
@@ -81,7 +97,7 @@ export default class App extends React.Component {
                 {...routerProps}
                 user={this.state.user}
                 handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
+                handleClick={this.handleClick}
               />
             )}
           />

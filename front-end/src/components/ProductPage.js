@@ -12,9 +12,14 @@ export default class ProductPage extends Component {
     }
     componentDidMount() {
         let idProduct = parseInt(this.props.match.params.id);
-        axios.get(`http://localhost:3000/v1/product/${idProduct}`)
+        console.log(this.props.user.token)
+        axios.get(`http://localhost:3000/v1/product/${idProduct}`, {
+            headers: {
+              'x-access-token':this.props.user.token 
+            }
+           })
             .then(res => {
-                console.log(res);
+                console.log(this.props.user);
                 console.log(res.data);
                 //The following line is to check the response JSON due to the weird structure of the response
                 console.log(res.data.rows[0]);

@@ -5,8 +5,8 @@ import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 // import product from './Product'
 import Product from './Product';
-// import classNames from 'classnames';
-// import Footer from './Footer';
+import classNames from 'classnames';
+import Footer from './Footer';
 // import WelcomePhoto from '../images/da.jpg'
 // import Link from "react-router-dom";
 
@@ -18,7 +18,7 @@ export default function LandingPage(props) {
     return (
         <React.Fragment>
             <div className={styles.wrapper}>
-             <Header > </Header>
+             <Header /> 
                 <section className={styles.topContainer}>
                     <div className={styles.showCase}>
                         <h1> We can sell everything</h1>
@@ -118,10 +118,6 @@ export default function LandingPage(props) {
                         </div>
 
                 </section>
-              
-              {/* <footer>
-                  <p>Kislenko Dmitrii &copy; 2019</p>
-              </footer> */}
               <Footer />
             </div>
 

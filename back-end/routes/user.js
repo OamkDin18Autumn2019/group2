@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var user = require("../models/user");
 var product = require("../models/product");
+const isAuth = require("../middlewares/isAuth");
 
 // Create tables "users" and "products"
 
@@ -11,7 +12,7 @@ user.createTableUsers()
 user.createTableHistory();
 
 // CRUD endpoints for "user"
-router.get("/:id?", function(req, res, next) {
+router.get("/:id?", isAuth, function(req, res, next) {
   if (req.params.id) {
     user.getById(req.params.id, {
       then: rows => {
@@ -45,12 +46,13 @@ router.post("/register", function(req, res) {
 });
 
 router.post("/login", async function(req, res, next) {
+  console.log(req.body)
   const data = await user.login(req.body);
   if (data.code == 1) {
     res
       .status(200)
       .header("x-auth-token", data.token)
-      .json({ ...data, token: "" });
+      .json({ ...data });
   } else {
     res.status(400).json({ ...data });
   }
