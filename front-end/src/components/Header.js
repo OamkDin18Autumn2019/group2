@@ -29,10 +29,12 @@ export default class Header extends React.Component {
         }
       }
 
+
         // we should not use that because it violates React principle
         scroll = window.onscroll = function() {
             var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
             if(scrolled !== 0){
+
             // If the scrollbar is scrolled it makes the background transparent
             // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
         console.log(scrolled)
@@ -82,6 +84,8 @@ export default class Header extends React.Component {
     // }
      
     render() {
+      console.log(this.props.style) 
+     
         if (loggedIn) {
             return(
                    <nav id="navbar" className={styles.mainNav}>
@@ -95,6 +99,7 @@ export default class Header extends React.Component {
             )
         }
      else {
+
         return(            
                 <nav className={this.state.NavbarClass}>
                     <div className={styles.LogoDiv}>

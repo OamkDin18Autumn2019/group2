@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../CSS/Login.module.css';
+import { Link } from 'react-router-dom'
 
 export default function Login(props) {
 
@@ -27,7 +28,10 @@ export default function Login(props) {
                 <label htmlFor="password" className={styles.Label}>Password</label><br/>
                 <input type="password" className={styles.Input} name="password" placeholder="Your password" />
             </div>
+
             <button type="submit" className={styles.SubmitBtn} >Login</button><br/>
+            <li><Link to='./product/1'>Product1 for testing</Link></li>
+
             <button className={styles.CancelBtn} onClick={handleCancel}>Cancel</button>
         </form>
     </div>

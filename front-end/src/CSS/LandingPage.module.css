@@ -1,7 +1,7 @@
 :root {
-    --primary: white;
-    --dark:rgb(56, 56, 56);
-    --light:rgb(255, 255, 255);
+    --primary: #ddd;
+    --dark:#333;
+    --light:#fff;
     /* --shadow:0 1px 5px rgba(104, 104, 104, 0.8); */
     --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
 }
@@ -13,7 +13,7 @@ html{
 }
 
 body{
-    background: white;
+    background: #ccc;
     line-height: 1.4;
 }
 
@@ -45,6 +45,7 @@ img{
 .img_block .content_block {
     width:100%;
     height: 100%;
+    box-shadow: var(--shadow);
     /* background:#f6f6f6; */
     text-align:center;
     /* min-height:250px; */
@@ -72,7 +73,7 @@ img{
     position:absolute;
     top:0;
     left:0;
-    z-index: 9900;
+    z-index: 1;
     -moz-transition:all 1s;
     -webkit-transition:all 1s;
     -o-transition:all 1s;
@@ -80,6 +81,7 @@ img{
 }
 .img_block a.content_block:hover .over_block {
     display:block;
+    box-shadow: var(--shadow);
     background-color:rgba(255, 255, 255, 0.212)
 }
 .img_block a.content_block span {
@@ -94,7 +96,7 @@ img{
     display:block;
     bottom:0;
     left:0;
-    z-index: 9910;
+    z-index: 2;
     -moz-transition: all .4s;
     -webkit-transition: all .4s;
     -o-transition: all .4s;
