@@ -14,6 +14,8 @@ var product = {
           .references('id')
           .inTable('users');
           t.text("name", 255);
+          t.integer("price");
+          t.integer("discount").defaultTo(0);
           t.text("description", 1024);
           t.float("ratingProduct", 10, 3);
           t.integer("amountOfRates");

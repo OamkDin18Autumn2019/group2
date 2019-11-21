@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from '../CSS/Login.module.css';
+import ButtonStyles from '../CSS/Buttons.module.css';
+import InputStyles from '../CSS/InputFields.module.css';
 import { Link } from 'react-router-dom'
 
 export default function Login(props) {
@@ -38,23 +40,23 @@ export default function Login(props) {
     <div className={styles.Login}>
         <div className={styles.LoginForm}>
             <h2 className={styles.h2}>Log in to mothersell</h2>
-            <div className={styles.Form}>
+            <form className={styles.Form} onSubmit={handleSubmitHandler}>
                 <div className={styles.EmailPassword}>
-                    <input className={styles.InputField} placeholder="Enter your email or username" />  
-                    
-                    <input className={styles.InputField} placeholder="Enter your password" />  
+                    <input name="username" className={InputStyles.InputField} placeholder="Enter your email or username" />  
+                    <input type="password" name="password" className={InputStyles.InputField} placeholder="Enter your password" />  
                 </div>
                 <div className={styles.RememberMe}>
-                    <input type="checkbox" id="RememberMe" /> 
+                    <input type="checkbox" id="RememberMe" className={InputStyles.Checkbox} /> 
+                    {/* <span className={InputStyles.Check}></span> */}
                     <label for="RememberMe" > Remember me </label> 
-            
                 </div>
                 <div className={styles.Buttons}>
-                    <button type="submit"> Log In </button> 
-                    <button type="reset"> Cancel </button> 
+                    <button type="submit" className={ButtonStyles.SubmitButton} >Login</button>
+                    {/* <button className={ButtonStyles.SecondaryButton} onClick={handleCancel}> Cancel </button>  */}
                 </div>
-            </div>
-            <a href="#" >Forgot account?</a>
+            </form>
+            <span > Do not have an account? <Link to="/register" id={styles.RegisterLink} className={ButtonStyles.Link}> Register </Link> </span>
+            {/* <a className={ButtonStyles.Link} >Register</a> */}
         </div>
     </div>
     )
