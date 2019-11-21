@@ -33,6 +33,14 @@ export default class CreateProduct extends Component {
   </div>
   <div className={styles.row}>
     <div className={styles.col_25}>
+      <label for="price">Price</label>
+    </div>
+    <div className={styles.col_75}>
+      <input type="number" id="price" name="price" value='0' placeholder="0"/>
+    </div>
+  </div>
+  <div className={styles.row}>
+    <div className={styles.col_25}>
       <label for="tags">Tags (for better search)</label>
     </div>
     
