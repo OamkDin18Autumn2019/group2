@@ -30,9 +30,10 @@ export default class Product extends React.Component {
 
         return (
             <>
-                <div className = {styles.img_block}>
-                    <a  className = {styles.content_block}><img alt="product" src={ this.props.children } />
-                        <div className = {styles.over_block}></div>
+                <div className={styles.img_block}>
+                    <a className={styles.content_block}><img alt="product" src={this.props.children} />
+                        <div className={styles.over_block}></div>
+                      
                         <span>45$</span>
                     </a>
                 </div>
