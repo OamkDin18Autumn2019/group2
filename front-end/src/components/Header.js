@@ -37,7 +37,7 @@ export default class Header extends React.Component {
 
             // If the scrollbar is scrolled it makes the background transparent
             // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
-        console.log(scrolled)
+        // console.log(scrolled)
             } else {
             // Если нет, то делаем его полностью видимым
             // else it makes the background visible
@@ -99,7 +99,6 @@ export default class Header extends React.Component {
             )
         }
      else {
-
         return(            
                 <nav className={this.state.NavbarClass}>
                     <div className={styles.LogoDiv}>
@@ -107,12 +106,12 @@ export default class Header extends React.Component {
                     </div>
                     <div className={this.state.DropDownMenu}>
                         <form className={styles.SearchBox}>
-                            <input className={styles.SearchBar} /> 
+                            <input type="search" className={styles.SearchBar} /> 
                             <button type="submit" className={ButtonStyles.IconButtons}> <img src={SearchLogo} className={classNames(styles.SearchLogo, styles.Icons) } /> </button>
                         </form>
                         <div className={styles.LoginRegisterButtons}>
-                          <button className={ButtonStyles.PrimaryButton}> <Link to="/login" > Login </Link></button> 
-                          <button className={ButtonStyles.PrimaryButton}> <Link to="/register" > Register </Link></button> 
+                          <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/login" > Login </Link></button> 
+                          <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Register </Link></button> 
                         </div>
                     </div>
                     <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img src={this.state.ArrowState} className={styles.Icons} /> </span>

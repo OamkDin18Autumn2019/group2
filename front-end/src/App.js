@@ -11,6 +11,7 @@ import CreateProduct from "./components/CreateProduct";
 import Profile from './components/Profile';
 import EditProduct from './components/EditProduct'
 
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);

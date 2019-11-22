@@ -130,7 +130,6 @@ export default function LandingPage(props) {
                         </div>
 
                 </section>
-
               <Footer />
             </div>
 
