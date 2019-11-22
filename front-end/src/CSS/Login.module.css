@@ -1,72 +1,92 @@
-.Container {
-    width: 40vw;
+input:focus,
+button:focus {
+    outline: none;
+    border: var(--primary) solid 1px;
+}
+
+body {
+    background-color: var(--background-primary);
+}
+
+.h2 {
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.Login {
+    display: grid;
+    grid-template-columns: 25% 70px auto 70px 25%;
+    grid-template-rows: 25% auto 25%;
+}
+
+.LoginForm {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-primary);
+    text-align: left;
+    border: 2px solid var(--nonactive-border);
+    /* border-radius: 3px; */
     margin: auto;
-    padding: auto;
+    padding: 10% 15%;
 }
 
 .Form {
-    background-color: #ffffff;
-    border: black solid 1px;
-    border-radius: 1%;
+    display: grid;
+    /* grid-gap: 10px; */
 }
 
-.Input {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: auto;
-    padding-left: 10px;
-
-    border: black solid 1px;
-    box-sizing: border-box;
-    border-radius: 5px;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 28px;
+.EmailPassword {
+    display: grid;
+    grid-gap: 1em;
 }
 
-.Label {
-    margin-left: 12%;
-
-    font-size: 24px;
-    line-height: 28px;
+.RememberMe {
+    display: grid;
+    align-self: center;
+    grid-template-columns: 25px 1fr;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* margin: 5px 0px; */
 }
 
-.FormGroup {
-    margin-top: 3%;
-    margin-bottom: 3%;
+.RememberMe label {
+    margin: 0;
+    padding: 0.4em;
+    margin: 0.25em 0;
 }
 
-.SubmitBtn {
-    width: 80%;
-    height: 30px;
-    margin-left: 10%;
-    margin-bottom: 3%;
-
-    border: none;
-    box-sizing: border-box;
-    border-radius: 5%;
-
-    background-color: rgb(69, 241, 63);
-
-    font-size: 18px;
-    line-height: 22px;
+.RememberMe span, input {
+    align-self: center;
 }
 
-.CancelBtn {
-    width: 20%;
-    height: 30px;
-    margin-left: 40%;
-    margin-bottom: 3%;
+.Buttons {
+    display: grid;
+    grid-gap: 5px;
+}
 
-    border: none;
-    box-sizing: border-box;
-    border-radius: 5%;
+#RegisterLink {
+    margin-top: 0.5em;
+}
 
-    background-color: rgb(255, 0, 0);
+@media(max-width: 768px) {
+    .Login {
+        grid-template-columns: 2.5em auto 2.5em;
+    }
 
-    font-size: 18px;
-    line-height: 22px;
+    .LoginForm {
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+}
+
+@media(max-width: 425px ) {
+    .Login {
+        grid-template-columns: 1em auto 1em;
+    }
 }

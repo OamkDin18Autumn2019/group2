@@ -1,0 +1,66 @@
+/* :root {
+    --primary: #19B51B;
+    --dark:#333;
+    --light:#fff;
+    --shadow:0 1px 5px rgba(104, 104, 104, 0.8);
+    --font: "Montserrat", "Roboto", Helvetica, Arial, sans-serif;
+} */
+
+input {
+    box-sizing: border-box;
+    border: 1px solid var(--nonactive-border);
+    transition: 0.4s all ease-in-out;
+}
+
+
+.InputField {
+    width: 100%;
+    height: 2.2em;
+    padding-left: 0.6em;
+}
+
+.InputField:hover {
+    border: 1.5px solid var(--primary-light);
+}
+
+.InputField:focus {
+    border: 1.5px solid var(--primary);
+}
+
+.Checkbox {
+    /* box-sizing: border-box; */
+    appearance: none;
+    cursor: pointer;
+    background-color: var(--light);
+    color: var(--primary);
+    transition: all 0.3s ease-in-out;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+}
+
+.Checkbox:hover {
+    border: 10px solid var(--primary-light);
+}
+
+.Checkbox:checked {
+    border: 10px solid var(--primary);
+    content: '\2714';
+}
+
+.Checkbox:checked ~ .Checkbox::after {
+    /* border: 1.3px solid #3A7BD8; */
+    content: '\2714';
+    /* transform: rotateX(180deg); */
+    padding-left: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+
+  
