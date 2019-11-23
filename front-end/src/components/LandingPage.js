@@ -11,7 +11,7 @@ import Footer from './Footer';
 // import Link from "react-router-dom";
 
 export default function LandingPage(props) {
-
+   
     // console.log(props);
     // console.log(window.scrollY);
 
@@ -57,7 +57,7 @@ export default function LandingPage(props) {
                     
 
                 </section>
-                </div>
+
 
                 <section className={styles.middleContainer}>
                     <header className={styles.showCaseMiddle}>

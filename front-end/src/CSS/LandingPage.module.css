@@ -102,7 +102,7 @@ img{
 .img_block a.content_block span {
     background: rgba(0, 0, 0, 0.5);
     width:100%;
-    height:0px;
+    height:0;
     text-transform:uppercase;
     font-size:21px;
     font-weight: bolder;
@@ -119,12 +119,13 @@ img{
 }
 .img_block a.content_block:hover span {
     bottom: 0;
-    height:60px;
+    height:50%;
     color: #ffffff;
 }
 .img_block a img {
     height: 100%;
 }
+
 
 /* Top container */
 
@@ -256,6 +257,10 @@ img{
     align-items: center;
 }
 
+.stars {
+    margin-top: -10%;
+}
+
 /* products */
 
 .products {
@@ -271,7 +276,6 @@ img{
     width: 99%;
     box-shadow: var(--shadow);
 }
-
 /* Footer */
 
 footer {
@@ -301,6 +305,12 @@ footer {
         display: block;
         text-align: center;
         margin: auto;
+    }
+    .stars {
+        margin-top: -5%;
+    }
+    .img_block a.content_block:hover span {
+        height:40%;
     }
 } 
 
