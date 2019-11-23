@@ -30,23 +30,35 @@ export default function LandingPage(props) {
                     </div>
                 </section>
                 {/* <h2> Our products </h2> */}
+                <div className={styles.bestSellersBox}>
+                <div className={ styles.bestSellersName}> Best sellers </div>
                 <section className={styles.products}>
+                  
                     <Product >https://source.unsplash.com/random/200x200</Product> 
                     <Product >https://source.unsplash.com/random/201x200</Product> 
                     <Product >https://source.unsplash.com/random/202x200</Product> 
                     <Product >https://source.unsplash.com/random/203x200</Product> 
                     <Product >https://source.unsplash.com/random/204x200</Product> 
                     <Product >https://source.unsplash.com/random/205x200</Product> 
-                    <Product >https://source.unsplash.com/random/206x200</Product> 
-                    <Product >https://source.unsplash.com/random/207x200</Product> 
-                    <Product >https://source.unsplash.com/random/208x200</Product> 
-                    <Product >https://source.unsplash.com/random/209x200</Product> 
-                    <Product >https://source.unsplash.com/random/210x210</Product> 
-                    <Product >https://source.unsplash.com/random/211x220</Product> 
-                    <Product >https://source.unsplash.com/random/212x230</Product> 
+                    
 
                 </section>
-    
+                {/* </div>
+                <div className={styles.bestSellersBox}> */}
+                <div className={ styles.bestSellersName}> New arrivals </div>
+                <section className={styles.products}>
+                  
+                    <Product >https://source.unsplash.com/random/200x201</Product> 
+                    <Product >https://source.unsplash.com/random/201x202</Product> 
+                    <Product >https://source.unsplash.com/random/202x203</Product> 
+                    <Product >https://source.unsplash.com/random/203x204</Product> 
+                    <Product >https://source.unsplash.com/random/204x205</Product> 
+                    <Product >https://source.unsplash.com/random/205x206</Product> 
+                    
+
+                </section>
+
+
                 <section className={styles.middleContainer}>
                     <header className={styles.showCaseMiddle}>
                         <h1>We are universal</h1>

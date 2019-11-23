@@ -9,6 +9,7 @@ import ProductPage from "./components/ProductPage";
 import BasketPage from "./components/BasketPage";
 import CreateProduct from "./components/CreateProduct";
 import Profile from './components/Profile';
+import EditProduct from './components/EditProduct'
 
 
 export default class App extends React.Component {
@@ -69,6 +70,11 @@ export default class App extends React.Component {
             path="/createProduct"
             exact
             render={routerProps => <CreateProduct {...routerProps} user={ this.state.user } />}
+          />
+            <Route
+            path="/editProduct/:id"
+            exact
+            render={routerProps => <EditProduct {...routerProps} user={ this.state.user } />}
           />
              <Route
             path="/profile"

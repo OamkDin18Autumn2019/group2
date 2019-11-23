@@ -2,6 +2,66 @@
 .profileImg {
     width: 50px;
 }
+.edit {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    min-width: 50%;
+    background-color: rgb(76, 175, 79); /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    border-radius: 12px;
+
+  
+}
+.edit:hover {
+    background-color: rgb(51, 126, 53);
+  color: white;
+  width: 50%;
+}
+.edit1 a{
+    /* background-color: rgba(51, 126, 54, 0.651);*/
+    color: rgb(51, 126, 53);
+    font-weight: bold;
+    font-size: larger;
+
+}
+.delete1 a{
+    color: #f44336;
+    font-weight: bold;
+    font-size: larger;
+}
+.delete {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    min-width: 50%;
+    background-color: #f44336; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.delete:hover {
+    background-color: #c22a1f;
+  color: white;
+  width: 50%;
+}
 .background {
     height: 100%;
     padding-top: 7%;
@@ -39,7 +99,7 @@
   }
   .productTable td, th {  
     border: 3px solid #ddd;
-    text-align: left;
+    text-align: center;
     padding: 15px;
   }
 .productTable tr:nth-child(even) {background-color: #f2f2f2;}
