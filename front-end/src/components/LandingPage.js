@@ -11,7 +11,7 @@ import Footer from './Footer';
 // import Link from "react-router-dom";
 
 export default function LandingPage(props) {
-
+   
     // console.log(props);
     // console.log(window.scrollY);
 
@@ -46,7 +46,7 @@ export default function LandingPage(props) {
                     <Product >https://source.unsplash.com/random/212x230</Product> 
 
                 </section>
-
+    
                 <section className={styles.middleContainer}>
                     <header className={styles.showCaseMiddle}>
                         <h1>We are universal</h1>
