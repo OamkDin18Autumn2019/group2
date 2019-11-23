@@ -128,10 +128,11 @@ export default function LandingPage(props) {
                         <a href="#" className={styles.btn}> Buy something now! </a>
 
                         </div>
-
                 </section>
+
               <Footer />
-            </div>
+                </div>
+            </div>  
 
         </React.Fragment>
     )

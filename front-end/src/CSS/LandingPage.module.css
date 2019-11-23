@@ -13,7 +13,7 @@ html{
 }
 
 body{
-    background: #ccc;
+    
     line-height: 1.4;
 }
 
@@ -205,6 +205,8 @@ img{
     background-size: cover;
     background-position: center;
     padding: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -250,6 +252,8 @@ img{
 .info{
     background: var(--primary);
     box-shadow: var(--shadow);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     display: grid;
     grid-gap: 30px;
     grid-template-columns: repeat(2, 1fr);
