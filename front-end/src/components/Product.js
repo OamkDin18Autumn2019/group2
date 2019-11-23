@@ -2,6 +2,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import styles from '../CSS/LandingPage.module.css';
+import axios from 'axios';
 
 import StarRatings from 'react-star-ratings';
 
@@ -10,11 +11,26 @@ export default class Product extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showProduct: styles.hide
+            showProduct: styles.hide,
         }
     }
+    // This is an example of usage API for changing rating
+    // We will improve it when we get actual data
+    
      changeRating = ( newRating, name ) => {
         console.log(newRating)
+        axios.put(`http://localhost:3000/v1/product/changeRating/1`, {
+            // headers: {
+            //     'x-access-token': this.props.user.token
+            // },
+            
+                "ratingProduct": newRating
+        
+        })
+        .then( res => {
+            console.log(res)
+        })
+        .catch((err)=> console.log(err))
        }
     showMore = () => {
         console.log(this.props.showProduct)
