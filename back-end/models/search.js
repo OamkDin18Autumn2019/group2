@@ -1,50 +1,95 @@
 var db = require('../database');
 var knex = require("../database/database");
 
-function isTag(tag, callback) {
+async function getTagId(name) {
+  console.log("getTagId ran");
   return knex
     .from('tags')
     .select()
-    .where("nameOfTag", tag)
+    .where("nameOfTag", name)
     .then(data => {
-      callback.then(data);
+      if (data[0] !== undefined) {
+        return (data[0].id);
+      }
+      else return null;
     })
-    .catch(err => {
-      callback.catch(err);
-    });
+    .catch(err => err);
 }
 
-function logSomething() {
-  return ("something");
+async function getCategoryId(name) {
+  console.log("getCategoryId ran");
+  return knex
+    .from('categories')
+    .select()
+    .where("nameOfCategory", name)
+    .then(data => {
+      if (data[0] !== undefined) {
+        return (data[0].id);
+      }
+      else return null;
+    })
+    .catch(err => err);
 }
 
 var search = {
   searchKeyWord:
-
-    /* function (word) {
-      return knex
-      .from("tags")
-      .select()
-      .where("nameOfTag", word);
-    } */
-
     async function (keyword, callback) {
-      var category = [];
-      var tags = await isTag(keyword);
-      console.log("keyword: ", keyword);
-      console.log(tags);
-      return ({});
-
-      /* return knex
+      var keywords = keyword.q.split(" ");
+      var name = "";
+      var categories = "";
+      var tags = [];
+      var query = knex
         .from('products')
         .select()
-        .where("name", "like", `%${keyword}%`)
-        .then(data => {
-          callback.then(data);
+        .where("name", "like", `%%`)
+        .andWhere("category", "like", `%%`);
+
+      const loadIn = async () => {
+        console.log("loading in...")
+        keywords.forEach(word => {
+          await getTagId(word)
+            .then(results => {
+              if (results !== null) {
+                tags.push(results);
+                console.log("tags: ", tags.toString());
+              }
+            })
+            .catch(err => err);
+          getCategoryId(word)
+            .then(results => {
+              if (results !== null) {
+                categories.push(results);
+                console.log("categories: ", typeof (categories.toString()));
+              }
+            })
+            .catch(err => err);
+        });
+      }
+
+      /* console.log("keyword: ", keyword);
+      console.log("array: ", keywords) */
+      //console.log(categories);
+
+      //return ({});
+
+
+      loadIn().then(results => {
+        console.log("done load in");
+        tags.forEach(x => {
+          query = query.andWhere("tags", "like", `%${x}%`);
         })
-        .catch(err => {
-          callback.catch(err);
-        }); */
+      })
+        .then(resolve => {
+          console.log("making request");
+          return query
+            .then(data => {
+              callback.then(data);
+            })
+            .catch(err => {
+              callback.catch(err);
+            });
+        })
+        .catch(err => err)
     }
 }
 
