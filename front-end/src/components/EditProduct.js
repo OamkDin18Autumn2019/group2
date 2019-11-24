@@ -18,7 +18,7 @@ export default class CreateProduct extends Component {
     componentDidMount() {
         let idProduct = parseInt(this.props.match.params.id);
         console.log(this.props.user.token)
-        axios.get(`http://localhost:3000/v1/product/${idProduct}`, {
+        axios.get(`http://localhost:4000/v1/product/${idProduct}`, {
             headers: {
                 'x-access-token': this.props.user.token
             }

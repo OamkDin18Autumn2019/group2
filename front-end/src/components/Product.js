@@ -19,7 +19,7 @@ export default class Product extends React.Component {
     
      changeRating = ( newRating, name ) => {
         console.log(newRating)
-        axios.put(`http://localhost:3000/v1/product/changeRating/1`, {
+        axios.put(`http://localhost:4000/v1/product/changeRating/1`, {
             // headers: {
             //     'x-access-token': this.props.user.token
             // },
