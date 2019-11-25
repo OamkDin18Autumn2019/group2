@@ -63,13 +63,6 @@ export default class CreateProduct extends Component {
           <td>$ {sale.price}</td>
           <td>{sale.quantity}</td>
           <td>{sale.dateTime}</td>
-          <td className={styles.edit1}>
-            <a href="./editProduct/2">Edit</a>
-          </td>
-          <td className={styles.delete1}>
-            {" "}
-            <a href="#">Delete</a>{" "}
-          </td>
         </tr>
       );
     });
@@ -124,7 +117,7 @@ export default class CreateProduct extends Component {
                 <tr>
                   <th>Product Name</th>
                   <th>Price</th>
-                  <th>Amount</th>
+                  <th>Quantity</th>
                   <th>Date of buying</th>
                 </tr>
                 {this.state.history}
