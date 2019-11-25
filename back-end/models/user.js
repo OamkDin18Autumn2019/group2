@@ -21,7 +21,8 @@ var user = {
       if (!exists) {
         return knex.schema.createTable("users", function (t) {
           t.increments("id").primary();
-          t.string("username", 255);
+          t.string("username", 255)
+          .unique();
           t.string("email", 255);
           t.string("password", 255);
           t.integer("ratingUser").defaultTo(0);
