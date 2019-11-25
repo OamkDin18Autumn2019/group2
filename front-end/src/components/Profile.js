@@ -7,7 +7,72 @@ import classNames from "classnames";
 export default class CreateProduct extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentSaleItems: [
+        {
+          name: "Test name",
+          price: "none",
+          quantity: "As many as possible",
+          dateTime: "Covert can't tell"
+        },
+        {
+          name: "Test name 2",
+          price: 45667,
+          quantity: 90009,
+          dateTime: "March 19, 2019"
+        }
+      ],
+
+      historyItems: [
+        {
+          name: "Test name",
+          price: "some",
+          quantity: "As many as possible",
+          dateTime: "Covert can't tell"
+        },
+        {
+          name: "Test name 2",
+          price: 45667,
+          quantity: 90009,
+          dateTime: "March 19, 2019"
+        }
+      ]
+    };
+    this.state.currentSale = this.state.currentSaleItems.map(sale => {
+      return (
+        <tr>
+          <td>{sale.name}</td>
+          <td>$ {sale.price}</td>
+          <td>{sale.quantity}</td>
+          <td>{sale.dateTime}</td>
+          <td className={styles.edit1}>
+            <a href="./editProduct/2">Edit</a>
+          </td>
+          <td className={styles.delete1}>
+            {" "}
+            <a href="#">Delete</a>{" "}
+          </td>
+        </tr>
+      );
+    });
+
+    this.state.history = this.state.historyItems.map(sale => {
+      return (
+        <tr>
+          <td>{sale.name}</td>
+          <td>$ {sale.price}</td>
+          <td>{sale.quantity}</td>
+          <td>{sale.dateTime}</td>
+          <td className={styles.edit1}>
+            <a href="./editProduct/2">Edit</a>
+          </td>
+          <td className={styles.delete1}>
+            {" "}
+            <a href="#">Delete</a>{" "}
+          </td>
+        </tr>
+      );
+    });
   }
 
   render() {
@@ -44,63 +109,12 @@ export default class CreateProduct extends Component {
                 <tr>
                   <th>Product Name</th>
                   <th>Price</th>
-                  <th>Amount</th>
-                  <th>Date of Buying</th>
+                  <th>Quantity</th>
+                  <th>Date</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
-                <tr>
-                  <td>Jill </td>
-                  <td>$ 12</td>
-                  <td>50</td>
-                  <td>19.01.2000</td>
-                  <td className={styles.edit1}>
-                    <a href="./editProduct/2">Edit</a>
-                  </td>
-                  <td className={styles.delete1}>
-                    {" "}
-                    <a href="#">Delete</a>{" "}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Eve</td>
-                  <td>Jackson</td>
-                  <td>94</td>
-                  <td>94</td>
-                  <td className={styles.edit1}>
-                    <a href="./editProduct/2">Edit</a>
-                  </td>
-                  <td className={styles.delete1}>
-                    {" "}
-                    <a href="#">Delete</a>{" "}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Adam</td>
-                  <td>Johnson</td>
-                  <td>67</td>
-                  <td>67</td>
-                  <td className={styles.edit1}>
-                    <a href="./editProduct/2">Edit</a>
-                  </td>
-                  <td className={styles.delete1}>
-                    {" "}
-                    <a href="#">Delete</a>{" "}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Adam</td>
-                  <td>Johnson</td>
-                  <td>67</td>
-                  <td>67</td>
-                  <td className={styles.edit1}>
-                    <a href="./editProduct/2">Edit</a>
-                  </td>
-                  <td className={styles.delete1}>
-                    {" "}
-                    <a href="#">Delete</a>{" "}
-                  </td>
-                </tr>
+                {this.state.currentSale}
               </table>
             </div>
             <br></br>
@@ -113,24 +127,7 @@ export default class CreateProduct extends Component {
                   <th>Amount</th>
                   <th>Date of buying</th>
                 </tr>
-                <tr>
-                  <td>Jill </td>
-                  <td>12$</td>
-                  <td>50</td>
-                  <td>19.01.2000</td>
-                </tr>
-                <tr>
-                  <td>Eve</td>
-                  <td>Jackson</td>
-                  <td>94</td>
-                  <td>94</td>
-                </tr>
-                <tr>
-                  <td>Adam</td>
-                  <td>Johnson</td>
-                  <td>67</td>
-                  <td>67</td>
-                </tr>
+                {this.state.history}
               </table>
             </div>
           </div>
