@@ -15,9 +15,9 @@ code {
 }
 
 :root {
-  --primary: #ddd;
+  --primary: #19B51B;
   --primary-light: #6CCF6D;
-  --background-primary: #ccc;
+  --background-primary: #ddd;
   --nonactive-border: #E8E8E8;
   --dark:#333;
   --light:#fff;

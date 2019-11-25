@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import SearchLogo from '../icons/icons8_search_filled_50px.png';
 import ArrowDown from '../icons/icons8_expand_arrow_filled_50px.png';
 import ArrowUp from '../icons/icons8_collapse_arrow_filled_50px.png';
+import BasketLogo from '../icons/icons8_shopping_cart_filled_50px.png';
+//  icons8_shopping_cart_filled_50px
 // import Navbar from './Navbar';
 // import menuLogo from '../icons/icons8-menu-50.png';
 // import ResetLogo from '../icons/icons8_close_window_filled_50px.png';
@@ -28,7 +30,6 @@ export default class Header extends React.Component {
             // backgroundColor: "rgba(0, 0, 0, 0)"
         }
       }
-
 
         // we should not use that because it violates React principle
         scroll = window.onscroll = function() {
@@ -84,18 +85,26 @@ export default class Header extends React.Component {
     // }
      
     render() {
-      console.log(this.props.style) 
-     
-        if (loggedIn) {
+      console.log(this.props.style)  
+      console.log(this.props.user);
+        if (this.props.user.username) {
             return(
-                   <nav id="navbar" className={styles.mainNav}>
-                      <a href="#" className={styles.logo}>Logo</a>
-                      <div className={styles.Dropdown}>
-                          <input className={styles.SearchBar} /> 
-                          <a type="button" href="#">Cart</a>
-                          <a href="#">Profile</a>
-                      </div>
-                </nav>      
+                <nav className={this.state.NavbarClass}>
+                    <div className={styles.LogoDiv}>
+                        <Link to="/"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>    
+                    </div>
+                    <div className={this.state.DropDownMenu}>
+                        <form className={styles.SearchBox}>
+                            <input type="search" className={styles.SearchBar} /> 
+                            <button type="submit" className={ButtonStyles.IconButtons}> <img src={SearchLogo} className={classNames(styles.SearchLogo, styles.Icons) } /> </button>
+                        </form>
+                        <div className={styles.LoginRegisterButtons}>
+                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
+                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Profile </Link></button> 
+                        </div>
+                    </div>
+                    <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img src={this.state.ArrowState} className={styles.Icons} /> </span>
+                </nav>
             )
         }
      else {
