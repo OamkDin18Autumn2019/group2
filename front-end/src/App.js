@@ -35,7 +35,7 @@ export default class App extends React.Component {
     };
 
     axios
-      .post(`http://localhost:3000/v1/user/login`, { user })
+      .post(`http://localhost:4000/v1/user/login`, { user })
       .then(res => {
 
         console.log(res);
