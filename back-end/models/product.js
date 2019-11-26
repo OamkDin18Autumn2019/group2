@@ -127,10 +127,12 @@ var product = {
   },
 
   update: function(id, product, callback) {
+
     return knex("products")
       .where("id", id)
       .update({
         ...product
+
       })
       .then(data => {
         callback.then(data);

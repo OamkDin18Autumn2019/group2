@@ -18,7 +18,7 @@ export default function LandingPage(props) {
     return (
         <React.Fragment>
             <div className={styles.wrapper}>
-             <Header /> 
+             <Header user={props.user} /> 
                 <section className={styles.topContainer}>
                     <div className={styles.showCase}>
                         <h1> We can sell everything</h1>

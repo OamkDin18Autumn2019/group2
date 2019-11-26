@@ -72,12 +72,15 @@ router.delete("/:id", function(req, res, next) {
     }
   });
 });
+
 router.put("/:id", function(req, res, next) {
   product.update(req.params.id, req.body, {
     then: rows => {
+      console.log(req);
       res.status(202).json({ code: 1, rows });
     },
     catch: err => {
+      console.log(err);
       res.status(500).json({ code: 0, err });
     }
   });

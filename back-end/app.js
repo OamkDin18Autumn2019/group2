@@ -11,6 +11,7 @@ app.use(cors());
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/user");
 var productsRouter = require("./routes/product");
+var searchRouter =  require("./routes/search");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/v1/", indexRouter);
 app.use("/v1/user", usersRouter);
 app.use("/v1/product", productsRouter);
+app.use("/v1/search", searchRouter);
 
 const isAuth = require("./middlewares/isAuth");
 app.get("/protected", isAuth, (req, res, next) => {
