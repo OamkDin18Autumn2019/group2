@@ -33,33 +33,33 @@ router.get("/:id?", function(req, res, next) {
 // It gives you an error in console when you send an array of objects
 // But it works, so you can use it
 router.post("/", function(req, res, next) {
- if (Array.isArray(req.body)) {
-   console.log(req.body)
-   Promise.all([
-    req.body.forEach(element => {
-      console.log(element)
-    product.add(element, {
+  if (Array.isArray(req.body)) {
+    console.log(req.body);
+    Promise.all([
+      req.body.forEach(element => {
+        console.log(element);
+        product.add(element, {
+          then: rows => {
+            console.log(rows);
+            res.status(202).json({ code: 1, rows });
+          },
+          catch: err => {
+            console.log(err);
+            res.status(500).json({ code: 0, err });
+          }
+        });
+      })
+    ]);
+  } else {
+    product.add(req.body, {
       then: rows => {
-        console.log(rows)
-        // res.status(202).json({ code: 1, rows });
+        res.status(202).json({ code: 1, rows });
       },
       catch: err => {
-        console.log(err)
-        // res.status(500).json({ code: 0, err });
+        res.status(500).json({ code: 0, err });
       }
     });
-    })]).then(res.sendStatus(200))
-    .catch(res.sendStatus(500))
- } else {
-  product.add(req.body, {
-    then: rows => {
-      res.status(202).json({ code: 1, rows });
-    },
-    catch: err => {
-      res.status(500).json({ code: 0, err });
-    }
-  });
- }
+  }
 });
 
 router.delete("/:id", function(req, res, next) {
@@ -88,20 +88,20 @@ router.put("/:id", function(req, res, next) {
 router.put("/changeRating/:id", function(req, res, next) {
   let id = req.params.id;
 
-  console.log(req.body)
+  console.log(req.body);
   product.getById(id, {
     then: rows => {
       console.log(rows[0].amountOfRates);
       if (rows[0].amountOfRates == 0) {
-         update = {
-          amountOfRates :rows[0].amountOfRates + 1,
-          ratingProduct : req.body.ratingProduct
-        }
+        update = {
+          amountOfRates: rows[0].amountOfRates + 1,
+          ratingProduct: req.body.ratingProduct
+        };
       } else {
         update = {
-          amountOfRates : rows[0].amountOfRates + 1,
-          ratingProduct : (req.body.ratingProduct +  rows[0].ratingProduct)/2
-        }
+          amountOfRates: rows[0].amountOfRates + 1,
+          ratingProduct: (req.body.ratingProduct + rows[0].ratingProduct) / 2
+        };
       }
       product.update(id, update, {
         then: rows => {
@@ -116,6 +116,8 @@ router.put("/changeRating/:id", function(req, res, next) {
       res.status(500).json({ code: 0, err });
     }
   });
+
+  
   // product.update(req.params.id, req.body, {
   //   then: rows => {
   //     res.status(202).json({ code: 1, rows });
@@ -125,5 +127,17 @@ router.put("/changeRating/:id", function(req, res, next) {
   //   }
   // });
 });
+
+router.post("/getByUser", function (req, res, next){
+
+  const userId = req.body.userId;
+  product.getByUserId(userId, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
 
 module.exports = router;
