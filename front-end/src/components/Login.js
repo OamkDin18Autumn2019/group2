@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom'
 
 export default function Login(props) {
 
-    function handleCancel(event) {
-        event.preventDefault();
-        props.history.goBack();
-    }
+    console.log(props);
+
+    // function handleCancel(event) {
+    //     event.preventDefault();
+    //     props.history.goBack();
+    // }
 
     function handleSubmitHandler(event) {
         event.preventDefault();
@@ -17,6 +19,10 @@ export default function Login(props) {
         // console.log(props);
         props.handleSubmit( event.target["username"].value,
                             event.target["password"].value );
+        if (props.user) {
+            // console.log(props.user)
+            props.history.goBack();
+        }
     }
 
     return(

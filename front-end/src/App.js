@@ -48,6 +48,8 @@ export default class App extends React.Component {
             token: res.data.token
           }
         });
+        // event.preventDefault();
+        this.props.history.goBack();
         // console.log(this.state.user);
 
       })
@@ -64,19 +66,19 @@ export default class App extends React.Component {
           <Route
             path="/"
             exact
-            render={routerProps => <LandingPage {...routerProps} />}
+            render={routerProps => <LandingPage {...routerProps} user={ this.state.user } />}
           />
            <Route
             path="/createProduct"
             exact
             render={routerProps => <CreateProduct {...routerProps} user={ this.state.user } />}
           />
-            <Route
+          <Route
             path="/editProduct/:id"
             exact
             render={routerProps => <EditProduct {...routerProps} user={ this.state.user } />}
           />
-             <Route
+          <Route
             path="/profile"
             exact
             render={routerProps => <Profile {...routerProps} user={ this.state.user } />}
@@ -89,7 +91,7 @@ export default class App extends React.Component {
           <Route
             path="/search"
             exact
-            render={routerProps => <SearchPage {...routerProps} />}
+            render={routerProps => <SearchPage {...routerProps} user={ this.state.user } />}
           />
           <Route
             path="/product/:id"
@@ -112,7 +114,7 @@ export default class App extends React.Component {
           <Route
             path="/basket"
             exact
-            render={routerProps => <BasketPage {...routerProps} />}
+            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } />}
           />
           {/* 
           <Route

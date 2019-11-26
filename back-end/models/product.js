@@ -112,6 +112,7 @@ var product = {
   },
 
   update: function(id, product, callback) {
+    console.log(product);
     return knex('products').where('id', id)
     .update(
       ({ 
