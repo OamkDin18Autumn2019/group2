@@ -1,0 +1,56 @@
+.PrimaryButton {
+    border: none;
+    background-color: transparent;
+}
+
+.SubmitButton {
+    border: 0;
+    height: 2em;
+    color: var(--light);
+    background-color: var(--primary);
+}
+
+.SecondaryButton {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    height: 2em;
+    background-color: var(--light);
+}
+
+.IconButtons {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.HiddenByDefault {
+    display: none;
+}
+
+.Link {
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    max-width: 60px;
+    color: var(--primary);
+}
+
+.Link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    background: var(--primary);
+    transition: width .3s;
+}
+
+.Link:hover {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.Link:hover::after {
+    color: white;
+    width: 100%;
+    transition: width .3s;
+}

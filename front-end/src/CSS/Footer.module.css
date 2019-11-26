@@ -1,0 +1,86 @@
+/*  img {
+   
+} */
+
+/* p {
+    margin-bottom: 0px;
+     font-size: 1.2em; 
+} */
+
+footer {
+    /* width: 100vw; */
+    position: relative;
+    /* bottom: 0; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: black;
+    color: #8F9491;
+    padding-top: 8px;
+    clear: both;
+}
+
+footer img {
+    width: 1.3em;
+    height: 1.3em;
+    margin: 5px ;
+}
+
+h5 {
+    color: white;
+    font-size: 1.1em;
+}
+
+.Inline {
+    display: inline-block;
+}
+
+.Copyright {
+    font-size: 0.7em;
+}
+
+.FooterInfo {
+    margin-bottom: 5px;
+}
+
+.PaymentMethods {
+    margin: 2px 20px;
+}
+
+.PaymentMethods > img {
+    width: 3em;
+    height: 3em;
+}
+
+.SocialMediaLogos > img {
+    width: 3em;
+    height: 3em;
+}
+
+@media (min-width: 320px) {
+    .FooterElement {
+        grid-column: span 3;
+        text-align: center;
+    }
+
+    .FooterElementBottom {
+        grid-column: span 3;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .FooterElement {
+        grid-column: span 1;
+    }
+    
+    .FooterElementBottom {
+        grid-column: span 3;
+        text-align: center;
+    }
+    
+    .FooterInfo {
+        margin-bottom: 5px;
+        white-space: nowrap;
+    }
+
+} 

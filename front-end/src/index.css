@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  background: rgba(39, 2, 2, 0.11);
+  
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -10,4 +12,15 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --primary: #19B51B;
+  --primary-light: #6CCF6D;
+  --background-primary: #ddd;
+  --nonactive-border: #E8E8E8;
+  --dark:#333;
+  --light:#fff;
+  --shadow:0 1px 5px rgba(104, 104, 104, 0.8);
+  --font-family-sans-serif: "Montserrat", "Roboto", Helvetica, Arial, sans-serif;
 }

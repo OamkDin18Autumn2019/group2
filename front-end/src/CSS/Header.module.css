@@ -1,71 +1,216 @@
-.mainNav ul li a {
-    background-color: black;
-    height: 100%;
-    padding-top: auto;
-    padding-bottom: auto;
+/* :root {
+    --primary: #19B51B;
+    --dark:#333;
+    --light:#fff;
+    --shadow:0 1px 5px rgba(104, 104, 104, 0.8);
+    --font: "Montserrat", "Roboto", Helvetica, Arial, sans-serif;
+} */
+
+nav a {
+    display: block;
+    text-decoration: none;
+    padding: auto;
+    /* padding-bottom: 0rem; */
+    /* margin-bottom: -0.5rem; */
+    text-align: center;
+    color: var(--light);
+    text-transform: uppercase;
+    font-size: 1.4rem;
 }
 
-.mainNav ul li img {
-    width: 70%;
+nav a:hover {
+    text-decoration: none;
+    color: white;
 }
-.mainNav ul li  {
-    height: 100%;
-}
-.mainNav {
+
+.mainNav, 
+.mainNavExpanded {
     width: 100%;
+    height: 10%;
+    max-height: 10%;
     background-color: black;
     position: fixed;
-    overflow: hidden;   
+    overflow: hidden;
     z-index: 10000;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     /* display: block; */
     /* position: absolute; */
     top: 0;
     left: 0;
 }
-.mainNav ul {
+
+.LogoDiv {
+    place-self: center;
+}
+
+.logo {
+    width: 50%;
+    max-width: 300px;
+    vertical-align: middle;
+    align-self: center;
+    padding: 0;
+    /* margin: 2% 0; */
+    /* margin-bottom: 15px; */
+    /* background-color: red; */
+}
+
+.DropDownMenuCollapsed, .DropDownMenuExpanded {
+    /* place-self: center; */
     display: grid;
-
-    /* grid-gap: px; */
-    list-style: none;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-.loginBtn1 {
-    border: 2px solid grey;
-    width: 65%;
-    height: 110%;
-    border-radius: 25px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
-.loginBtn1:hover{
-    border: 2px solid white;
-    width: 75%;
-    height: 110%;
-    border-radius: 15px;
-    background-color: rgba(250, 0, 0, 0);
+    grid-template-columns: 1fr 1fr;
+    grid-column: 2/3;
+    justify-content: center;
 }
 
-.mainNav a {
-    display: block;
-    text-decoration: none;
-    padding: 0.5rem;
-    padding-bottom: 0rem;
-    margin-bottom: -0.5rem;
-    text-align: center;
-    color: var(--light);
-    text-transform: uppercase;
-    font-size: 1.1rem;
-    /* box-shadow: var(--shadow); */
+.SearchBox {
+    align-self: center;
+    grid-column: 1/2;
 }
 
+.SearchBar {
+    place-self: center;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: 70%;
+    min-width: 150px;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid white;
+    font-size: 1.2em;
+    color: white;
+    transition: border-bottom 0.5s ease-in-out;
+}
 
+.SearchBar:focus {
+    border: 0;
+    border-bottom: 1.5px solid white;
+}
 
-@media(max-width: 700px) {
+.SearchBar::-webkit-search-cancel-button {
+    /* background-color: red; */
+    padding-left: -90px;
+    -webkit-appearance: none;
+    height: 25px;
+    width: 25px;
+    background-image: url("../icons/icons8_close_window_50px_1.png");
+    background-repeat: no-repeat;
+    background-size: 25px;
+    /* border-radius: 10px; */
+    /* background: red; */
+}
+
+.Icons {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+}
+
+.SearchLogo {
+    width: 25px;
+    height: 25px;
+}
+
+.LoginRegisterButtons {
+    place-self: center;
+    font-size: 1.3em;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+#Login {
+    margin-right: 0.5em;
+}
+
+#Register {
+    justify-content: end;
+    margin-left: 0.5em;
+}
+
+.ArrowDownCollapsed, .ArrowDownExpanded {
+    display: none;
+    /* opacity: 1; */
+    transition: all 0.5s ease-in-out;
+    /* width: 30px; */
+}
+
+@media(max-width: 580px) {
     .mainNav ul li a {
         padding-bottom: 1rem;
     }
-    .mainNav ul {
+
+    /* .IconButtons {
+        margin-left: 12px ;
+        padding-right: auto ;
+    } */
+
+    .mainNav, .mainNavExpanded {
         grid-template-columns: 1fr;
+        transition: all 0.4s ease-in-out;
+    }
+    .mainNavExpanded {
+        height: 28%;
+        max-height: 28%;
+    }
+    .mainNav {
+        height: 10%;
+        max-height: 20%;
+    }
+    .DropDownMenuCollapsed, .DropDownMenuExpanded {
+        display: grid;
+        grid-column: 1/2;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        place-self: center;
+        display: block;
+        transition: all 0.5s ease-in-out;
+    }
+    .DropDownMenuCollapsed {
+        display: block;
+        /* margin: 0;
+        padding: 0; */
+        height: 0;
+        line-height: 0;
+        opacity: 0;
+    }
+    .DropDownMenuCollapsed form button img {
+        height: 0;
+    }
+    .DropDownMenuExpanded {
+        opacity: 1;
+    }
+    .DropDownMenuExpanded form {
+        grid-row: 2/3;
+    }
+    .ArrowDownCollapsed {
+        display: block;
+        position: relative;
+        justify-self: center;
+    }
+    .ArrowDownExpanded {
+        display: block;
+        position: relative;
+        justify-self: center;
+    }
+    .SearchBox {
+        width: 120%;
+        margin-left: 12px;
+        margin-bottom: 7%;
+        grid-row: 1;
+    }
+    .LoginRegisterButtons {
+        /* place-self: center; */
+        grid-column: 1/2;
+        grid-row: 2;
+        display: flex;
+        flex-flow: column wrap;
     }
 
-} 
+    #Login {
+        margin-right: 0;
+    }
+    
+    #Register {
+        margin-left: 0;
+    }
+}

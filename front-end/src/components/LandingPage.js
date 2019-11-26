@@ -5,47 +5,59 @@ import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 // import product from './Product'
 import Product from './Product';
-// import classNames from 'classnames';
-// import Footer from './Footer';
+import classNames from 'classnames';
+import Footer from './Footer';
 // import WelcomePhoto from '../images/da.jpg'
 // import Link from "react-router-dom";
 
 export default function LandingPage(props) {
-
+   
     // console.log(props);
     // console.log(window.scrollY);
 
     return (
         <React.Fragment>
             <div className={styles.wrapper}>
-             <Header > </Header>
+             <Header user={props.user} /> 
                 <section className={styles.topContainer}>
-                    <header className={styles.showCase}>
+                    <div className={styles.showCase}>
                         <h1> We can sell everything</h1>
                         <p> Lorem ipsum dolor sit amet,
                             consectetur adipiscing elit.
                             Curabitur nec gravida massa.
                         Aenean ut libero. </p>
                         <a href="#" className={styles.btn}> Get started </a>
-                    </header>
+                    </div>
                 </section>
                 {/* <h2> Our products </h2> */}
+                <div className={styles.bestSellersBox}>
+                <div className={ styles.bestSellersName}> Best sellers </div>
                 <section className={styles.products}>
+                  
                     <Product >https://source.unsplash.com/random/200x200</Product> 
                     <Product >https://source.unsplash.com/random/201x200</Product> 
                     <Product >https://source.unsplash.com/random/202x200</Product> 
                     <Product >https://source.unsplash.com/random/203x200</Product> 
                     <Product >https://source.unsplash.com/random/204x200</Product> 
                     <Product >https://source.unsplash.com/random/205x200</Product> 
-                    <Product >https://source.unsplash.com/random/206x200</Product> 
-                    <Product >https://source.unsplash.com/random/207x200</Product> 
-                    <Product >https://source.unsplash.com/random/208x200</Product> 
-                    <Product >https://source.unsplash.com/random/209x200</Product> 
-                    <Product >https://source.unsplash.com/random/210x210</Product> 
-                    <Product >https://source.unsplash.com/random/211x220</Product> 
-                    <Product >https://source.unsplash.com/random/212x230</Product> 
+                    
 
                 </section>
+                {/* </div>
+                <div className={styles.bestSellersBox}> */}
+                <div className={ styles.bestSellersName}> New arrivals </div>
+                <section className={styles.products}>
+                  
+                    <Product >https://source.unsplash.com/random/200x201</Product> 
+                    <Product >https://source.unsplash.com/random/201x202</Product> 
+                    <Product >https://source.unsplash.com/random/202x203</Product> 
+                    <Product >https://source.unsplash.com/random/203x204</Product> 
+                    <Product >https://source.unsplash.com/random/204x205</Product> 
+                    <Product >https://source.unsplash.com/random/205x206</Product> 
+                    
+
+                </section>
+
 
                 <section className={styles.middleContainer}>
                     <header className={styles.showCaseMiddle}>
@@ -116,13 +128,11 @@ export default function LandingPage(props) {
                         <a href="#" className={styles.btn}> Buy something now! </a>
 
                         </div>
-
                 </section>
-              
-              <footer>
-                  <p>Kislenko Dmitrii &copy; 2019</p>
-              </footer>
-            </div>
+
+              <Footer />
+                </div>
+            </div>  
 
         </React.Fragment>
     )

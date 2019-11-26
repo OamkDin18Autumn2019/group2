@@ -1,10 +1,10 @@
-:root {
+/* :root {
     --primary: #ddd;
     --dark:#333;
     --light:#fff;
     --shadow:0 1px 5px rgba(104, 104, 104, 0.8);
     --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
-}
+} */
 
 html{
     box-sizing: border-box;
@@ -13,7 +13,7 @@ html{
 }
 
 body{
-    background: #ccc;
+    
     line-height: 1.4;
 }
 
@@ -41,10 +41,26 @@ img{
 .showMoreInfo{
     display: block;
 }
+.bestSellersName {
+    /* padding-top: 2%; */
+    padding-left: 1.5rem;
+    /* padding-bottom: 22%; */
+    font-size: xx-large;
+    font-weight: bold;
+}
+.bestSellersBox {
+    /* display: block; */
+    margin-top: 0;
+    margin-bottom: 0;
+    /* background-color: var(--background-primary); */
+    /* margin-top: -3%;
+    margin-bottom: -3%; */
+}
 
 .img_block .content_block {
     width:100%;
     height: 100%;
+    box-shadow: var(--shadow);
     /* background:#f6f6f6; */
     text-align:center;
     /* min-height:250px; */
@@ -72,7 +88,7 @@ img{
     position:absolute;
     top:0;
     left:0;
-    z-index: 9900;
+    z-index: 1;
     -moz-transition:all 1s;
     -webkit-transition:all 1s;
     -o-transition:all 1s;
@@ -80,12 +96,13 @@ img{
 }
 .img_block a.content_block:hover .over_block {
     display:block;
+    box-shadow: var(--shadow);
     background-color:rgba(255, 255, 255, 0.212)
 }
 .img_block a.content_block span {
     background: rgba(0, 0, 0, 0.5);
     width:100%;
-    height:0px;
+    height:0;
     text-transform:uppercase;
     font-size:21px;
     font-weight: bolder;
@@ -94,7 +111,7 @@ img{
     display:block;
     bottom:0;
     left:0;
-    z-index: 9910;
+    z-index: 2;
     -moz-transition: all .4s;
     -webkit-transition: all .4s;
     -o-transition: all .4s;
@@ -102,12 +119,13 @@ img{
 }
 .img_block a.content_block:hover span {
     bottom: 0;
-    height:60px;
+    height:50%;
     color: #ffffff;
 }
 .img_block a img {
     height: 100%;
 }
+
 
 /* Top container */
 
@@ -120,6 +138,7 @@ img{
     ;
 }
 
+
 /*  Showcase */
 .showCase {
     grid-area: showCase;
@@ -128,6 +147,7 @@ img{
     background-size: cover;
     background-position: center;
     padding: 3rem;
+    /* margin-bottom: 0; */
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -152,7 +172,7 @@ img{
 }
 
 .topBox {
-    background: var(--primary);
+    background: var(--background-primary);
     display: grid;
     align-items: center;
     justify-items: center;
@@ -172,7 +192,8 @@ img{
     grid-gap: 20px;
     grid-template-areas: 
     "showCase showCase"
-    "showCase showCase"
+    "showCase showCase";
+  
     ;
 }
 
@@ -184,6 +205,8 @@ img{
     background-size: cover;
     background-position: center;
     padding: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -220,31 +243,36 @@ img{
 }
 
 .box {
-    background: var(--primary);
+    background: var(--background-primary);
     text-align: center;
     padding:  1.5rem 2rem;
     box-shadow: var(--shadow);
 }
 
 .info{
-    background: var(--primary);
+    background: var(--background-primary);
     box-shadow: var(--shadow);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     display: grid;
     grid-gap: 30px;
     grid-template-columns: repeat(2, 1fr);
     padding: 3rem;
     align-items: center;
 }
-.info img {
-    /* width: 50%; */
+
+.stars {
+    margin-top: -10%;
 }
+
 /* products */
 
 .products {
     margin: 1rem;
     display: grid;
     grid-gap: 20px;
-
+    /* background-color: var(--background-primary); */
+    scroll-snap-type: x mandatory;
     grid-template-columns: repeat(auto-fit, minmax( 200px, 1fr));
 }
 
@@ -252,7 +280,6 @@ img{
     width: 99%;
     box-shadow: var(--shadow);
 }
-
 /* Footer */
 
 footer {
@@ -264,7 +291,7 @@ footer {
 }
 
 @media(max-width: 700px) {
-    .top-container {
+       .top-container {
         grid-template-areas: 
         'showCase showCase'
         'topBoxA topBoxB'
@@ -283,6 +310,12 @@ footer {
         text-align: center;
         margin: auto;
     }
+    .stars {
+        margin-top: -5%;
+    }
+    .img_block a.content_block:hover span {
+        height:40%;
+    }
 } 
 
 @media (max-width: 700px) {
@@ -292,6 +325,15 @@ footer {
         'topBoxA'
         'topBoxB'
         ;
+    }
+}
+@media(max-width: 500px) {
+    .bestSellersName {
+    text-align: center;
+    }
+    .middleContainer {
+        display: none;
+
     }
 }
 
