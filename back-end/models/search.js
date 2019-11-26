@@ -1,96 +1,107 @@
 var db = require('../database');
 var knex = require("../database/database");
 
-async function getTagId(name) {
-  console.log("getTagId ran");
-  return knex
-    .from('tags')
-    .select()
-    .where("nameOfTag", name)
-    .then(data => {
-      if (data[0] !== undefined) {
-        return (data[0].id);
-      }
-      else return null;
-    })
-    .catch(err => err);
-}
-
-async function getCategoryId(name) {
-  console.log("getCategoryId ran");
-  return knex
-    .from('categories')
-    .select()
-    .where("nameOfCategory", name)
-    .then(data => {
-      if (data[0] !== undefined) {
-        return (data[0].id);
-      }
-      else return null;
-    })
-    .catch(err => err);
-}
-
 var search = {
   searchKeyWord:
     async function (keyword, callback) {
-      var keywords = keyword.q.split(" ");
-      var name = "";
-      var categories = "";
+      var keywordsArray = keyword.q.split(" ");
+      var categories = [];
       var tags = [];
-      var query = knex
-        .from('products')
-        .select()
-        .where("name", "like", `%%`)
-        .andWhere("category", "like", `%%`);
+      var data = [];
 
-      const loadIn = async () => {
-        console.log("loading in...")
-        keywords.forEach(word => {
-          await getTagId(word)
-            .then(results => {
-              if (results !== null) {
-                tags.push(results);
-                console.log("tags: ", tags.toString());
-              }
-            })
-            .catch(err => err);
-          getCategoryId(word)
-            .then(results => {
-              if (results !== null) {
-                categories.push(results);
-                console.log("categories: ", typeof (categories.toString()));
-              }
-            })
-            .catch(err => err);
-        });
+      //Sort tags out and push them to $tags
+      for (let i = 0; i < keywordsArray.length; i++) {
+        let j = await knex
+          .from('tags')
+          .select()
+          .where("nameOfTag", keywordsArray[i]);
+        if (j.length !== 0) {
+          tags.push(j[0]);
+        }
+      }
+      tags.forEach(i => { keywordsArray.splice(keywordsArray.indexOf(i.nameOfTag), 1) });
+
+      //Sort categories out and push them to $categories
+      for (let i = 0; i < keywordsArray.length; i++) {
+        let j = await knex
+          .from('categories')
+          .select()
+          .where("nameOfCategory", keywordsArray[i]);
+        if (j.length !== 0) {
+          categories.push(j[0]);
+        }
+      }
+      categories.forEach(i => { keywordsArray.splice(keywordsArray.indexOf(i.nameOfCategory), 1) });
+
+      //Construct queries and send to the database, then push data to $data
+      //In case of no product name in query
+      if (keywordsArray.length === 0) {
+        let query = knex
+          .from('products')
+          .select()    
+        categories.forEach(x => {
+          query = query.andWhere("category", "like", `%${x.id}%`);
+        })
+        tags.forEach(x => {
+          query = query.andWhere("tags", "like", `%${x.id}%`);
+        })
+        let item = await query;
+        if (item.length !== 0) {
+          item.forEach(i=>data.push(i));  
+        }
+      }
+      //In case of one or more product names in query
+      else {
+        for (let i = 0; i < keywordsArray.length; i++) {
+          let query = knex
+            .from('products')
+            .select()
+            .where("name", "like", `%${keywordsArray[i]}%`);
+          categories.forEach(x => {
+            query = query.andWhere("category", "like", `%${x.id}%`);
+          })
+          tags.forEach(x => {
+            query = query.andWhere("tags", "like", `%${x.id}%`);
+          })
+          let item = await query;
+          if (item.length !== 0) {
+            item.forEach(i=>data.push(i));  
+          }
+
+        }
       }
 
-      /* console.log("keyword: ", keyword);
-      console.log("array: ", keywords) */
-      //console.log(categories);
-
-      //return ({});
-
-
-      loadIn().then(results => {
-        console.log("done load in");
-        tags.forEach(x => {
-          query = query.andWhere("tags", "like", `%${x}%`);
-        })
-      })
-        .then(resolve => {
-          console.log("making request");
-          return query
-            .then(data => {
-              callback.then(data);
-            })
-            .catch(err => {
-              callback.catch(err);
-            });
-        })
-        .catch(err => err)
+      return (
+        callback.then(data)
+      );
     }
+
+
+
 }
 
+//Search function made bu Prabhjot
+const search2 = async ({ body }, res) => {
+
+  let results = [];
+  console.log(body.names);
+
+
+  for (let i = 0; i < body.names.length; i++) {
+
+    const nameResults = await knex("products").select()
+      .where("name", "like", `%${body.names[i]}%`);
+
+    const tagIds = await knex("tags").select()
+      .where("nameOfTag", "like", `%${body.names[i]}%`);
+
+    console.log(tagIds);
+
+
+  }
+
+
+  res.json(results);
+}
 module.exports = search;
+module.exports.search2 = search2;
