@@ -117,7 +117,6 @@ router.put("/changeRating/:id", function(req, res, next) {
     }
   });
 
-  
   // product.update(req.params.id, req.body, {
   //   then: rows => {
   //     res.status(202).json({ code: 1, rows });
@@ -128,8 +127,7 @@ router.put("/changeRating/:id", function(req, res, next) {
   // });
 });
 
-router.post("/getByUser", function (req, res, next){
-
+router.post("/getByUser", function(req, res, next) {
   const userId = req.body.userId;
   product.getByUserId(userId, {
     then: rows => {
@@ -139,5 +137,6 @@ router.post("/getByUser", function (req, res, next){
       res.status(500).json({ code: 0, err });
     }
   });
+});
 
 module.exports = router;
