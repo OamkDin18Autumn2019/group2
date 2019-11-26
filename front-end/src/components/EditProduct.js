@@ -36,8 +36,9 @@ export default class EditProduct extends Component {
     componentDidMount() {
         const toBeEditedData = ["name", "price", "discount", "tags", "images", "category", "description"];
         let idProduct = parseInt(this.props.match.params.id);
-        console.log(this.props.user);
-        axios.get(`http://localhost:3000/v1/product/${idProduct}`, {
+    
+        console.log(this.props.user.token)
+        axios.get(`http://localhost:4000/v1/product/${idProduct}`, {
             headers: {
                 'x-access-token': this.props.user.token
             }

@@ -30,7 +30,27 @@ router.get("/:id?", function(req, res, next) {
   }
 });
 
+// It gives you an error in console when you send an array of objects
+// But it works, so you can use it
 router.post("/", function(req, res, next) {
+ if (Array.isArray(req.body)) {
+   console.log(req.body)
+   Promise.all([
+    req.body.forEach(element => {
+      console.log(element)
+    product.add(element, {
+      then: rows => {
+        console.log(rows)
+        // res.status(202).json({ code: 1, rows });
+      },
+      catch: err => {
+        console.log(err)
+        // res.status(500).json({ code: 0, err });
+      }
+    });
+    })]).then(res.sendStatus(200))
+    .catch(res.sendStatus(500))
+ } else {
   product.add(req.body, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
@@ -39,7 +59,9 @@ router.post("/", function(req, res, next) {
       res.status(500).json({ code: 0, err });
     }
   });
+ }
 });
+
 router.delete("/:id", function(req, res, next) {
   product.delete(req.params.id, {
     then: rows => {
