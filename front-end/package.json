@@ -8,6 +8,8 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-icons": "^3.8.0",
+    "react-images-upload": "^1.2.7",
+    "react-loader-spinner": "^3.1.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-star-ratings": "^2.3.0"

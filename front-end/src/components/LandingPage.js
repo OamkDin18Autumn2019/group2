@@ -22,14 +22,15 @@ export default function LandingPage(props) {
                 <section className={styles.topContainer}>
                     <div className={styles.showCase}>
                         <h1> We can sell everything</h1>
-                        <p> Lorem ipsum dolor sit amet,
+                        <p> 
+                            Lorem ipsum dolor sit amet,
                             consectetur adipiscing elit.
                             Curabitur nec gravida massa.
-                        Aenean ut libero. </p>
+                            Aenean ut libero. 
+                        </p>
                         <a href="#" className={styles.btn}> Get started </a>
                     </div>
                 </section>
-                {/* <h2> Our products </h2> */}
                 <div className={styles.bestSellersBox}>
                 <div className={ styles.bestSellersName}> Best sellers </div>
                 <section className={styles.products}>
@@ -43,8 +44,6 @@ export default function LandingPage(props) {
                     
 
                 </section>
-                {/* </div>
-                <div className={styles.bestSellersBox}> */}
                 <div className={ styles.bestSellersName}> New arrivals </div>
                 <section className={styles.products}>
                   
@@ -57,6 +56,18 @@ export default function LandingPage(props) {
                     
 
                 </section>
+                <div className={ styles.bestSellersName}> Discounts </div>
+                <section className={styles.products}>
+                  
+                    <Product >https://source.unsplash.com/random/200x201</Product> 
+                    <Product >https://source.unsplash.com/random/201x202</Product> 
+                    <Product >https://source.unsplash.com/random/202x203</Product> 
+                    <Product >https://source.unsplash.com/random/203x204</Product> 
+                    <Product >https://source.unsplash.com/random/204x205</Product> 
+                    <Product >https://source.unsplash.com/random/205x206</Product> 
+
+                </section>
+                
 
 
                 <section className={styles.middleContainer}>
