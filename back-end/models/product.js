@@ -15,10 +15,13 @@ var product = {
           .inTable('users');
           t.text("name", 255);
           t.integer("price");
-          t.integer("discount").defaultTo(0);
+          t.integer("discount")
+          .defaultTo(0);
           t.text("description", 1024);
-          t.float("ratingProduct", 10, 3);
-          t.integer("amountOfRates");
+          t.float("ratingProduct", 10, 3)
+          .defaultTo(0);
+          t.integer("amountOfRates")
+          .defaultTo(0);
           t.string('tags', 512);
           t.string('category');
           t.integer('amountOfProduct');
