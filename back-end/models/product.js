@@ -14,21 +14,21 @@ var product = {
             .inTable("users");
           t.text("name", 255);
           t.integer("price");
-          t.integer("discount").defaultTo(0);
+          t.integer("discount")
+          .defaultTo(0);
           t.text("description", 1024);
-          t.float("ratingProduct", 10, 3);
-          t.integer("amountOfRates");
-          t.string("tags", 512);
-          t.string("category");
-          t.integer("amountOfProduct");
-          t.integer("amountOfSoldProduct");
-          t.string("images", 1024);
-          t.dateTime("created_at")
-            .notNullable()
-            .defaultTo(knex.raw("CURRENT_TIMESTAMP"));
-          t.dateTime("updated_at").defaultTo(
-            knex.raw("NULL ON UPDATE CURRENT_TIMESTAMP")
-          );
+          t.float("ratingProduct", 10, 3)
+          .defaultTo(0);
+          t.integer("amountOfRates")
+          .defaultTo(0);
+          t.string('tags', 512);
+          t.string('category');
+          t.integer('amountOfProduct');
+          t.integer('amountOfSoldProduct');
+          t.string('images', 1024);
+          t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+          t.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
+
         });
       } else {
         return null;
