@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import axios from 'axios';
-import ImageUploader from 'react-images-upload';
+// import ImageUploader from 'react-images-upload';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 import styles from '../CSS/CreateProduct.module.css';
 import LoaderStyle from '../CSS/Loader.module.css';
-import classNames from 'classnames';
-import { FaSlidersH } from 'react-icons/fa';
+// import classNames from 'classnames';
+// import { FaSlidersH } from 'react-icons/fa';
 
 
 export default class EditProduct extends Component {
@@ -53,11 +53,9 @@ export default class EditProduct extends Component {
                         category: res.data.rows[0].category,
                         description: res.data.rows[0].description
                     });
-                    // let product = this.state.data;
-                    // let editedData = product.filter((item) => item === toBeEditedData.map());
+
                     console.log(this.state.data);
-                    // let editedData = product.filter((item) => item === "name");
-                    // console.log(editedData);
+                    
                 }
             })
             .catch(err => {
@@ -94,7 +92,7 @@ export default class EditProduct extends Component {
         })
             .then(res => {
                 console.log(res);
-                // this.setState({data:  });
+                
             })
             .catch(err => {
                 console.log(err);
