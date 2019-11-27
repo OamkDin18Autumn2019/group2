@@ -1,8 +1,9 @@
 
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../CSS/LandingPage.module.css';
 import axios from 'axios';
+
 
 import StarRatings from 'react-star-ratings';
 
@@ -12,26 +13,36 @@ export default class Product extends React.Component {
         super(props);
         this.state = {
             showProduct: styles.hide,
+            rating: null,
         }
     }
-    // This is an example of usage API for changing rating
-    // We will improve it when we get actual data
-    
-     changeRating = ( newRating, name ) => {
-        console.log(newRating)
-        axios.put(`http://localhost:4000/v1/product/changeRating/1`, {
-            // headers: {
-            //     'x-access-token': this.props.user.token
-            // },
-            
-                "ratingProduct": newRating
-        
-        })
-        .then( res => {
-            console.log(res)
-        })
-        .catch((err)=> console.log(err))
-       }
+
+    changeRating = (newRating, name) => {
+        if (this.props.user.username !== "") {
+            if (this.state.rating == null) {
+                axios.put(`http://localhost:4000/v1/product/changeRating/${this.props.id}`, {
+                    // headers: {
+                    //     'x-access-token': this.props.user.token
+                    // },
+                    "ratingProduct": newRating
+
+                })
+                    .then(res => {
+                        console.log(res)
+                        this.setState({
+                            rating: newRating
+                        })
+                    })
+                    .catch((err) => console.log(err))
+            } else {
+                console.log('You have already rated the product')
+            }
+
+        } else {
+            console.log('You are not logged in')
+            // this.props.history.push('/login');
+        }
+    }
     showMore = () => {
         console.log(this.props.showProduct)
         if (this.state.showProduct === styles.hide) {
@@ -49,36 +60,36 @@ export default class Product extends React.Component {
     render() {
 
         return (
-            <>
-                <div className={styles.img_block}>
-                    <a className={styles.content_block}><img alt="product" src={this.props.children} />
-                        <div className={styles.over_block}>
-                          
-                        </div>
+            <>{
+                console.log(this.props.user)
 
-                        <span>45$
+            }
+                <div className={styles.img_block}>
+                    <a className={styles.content_block}><img alt="product" src={this.props.images} />
+                        <div className={styles.over_block}>
+                        </div>
+                        {/* {this.props.ratingProduct} */}
+                    
+                        <span>    <Link to={`/product/${this.props.id}`}>{this.props.price}$      </Link>
                             <div className={styles.stars}>
-                            <StarRatings
-                            //    svgIconViewBox ='12 12 20 21'
-                            // ignoreInlineStyles = { true}
-                               starDimension = '35px'
-                               rating={2}
-                            //    isAggregateRating = { false}
-                            //    isSelectable= {false}
-                               starHoverColor ='yellow'
-                               starRatedColor = 'yellow'
-                               starEmptyColor = 'white'
-                               //   starRatedColor="yellow"
-                               changeRating={this.changeRating}
-                               numberOfStars={5}
-                               // name='rating'
-                               
-                               starSpacing = '1px'
-                           />
-                           
+                              
+                                    <StarRatings
+                                    starDimension='35px'
+                                    rating={(this.state.rating == null) ? this.props.ratingProduct : this.state.rating}
+                                    starHoverColor='yellow'
+                                    starRatedColor='yellow'
+                                    starEmptyColor='white'
+                                    changeRating={this.changeRating}
+                                    numberOfStars={5}
+                                    starSpacing='1px'
+                                /> 
+                                <div className={styles.notification}>
+                                {
+                                    (this.props.ratingProduct == 0 && this.state.rating == null) ? 'No rates yet' : "" 
+                                }
+                                </div>
                             </div>
-                            </span>
-                        
+                        </span>
                     </a>
                 </div>
             </>
