@@ -25,7 +25,7 @@ export default class LandingPage extends React.Component {
            })
             .then(res => {
                 // console.log(this.props.user);
-                console.log(res.data);
+                // console.log(res.data);
                 //The following line is to check the response JSON due to the weird structure of the response
                 // console.log(res.data.rows[0]);
                 if (res.data.rows[0] !== undefined) {

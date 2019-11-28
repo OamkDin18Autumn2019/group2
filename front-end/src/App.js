@@ -43,8 +43,7 @@ export default class App extends React.Component {
   }
   handleSubmit = (un, pw) => {
     // console.log(this.state.user);
-    console.log(un);
-    console.log(pw);
+
 
     const user = {
       username: un,
@@ -55,9 +54,9 @@ export default class App extends React.Component {
       .post(`http://localhost:4000/v1/user/login`, { user })
       .then(res => {
 
-        console.log(res);
+        // console.log(res);
         console.log(res.data);
-        console.log(this.state.user);
+        // console.log(this.state.user);
         this.setState({
           user: {
             username: un,
