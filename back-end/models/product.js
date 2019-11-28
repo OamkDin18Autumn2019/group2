@@ -13,9 +13,9 @@ var product = {
             .references("id")
             .inTable("users");
           t.text("name", 255);
-          t.integer("price");
-          t.integer("discount")
-            .defaultTo(0);
+          t.float("price", 25, 2);
+          t.float("discount", 4, 2)
+          .defaultTo(0);
           t.text("description", 1024);
           t.float("ratingProduct", 10, 2)
             .defaultTo(0);
@@ -28,7 +28,6 @@ var product = {
           t.string('images', 1024);
           t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
           t.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
-
         });
       } else {
         return null;

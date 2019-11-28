@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "../CSS/Basket.module.css";
+import Header from "./Header"
 import BasketProductEntry from "./BasketProductEntry";
 import axios from 'axios';
 
@@ -34,14 +35,17 @@ export default class BasketPage extends Component {
   ));
   render() {
     return (
-      <div className={styles.main}>
-        <div className={styles.titleBar}>
-          <button onClick={this.buyProducts} className={styles.paymentButton}>Buy</button>
-          <button onClick={ () => this.props.history.goBack() }>Go back</button>
 
+      <>
+        <Header user={this.props.user} />
+        <div className={styles.main}>
+          <div className={styles.titleBar}>
+            <button onClick={this.buyProducts} className={styles.paymentButton}>Buy</button>
+            <button onClick={ () => this.props.history.goBack() }>Go back</button>
+          </div>
+          <div className={styles.items}>{this.productEntries}</div>
         </div>
-        <div className={styles.items}>{this.productEntries}</div>
-      </div>
+      </>
     );
   }
 }
