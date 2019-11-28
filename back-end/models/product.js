@@ -3,9 +3,9 @@ var knex = require("../database/database");
 
 var product = {
   createTableProducts: async () => {
-    knex.schema.hasTable("products").then(function(exists) {
+    knex.schema.hasTable("products").then(function (exists) {
       if (!exists) {
-        return knex.schema.createTable("products", function(t) {
+        return knex.schema.createTable("products", function (t) {
           t.increments("id").primary();
           t.integer("idUser", 10)
             .unsigned()
@@ -17,10 +17,10 @@ var product = {
           t.float("discount", 4, 2)
           .defaultTo(0);
           t.text("description", 1024);
-          t.float("ratingProduct", 10, 3)
-          .defaultTo(0);
+          t.float("ratingProduct", 10, 2)
+            .defaultTo(0);
           t.integer("amountOfRates")
-          .defaultTo(0);
+            .defaultTo(0);
           t.string('tags', 512);
           t.string('category');
           t.integer('amountOfProduct');
@@ -36,9 +36,9 @@ var product = {
   },
 
   createTableCategories: async () => {
-    knex.schema.hasTable("categories").then(function(exists) {
+    knex.schema.hasTable("categories").then(function (exists) {
       if (!exists) {
-        return knex.schema.createTable("categories", function(t) {
+        return knex.schema.createTable("categories", function (t) {
           t.increments("id").primary();
           t.string("nameOfCategory");
         });
@@ -49,9 +49,9 @@ var product = {
   },
 
   createTableTags: async () => {
-    knex.schema.hasTable("tags").then(function(exists) {
+    knex.schema.hasTable("tags").then(function (exists) {
       if (!exists) {
-        return knex.schema.createTable("tags", function(t) {
+        return knex.schema.createTable("tags", function (t) {
           t.increments("id").primary();
           t.string("nameOfTag");
         });
@@ -61,7 +61,7 @@ var product = {
     });
   },
 
-  get: async function(callback) {
+  get: async function (callback) {
     return knex
       .from("products")
       .select()
@@ -73,7 +73,7 @@ var product = {
       });
   },
 
-  getById: async function(id, callback) {
+  getById: async function (id, callback) {
     console.log(id);
     return knex
       .from("products")
@@ -87,7 +87,21 @@ var product = {
       });
   },
 
-  getByUserId: async function(id, callback) {
+  getnewArrivals: async function (callback) {
+    return knex
+      .from('products')
+      .select()
+      .limit(8)
+      .orderBy('created_at','desc')
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+  },
+
+  getByUserId: async function (id, callback) {
     console.log(id);
     return knex
       .from("products")
@@ -100,7 +114,7 @@ var product = {
         callback.catch(err);
       });
   },
-  add: async function(product, callback) {
+  add: async function (product, callback) {
     // console.log(product);
     return knex("products")
       .insert([{ ...product }])
@@ -112,7 +126,7 @@ var product = {
       });
   },
 
-  delete: async function(id, callback) {
+  delete: async function (id, callback) {
     return knex
       .from("products")
       .delete()
@@ -125,7 +139,7 @@ var product = {
       });
   },
 
-  update: function(id, product, callback) {
+  update: function (id, product, callback) {
 
     return knex("products")
       .where("id", id)

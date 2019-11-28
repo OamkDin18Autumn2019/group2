@@ -45,6 +45,13 @@ export default class ProductPage extends Component {
         }
         this.setState({ amount: temporary_amount })
     }
+    addToCart = (event) => {
+      event.preventDefault(); 
+    //   this.props.addToCartGlobal
+      this.props.addToCartGlobal({...this.state.data, amountInTheCart: this.state.amount})
+        // console.log(this.props );
+
+    }
     render() {
 
         //Conditional renderer for available product
@@ -70,7 +77,9 @@ export default class ProductPage extends Component {
                             </div>
                             <div>
                                 <button className="mr-2">Buy now</button>
-                                <button>Put into cart</button>
+                                <button className="mr-2" onClick={this.addToCart}>Put into cart</button>
+                                <button onClick={ () => this.props.history.goBack() }>Go back</button>
+
                             </div>
                         </div>
                     </div>

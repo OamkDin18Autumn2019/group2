@@ -31,16 +31,18 @@ export default class BasketPage extends Component {
     }
   ];
 
-  productEntries = this.tempProducts.map(entry => (
-    <BasketProductEntry data={entry} />
+  productEntries = this.props.cart.map((entry, i) => (
+    <BasketProductEntry key={i} data={entry} />
   ));
   render() {
     return (
+
       <>
         <Header user={this.props.user} />
         <div className={styles.main}>
           <div className={styles.titleBar}>
             <button className={styles.paymentButton}>Continue to payment </button>
+            <button onClick={ () => this.props.history.goBack() }>Go back</button>
           </div>
           <div className={styles.items}>{this.productEntries}</div>
         </div>

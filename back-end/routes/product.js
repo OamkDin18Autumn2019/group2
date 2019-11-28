@@ -141,5 +141,16 @@ router.post("/getByUser", function(req, res, next) {
     }
   });
 });
+router.get("/da/newArrivals", function(req, res, next) {
+  product.getnewArrivals({
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
+
 
 module.exports = router;
