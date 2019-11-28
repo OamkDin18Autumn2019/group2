@@ -1,16 +1,12 @@
 var express = require("express");
 var router = express.Router();
-var product = require("../models/product");
+var history = require("../models/history");
 const isAuth = require("../middlewares/isAuth");
 
-// Create tables "categories" and "tags"
-product.createTableCategories();
-product.createTableTags();
-
-// CRUD endpoints for "product"
+// CRUD endpoints for "history"
 router.get("/:id?", function(req, res, next) {
   if (req.params.id) {
-    product.getById(req.params.id, {
+    history.getById(req.params.id, {
       then: rows => {
         res.status(202).json({ code: 1, rows });
       },
@@ -19,7 +15,7 @@ router.get("/:id?", function(req, res, next) {
       }
     });
   } else {
-    product.get({
+    history.get({
       then: rows => {
         res.status(202).json({ code: 1, rows });
       },
@@ -32,13 +28,15 @@ router.get("/:id?", function(req, res, next) {
 
 // It gives you an error in console when you send an array of objects
 // But it works, so you can use it
-router.post("/", function(req, res, next) {
+router.post("/", isAuth, function(req, res, next) {
+    console.log(req.user)
+    console.log(req.body)
   if (Array.isArray(req.body)) {
     console.log(req.body);
     Promise.all([
       req.body.forEach(element => {
         console.log(element);
-        product.add(element, {
+        history.add(element, {
           then: rows => {
             console.log(rows);
             res.status(202).json({ code: 1, rows });
@@ -51,7 +49,7 @@ router.post("/", function(req, res, next) {
       })
     ]);
   } else {
-    product.add(req.body, {
+    history.add(req.body, {
       then: rows => {
         res.status(202).json({ code: 1, rows });
       },
@@ -63,7 +61,7 @@ router.post("/", function(req, res, next) {
 });
 
 router.delete("/:id", function(req, res, next) {
-  product.delete(req.params.id, {
+  history.delete(req.params.id, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
     },
@@ -74,7 +72,7 @@ router.delete("/:id", function(req, res, next) {
 });
 
 router.put("/:id", function(req, res, next) {
-  product.update(req.params.id, req.body, {
+  history.update(req.params.id, req.body, {
     then: rows => {
       console.log(req);
       res.status(202).json({ code: 1, rows });
@@ -92,7 +90,7 @@ router.put("/changeRating/:id", function(req, res, next) {
   let id = req.params.id;
 
   console.log(req.body);
-  product.getById(id, {
+  history.getById(id, {
     then: rows => {
       console.log(rows[0].amountOfRates);
       if (rows[0].amountOfRates == 0) {
@@ -106,7 +104,7 @@ router.put("/changeRating/:id", function(req, res, next) {
           ratingProduct: (req.body.ratingProduct + rows[0].ratingProduct) / 2
         };
       }
-      product.update(id, update, {
+      history.update(id, update, {
         then: rows => {
           res.status(202).json({ code: 1, rows });
         },
@@ -120,7 +118,7 @@ router.put("/changeRating/:id", function(req, res, next) {
     }
   });
 
-  // product.update(req.params.id, req.body, {
+  // history.update(req.params.id, req.body, {
   //   then: rows => {
   //     res.status(202).json({ code: 1, rows });
   //   },
@@ -132,7 +130,7 @@ router.put("/changeRating/:id", function(req, res, next) {
 
 router.post("/getByUser", function(req, res, next) {
   const userId = req.body.userId;
-  product.getByUserId(userId, {
+  history.getByUserId(userId, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
     },
@@ -142,7 +140,7 @@ router.post("/getByUser", function(req, res, next) {
   });
 });
 router.get("/da/newArrivals", function(req, res, next) {
-  product.getnewArrivals({
+  history.getnewArrivals({
     then: rows => {
       res.status(202).json({ code: 1, rows });
     },

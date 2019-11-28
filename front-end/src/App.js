@@ -20,14 +20,30 @@ export default class App extends React.Component {
         username: "",
         password: "",
         token: "",
-      }
+      },
+      cart: []
     };
   }
-
+  addToCart = (product) => {
+    let currentCart = [];
+    currentCart.push(product);
+    console.log(this.state.cart)
+  for (let i = 0; i < this.state.cart.length; i++) {
+    if(this.state.cart[i].id == product.id) {
+      console.log('Found')
+      // this.setState({
+        
+      // })  
+    }
+    
+  }
+    this.setState({
+      cart: [...this.state.cart,product]
+    })
+  }
   handleSubmit = (un, pw) => {
     // console.log(this.state.user);
-    console.log(un);
-    console.log(pw);
+
 
     const user = {
       username: un,
@@ -38,9 +54,9 @@ export default class App extends React.Component {
       .post(`http://localhost:4000/v1/user/login`, { user })
       .then(res => {
 
-        console.log(res);
+        // console.log(res);
         console.log(res.data);
-        console.log(this.state.user);
+        // console.log(this.state.user);
         this.setState({
           user: {
             username: un,
@@ -48,6 +64,8 @@ export default class App extends React.Component {
             token: res.data.token
           }
         });
+        // event.preventDefault();
+        this.props.history.goBack();
         // console.log(this.state.user);
 
       })
@@ -64,19 +82,19 @@ export default class App extends React.Component {
           <Route
             path="/"
             exact
-            render={routerProps => <LandingPage {...routerProps} />}
+            render={routerProps => <LandingPage {...routerProps} user={ this.state.user } />}
           />
            <Route
             path="/createProduct"
             exact
             render={routerProps => <CreateProduct {...routerProps} user={ this.state.user } />}
           />
-            <Route
+          <Route
             path="/editProduct/:id"
             exact
             render={routerProps => <EditProduct {...routerProps} user={ this.state.user } />}
           />
-             <Route
+          <Route
             path="/profile"
             exact
             render={routerProps => <Profile {...routerProps} user={ this.state.user } />}
@@ -89,12 +107,12 @@ export default class App extends React.Component {
           <Route
             path="/search"
             exact
-            render={routerProps => <SearchPage {...routerProps} />}
+            render={routerProps => <SearchPage {...routerProps} user={ this.state.user } />}
           />
           <Route
             path="/product/:id"
             exact
-            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} />}
+            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} addToCartGlobal = { this.addToCart } />}
           />
           <Route
             path="/login"
@@ -112,7 +130,7 @@ export default class App extends React.Component {
           <Route
             path="/basket"
             exact
-            render={routerProps => <BasketPage {...routerProps} />}
+            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } />}
           />
           {/* 
           <Route
