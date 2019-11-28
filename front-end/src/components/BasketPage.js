@@ -15,10 +15,8 @@ export default class BasketPage extends Component {
   buyProducts = () => {
     console.log(this.props.user.token)
     axios.post(`http://localhost:4000/v1/history/`, 
-      {
-        email: 'da', //varEmail is a variable which holds the email
-        password: 'varPassword'
-       },
+      this.props.cart,
+  
        {
          headers: {
            Authorization: this.props.user.token

@@ -61,7 +61,7 @@ export default class Product extends React.Component {
 
         return (
             <>{
-                console.log(this.props.user)
+                // console.log(this.props.user)
 
             }
                 <div className={styles.img_block}>

@@ -44,10 +44,10 @@ var history = {
   },
 
 
-  add: async function (history, callback) {
-    // console.log(history);
+  add: async function (history,callback) {
+    console.log(history);
     return knex("history")
-      .insert([{ ...history }])
+      .insert([{...history}])
       .then(data => {
         callback.then(data);
       })

@@ -36,18 +36,27 @@ router.post("/", isAuth, function(req, res, next) {
     Promise.all([
       req.body.forEach(element => {
         console.log(element);
-        history.add(element, {
+        history.add({
+          idUser: req.user.id,
+          idProduct: element.id,
+          amount: element.amountInTheCart
+        }, {
           then: rows => {
             console.log(rows);
-            res.status(202).json({ code: 1, rows });
+            // res.status(202).json({ code: 1, rows });
           },
           catch: err => {
             console.log(err);
-            res.status(500).json({ code: 0, err });
+            // res.status(500).json({ code: 0, err });
           }
         });
       })
-    ]);
+    ])
+    .then(res.status(202).json())
+    // .catch(res.status(501).json())
+    // Can somebody explain why we should remove 
+    // .catch() in Promise.all?
+
   } else {
     history.add(req.body, {
       then: rows => {

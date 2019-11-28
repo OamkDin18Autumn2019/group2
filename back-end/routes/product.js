@@ -41,15 +41,17 @@ router.post("/", function(req, res, next) {
         product.add(element, {
           then: rows => {
             console.log(rows);
-            res.status(202).json({ code: 1, rows });
+            // res.status(202).json({ code: 1, rows });
           },
           catch: err => {
             console.log(err);
-            res.status(500).json({ code: 0, err });
+            // res.status(500).json({ code: 0, err });
           }
         });
       })
-    ]);
+    ])    
+    .then(res.status(202).json({ code: 1 }))
+    // .catch(res.status(500).json({ code: 0 }))
   } else {
     product.add(req.body, {
       then: rows => {

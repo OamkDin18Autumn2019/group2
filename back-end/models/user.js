@@ -8,7 +8,7 @@ function generateAuthToken(id, isAdmin = false, user) {
   const token = jwt.sign(
     {
       id,
-      user,
+      ...user,
       isAdmin
     },
     jwtKey,
@@ -124,7 +124,7 @@ var user = {
       return {
         user: userData,
         code: 1,
-        token: generateAuthToken(userData.idUser, false, user)
+        token: generateAuthToken(userData.idUser, false, userData)
       };
     } else {
       return {
