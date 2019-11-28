@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import OnSellProduct from './OnSellProduct';
 import axios from "axios";
 import styles from "../CSS/Profile.module.css";
 import classNames from "classnames";
@@ -9,70 +10,76 @@ export default class CreateProduct extends Component {
     super(props);
     this.state = {
       currentSaleItems: [
-        {
-          name: "Test name",
-          price: "none",
-          quantity: "As many as possible",
-          dateTime: "Covert can't tell"
-        },
-        {
-          name: "Test name 2",
-          price: 45667,
-          quantity: 90009,
-          dateTime: "March 19, 2019"
-        }
+    
       ],
 
       historyItems: [
-        {
-          name: "Test name",
-          price: "some",
-          quantity: "As many as possible",
-          dateTime: "Covert can't tell"
-        },
-        {
-          name: "Test name 2",
-          price: 45667,
-          quantity: 90009,
-          dateTime: "March 19, 2019"
-        }
+        
       ]
     };
-    this.state.currentSale = this.state.currentSaleItems.map(sale => {
-      return (
-        <tr>
-          <td>{sale.name}</td>
-          <td>$ {sale.price}</td>
-          <td>{sale.quantity}</td>
-          <td>{sale.dateTime}</td>
-          <td className={styles.edit1}>
-            <a href="./editProduct/2">Edit</a>
-          </td>
-          <td className={styles.delete1}>
-            {" "}
-            <a href="#">Delete</a>{" "}
-          </td>
-        </tr>
-      );
-    });
 
-    this.state.history = this.state.historyItems.map(sale => {
-      return (
-        <tr>
-          <td>{sale.name}</td>
-          <td>$ {sale.price}</td>
-          <td>{sale.quantity}</td>
-          <td>{sale.dateTime}</td>
-        </tr>
-      );
-    });
+    // this.state.currentSale = this.state.currentSaleItems.map(sale => {
+    //   return (
+    //     <tr>
+    //       <td>{sale.name}</td>
+    //       <td>$ {sale.price}</td>
+    //       <td>{sale.quantity}</td>
+    //       <td>{sale.dateTime}</td>
+    //       <td className={styles.edit1}>
+    //         <a href="./editProduct/2">Edit</a>
+    //       </td>
+    //       <td className={styles.delete1}>
+    //         {" "}
+    //         <a href="#">Delete</a>{" "}
+    //       </td>
+    //     </tr>
+    //   );
+    // });
+
+    // this.state.history = this.state.historyItems.map(sale => {
+    //   return (
+    //     <tr>
+    //       <td>{sale.name}</td>
+    //       <td>$ {sale.price}</td>
+    //       <td>{sale.quantity}</td>
+    //       <td>{sale.dateTime}</td>
+    //     </tr>
+    //   );
+    // });
+  }
+
+  componentDidMount = () => {
+    let userId = parseInt(this.props.match.params.id);
+    console.log("userId: " + userId);
+    axios.get(`http://localhost:4000/v1/product/getByUserId/${userId}`,  {
+      headers: {
+        'x-access-token': this.props.user.token
+      }
+      // userId
+    })
+      .then(res => {
+        console.log(res.data.rows);
+        if (res.data.rows !== undefined) {
+          this.setState({ currentSaleItems: res.data.rows});
+        }
+        console.log(this.state.currentSaleItems);
+      })
+      .catch(err => {
+        console.log(err);
+        return null;
+      })
+  }
+
+  onClick = () => {
+    // console.log(this.state.currentSaleItems);
+    console.log(this.state.currentSaleItems.map(item => item.id));
   }
 
   render() {
     return (
       <>
-        <Header />
-        <div className={styles.background}>
+        <Header user={this.props.user} />
+        <div className={styles.background} onClick={this.onClick}>
           <div className={styles.container}>
             <h2> Profile</h2>
             <div className={styles.personalInfo}>
@@ -96,9 +103,17 @@ export default class CreateProduct extends Component {
               </div>
             </div>
             <br></br>
-            <h2> Your are selling now</h2>
+            <h2> On sell products</h2>
             <div style={{ overflowX: "auto" }}>
-              <table className={styles.productTable}>
+              {
+                // let products = this.state.currentSaleItems;
+                this.state.currentSaleItems.map(product => {
+                  return <OnSellProduct {...product} />
+                } ) 
+              } 
+
+
+              {/* <table className={styles.productTable}>
                 <tr>
                   <th>Product Name</th>
                   <th>Price</th>
@@ -108,12 +123,12 @@ export default class CreateProduct extends Component {
                   <th>Delete</th>
                 </tr>
                 {this.state.currentSale}
-              </table>
+              </table> */}
             </div>
             <br></br>
-            <h2> You bought before</h2>
+            <h2> History</h2>
             <div style={{ overflowX: "auto" }}>
-              <table className={styles.productTable}>
+              {/* <table className={styles.productTable}>
                 <tr>
                   <th>Product Name</th>
                   <th>Price</th>
@@ -121,7 +136,7 @@ export default class CreateProduct extends Component {
                   <th>Date of buying</th>
                 </tr>
                 {this.state.history}
-              </table>
+              </table> */}
             </div>
           </div>
         </div>

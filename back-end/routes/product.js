@@ -130,8 +130,9 @@ router.put("/changeRating/:id", function(req, res, next) {
   // });
 });
 
-router.post("/getByUser", function(req, res, next) {
-  const userId = req.body.userId;
+router.get("/getByUserId/:userId", function(req, res, next) {
+  // console.log(req.params.userId);
+  const userId = req.params.userId;
   product.getByUserId(userId, {
     then: rows => {
       res.status(202).json({ code: 1, rows });

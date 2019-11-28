@@ -88,7 +88,7 @@ var product = {
   },
 
   getByUserId: async function(id, callback) {
-    console.log(id);
+    // console.log(id);
     return knex
       .from("products")
       .select()
@@ -98,6 +98,7 @@ var product = {
       })
       .catch(err => {
         callback.catch(err);
+        // console.log("error bruh");
       });
   },
   add: async function(product, callback) {

@@ -79,7 +79,7 @@ export default class App extends React.Component {
             render={routerProps => <EditProduct {...routerProps} user={ this.state.user } />}
           />
           <Route
-            path="/profile"
+            path="/profile/:id"
             exact
             render={routerProps => <Profile {...routerProps} user={ this.state.user } />}
           />
