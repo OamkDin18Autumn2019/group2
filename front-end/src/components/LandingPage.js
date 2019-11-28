@@ -43,6 +43,7 @@ export default class LandingPage extends React.Component {
     // console.log(window.scrollY);
     render() {
 
+
         return (
             <React.Fragment>
                 <div className={styles.wrapper}>
@@ -87,6 +88,7 @@ export default class LandingPage extends React.Component {
                                 <p> Lorem ipsum dolor sit amet,
                                     consectetur adipiscing elit.
                                     Curabitur nec gravida massa.
+
                         Aenean ut libero. </p>
                                 <a href="#" className={styles.btn}> Buy now </a>
                             </header>
