@@ -20,10 +20,27 @@ export default class App extends React.Component {
         username: "",
         password: "",
         token: "",
-      }
+      },
+      cart: []
     };
   }
-
+  addToCart = (product) => {
+    let currentCart = [];
+    currentCart.push(product);
+    console.log(this.state.cart)
+  for (let i = 0; i < this.state.cart.length; i++) {
+    if(this.state.cart[i].id == product.id) {
+      console.log('Found')
+      // this.setState({
+        
+      // })  
+    }
+    
+  }
+    this.setState({
+      cart: [...this.state.cart,product]
+    })
+  }
   handleSubmit = (un, pw) => {
     // console.log(this.state.user);
     console.log(un);
@@ -96,7 +113,7 @@ export default class App extends React.Component {
           <Route
             path="/product/:id"
             exact
-            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} />}
+            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} addToCartGlobal = { this.addToCart } />}
           />
           <Route
             path="/login"
@@ -114,7 +131,7 @@ export default class App extends React.Component {
           <Route
             path="/basket"
             exact
-            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } />}
+            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } />}
           />
           {/* 
           <Route
