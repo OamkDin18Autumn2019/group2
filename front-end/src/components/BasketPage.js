@@ -2,35 +2,34 @@ import React, { Component } from "react";
 import styles from "../CSS/Basket.module.css";
 import Header from "./Header"
 import BasketProductEntry from "./BasketProductEntry";
+import axios from 'axios';
 
 export default class BasketPage extends Component {
-  tempProducts = [
-    {
-      name: "Product A",
-      price: 1.5,
-      quantity: 1,
-      image: "url",
-      id: "id",
-      description: "Product A description"
-    },
-    {
-      name: "Product B",
-      price: 2,
-      quantity: 2,
-      image: "url",
-      id: "id",
-      description: "Product B description"
-    },
-    {
-      name: "Product C",
-      price: 2.5,
-      quantity: 3,
-      image: "url",
-      id: "id",
-      description: "Product C description"
+  constructor(props) {
+    super(props);
+    this.state = {
+ 
     }
-  ];
+}
+  
+  buyProducts = () => {
+    console.log(this.props.user.token)
+    axios.post(`http://localhost:4000/v1/history/`, 
+      {
+        email: 'da', //varEmail is a variable which holds the email
+        password: 'varPassword'
+       },
+       {
+         headers: {
+           Authorization: this.props.user.token
+         }
 
+
+    })
+    .then(result => console.log(result))
+    .catch(err => console.log(err))
+
+  }
   productEntries = this.props.cart.map((entry, i) => (
     <BasketProductEntry key={i} data={entry} />
   ));
@@ -41,7 +40,7 @@ export default class BasketPage extends Component {
         <Header user={this.props.user} />
         <div className={styles.main}>
           <div className={styles.titleBar}>
-            <button className={styles.paymentButton}>Continue to payment </button>
+            <button onClick={this.buyProducts} className={styles.paymentButton}>Buy</button>
             <button onClick={ () => this.props.history.goBack() }>Go back</button>
           </div>
           <div className={styles.items}>{this.productEntries}</div>
