@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "../CSS/Basket.module.css";
+import Header from "./Header"
 import BasketProductEntry from "./BasketProductEntry";
 
 export default class BasketPage extends Component {
@@ -35,12 +36,15 @@ export default class BasketPage extends Component {
   ));
   render() {
     return (
-      <div className={styles.main}>
-        <div className={styles.titleBar}>
-          <button className={styles.paymentButton}>Continue to payment </button>
+      <>
+        <Header user={this.props.user} />
+        <div className={styles.main}>
+          <div className={styles.titleBar}>
+            <button className={styles.paymentButton}>Continue to payment </button>
+          </div>
+          <div className={styles.items}>{this.productEntries}</div>
         </div>
-        <div className={styles.items}>{this.productEntries}</div>
-      </div>
+      </>
     );
   }
 }
