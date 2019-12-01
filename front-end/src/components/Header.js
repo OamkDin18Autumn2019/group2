@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link }  from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from 'classnames';
@@ -17,6 +17,19 @@ import BasketLogo from '../icons/icons8_shopping_cart_filled_50px.png';
 
 const loggedIn = 0;
 
+const SearchBar = (props) => {
+    return (
+        <form className={styles.SearchBox} onSubmit={props.searchSubmitHandler}>
+            <input type="search" className={styles.SearchBar} name="q"
+                onChange={props.searchInputChangeHandler}
+                value={props.searchInput}
+            />
+            <button type="submit" className={ButtonStyles.IconButtons}> <img src={SearchLogo} alt="decorative" className={classNames(styles.SearchLogo, styles.Icons)} /> </button>
+        </form>
+    )
+}
+
+
 export default class Header extends React.Component {
 
     constructor(props) {
@@ -25,37 +38,49 @@ export default class Header extends React.Component {
             DropDownMenuButton: styles.ArrowDownCollapsed,
             DropDownMenu: styles.DropDownMenuCollapsed,
             ArrowState: ArrowDown,
-            NavbarClass: styles.mainNav
+            NavbarClass: styles.mainNav,
             // NavbarOpen: false,
             // backgroundColor: "rgba(0, 0, 0, 0)"
+            searchInput: ""
         }
-      }
+    }
 
-        // we should not use that because it violates React principle
-        scroll = window.onscroll = function() {
-            var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
-            if(scrolled !== 0){
+    // we should not use that because it violates React principle
+    scroll = window.onscroll = function () {
+        var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
+        if (scrolled !== 0) {
 
             // If the scrollbar is scrolled it makes the background transparent
             // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
-        // console.log(scrolled)
-            } else {
+            // console.log(scrolled)
+        } else {
             // Если нет, то делаем его полностью видимым
             // else it makes the background visible
             // document.querySelector('#navbar').styles.mainNav.opacity = '1';
-            };
         };
+    };
 
-        DropDownClickHandler = event => {
-            this.setState({ DropDownMenuButton: this.state.DropDownMenuButton === styles.ArrowDownCollapsed ? styles.ArrowDownExpanded : styles.ArrowDownCollapsed });
-            this.setState({ DropDownMenu: this.state.DropDownMenu === styles.DropDownMenuCollapsed ? styles.DropDownMenuExpanded : styles.DropDownMenuCollapsed });
-            this.setState({ ArrowState: this.state.ArrowState === ArrowUp ? ArrowDown : ArrowUp });
-            this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
+    DropDownClickHandler = event => {
+        this.setState({ DropDownMenuButton: this.state.DropDownMenuButton === styles.ArrowDownCollapsed ? styles.ArrowDownExpanded : styles.ArrowDownCollapsed });
+        this.setState({ DropDownMenu: this.state.DropDownMenu === styles.DropDownMenuCollapsed ? styles.DropDownMenuExpanded : styles.DropDownMenuCollapsed });
+        this.setState({ ArrowState: this.state.ArrowState === ArrowUp ? ArrowDown : ArrowUp });
+        this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
 
-            console.log(this.state.NavbarClass);
-            // console.log(this.state.DropDownMenuButton);
-            // console.log(this.state.ArrowState);
-        }
+        console.log(this.state.NavbarClass);
+        // console.log(this.state.DropDownMenuButton);
+        // console.log(this.state.ArrowState);
+    }
+
+    searchInputChangeHandler = (event) => {
+        event.preventDefault();
+        this.setState({ searchInput: event.target.value })
+    }
+
+    searchSubmitHandler = (event) => {
+        event.preventDefault();
+        console.log("submited");
+        console.log(this.props.history.push('/search?q='+this.state.searchInput));
+    }
 
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
     // listenScrollEvent = e => {
@@ -83,49 +108,51 @@ export default class Header extends React.Component {
     // BackdropClickHandler = () => {
     //     this.setState({NavbarOpen: false})
     // }
-     
+
     render() {
-      console.log(this.props.style)  
-      console.log(this.props.user);
+        console.log(this.props.style)
+        console.log(this.props.user);
         if (this.props.user.username) {
-            return(
+            return (
                 <nav className={this.state.NavbarClass}>
                     <div className={styles.LogoDiv}>
-                        <Link to="/"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>    
+                        <Link to="/"> <img className={styles.logo} alt="decorative" src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
                     </div>
                     <div className={this.state.DropDownMenu}>
-                        <form className={styles.SearchBox}>
-                            <input type="search" className={styles.SearchBar} /> 
-                            <button type="submit" className={ButtonStyles.IconButtons}> <img src={SearchLogo} className={classNames(styles.SearchLogo, styles.Icons) } /> </button>
-                        </form>
+                        <SearchBar
+                            searchSubmitHandler={this.searchSubmitHandler}
+                            searchInputChangeHandler={this.searchInputChangeHandler}
+                            searchInput={this.state.searchInput}
+                        ></SearchBar>
                         <div className={styles.LoginRegisterButtons}>
-                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
-                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Profile </Link></button> 
+                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img alt="decorative" src={BasketLogo} className={styles.Icons} /> </Link></button>
+                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Profile </Link></button>
                         </div>
                     </div>
-                    <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img src={this.state.ArrowState} className={styles.Icons} /> </span>
+                    <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img alt="decorative" src={this.state.ArrowState} className={styles.Icons} /> </span>
                 </nav>
             )
         }
-     else {
-        return(            
+        else {
+            return (
                 <nav className={this.state.NavbarClass}>
                     <div className={styles.LogoDiv}>
-                        <Link to="/"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>    
+                        <Link to="/"> <img className={styles.logo}  alt="decorative" src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
                     </div>
-                    <div className={this.state.DropDownMenu}>
-                        <form className={styles.SearchBox}>
-                            <input type="search" className={styles.SearchBar} /> 
-                            <button type="submit" className={ButtonStyles.IconButtons}> <img src={SearchLogo} className={classNames(styles.SearchLogo, styles.Icons) } /> </button>
-                        </form>
+                    <div className={this.state.DropDownMenu} >
+                        <SearchBar
+                            searchSubmitHandler={this.searchSubmitHandler}
+                            searchInputChangeHandler={this.searchInputChangeHandler}
+                            searchInput={this.state.searchInput}
+                        ></SearchBar>
                         <div className={styles.LoginRegisterButtons}>
-                          <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/login" > Login </Link></button> 
-                          <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Register </Link></button> 
+                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/login" > Login </Link></button>
+                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Register </Link></button>
                         </div>
                     </div>
-                    <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img src={this.state.ArrowState} className={styles.Icons} /> </span>
+                    <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img alt="decorative" src={this.state.ArrowState} className={styles.Icons} /> </span>
                 </nav>
-        )
+            )
+        }
     }
-}
 }
