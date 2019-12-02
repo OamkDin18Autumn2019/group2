@@ -1,9 +1,12 @@
+body {
+    background-color: white;
+}
+
 .Container {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    grid-template-areas:
-    'search search search search search'
-    'filters img info info info ';
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    min-height: 75vh;
 }
 
 .SearchBar {
@@ -17,18 +20,18 @@
 }
 
 .Filters {
-    grid-area: filters;
-    padding-left: 20%;
-    background-color: rgb(250, 159, 204);
+    
 }
 
 
 .Img {
-    grid-area: img;
-    width: 100px;
-    height: 100%;;
+    max-height: 200px;
+    border: solid 2px black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 0px;
 }
 
 .Info {
-    grid-area: info;
+    
 }
