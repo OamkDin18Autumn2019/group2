@@ -2,46 +2,62 @@ import React, { Component } from "react";
 import styles from "../CSS/Basket.module.css";
 import Header from "./Header"
 import BasketProductEntry from "./BasketProductEntry";
+import axios from 'axios';
 
 export default class BasketPage extends Component {
-  tempProducts = [
-    {
-      name: "Product A",
-      price: 1.5,
-      quantity: 1,
-      image: "url",
-      id: "id",
-      description: "Product A description"
-    },
-    {
-      name: "Product B",
-      price: 2,
-      quantity: 2,
-      image: "url",
-      id: "id",
-      description: "Product B description"
-    },
-    {
-      name: "Product C",
-      price: 2.5,
-      quantity: 3,
-      image: "url",
-      id: "id",
-      description: "Product C description"
-    }
-  ];
+  constructor(props) {
+    super(props);
+    this.state = {
 
-  productEntries = this.tempProducts.map(entry => (
-    <BasketProductEntry data={entry} />
-  ));
+    }
+  }
+ 
+  buyProducts = () => {
+    let da = [];
+    // let length = this.props.cart.length
+   this.props.cart.forEach((element, i) => {
+    axios.post(`http://localhost:4000/v1/history/`,
+    element,
+    {
+      headers: {
+        Authorization: this.props.user.token
+      }
+    })
+    .then(result => {
+      axios.put(`http://localhost:4000/v1/product/${element.id}`,
+        {
+          amountOfProduct: element.amountOfProduct - element.amountInTheCart,
+          amountOfSoldProduct: element.amountOfSoldProduct + element.amountInTheCart,
+        },
+        {
+          headers: {
+            Authorization: this.props.user.token
+          }
+        })
+        .then(res => {
+          this.props.deleteFromCartById(i);
+          da.push(i);
+          console.log(da, this.props.cart)
+        })
+    })
+    .catch(err => console.log(err))
+   });
+   da.forEach(i => {
+    this.props.deleteFromCartById(i);
+   });
+  }
   render() {
     return (
+
       <>
         <div className={styles.main}>
           <div className={styles.titleBar}>
-            <button className={styles.paymentButton}>Continue to payment </button>
+            <button onClick={this.buyProducts} className={styles.paymentButton}>Buy</button>
+            <button onClick={() => this.props.history.goBack()}>Go back</button>
           </div>
-          <div className={styles.items}>{this.productEntries}</div>
+          <div className={styles.items}>{this.props.cart.map((entry, i) => (
+    <BasketProductEntry key={i} data={entry} />
+  ))}</div>
         </div>
       </>
     );

@@ -54,8 +54,6 @@ export default class EditProduct extends Component {
                         description: res.data.rows[0].description
                     });
 
-                    console.log(this.state.data);
-                    
                 }
             })
             .catch(err => {
@@ -66,8 +64,8 @@ export default class EditProduct extends Component {
 
     onChange = (event) => {
         this.setState({ [event.target.name] : event.target.value });
-        console.log('name: ' + event.target.name)
-        console.log('value: ' + event.target.value);
+        // console.log('name: ' + event.target.name)
+        // console.log('value: ' + event.target.value);
     }
 
     onSubmit = () => {
@@ -84,11 +82,13 @@ export default class EditProduct extends Component {
         console.log(editedProduct);
 
         let idProduct = parseInt(this.props.match.params.id);
-        axios.put(`http://localhost:4000/v1/product/${idProduct}`, {
-            // headers: {
-            //     'x-access-token': this.props.user.token
-            // }
+        axios.put(`http://localhost:4000/v1/product/${idProduct}`,   {
             ...editedProduct
+          },
+          {
+            headers: {
+              Authorization: this.props.user.token
+            }
         })
             .then(res => {
                 console.log(res);
@@ -98,6 +98,7 @@ export default class EditProduct extends Component {
                 console.log(err);
                 return null;
             })
+            this.props.history.goBack();
     }
     
     newPriceCalculator = (event) => {
