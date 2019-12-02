@@ -45,7 +45,7 @@ export default class LandingPage extends React.Component {
         return (
             <React.Fragment>
                 <div className={styles.wrapper}>
-                    <Header user={this.props.user} {...props}/>
+                    <Header user={this.props.user} {...this.props}/>
                     <section className={styles.topContainer}>
                         <div className={styles.showCase}>
                             <h1> We can sell everything</h1>
