@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
+import Header from './components/Header';
 import LandingPage from "./components/LandingPage";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -63,6 +64,11 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <Router>
+          <Route 
+            path="/"
+            render={routerProps => <Header {...routerProps} user={this.state.user} /> }
+          />
+
           <Route
             path="/"
             exact

@@ -37,7 +37,6 @@ export default class BasketPage extends Component {
   render() {
     return (
       <>
-        <Header user={this.props.user} />
         <div className={styles.main}>
           <div className={styles.titleBar}>
             <button className={styles.paymentButton}>Continue to payment </button>

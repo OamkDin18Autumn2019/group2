@@ -152,7 +152,6 @@ export default class EditProduct extends Component {
             } else {
                 return(
                     <>
-                    <Header user={this.props.user} />
                     <div className={styles.background}>
 
                         <div className={styles.container}>
