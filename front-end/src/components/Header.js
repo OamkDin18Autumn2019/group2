@@ -66,6 +66,7 @@ export default class Header extends React.Component {
         this.setState({ ArrowState: this.state.ArrowState === ArrowUp ? ArrowDown : ArrowUp });
         this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
 
+
         console.log(this.state.NavbarClass);
         // console.log(this.state.DropDownMenuButton);
         // console.log(this.state.ArrowState);
@@ -82,7 +83,6 @@ export default class Header extends React.Component {
         console.log("submited");
         this.props.history.push('/search?q='+encodeURIComponent(this.state.searchInput));
     }
-
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
     // listenScrollEvent = e => {
     //     if (window.scrollY > 50) {
@@ -111,8 +111,10 @@ export default class Header extends React.Component {
     // }
 
     render() {
+
         console.log(this.props.style)
         console.log(this.props.user);
+
         if (this.props.user.username) {
             return (
                 <nav className={this.state.NavbarClass}>
@@ -126,8 +128,10 @@ export default class Header extends React.Component {
                             searchInput={this.state.searchInput}
                         ></SearchBar>
                         <div className={styles.LoginRegisterButtons}>
-                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img alt="decorative" src={BasketLogo} className={styles.Icons} /> </Link></button>
-                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Profile </Link></button>
+
+                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
+                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
+
                         </div>
                     </div>
                     <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img alt="decorative" src={this.state.ArrowState} className={styles.Icons} /> </span>

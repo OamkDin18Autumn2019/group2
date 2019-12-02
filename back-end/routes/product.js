@@ -34,23 +34,25 @@ router.get("/:id?", function(req, res, next) {
 // But it works, so you can use it
 router.post("/", function(req, res, next) {
   if (Array.isArray(req.body)) {
-    console.log(req.body);
+    // console.log(req.body);
     Promise.all([
       req.body.forEach(element => {
-        console.log(element);
+        // console.log(element);
         product.add(element, {
           then: rows => {
             console.log(rows);
-            res.status(202).json({ code: 1, rows });
+            // res.status(202).json({ code: 1, rows });
           },
           catch: err => {
             console.log(err);
-            res.status(500).json({ code: 0, err });
+            // res.status(500).json({ code: 0, err });
           }
         });
       })
-    ]);
-  } else {
+    ])    
+    .then(res.status(202).json({ code: 1 }))
+    // .catch(res.status(500).json({ code: 0 }))
+    } else {
     product.add(req.body, {
       then: rows => {
         res.status(202).json({ code: 1, rows });
@@ -62,7 +64,7 @@ router.post("/", function(req, res, next) {
   }
 });
 
-router.delete("/:id", function(req, res, next) {
+router.delete("/:id", isAuth, function(req, res, next) {
   product.delete(req.params.id, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
@@ -73,7 +75,7 @@ router.delete("/:id", function(req, res, next) {
   });
 });
 
-router.put("/:id", function(req, res, next) {
+router.put("/:id", isAuth, function(req, res, next) {
   product.update(req.params.id, req.body, {
     then: rows => {
       console.log(req);
@@ -90,8 +92,7 @@ router.put("/:id", function(req, res, next) {
 // via "body" and "productId" via endpoint
 router.put("/changeRating/:id", function(req, res, next) {
   let id = req.params.id;
-
-  console.log(req.body);
+  // console.log(req.body);
   product.getById(id, {
     then: rows => {
       console.log(rows[0].amountOfRates);
@@ -141,8 +142,21 @@ router.post("/getByUser", function(req, res, next) {
     }
   });
 });
-router.get("/da/newArrivals", function(req, res, next) {
+
+router.get("/da/newArrivals/", function(req, res, next) {
   product.getnewArrivals({
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
+
+router.get("/da/currentSellings/", isAuth, function(req, res, next) {
+  // console.log(req.user.id)
+  product.getCurrentSellings(req.user.id,{
     then: rows => {
       res.status(202).json({ code: 1, rows });
     },
