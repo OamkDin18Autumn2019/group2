@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from 'classnames';
@@ -78,8 +78,9 @@ export default class Header extends React.Component {
 
     searchSubmitHandler = (event) => {
         event.preventDefault();
+        //let history =  useHistory();
         console.log("submited");
-        console.log(this.props.history.push('/search?q='+this.state.searchInput));
+        this.props.history.push('/search?q='+encodeURIComponent(this.state.searchInput));
     }
 
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
@@ -116,7 +117,7 @@ export default class Header extends React.Component {
             return (
                 <nav className={this.state.NavbarClass}>
                     <div className={styles.LogoDiv}>
-                        <Link to="/"> <img className={styles.logo} alt="decorative" src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
+                        <Link to="/"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
                     </div>
                     <div className={this.state.DropDownMenu}>
                         <SearchBar
@@ -137,7 +138,7 @@ export default class Header extends React.Component {
             return (
                 <nav className={this.state.NavbarClass}>
                     <div className={styles.LogoDiv}>
-                        <Link to="/"> <img className={styles.logo}  alt="decorative" src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
+                        <Link to="/"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
                     </div>
                     <div className={this.state.DropDownMenu} >
                         <SearchBar

@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-//import styles from '../CSS/SearchPage.module.css';
+import styles from '../CSS/SearchPage.module.css';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -8,8 +8,8 @@ import Footer from './Footer';
 function VerticalProductDisplay(props) {
     return (
         <div className="row my-2 no-gutters">
-            <img className="col-2" src={props.img} style={{ height: "100%" }}></img>
-            <div className="col">
+            <img className={`col-2 ${styles.Img}`} src={props.images} style={{ height: "100%" }}></img>
+            <div className={`col ${styles.Info}`}>
                 <div>{props.name}</div>
                 <div>Description: {props.description}</div>
                 <div>${props.price}</div>
@@ -18,39 +18,71 @@ function VerticalProductDisplay(props) {
     )
 }
 
+/**
+ * This function is to remove commas, dots and duplicated spaces
+ * @param {str} str String
+ */
+const processSearch = (str) => {
+    let tempStr = str.replace("?q=", "");
+    tempStr = tempStr.replace(".", " ");
+    tempStr = tempStr.replace(",", " ");
+    tempStr =  tempStr.replace(/\s+/g, ' ');
+    tempStr = tempStr.trim();
+    let temp_array = tempStr.split(" ");
+    temp_array = [... new Set(temp_array)];
+    return temp_array.join(" ");
+}
+
 
 export default class SearchPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                { name: 'TV', price: 19, img: 'https://images.samsung.com/is/image/samsung/vn-premium-uhd-nu8000-ua55nu8000kxxv-dynamicblack-94847376?$PD_GALLERY_L_JPG$', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed justo nibh, ullamcorper sit amet interdum iaculis, scelerisque ullamcorper urna." },
-                { name: 'Fridge', price: 200, img: 'https://brain-images-ssl.cdn.dixons.com/9/4/10164049/l_10164049_018.jpg', description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed justo nibh, ullamcorper sit amet interdum iaculis, scelerisque ullamcorper urna." }
-            ]
+            data: [],
+            lastQuery: null
         }
     }
     componentDidMount() {
-        fetch('http://localhost:4000/v1/search?q=' + this.props.location.search.slice(3),{crossDomain:true})
+        let temp_query = decodeURIComponent(this.props.location.search);
+        temp_query = processSearch(temp_query);
+        temp_query = encodeURIComponent(temp_query);
+        console.log("query: ", temp_query);
+        fetch('http://localhost:4000/v1/search?q=' + temp_query, { crossDomain: true })
             .then(res => res.json())
-            .then(results=>{this.setState({data: results.rows})})
-            .catch(err=>err)
+            .then(results => {
+                console.log("fetch results: ", results.rows);
+                if (temp_query !== 0) {
+                    this.setState({ data: results.rows, lastQuery: temp_query });
+                }
+            })
+            .catch(err => err)
     }
+    componentDidUpdate() {
+        let temp_query = decodeURIComponent(this.props.location.search);
+        temp_query = processSearch(temp_query);
+        temp_query = encodeURIComponent(temp_query);
+        if (temp_query !== this.state.lastQuery) {
+            console.group("updated");
+            fetch('http://localhost:4000/v1/search?q=' + temp_query, { crossDomain: true })
+                .then(res => res.json())
+                .then(results => {
+                    console.log("fetch results: ", results.rows);
+                    if (temp_query.length !== 0) {
+                        this.setState({ data: results.rows, lastQuery: temp_query })
+                    }
+                })
+                .catch(err => err)
+        }
 
-    goback = (event) => {
-        this.props.history.goBack();
+
     }
     render() {
-        console.log("query: ", this.props.location.search.slice(3));
         return (
             <>
                 <Header user={this.props.user} {... this.props}></Header>
-                <div className="container">
+                <div className={styles.Container}>
                     <div className="row">
-                        <input type="text" className="form-control" placeholder="Search...."></input>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-2">
+                        <div className={`col-2 ${styles.Filters}`}>
                             <form className="container my-3">
                                 <div className="form-group">
                                     <label>Size</label>
@@ -70,11 +102,10 @@ export default class SearchPage extends React.Component {
 
 
 
-                        <div className="col-10">
+                        <div className="col-10 m-0 p-0">
                             {this.state.data.map((item, index) => <VerticalProductDisplay {...item} key={index} ></VerticalProductDisplay>)}
                         </div>
                     </div>
-                    <button onClick={this.goback}>Back</button>
                 </div>
                 <Footer></Footer>
             </>
