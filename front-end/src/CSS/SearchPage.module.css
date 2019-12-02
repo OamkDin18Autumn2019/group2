@@ -1,7 +1,12 @@
+body {
+    background-color: white;
+}
+
 .Container {
     margin-top: 10%;
     margin-left: 10%;
     margin-right: 10%;
+    min-height: 75vh;
 }
 
 .SearchBar {
@@ -15,14 +20,18 @@
 }
 
 .Filters {
-    background-color: rgb(250, 159, 204);
+    
 }
 
 
 .Img {
-    
+    max-height: 200px;
+    border: solid 2px black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 0px;
 }
 
 .Info {
-    background-color: aqua;
+    
 }

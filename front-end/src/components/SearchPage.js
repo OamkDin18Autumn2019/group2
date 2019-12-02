@@ -1,18 +1,31 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from '../CSS/SearchPage.module.css';
+import StarRatings from 'react-star-ratings';
 
 import Header from './Header';
 import Footer from './Footer';
 
 function VerticalProductDisplay(props) {
     return (
-        <div className="row my-2 no-gutters">
-            <img className={`col-2 ${styles.Img}`} src={props.images} style={{ height: "100%" }}></img>
+        <div className="row mb-5 no-gutters">
+            <div className="col-1"></div>
+            <img className={`col-2 ${styles.Img}`} alt="decorative" src={props.images}></img>
             <div className={`col ${styles.Info}`}>
-                <div>{props.name}</div>
-                <div>Description: {props.description}</div>
-                <div>${props.price}</div>
+                <div className="pl-5 pt-3">
+                    <b className="mb-2">{props.name}</b>
+                    <div className="my-2">
+                    <StarRatings
+                        rating={props.ratingProduct}
+                        starDimension="25px"
+                        starRatedColor="yellow"
+                        starEmptyColor="lightgray"
+                    />
+                    </div>
+                    <div className="mb-2">${props.price}</div>
+                    <div className="mb-2">Description: {props.description}</div>
+                    
+                </div>
             </div>
         </div>
     )
@@ -26,10 +39,10 @@ const processSearch = (str) => {
     let tempStr = str.replace("?q=", "");
     tempStr = tempStr.replace(".", " ");
     tempStr = tempStr.replace(",", " ");
-    tempStr =  tempStr.replace(/\s+/g, ' ');
+    tempStr = tempStr.replace(/\s+/g, ' ');
     tempStr = tempStr.trim();
     let temp_array = tempStr.split(" ");
-    temp_array = [... new Set(temp_array)];
+    temp_array = [...new Set(temp_array)];
     return temp_array.join(" ");
 }
 
@@ -39,9 +52,11 @@ export default class SearchPage extends React.Component {
         super(props);
         this.state = {
             data: [],
-            lastQuery: null
+            lastQuery: null,
+            sortRatings: "highest"
         }
     }
+
     componentDidMount() {
         let temp_query = decodeURIComponent(this.props.location.search);
         temp_query = processSearch(temp_query);
@@ -50,13 +65,14 @@ export default class SearchPage extends React.Component {
         fetch('http://localhost:4000/v1/search?q=' + temp_query, { crossDomain: true })
             .then(res => res.json())
             .then(results => {
-                console.log("fetch results: ", results.rows);
+                //console.log("fetch results: ", results.rows);
                 if (temp_query !== 0) {
                     this.setState({ data: results.rows, lastQuery: temp_query });
                 }
             })
             .catch(err => err)
     }
+
     componentDidUpdate() {
         let temp_query = decodeURIComponent(this.props.location.search);
         temp_query = processSearch(temp_query);
@@ -66,16 +82,23 @@ export default class SearchPage extends React.Component {
             fetch('http://localhost:4000/v1/search?q=' + temp_query, { crossDomain: true })
                 .then(res => res.json())
                 .then(results => {
-                    console.log("fetch results: ", results.rows);
+                    //console.log("fetch results: ", results.rows);
                     if (temp_query.length !== 0) {
                         this.setState({ data: results.rows, lastQuery: temp_query })
                     }
                 })
                 .catch(err => err)
         }
-
-
     }
+
+    highestRatings = () => {
+        this.setState({data: this.state.data.sort((a,b) => {return b.ratingProduct-a.ratingProduct})});
+    }
+
+    lowestRatings = () => {
+        this.setState({data: this.state.data.sort((a,b) => {return a.ratingProduct-b.ratingProduct})})
+    }
+
     render() {
         return (
             <>
@@ -83,18 +106,20 @@ export default class SearchPage extends React.Component {
                 <div className={styles.Container}>
                     <div className="row">
                         <div className={`col-2 ${styles.Filters}`}>
-                            <form className="container my-3">
-                                <div className="form-group">
-                                    <label>Size</label>
-                                    <div><input type="radio" value="option1"></input>Option 1</div>
-                                    <div><input type="radio" value="option2"></input>Option 2</div>
-                                    <div><input type="radio" value="option3"></input>Option 3</div>
+                            <form className="mx-auto">
+                                <div className="form-group container border border-secondary border-box rounded">
+                                    <b><a href="#" data-toggle="collapse" data-target="#price">&#9660; Price</a></b>
+                                    <div id="price" className="collapse show">
+                                    <div><input type="radio" className="my-2 ml-4" name="price" onClick={null} ></input>Highest price</div>
+                                    <div><input type="radio" className="my-2 ml-4" name="price" onClick={null} ></input>Lowest price</div>
+                                    </div>
                                 </div>
-                                <div className="form-group">
-                                    <label>Price</label>
-                                    <div><input type="radio" value="option1"></input>Option 1</div>
-                                    <div><input type="radio" value="option2"></input>Option 2</div>
-                                    <div><input type="radio" value="option3"></input>Option 3</div>
+                                <div className="form-group container my-3 border border-secondary border-box rounded">
+                                    <b><a href="#" data-toggle="collapse" data-target="#ratings">&#9660; Ratings</a></b>
+                                    <div id="ratings" className="collapse show">
+                                    <div><input type="radio" className="my-2 ml-4" name="ratings" onClick={this.highestRatings} ></input>Highest ratings</div>
+                                    <div><input type="radio" className="my-2 ml-4" name="ratings" onClick={this.lowestRatings} ></input>Lowest ratings</div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -102,7 +127,7 @@ export default class SearchPage extends React.Component {
 
 
 
-                        <div className="col-10 m-0 p-0">
+                        <div className="col-10 m-0 mx-auto">
                             {this.state.data.map((item, index) => <VerticalProductDisplay {...item} key={index} ></VerticalProductDisplay>)}
                         </div>
                     </div>
