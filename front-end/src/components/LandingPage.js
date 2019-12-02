@@ -7,7 +7,6 @@ import Product from './Product';
 import Footer from './Footer';
 import axios from 'axios';
 
-
 export default class LandingPage extends React.Component {
     constructor(props) {
         super(props);
@@ -43,11 +42,10 @@ export default class LandingPage extends React.Component {
     // console.log(window.scrollY);
     render() {
 
-
         return (
             <React.Fragment>
                 <div className={styles.wrapper}>
-                    <Header user={this.props.user} />
+                    <Header user={this.props.user} {...this.props}/>
                     <section className={styles.topContainer}>
                         <div className={styles.showCase}>
                             <h1> We can sell everything</h1>
