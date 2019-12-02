@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import OnSellProduct from './OnSellProduct';
 import axios from "axios";
 import styles from "../CSS/Profile.module.css";
 import classNames from "classnames";
@@ -46,13 +47,17 @@ export default class CreateProduct extends Component {
         console.log(err);
         return null;
       })
+
+  }
+
+  onClick = () => {
+    // console.log(this.state.currentSaleItems);
+    console.log(this.state.currentSaleItems.map(item => item.id));
   }
 
   render() {
     return (
       <>
-
-        <Header user={this.props.user} />
         <div className={styles.background}>
           <div className={styles.container}>
             <h2> Profile</h2>
@@ -77,9 +82,17 @@ export default class CreateProduct extends Component {
               </div>
             </div>
             <br></br>
-            <h2> Your are selling now</h2>
+            <h2> On sell products</h2>
             <div style={{ overflowX: "auto" }}>
-              <table className={styles.productTable}>
+              {
+                // let products = this.state.currentSaleItems;
+                this.state.currentSaleItems.map(product => {
+                  return <OnSellProduct {...product} />
+                } ) 
+              } 
+
+
+              {/* <table className={styles.productTable}>
                 <tr>
                   <th>Product Name</th>
                   <th>Price</th>
@@ -88,6 +101,7 @@ export default class CreateProduct extends Component {
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
+
                 {this.state.currentSaleItems.map(sale => {
                   return (
                     <tr>
@@ -108,15 +122,17 @@ export default class CreateProduct extends Component {
               </table>
             </div>
             <br></br>
-            <h2> You bought before</h2>
+            <h2> History</h2>
             <div style={{ overflowX: "auto" }}>
-              <table className={styles.productTable}>
+              {/* <table className={styles.productTable}>
                 <tr>
                   <th>Product Name</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Date of buying</th>
                 </tr>
+                {this.state.history}
+              </table> */}
                 {this.state.historyItems.map(sale => {
                   return (
                     <tr>

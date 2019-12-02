@@ -87,6 +87,7 @@ var product = {
       });
   },
 
+
   getnewArrivals: async function (callback) {
     return knex
       .from('products')
@@ -112,6 +113,7 @@ var product = {
       })
       .catch(err => {
         callback.catch(err);
+        // console.log("error bruh");
       });
   },
 

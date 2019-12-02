@@ -50,7 +50,6 @@ export default class BasketPage extends Component {
     return (
 
       <>
-        <Header user={this.props.user} />
         <div className={styles.main}>
           <div className={styles.titleBar}>
             <button onClick={this.buyProducts} className={styles.paymentButton}>Buy</button>

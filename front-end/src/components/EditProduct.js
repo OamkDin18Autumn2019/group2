@@ -28,7 +28,7 @@ export default class EditProduct extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         let idProduct = parseInt(this.props.match.params.id);
         console.log(this.props.user.token)
         axios.get(`http://localhost:4000/v1/product/${idProduct}`, {
@@ -153,7 +153,6 @@ export default class EditProduct extends Component {
             } else {
                 return(
                     <>
-                    <Header user={this.props.user} />
                     <div className={styles.background}>
 
                         <div className={styles.container}>
