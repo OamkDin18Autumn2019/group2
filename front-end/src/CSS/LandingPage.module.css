@@ -27,7 +27,7 @@ body{
 
 img{
     max-width: 100%;
-    /* height: 100%; */
+    /* height: 200px; */
 }
 
 .wrapper {
@@ -57,9 +57,14 @@ img{
     margin-bottom: -3%; */
 }
 
+/* 
+ATTENTION! 
+Here is the height of the product images. I put some value but you can change it.
+There is also the same img in @media which changes automatically to 100% 
+ */
 .img_block .content_block {
     width:100%;
-    height: 100%;
+    height: 250px;
     box-shadow: var(--shadow);
     /* background:#f6f6f6; */
     text-align:center;
@@ -116,6 +121,10 @@ img{
     -webkit-transition: all .4s;
     -o-transition: all .4s;
     transition: all .4s;
+}
+.img_block a.content_block span a {
+  text-decoration: none;
+  color: white;
 }
 .img_block a.content_block:hover span {
     bottom: 0;
@@ -229,7 +238,10 @@ img{
     margin-top: 0;
     color: var(--light);
 }
-
+.notification {
+    font-size: 15px;
+    margin-top: -5%;
+}
 
 
 
@@ -278,6 +290,7 @@ img{
 
 .products img {
     width: 99%;
+    /* height: 200px; */
     box-shadow: var(--shadow);
 }
 /* Footer */
@@ -334,6 +347,10 @@ footer {
     .middleContainer {
         display: none;
 
+    }
+    .img_block .content_block {
+        width: 100%;
+        height: 50vh;
     }
 }
 
