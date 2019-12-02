@@ -6,7 +6,8 @@ var history = {
   get: async function (callback) {
     return knex
       .from("history")
-      .select()
+      .select('name', 'history.amount', 'price', 'history.created_at' )
+      .innerJoin('products', 'products.id','history.idProduct')
       .then(data => {
         callback.then(data);
       })

@@ -52,7 +52,7 @@ export default class Header extends React.Component {
             this.setState({ ArrowState: this.state.ArrowState === ArrowUp ? ArrowDown : ArrowUp });
             this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
 
-            console.log(this.state.NavbarClass);
+            // console.log(this.state.NavbarClass);
             // console.log(this.state.DropDownMenuButton);
             // console.log(this.state.ArrowState);
         }
@@ -85,8 +85,7 @@ export default class Header extends React.Component {
     // }
      
     render() {
-      console.log(this.props.style)  
-      console.log(this.props.user);
+    //   console.log(this.props.style)  
         if (this.props.user.username) {
             return(
                 <nav className={this.state.NavbarClass}>
@@ -100,7 +99,7 @@ export default class Header extends React.Component {
                         </form>
                         <div className={styles.LoginRegisterButtons}>
                             <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
-                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Profile </Link></button> 
+                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
                         </div>
                     </div>
                     <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img src={this.state.ArrowState} className={styles.Icons} /> </span>

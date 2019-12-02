@@ -91,7 +91,7 @@ router.put("/:id", function (req, res, next) {
 // via "body" and "productId" via endpoint
 router.put("/changeRating/:id", function (req, res, next) {
     let id = req.params.id;
-    console.log(req.body);
+    // console.log(req.body);
     history.getById(id, {
         then: rows => {
             console.log(rows[0].amountOfRates);
