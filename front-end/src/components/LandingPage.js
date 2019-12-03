@@ -80,42 +80,7 @@ export default class LandingPage extends React.Component {
                         </section>
 
 
-                        <section className={styles.middleContainer}>
-                            <header className={styles.showCaseMiddle}>
-                                <h1>We are universal</h1>
-                                <p> Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit.
-                                    Curabitur nec gravida massa.
-
-
-    return (
-        <React.Fragment>
-            <div className={styles.wrapper}>
-                <section className={styles.topContainer}>
-                    <div className={styles.showCase}>
-                        <h1> We can sell everything</h1>
-                        <p> 
-                            Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit.
-                            Curabitur nec gravida massa.
-                            Aenean ut libero. 
-                        </p>
-                        <a href="#" className={styles.btn}> Get started </a>
-                    </div>
-                </section>
-                <div className={styles.bestSellersBox}>
-                <div className={ styles.bestSellersName}> Best sellers </div>
-                <section className={styles.products}>
-                  
-                    <Product >https://source.unsplash.com/random/200x200</Product> 
-                    <Product >https://source.unsplash.com/random/201x200</Product> 
-                    <Product >https://source.unsplash.com/random/202x200</Product> 
-                    <Product >https://source.unsplash.com/random/203x200</Product> 
-                    <Product >https://source.unsplash.com/random/204x200</Product> 
-                    <Product >https://source.unsplash.com/random/205x200</Product> 
-                    
-
-                </section>
+                        
                 <div className={ styles.bestSellersName}> New arrivals </div>
                 <section className={styles.products}>
                   
