@@ -13,7 +13,8 @@ export default class BasketPage extends Component {
   }
  
   buyProducts = () => {
-  console.log(this.props.cart)
+    let currentCart = this.props.cart
+    console.log(this.props.cart)
   for (let i = 0; i < this.props.cart.length; i++) {
     axios.put(`http://localhost:4000/v1/product/${this.props.cart[i].id}`,
     {
@@ -25,15 +26,29 @@ export default class BasketPage extends Component {
         Authorization: this.props.user.token
       }
     })
-    .then(res => {
+    .then((res) => {
       // this.props.deleteFromCartById(i);
       // da.push(i);
-      console.log(res)
+      // console.log(res)
+       axios.post(`http://localhost:4000/v1/history`,
+      {
+        ...this.props.cart[i]
+      },
+      {
+        headers: {
+          Authorization: this.props.user.token
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        currentCart.splice(i,1)
+        console.log(currentCart)
+        this.props.updateCart(currentCart)
+
+      })
+      .catch( err => console.log(err))
     })
     .catch( err => console.log(err))
-
-
-    
   }
  
 

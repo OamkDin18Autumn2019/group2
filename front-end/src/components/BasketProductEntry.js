@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../CSS/BasketProductEntry.module.css";
 export default props => {
   const data = props.data;
-console.log(data)
+// console.log(data)
   return (
     
     <div className={styles.main}>
