@@ -32,35 +32,24 @@ router.get("/:id?", function(req, res, next) {
 
 // It gives you an error in console when you send an array of objects
 // But it works, so you can use it
-router.post("/", function(req, res, next) {
-  if (Array.isArray(req.body)) {
-    // console.log(req.body);
-    Promise.all([
-      req.body.forEach(element => {
-        // console.log(element);
-        product.add(element, {
-          then: rows => {
-            console.log(rows);
-            // res.status(202).json({ code: 1, rows });
-          },
-          catch: err => {
-            console.log(err);
-            // res.status(500).json({ code: 0, err });
-          }
-        });
-      })
-    ])    
-    .then(res.status(202).json({ code: 1 }))
-    // .catch(res.status(500).json({ code: 0 }))
-    } else {
-    product.add(req.body, {
-      then: rows => {
-        res.status(202).json({ code: 1, rows });
-      },
-      catch: err => {
-        res.status(500).json({ code: 0, err });
+router.post("/", async function(req, res, next) {
+  try {
+    if (Array.isArray(req.body)) {
+      let results = [];
+
+      for (let i = 0; i < req.body.length; i++) {
+        const d = req.body[i];
+        const p = await product.add(d);
+        results.add(p);
       }
-    });
+    } else {
+      const p = await product.add(d);
+      results.add(p);
+    }
+
+    res.status(200).json({ results });
+  } catch (err) {
+    res.status(400).json({ err });
   }
 });
 
@@ -157,7 +146,7 @@ router.get("/da/newArrivals/", function(req, res, next) {
 
 router.get("/da/currentSellings/", isAuth, function(req, res, next) {
   // console.log(req.user.id)
-  product.getCurrentSellings(req.user.id,{
+  product.getCurrentSellings(req.user.id, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
     },
@@ -166,6 +155,5 @@ router.get("/da/currentSellings/", isAuth, function(req, res, next) {
     }
   });
 });
-
 
 module.exports = router;
