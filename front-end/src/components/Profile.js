@@ -29,6 +29,7 @@ export default class CreateProduct extends Component {
       .then(res => {
         //The following line is to check the response JSON due to the weird structure of the response
         this.setState({ historyItems: res.data.rows });
+        // Da
       })
       .catch(err => {
         console.log(err);
