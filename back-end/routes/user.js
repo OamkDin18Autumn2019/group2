@@ -77,8 +77,8 @@ router.put("/:id", function(req, res, next) {
   });
 });
 
-router.post("/getHistory", function(req, res, next) {
-  user.getHistoryById(req.body.id, req.body, {
+router.get("/da/getHistory", isAuth, function(req, res, next) {
+  user.getHistoryById(req.user.id, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
     },

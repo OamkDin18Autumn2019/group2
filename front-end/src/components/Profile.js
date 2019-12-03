@@ -6,74 +6,48 @@ import axios from "axios";
 import styles from "../CSS/Profile.module.css";
 import classNames from "classnames";
 
+
+// IMPORTANT TODO
+// We have to add a button/link on this page
+// to move to the place where
+// user can create a new product
+
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentSaleItems: [
-    
-      ],
-
-      historyItems: [
-        
-      ]
+      currentSaleItems: [],
+      historyItems: []
     };
-
-    // this.state.currentSale = this.state.currentSaleItems.map(sale => {
-    //   return (
-    //     <tr>
-    //       <td>{sale.name}</td>
-    //       <td>$ {sale.price}</td>
-    //       <td>{sale.quantity}</td>
-    //       <td>{sale.dateTime}</td>
-    //       <td className={styles.edit1}>
-    //         <a href="./editProduct/2">Edit</a>
-    //       </td>
-    //       <td className={styles.delete1}>
-    //         {" "}
-    //         <a href="#">Delete</a>{" "}
-    //       </td>
-    //     </tr>
-    //   );
-    // });
-
-    // this.state.history = this.state.historyItems.map(sale => {
-    //   return (
-    //     <tr>
-    //       <td>{sale.name}</td>
-    //       <td>$ {sale.price}</td>
-    //       <td>{sale.quantity}</td>
-    //       <td>{sale.dateTime}</td>
-    //     </tr>
-    //   );
-    // });
   }
-
-  componentDidMount = () => {
-    let userId = parseInt(this.props.match.params.id);
-    console.log("userId: " + userId);
-    axios.get(`http://localhost:4000/v1/product/getByUserId/${userId}`,  {
+  componentDidMount() {
+    // let idProduct = parseInt(this.props.match.params.id);
+    axios.get(`http://localhost:4000/v1/user/da/getHistory`, {
       headers: {
         'x-access-token': this.props.user.token
       }
-      // userId
     })
       .then(res => {
-        console.log(res.data.rows);
-        if (res.data.rows !== undefined) {
-          this.setState({ currentSaleItems: res.data.rows});
-        }
-        console.log(this.state.currentSaleItems);
+        //The following line is to check the response JSON due to the weird structure of the response
+        this.setState({ historyItems: res.data.rows });
       })
       .catch(err => {
         console.log(err);
         return null;
       })
-  }
-
-  onClick = () => {
-    // console.log(this.state.currentSaleItems);
-    console.log(this.state.currentSaleItems.map(item => item.id));
+    axios.get(`http://localhost:4000/v1/product/da/currentSellings/`, {
+      headers: {
+        'x-access-token': this.props.user.token
+      }
+    })
+      .then(res => {
+        //The following line is to check the response JSON due to the weird structure of the response
+        this.setState({ currentSaleItems: res.data.rows });
+      })
+      .catch(err => {
+        console.log(err);
+        return null;
+      })
   }
 
   render() {
@@ -146,7 +120,7 @@ export default class Profile extends Component {
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png"
                 ></img>
 
-                <div className={styles.username}>Dmitrii231</div>
+                <div className={styles.username}>{ this.props.user.username}</div>
               </div>
               <div className={styles.profileInfoBlock}>
                 <img

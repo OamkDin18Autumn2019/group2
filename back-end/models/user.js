@@ -4,10 +4,11 @@ const jwt = require("jsonwebtoken");
 const saltRounds = 4;
 const jwtKey = "BWWrCs!|M;e*oU.YWJ_W+6jposZKF-";
 
-function generateAuthToken(id, isAdmin = false) {
+function generateAuthToken(id, isAdmin = false, user) {
   const token = jwt.sign(
     {
       id,
+      ...user,
       isAdmin
     },
     jwtKey,
@@ -123,7 +124,7 @@ var user = {
       return {
         user: userData,
         code: 1,
-        token: generateAuthToken(userData.idUser, false)
+        token: generateAuthToken(userData.idUser, false, userData)
       };
     } else {
       return {
@@ -196,8 +197,9 @@ var user = {
     console.log(id);
     return knex
       .from("history")
-      .select()
-      .where("idUser", id)
+      .select('name', 'history.amount', 'price', 'history.created_at')
+      .innerJoin('products', 'products.id', 'history.idProduct')
+      .where("history.idUser", id)
       .then(data => {
         callback.then(data);
       })
