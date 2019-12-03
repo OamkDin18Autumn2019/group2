@@ -23,6 +23,21 @@
     padding: 0;
 }
 
+.EditButton {
+    box-sizing: border-box;
+    height: 2em;
+    border: 1px solid var(--dark);
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.DeleteButton {
+    box-sizing: border-box;
+    height: 2em;
+    border: 0;
+    background-color: var(--danger);
+    color: var(--light);
+}
 .HiddenByDefault {
     display: none;
 }
