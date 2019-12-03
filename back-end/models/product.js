@@ -87,6 +87,7 @@ var product = {
       });
   },
 
+
   getnewArrivals: async function (callback) {
     return knex
       .from('products')
@@ -101,12 +102,27 @@ var product = {
       });
   },
 
-  getByUserId: async function (id, callback) {
+  getCurrentSellings: async function (id, callback) {
     console.log(id);
     return knex
       .from("products")
       .select()
       .where("idUser", id)
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+        // console.log("error bruh");
+      });
+  },
+
+  getByUserId: async function (id, callback) {
+    console.log(id);
+    return knex
+      .from("products")
+      .select()
+      // .where("id", 1)
       .then(data => {
         callback.then(data);
       })
@@ -140,7 +156,6 @@ var product = {
   },
 
   update: function (id, product, callback) {
-
     return knex("products")
       .where("id", id)
       .update({

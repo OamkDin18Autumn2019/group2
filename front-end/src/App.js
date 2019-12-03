@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
+import Header from './components/Header';
 import LandingPage from "./components/LandingPage";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -41,6 +42,14 @@ export default class App extends React.Component {
       cart: [...this.state.cart,product]
     })
   }
+
+  deleteFromCartById = (id) => {
+    let currentCart = this.state.cart;
+    currentCart.splice(id,1);
+    this.setState({
+      cart: currentCart
+    })
+  }
   handleSubmit = (un, pw) => {
     // console.log(this.state.user);
 
@@ -79,6 +88,11 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <Router>
+          <Route 
+            path="/"
+            render={routerProps => <Header {...routerProps} user={this.state.user} /> }
+          />
+
           <Route
             path="/"
             exact
@@ -95,7 +109,7 @@ export default class App extends React.Component {
             render={routerProps => <EditProduct {...routerProps} user={ this.state.user } />}
           />
           <Route
-            path="/profile"
+            path="/profile/:id"
             exact
             render={routerProps => <Profile {...routerProps} user={ this.state.user } />}
           />
@@ -130,7 +144,7 @@ export default class App extends React.Component {
           <Route
             path="/basket"
             exact
-            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } />}
+            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } deleteFromCartById = { this.deleteFromCartById } />}
           />
           {/* 
           <Route
