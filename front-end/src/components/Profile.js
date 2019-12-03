@@ -70,7 +70,7 @@ export default class CreateProduct extends Component {
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png"
                 ></img>
 
-                <div className={styles.username}>{ this.props.user.username}</div>
+                <div className={styles.username}>{this.props.user.username}</div>
               </div>
               <div className={styles.profileInfoBlock}>
                 <img
@@ -89,8 +89,8 @@ export default class CreateProduct extends Component {
                 // let products = this.state.currentSaleItems;
                 this.state.currentSaleItems.map(product => {
                   return <OnSellProduct {...product} />
-                } ) 
-              } 
+                })
+              }
 
 
               {/* <table className={styles.productTable}>
@@ -134,6 +134,7 @@ export default class CreateProduct extends Component {
                 </tr>
                 {this.state.history}
               </table> */}
+              <table>
                 {this.state.historyItems.map(sale => {
                   return (
                     <tr>
