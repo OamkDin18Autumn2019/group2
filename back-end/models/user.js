@@ -197,8 +197,9 @@ var user = {
     console.log(id);
     return knex
       .from("history")
-      .select()
-      .where("idUser", id)
+      .select('name', 'history.amount', 'price', 'history.created_at')
+      .innerJoin('products', 'products.id', 'history.idProduct')
+      .where("history.idUser", id)
       .then(data => {
         callback.then(data);
       })
