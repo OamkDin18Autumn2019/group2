@@ -91,6 +91,15 @@ export default class SearchPage extends React.Component {
         }
     }
 
+
+    highestPrice = () => {
+        this.setState({data: this.state.data.sort((a,b) => {return b.price-a.price})});
+    }
+
+    lowestPrice = () => {
+        this.setState({data: this.state.data.sort((a,b) => {return a.price-b.price})});
+    }
+
     highestRatings = () => {
         this.setState({data: this.state.data.sort((a,b) => {return b.ratingProduct-a.ratingProduct})});
     }
@@ -110,8 +119,8 @@ export default class SearchPage extends React.Component {
                                 <div className="form-group container border border-secondary border-box rounded">
                                     <b><a href="#" data-toggle="collapse" data-target="#price">&#9660; Price</a></b>
                                     <div id="price" className="collapse show">
-                                    <div><input type="radio" className="my-2 ml-4" name="price" onClick={null} ></input>Highest price</div>
-                                    <div><input type="radio" className="my-2 ml-4" name="price" onClick={null} ></input>Lowest price</div>
+                                    <div><input type="radio" className="my-2 ml-4" name="price" onClick={this.highestPrice} ></input>Highest price</div>
+                                    <div><input type="radio" className="my-2 ml-4" name="price" onClick={this.lowestPrice} ></input>Lowest price</div>
                                     </div>
                                 </div>
                                 <div className="form-group container my-3 border border-secondary border-box rounded">
