@@ -34,9 +34,9 @@ router.get("/:id?", function(req, res, next) {
 // But it works, so you can use it
 router.post("/", async function(req, res, next) {
   try {
+    console.log(req.body)
     if (Array.isArray(req.body)) {
       let results = [];
-
       for (let i = 0; i < req.body.length; i++) {
         const d = req.body[i];
         const p = await product.add(d);
@@ -49,6 +49,7 @@ router.post("/", async function(req, res, next) {
 
     res.status(200).json({ results });
   } catch (err) {
+    console.log(err)
     res.status(400).json({ err });
   }
 });
@@ -67,11 +68,11 @@ router.delete("/:id", isAuth, function(req, res, next) {
 router.put("/:id", isAuth, function(req, res, next) {
   product.update(req.params.id, req.body, {
     then: rows => {
-      console.log(req);
+      // console.log(req);
       res.status(202).json({ code: 1, rows });
     },
     catch: err => {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ code: 0, err });
     }
   });

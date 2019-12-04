@@ -13,38 +13,45 @@ export default class BasketPage extends Component {
   }
  
   buyProducts = () => {
-    let da = [];
-    // let length = this.props.cart.length
-   this.props.cart.forEach((element, i) => {
-    axios.post(`http://localhost:4000/v1/history/`,
-    element,
+    let currentCart = this.props.cart
+    console.log(this.props.cart)
+  for (let i = 0; i < this.props.cart.length; i++) {
+    axios.put(`http://localhost:4000/v1/product/${this.props.cart[i].id}`,
+    {
+      amountOfProduct: this.props.cart[i].amountOfProduct - this.props.cart[i].amountInTheCart,
+      amountOfSoldProduct: this.props.cart[i].amountOfSoldProduct + this.props.cart[i].amountInTheCart,
+    },
     {
       headers: {
         Authorization: this.props.user.token
       }
     })
-    .then(result => {
-      axios.put(`http://localhost:4000/v1/product/${element.id}`,
-        {
-          amountOfProduct: element.amountOfProduct - element.amountInTheCart,
-          amountOfSoldProduct: element.amountOfSoldProduct + element.amountInTheCart,
-        },
-        {
-          headers: {
-            Authorization: this.props.user.token
-          }
-        })
-        .then(res => {
-          this.props.deleteFromCartById(i);
-          da.push(i);
-          console.log(da, this.props.cart)
-        })
+    .then((res) => {
+      // this.props.deleteFromCartById(i);
+      // da.push(i);
+      // console.log(res)
+       axios.post(`http://localhost:4000/v1/history`,
+      {
+        ...this.props.cart[i]
+      },
+      {
+        headers: {
+          Authorization: this.props.user.token
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        currentCart.splice(i,1)
+        console.log(currentCart)
+        this.props.updateCart(currentCart)
+
+      })
+      .catch( err => console.log(err))
     })
-    .catch(err => console.log(err))
-   });
-   da.forEach(i => {
-    this.props.deleteFromCartById(i);
-   });
+    .catch( err => console.log(err))
+  }
+ 
+
   }
   render() {
     return (
