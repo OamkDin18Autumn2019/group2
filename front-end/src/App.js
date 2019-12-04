@@ -62,16 +62,19 @@ export default class App extends React.Component {
       if (product.id === currentCart[i].id) {
         console.log("found")
         currentCart[i] = {
-          ...productToCart,
+          ...productToCart
         }
         this.setState({
           cart : currentCart
         });
+        break
       } else {
+        console.log("nothing")  
         let newCart = [ productToCart ];
         this.setState({
           cart : this.state.cart.concat(newCart)
         });
+        
         newCart = [];
       }
     }  
