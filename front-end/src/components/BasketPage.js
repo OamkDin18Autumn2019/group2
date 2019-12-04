@@ -26,10 +26,10 @@ export default class BasketPage extends Component {
         Authorization: this.props.user.token
       }
     })
-    .then((res) => {
+    .then((res1) => {
       // this.props.deleteFromCartById(i);
       // da.push(i);
-      // console.log(res)
+      console.log(res1)
        axios.post(`http://localhost:4000/v1/history`,
       {
         ...this.props.cart[i]
