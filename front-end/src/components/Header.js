@@ -115,11 +115,13 @@ export default class Header extends React.Component {
         console.log(this.props.style)
         console.log(this.props.user);
 
-        if (this.props.user.username) {
+        // The line of code below is the commented logo picture
+
+        // <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" />
             return (
                 <nav className={this.state.NavbarClass}>
                     <div className={styles.LogoDiv}>
-                        <Link to="/"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
+                        <Link to="/"> mothersell </Link>
                     </div>
                     <div className={this.state.DropDownMenu}>
                         <SearchBar
@@ -128,36 +130,22 @@ export default class Header extends React.Component {
                             searchInput={this.state.searchInput}
                         ></SearchBar>
                         <div className={styles.LoginRegisterButtons}>
-
-                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
-                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
-
+                            { this.props.user.username ? (
+                                    <>
+                                        <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
+                                        <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
+                                    </>
+                                ) : (
+                                    <>
+                                        <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/login" > Login </Link></button>
+                                        <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Register </Link></button>
+                                    </>
+                                )
+                            }
                         </div>
                     </div>
                     <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img alt="decorative" src={this.state.ArrowState} className={styles.Icons} /> </span>
                 </nav>
             )
         }
-        else {
-            return (
-                <nav className={this.state.NavbarClass}>
-                    <div className={styles.LogoDiv}>
-                        <Link to="/"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
-                    </div>
-                    <div className={this.state.DropDownMenu} >
-                        <SearchBar
-                            searchSubmitHandler={this.searchSubmitHandler}
-                            searchInputChangeHandler={this.searchInputChangeHandler}
-                            searchInput={this.state.searchInput}
-                        ></SearchBar>
-                        <div className={styles.LoginRegisterButtons}>
-                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/login" > Login </Link></button>
-                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Register </Link></button>
-                        </div>
-                    </div>
-                    <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img alt="decorative" src={this.state.ArrowState} className={styles.Icons} /> </span>
-                </nav>
-            )
-        }
-    }
 }
