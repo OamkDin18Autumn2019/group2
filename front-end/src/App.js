@@ -43,7 +43,6 @@ export default class App extends React.Component {
   //   })
   // }
   addToCart = (product, amountOfProduct) => {
-
     var currentCart = this.state.cart;
     var productToCart = {
       ...product,
@@ -74,7 +73,7 @@ export default class App extends React.Component {
         this.setState({
           cart : this.state.cart.concat(newCart)
         });
-        
+
         newCart = [];
       }
     }  

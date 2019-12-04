@@ -30,8 +30,8 @@ export default class BasketPage extends Component {
       }
     })
     .then( async (res1) => {
-      console.log(res1)
-      await axios.post(`http://localhost:4000/v1/history`,
+      // console.log(res1)
+      await axios.post(`http://localhost:4000/v1/user/da/createHistory`,
       {
         ...this.props.cart[i]
       },
@@ -41,7 +41,7 @@ export default class BasketPage extends Component {
         }
       })
       .then(async(res) => {
-        console.log(res)
+        // console.log(res)
         arrayToDelete.push(this.props.cart[i]);
       })
       .catch( err => console.log(err))

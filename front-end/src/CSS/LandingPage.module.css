@@ -76,7 +76,7 @@ There is also the same img in @media which changes automatically to 100%
     /* border-color: #DDDDDD; */
     /* box-shadow: 10px 10px 6px -6px #777777;  */
 }
-.img_block a.content_block {
+.img_block .content_block {
     display:block;
     position: relative;
     overflow:hidden;
@@ -86,7 +86,7 @@ There is also the same img in @media which changes automatically to 100%
     transition: all .4s;
     cursor:pointer;
 }
-.img_block a.content_block .over_block {
+.img_block .content_block .over_block {
     /* background-color:rgba(0, 160, 150, 0); */
     width:100%;
     height:100%;
@@ -99,12 +99,12 @@ There is also the same img in @media which changes automatically to 100%
     -o-transition:all 1s;
     transition:all 1s;
 }
-.img_block a.content_block:hover .over_block {
+.img_block .content_block:hover .over_block {
     display:block;
     box-shadow: var(--shadow);
     background-color:rgba(255, 255, 255, 0.212)
 }
-.img_block a.content_block span {
+.img_block .content_block span {
     background: rgba(0, 0, 0, 0.5);
     width:100%;
     height:0;
@@ -122,16 +122,16 @@ There is also the same img in @media which changes automatically to 100%
     -o-transition: all .4s;
     transition: all .4s;
 }
-.img_block a.content_block span a {
+.img_block .content_block span a {
   text-decoration: none;
   color: white;
 }
-.img_block a.content_block:hover span {
+.img_block .content_block:hover span {
     bottom: 0;
     height:50%;
     color: #ffffff;
 }
-.img_block a img {
+.img_block  img {
     height: 100%;
 }
 
