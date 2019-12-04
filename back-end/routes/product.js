@@ -32,37 +32,28 @@ router.get("/:id?", function(req, res, next) {
 
 // It gives you an error in console when you send an array of objects
 // But it works, so you can use it
-router.post("/", function(req, res, next) {
- if (Array.isArray(req.body)) {
-   console.log(req.body)
-   Promise.all([
-    req.body.forEach(element => {
-      console.log(element)
-    product.add(element, {
-      then: rows => {
-        console.log(rows)
-        // res.status(202).json({ code: 1, rows });
-      },
-      catch: err => {
-        console.log(err)
-        // res.status(500).json({ code: 0, err });
+router.post("/", async function(req, res, next) {
+  try {
+    if (Array.isArray(req.body)) {
+      let results = [];
+
+      for (let i = 0; i < req.body.length; i++) {
+        const d = req.body[i];
+        const p = await product.add(d);
+        results.add(p);
       }
-    });
-    })]).then(res.sendStatus(200))
-    .catch(res.sendStatus(500))
- } else {
-  product.add(req.body, {
-    then: rows => {
-      res.status(202).json({ code: 1, rows });
-    },
-    catch: err => {
-      res.status(500).json({ code: 0, err });
+    } else {
+      const p = await product.add(d);
+      results.add(p);
     }
-  });
- }
+
+    res.status(200).json({ results });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
 });
 
-router.delete("/:id", function(req, res, next) {
+router.delete("/:id", isAuth, function(req, res, next) {
   product.delete(req.params.id, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
@@ -72,12 +63,15 @@ router.delete("/:id", function(req, res, next) {
     }
   });
 });
-router.put("/:id", function(req, res, next) {
+
+router.put("/:id", isAuth, function(req, res, next) {
   product.update(req.params.id, req.body, {
     then: rows => {
+      console.log(req);
       res.status(202).json({ code: 1, rows });
     },
     catch: err => {
+      console.log(err);
       res.status(500).json({ code: 0, err });
     }
   });
@@ -87,21 +81,20 @@ router.put("/:id", function(req, res, next) {
 // via "body" and "productId" via endpoint
 router.put("/changeRating/:id", function(req, res, next) {
   let id = req.params.id;
-
-  console.log(req.body)
+  // console.log(req.body);
   product.getById(id, {
     then: rows => {
       console.log(rows[0].amountOfRates);
       if (rows[0].amountOfRates == 0) {
-         update = {
-          amountOfRates :rows[0].amountOfRates + 1,
-          ratingProduct : req.body.ratingProduct
-        }
+        update = {
+          amountOfRates: rows[0].amountOfRates + 1,
+          ratingProduct: req.body.ratingProduct
+        };
       } else {
         update = {
-          amountOfRates : rows[0].amountOfRates + 1,
-          ratingProduct : (req.body.ratingProduct +  rows[0].ratingProduct)/2
-        }
+          amountOfRates: rows[0].amountOfRates + 1,
+          ratingProduct: (req.body.ratingProduct + rows[0].ratingProduct) / 2
+        };
       }
       product.update(id, update, {
         then: rows => {
@@ -116,6 +109,7 @@ router.put("/changeRating/:id", function(req, res, next) {
       res.status(500).json({ code: 0, err });
     }
   });
+
   // product.update(req.params.id, req.body, {
   //   then: rows => {
   //     res.status(202).json({ code: 1, rows });
@@ -124,6 +118,42 @@ router.put("/changeRating/:id", function(req, res, next) {
   //     res.status(500).json({ code: 0, err });
   //   }
   // });
+});
+
+router.get("/getByUserId/:userId", function(req, res, next) {
+  // console.log(req.params.userId);
+  const userId = req.params.userId;
+  product.getByUserId(userId, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
+
+router.get("/da/newArrivals/", function(req, res, next) {
+  product.getnewArrivals({
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
+
+router.get("/da/currentSellings/", isAuth, function(req, res, next) {
+  // console.log(req.user.id)
+  product.getCurrentSellings(req.user.id, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
 });
 
 module.exports = router;

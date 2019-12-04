@@ -1,0 +1,57 @@
+[
+    {
+        "idUser": 1,
+        "name": "Adidas boots",
+        "price": 50,
+        "description": "Good Adidas boots. In normal condition",
+        "tags": "Boots, Sportswear, Adidas",
+        "category": "shoes",
+        "amountOfProduct": 1,
+        "amountOfSoldProduct": 0,
+        "images":"https://www.loofes-clothing.com/images/adidas-performance-juniors-predator-19-3-fg-football-boots-blue-p25867-101474_image.jpg"
+    },
+    {
+        "idUser": 1,
+        "name": "Bike",
+        "price": 30,
+        "description": "Bike in good condition. 26 wheel size. Brakes work well",
+        "tags": "Bikes, hobbies, wheels",
+        "category": "bikes",
+        "amountOfProduct": 1,
+        "amountOfSoldProduct": 0,
+        "images":"https://storage.needpix.com/rsynced_images/bike-2570413_1280.jpg"
+    },
+    {
+        "idUser": 1,
+        "name": "Adidas Gloves",
+        "price": 10,
+        "description": "I'm moving to Egypt, so I don't need them anymore",
+        "tags": "Gloves, hands, adidas",
+        "category": "For home",
+        "amountOfProduct": 2,
+        "amountOfSoldProduct": 0,
+        "images":"https://www.misterrunning.com/images/2018-media/Adidas_Gloves_CY6007_Black_A.jpg"
+    },
+    {
+        "idUser": 1,
+        "name": "Laptop",
+        "price": 699,
+        "description": "HP, intel core i5, 8th Gen 200, NVIDIA GeForce GTX 1050. In usage half a year",
+        "tags": "Laptops, gaming, Nursultan",
+        "category": "Computers",
+        "amountOfProduct": 1,
+        "amountOfSoldProduct": 0,
+        "images":"https://cdn.uc.assets.prezly.com/b739d65b-5711-4129-b49f-f0ccef381145/-/preview/2048x2048/-/quality/best/-/format/auto/"
+    },
+    {
+        "idUser": 1,
+        "name": "Socks",
+        "price": 3,
+        "description": "Children socks, cotton",
+        "tags": "Socks, children, clothes",
+        "category": "Clothes",
+        "amountOfProduct": 12,
+        "amountOfSoldProduct": 0,
+        "images":"https://i.pinimg.com/originals/79/10/e4/7910e40a546dffe2162593a325b58599.jpg"
+    }   
+]

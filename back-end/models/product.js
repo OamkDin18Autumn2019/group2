@@ -1,24 +1,26 @@
-var db = require('../database');
+var db = require("../database");
 var knex = require("../database/database");
 
 var product = {
-
   createTableProducts: async () => {
     knex.schema.hasTable("products").then(function (exists) {
       if (!exists) {
         return knex.schema.createTable("products", function (t) {
           t.increments("id").primary();
           t.integer("idUser", 10)
-          .unsigned()
-          .notNullable()
-          .references('id')
-          .inTable('users');
+            .unsigned()
+            .notNullable()
+            .references("id")
+            .inTable("users");
           t.text("name", 255);
-          t.integer("price");
-          t.integer("discount").defaultTo(0);
+          t.float("price", 25, 2);
+          t.float("discount", 4, 2)
+          .defaultTo(0);
           t.text("description", 1024);
-          t.float("ratingProduct", 10, 3);
-          t.integer("amountOfRates");
+          t.float("ratingProduct", 10, 2)
+            .defaultTo(0);
+          t.integer("amountOfRates")
+            .defaultTo(0);
           t.string('tags', 512);
           t.string('category');
           t.integer('amountOfProduct');
@@ -38,7 +40,7 @@ var product = {
       if (!exists) {
         return knex.schema.createTable("categories", function (t) {
           t.increments("id").primary();
-          t.string('nameOfCategory');
+          t.string("nameOfCategory");
         });
       } else {
         return null;
@@ -51,7 +53,7 @@ var product = {
       if (!exists) {
         return knex.schema.createTable("tags", function (t) {
           t.increments("id").primary();
-          t.string('nameOfTag');
+          t.string("nameOfTag");
         });
       } else {
         return null;
@@ -61,20 +63,20 @@ var product = {
 
   get: async function (callback) {
     return knex
-    .from("products")
-    .select()
-    .then(data => {
-      callback.then(data);
-    })
+      .from("products")
+      .select()
+      .then(data => {
+        callback.then(data);
+      })
       .catch(err => {
         callback.catch(err);
       });
   },
 
   getById: async function (id, callback) {
-    console.log(id)
+    console.log(id);
     return knex
-      .from('products')
+      .from("products")
       .select()
       .where("id", id)
       .then(data => {
@@ -83,26 +85,15 @@ var product = {
       .catch(err => {
         callback.catch(err);
       });
-
   },
 
-  add: async function(product, callback) {
-    // console.log(product);
-      return knex("products")
-        .insert([{ ...product }])
-        .then(data => {
-          callback.then(data);
-        })
-        .catch(err => {
-          callback.catch(err);
-        });
-  },
 
-  delete: async function (id, callback) {
+  getnewArrivals: async function (callback) {
     return knex
       .from('products')
-      .delete()
-      .where('id', id)
+      .select()
+      .limit(8)
+      .orderBy('created_at','desc')
       .then(data => {
         callback.then(data);
       })
@@ -111,21 +102,73 @@ var product = {
       });
   },
 
-  update: function(id, product, callback) {
-    return knex('products').where('id', id)
-    .update(
-      ({ 
-       ...product,
+  getCurrentSellings: async function (id, callback) {
+    console.log(id);
+    return knex
+      .from("products")
+      .select()
+      .where("idUser", id)
+      .then(data => {
+        callback.then(data);
       })
-    )
-    .then(data => {
-      callback.then(data);
-    })
-    .catch(err => {
-      callback.catch(err);
-    });
+      .catch(err => {
+        callback.catch(err);
+        // console.log("error bruh");
+      });
+  },
+
+  getByUserId: async function (id, callback) {
+    console.log(id);
+    return knex
+      .from("products")
+      .select()
+      // .where("id", 1)
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+  },
+  add: async function (product, callback) {
+    // console.log(product);
+    return knex("products")
+      .insert([{ ...product }])
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+  },
+
+  delete: async function (id, callback) {
+    return knex
+      .from("products")
+      .delete()
+      .where("id", id)
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+  },
+
+  update: function (id, product, callback) {
+    return knex("products")
+      .where("id", id)
+      .update({
+        ...product
+
+      })
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
   }
 };
-
 
 module.exports = product;

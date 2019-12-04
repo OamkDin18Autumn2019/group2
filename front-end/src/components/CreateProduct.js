@@ -42,7 +42,6 @@ export default class CreateProduct extends Component {
   render() {
     return (
       <>
-        <Header />
         <div className={styles.background}>
 
           <div className={styles.container}>

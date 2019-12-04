@@ -6,9 +6,7 @@ const isAuth = require("../middlewares/isAuth");
 
 // Create tables "users" and "products"
 
-user.createTableUsers()
-.then(product.createTableProducts()
-.then());
+user.createTableUsers().then(product.createTableProducts().then());
 user.createTableHistory();
 
 // CRUD endpoints for "user"
@@ -46,7 +44,7 @@ router.post("/register", function(req, res) {
 });
 
 router.post("/login", async function(req, res, next) {
-  console.log(req.body)
+  console.log(req.body);
   const data = await user.login(req.body);
   if (data.code == 1) {
     res
@@ -70,6 +68,17 @@ router.delete("/:id", function(req, res, next) {
 });
 router.put("/:id", function(req, res, next) {
   user.update(req.params.id, req.body, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
+
+router.get("/da/getHistory", isAuth, function(req, res, next) {
+  user.getHistoryById(req.user.id, {
     then: rows => {
       res.status(202).json({ code: 1, rows });
     },

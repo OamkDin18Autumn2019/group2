@@ -15,7 +15,7 @@ body {
 
 .Login {
     display: grid;
-    grid-template-columns: 25% 70px auto 70px 25%;
+    grid-template-columns: 20% 70px auto 70px 20%;
     grid-template-rows: 25% auto 25%;
 }
 

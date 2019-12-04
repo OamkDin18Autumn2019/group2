@@ -4,10 +4,11 @@ const jwt = require("jsonwebtoken");
 const saltRounds = 4;
 const jwtKey = "BWWrCs!|M;e*oU.YWJ_W+6jposZKF-";
 
-function generateAuthToken(id, isAdmin = false) {
+function generateAuthToken(id, isAdmin = false, user) {
   const token = jwt.sign(
     {
       id,
+      ...user,
       isAdmin
     },
     jwtKey,
@@ -17,18 +18,21 @@ function generateAuthToken(id, isAdmin = false) {
 }
 var user = {
   createTableUsers: async () => {
-    knex.schema.hasTable("users").then(function (exists) {
+    knex.schema.hasTable("users").then(function(exists) {
       if (!exists) {
-        return knex.schema.createTable("users", function (t) {
+        return knex.schema.createTable("users", function(t) {
           t.increments("id").primary();
-          t.string("username", 255)
-          .unique();
+          t.string("username", 255).unique();
           t.string("email", 255);
           t.string("password", 255);
           t.integer("ratingUser").defaultTo(0);
           t.integer("amountOfRates").defaultTo(0);
-          t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
-          t.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
+          t.dateTime("created_at")
+            .notNullable()
+            .defaultTo(knex.raw("CURRENT_TIMESTAMP"));
+          t.dateTime("updated_at").defaultTo(
+            knex.raw("NULL ON UPDATE CURRENT_TIMESTAMP")
+          );
         });
       } else {
         return null;
@@ -36,23 +40,24 @@ var user = {
     });
   },
   createTableHistory: async () => {
-    knex.schema.hasTable("history").then(function (exists) {
+    knex.schema.hasTable("history").then(function(exists) {
       if (!exists) {
-        return knex.schema.createTable("history", function (t) {
+        return knex.schema.createTable("history", function(t) {
           t.increments("id").primary();
           t.integer("idUser", 10)
-          .unsigned()
-          .notNullable()
-          .references('id')
-          .inTable('users');
+            .unsigned()
+            .notNullable()
+            .references("id")
+            .inTable("users");
           t.integer("idProduct", 10)
-          .unsigned()
-          .notNullable()
-          .references('id')
-          .inTable('products');
+            .unsigned()
+            .notNullable()
+            .references("id")
+            .inTable("products");
           t.integer("amount").defaultTo(1);
-          t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
-          
+          t.dateTime("created_at")
+            .notNullable()
+            .defaultTo(knex.raw("CURRENT_TIMESTAMP"));
         });
       } else {
         return null;
@@ -60,19 +65,22 @@ var user = {
     });
   },
 
-  get: async function (callback) {
-    return knex.from("users").select("*").then(data => {
-      callback.then(data);
-    })
+  get: async function(callback) {
+    return knex
+      .from("users")
+      .select("*")
+      .then(data => {
+        callback.then(data);
+      })
       .catch(err => {
         callback.catch(err);
       });
   },
 
-  getById: async function (id, callback) {
-    console.log(id)
+  getById: async function(id, callback) {
+    console.log(id);
     return knex
-      .from('users')
+      .from("users")
       .select()
       .where("id", id)
       .then(data => {
@@ -81,11 +89,10 @@ var user = {
       .catch(err => {
         callback.catch(err);
       });
-
   },
 
-  add: function (user, callback) {
-    console.log(user)
+  add: function(user, callback) {
+    console.log(user);
     bcrypt.hash(user.user.password, saltRounds).then(hash => {
       return knex("users")
         .insert([{ ...user.user, password: hash }])
@@ -98,12 +105,12 @@ var user = {
         });
     });
   },
-  login: async function (user, callback) {
+  login: async function(user, callback) {
     console.log(user);
     let userData = await knex
-      .from('users')
+      .from("users")
       .select()
-      .where("username", user.user.username)
+      .where("username", user.user.username);
     userData = userData[0];
     if (userData == null) {
       return { code: 0 };
@@ -117,7 +124,7 @@ var user = {
       return {
         user: userData,
         code: 1,
-        token: generateAuthToken(userData.idUser, false)
+        token: generateAuthToken(userData.idUser, false, userData)
       };
     } else {
       return {
@@ -125,11 +132,11 @@ var user = {
       };
     }
   },
-  delete: async function (id, callback) {
+  delete: async function(id, callback) {
     return knex
-      .from('users')
+      .from("users")
       .delete()
-      .where('id', id)
+      .where("id", id)
       .then(data => {
         callback.then(data);
       })
@@ -137,56 +144,68 @@ var user = {
         callback.catch(err);
       });
   },
-  update: function (id, user, callback) {
+  update: function(id, user, callback) {
     if (user.password) {
-         bcrypt.hash(user.password, saltRounds).then(hash => {
-      console.log(user);
-      return knex('users').where('id', id)
-        .update(
-          ({ 
-           ...user,
-            password: hash,
+      bcrypt.hash(user.password, saltRounds).then(hash => {
+        console.log(user);
+        return knex("users")
+          .where("id", id)
+          .update({
+            ...user,
+            password: hash
           })
-        )
-        .then(data => {
-          callback.then(data);
-        })
-        .catch(err => {
-          callback.catch(err);
-        });
-    });
-    } else {
-        return knex('users').where('id', id)
-          .update(
-            ({ 
-             ...user,
-           })
-          )
           .then(data => {
             callback.then(data);
           })
           .catch(err => {
             callback.catch(err);
           });
+      });
+    } else {
+      return knex("users")
+        .where("id", id)
+        .update({
+          ...user
+        })
+        .then(data => {
+          callback.then(data);
+        })
+        .catch(err => {
+          callback.catch(err);
+        });
     }
- 
-      // return knex.raw(
-      //   "UPDATE `users` SET  `username` = ?, `email` = ?, `password` = ?, `ratingUser` = ?, `amountOfRates` = ? WHERE `users`.`idUser` = ?",
-      //   [
-      //     user.username,
-      //     user.email,
-      //     hash,
-      //     user.ratingUser,
-      //     user.amountOfRates,
-      //     id
-      //   ],
-      // )
-      // .then(data => {
-      //   callback.then(data);
-      // })
-      // .catch(err => {
-      //   callback.catch(err);
-      // });
+
+    // return knex.raw(
+    //   "UPDATE `users` SET  `username` = ?, `email` = ?, `password` = ?, `ratingUser` = ?, `amountOfRates` = ? WHERE `users`.`idUser` = ?",
+    //   [
+    //     user.username,
+    //     user.email,
+    //     hash,
+    //     user.ratingUser,
+    //     user.amountOfRates,
+    //     id
+    //   ],
+    // )
+    // .then(data => {
+    //   callback.then(data);
+    // })
+    // .catch(err => {
+    //   callback.catch(err);
+    // });
+  },
+  getHistoryById: async function(id, callback) {
+    console.log(id);
+    return knex
+      .from("history")
+      .select('name', 'history.amount', 'price', 'history.created_at')
+      .innerJoin('products', 'products.id', 'history.idProduct')
+      .where("history.idUser", id)
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
   }
 };
 module.exports = user;
