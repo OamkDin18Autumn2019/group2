@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Switch, Route, Link, useRouteMatch } from 'react-router-dom';
-import Header from "./Header";
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import OnSellProducts from './OnSellProducts';
+import Analytics from './Analytics';
+import History from './History';
 import axios from "axios";
-import styles from "../CSS/Profile.module.css";
+import styles from "../CSS/Profile.module.css"; 
+import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from "classnames";
 
 
@@ -17,7 +19,8 @@ export default class Profile extends Component {
     super(props);
     this.state = {
       currentSaleItems: [],
-      historyItems: []
+      historyItems: [],
+      activeTab: OnSellProducts
     };
   }
   componentDidMount() {
@@ -43,6 +46,7 @@ export default class Profile extends Component {
       .then(res => {
         //The following line is to check the response JSON due to the weird structure of the response
         this.setState({ currentSaleItems: res.data.rows });
+        console.log(this.state);
       })
       .catch(err => {
         console.log(err);
@@ -50,55 +54,96 @@ export default class Profile extends Component {
       })
   }
 
-  render() {
+  TabLoader = (ActiveTab) => {
+    // console.log(ActiveTab);
+    const Name = this.state.activeTab;
+    console.log(<Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />);
+    return <Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />
+  }
 
-    // let {path, url} = useRouteMatch();
+  TabPickHandler = (event) => {
+      console.log(event.target.name);
+      const components = [
+        OnSellProducts,
+        Analytics,
+        History
+      ];
+
+      components.map(component => console.log(component.name));
+      components.map(component => {
+        if (component.name == event.target.name) {
+          const ChosenComponent = component;
+          console.log(ChosenComponent);
+          this.setState({activeTab: component});
+          // this.TabLoader(ChosenComponent);
+          console.log("da");
+        } else {
+          console.log("net")
+        }
+      })
+
+      // console.log(this.state.activeTab);
+      
+  }
+
+
+  render() {
+    // console.log(this.components.map());
+    console.log(this.state.activeTab[0])
     const url = this.props.match.url;
     const path = this.props.match.path;
-    console.log("url: " + url);
-    console.log(path);
+    // console.log(this.state.activeTab);
+    // console.log("url: " + url);
+    // console.log(path);
 
     return (
-      <div className={styles.ProfilePage}>
-        <div className={styles.ProfileInfo}>
-          <div className={styles.ProfileInfoNames}>
-            <h5 className={styles.Username}> {this.props.user.username} </h5>
-            <h6 className={styles.Email}> {this.props.user.email} </h6>
+      <Router>
+        <>
+        <div className={styles.ProfilePage}>
+          <div className={styles.ProfileInfo}>
+            <div className={styles.ProfileInfoNames}>
+              <h5 className={styles.Username}> MotherSeller {this.props.user.username} </h5>
+              <h6 className={styles.Email}> something@example.com {this.props.user.email} </h6>
+            </div>
+            <div className={styles.DescriptionContainer}>
+              <p className={styles.Description}> 
+                Lorem Ipsum motherseller. Here is the description of your page and yourself. 
+                Some Other shit about that other shit that you like or might not like I do not even care
+                You just need to do this or otherwise I will start reading Hitler's book MeinKampf 
+                So you better know your place you piece of undercode.
+              </p>
+            </div>
+            <div className={styles.BasicStatistics}>
+              <div className={styles.BasicStatisticsElement}>
+                <label> Your rating </label>
+                {/* <h6> {this.state.user.rating} </h6> */}
+                <h6> Here lies the user rating </h6>
+              </div>
+              <div className={styles.BasicStatisticsElement}>
+                <label> Products Sold </label>
+                <h6> Here lies the number of products the user sold </h6>
+              </div>
+              <div className={styles.BasicStatisticsElement}>
+                <label> Registered Since </label>
+                <h6> Here lies the data of registration of the user </h6>
+              </div>
+              <div className={styles.BasicStatisticsElement}>
+                <label> You are this many days with us </label>
+                <h6> Here lies the number of days the user is with us </h6>
+              </div>
+            </div>
           </div>
-          <div className={styles.BasicStatistics}>
-            <div className={styles.BasicStatisticsElement}>
-              <label> Your rating </label>
-              {/* <h6> {this.state.user.rating} </h6> */}
-              <h6> Here lies the user rating </h6>
-            </div>
-            <div className={styles.BasicStatisticsElement}>
-              <label> Products Sold </label>
-              <h6> Here lies the number of products the user sold </h6>
-            </div>
-            <div className={styles.BasicStatisticsElement}>
-              <label> Registered Since </label>
-              <h6> Here lies the data of registration of the user </h6>
-            </div>
-            <div className={styles.BasicStatisticsElement}>
-              <label> You are this many days with us </label>
-              <h6> Here lies the number of days the user is with us </h6>
-            </div>
+          <div className={styles.SideNavBar}>
+            <ul className={styles.SideBarUL}>
+              <li> <a className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </li>
+              <li> <a className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </li>
+              <li> <a className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </li>
+            </ul>
           </div>
-        </div>
-        <div className={styles.SideNavBar}>
-          <ul className={styles.SideBarUL}>
-            <li> <Link to={`${url}/onSell`}> Currently on sell </Link> </li>
-            <li> <Link to={`${url}/analytics`}> Analytics </Link> </li>
-            <li> <Link to={`${url}/history`}> History </Link> </li>
-          </ul>
-        </div>
-        <div className={styles.ProfileData}>
-          <Switch>
-            <Route path={`${url}/onSell`} render={ routerProps => <OnSellProducts {...routerProps} props={this.state.currentSaleItems} />} />  
-            <Route path={`${url}/analytics`} component={OnSellProducts} /> 
-            <Route path={`${url}/history`} component={OnSellProducts} />  
-          </Switch>
-        </div>
+          <div className={styles.ProfileData}>
+              {this.TabLoader(this.state.activeTab)}
+          </div>
+          
         
         {/* <div style={{ overflowX: "auto" }}>
               {
@@ -164,7 +209,10 @@ export default class Profile extends Component {
             {/* </div>
           </div>
         </div> */}
-      </div>
+        </div>
+        </>
+      </Router>
+      
     );
   }
 }
