@@ -112,8 +112,8 @@ export default class Header extends React.Component {
 
     render() {
 
-        console.log(this.props.style)
-        console.log(this.props.user);
+        // console.log(this.props.style)
+        // console.log(this.props.user);
 
         if (this.props.user.username) {
             return (

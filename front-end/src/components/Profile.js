@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Header from "./Header";
-import OnSellProduct from './OnSellProduct';
 import axios from "axios";
 import styles from "../CSS/Profile.module.css";
 import classNames from "classnames";
@@ -21,7 +20,7 @@ export default class CreateProduct extends Component {
   }
   componentDidMount() {
     // let idProduct = parseInt(this.props.match.params.id);
-    axios.get(`http://localhost:4000/v1/history/`, {
+    axios.get(`http://localhost:4000/v1/user/da/getHistory`, {
       headers: {
         'x-access-token': this.props.user.token
       }
@@ -29,7 +28,6 @@ export default class CreateProduct extends Component {
       .then(res => {
         //The following line is to check the response JSON due to the weird structure of the response
         this.setState({ historyItems: res.data.rows });
-        // Da
       })
       .catch(err => {
         console.log(err);
@@ -48,17 +46,13 @@ export default class CreateProduct extends Component {
         console.log(err);
         return null;
       })
-
-  }
-
-  onClick = () => {
-    // console.log(this.state.currentSaleItems);
-    console.log(this.state.currentSaleItems.map(item => item.id));
   }
 
   render() {
     return (
       <>
+
+        <Header user={this.props.user} />
         <div className={styles.background}>
           <div className={styles.container}>
             <h2> Profile</h2>
@@ -70,7 +64,7 @@ export default class CreateProduct extends Component {
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png"
                 ></img>
 
-                <div className={styles.username}>{this.props.user.username}</div>
+                <div className={styles.username}>{ this.props.user.username}</div>
               </div>
               <div className={styles.profileInfoBlock}>
                 <img
@@ -83,17 +77,9 @@ export default class CreateProduct extends Component {
               </div>
             </div>
             <br></br>
-            <h2> On sell products</h2>
+            <h2> Your are selling now</h2>
             <div style={{ overflowX: "auto" }}>
-              {
-                // let products = this.state.currentSaleItems;
-                this.state.currentSaleItems.map(product => {
-                  return <OnSellProduct {...product} />
-                })
-              }
-
-
-              {/* <table className={styles.productTable}>
+              <table className={styles.productTable}>
                 <tr>
                   <th>Product Name</th>
                   <th>Price</th>
@@ -102,7 +88,6 @@ export default class CreateProduct extends Component {
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
-
                 {this.state.currentSaleItems.map(sale => {
                   return (
                     <tr>
@@ -123,18 +108,15 @@ export default class CreateProduct extends Component {
               </table>
             </div>
             <br></br>
-            <h2> History</h2>
+            <h2> You bought before</h2>
             <div style={{ overflowX: "auto" }}>
-              {/* <table className={styles.productTable}>
+              <table className={styles.productTable}>
                 <tr>
                   <th>Product Name</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Date of buying</th>
                 </tr>
-                {this.state.history}
-              </table> */}
-              <table>
                 {this.state.historyItems.map(sale => {
                   return (
                     <tr>

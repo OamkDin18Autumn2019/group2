@@ -50,10 +50,15 @@ export default class App extends React.Component {
       cart: currentCart
     })
   }
+
+  updateCart = (newCart) => {
+    this.setState({
+      cart: newCart
+    })
+    console.log(this.state.cart)
+  }
+
   handleSubmit = (un, pw) => {
-    // console.log(this.state.user);
-
-
     const user = {
       username: un,
       password: pw
@@ -144,16 +149,16 @@ export default class App extends React.Component {
           <Route
             path="/basket"
             exact
-            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } deleteFromCartById = { this.deleteFromCartById } />}
+            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } updateCart = { this.updateCart } />}
           />
-          {/* 
+          
           <Route
             path="/profile"
-            exact render={(routerProps ) => <ProfilePage  />} />  
-          <Route
-            path="/admin"
-            exact render={(routerProps ) => <AdminPage  />} />
-             */}
+            exact render={(routerProps ) => <Profile  user={ this.state.user } />} />  
+          {/* // <Route
+          //   path="/admin"
+          //   exact render={(routerProps ) => <AdminPage  />} />
+          //    */}
         </Router>
       </React.Fragment>
     );
