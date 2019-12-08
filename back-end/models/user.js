@@ -48,12 +48,13 @@ var user = {
             .unsigned()
             .notNullable()
             .references("id")
-            .inTable("users");
+            .inTable("users")
           t.integer("idProduct", 10)
             .unsigned()
             .notNullable()
             .references("id")
-            .inTable("products");
+            .inTable("products")
+            .onDelete('CASCADE')
           t.integer("amount").defaultTo(1);
           t.dateTime("created_at")
             .notNullable()
@@ -206,6 +207,17 @@ var user = {
       .catch(err => {
         callback.catch(err);
       });
-  }
+  },
+  addHistory: async function (history,callback) {
+    console.log(history);
+    return knex("history")
+      .insert([{...history}])
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+  },
 };
 module.exports = user;

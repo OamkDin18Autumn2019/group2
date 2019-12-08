@@ -11,7 +11,7 @@ app.use(cors());
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/user");
 var productsRouter = require("./routes/product");
-var historyRouter = require("./routes/history")
+// var historyRouter = require("./routes/history")
 var searchRouter =  require("./routes/search");
 
 app.use(function (req, res, next) {
@@ -36,7 +36,7 @@ app.use("/v1/", indexRouter);
 app.use("/v1/user", usersRouter);
 app.use("/v1/product", productsRouter);
 app.use("/v1/search", searchRouter);
-app.use("/v1/history", historyRouter);
+// app.use("/v1/history", historyRouter);
 
 const isAuth = require("./middlewares/isAuth");
 app.get("/protected", isAuth, (req, res, next) => {

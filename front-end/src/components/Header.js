@@ -112,8 +112,8 @@ export default class Header extends React.Component {
 
     render() {
 
-        console.log(this.props.style)
-        console.log(this.props.user);
+        // console.log(this.props.style)
+        // console.log(this.props.user);
 
         // The line of code below is the commented logo picture
 

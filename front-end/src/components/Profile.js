@@ -56,7 +56,7 @@ export default class Profile extends Component {
         return null;
       })
   }
-
+  
   TabLoader = () => {
     // console.log(ActiveTab);
     const Name = this.state.showActiveTab;
@@ -88,6 +88,22 @@ export default class Profile extends Component {
       })    
   }
 
+  deleteProduct(id) {
+    // event.preventDefault();
+    // axios.delete(`http://localhost:4000/v1/product/${id}`, {
+    //   headers: {
+    //     'x-access-token': this.props.user.token
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log(res)
+    //     this.componentDidUpdate()
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //     return null;
+    //   })
+  }
 
   render() {
     // console.log(this.components.map());
@@ -194,9 +210,24 @@ export default class Profile extends Component {
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
-                {this.state.currentSale}
-              </table> */}
-            {/* </div>
+                {this.state.currentSaleItems.map(sale => {
+                  return (
+                    <tr>
+                      <td>{sale.name}</td>
+                      <td>$ {sale.price}</td>
+                      <td>{sale.amountOfProduct}</td>
+                      <td>{sale.created_at.substr(0,10)}</td>
+                      <td className={styles.edit1}>
+                        <Link to={`/editProduct/${sale.id}`}>   Edit   </Link>
+                      </td>
+                      <td className={styles.delete1}>
+                        <a href='#' onClick = {this.deleteProduct(sale.id)}>Delete</a>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </table>
+            </div>
             <br></br>
             <h2> History</h2>
             <div style={{ overflowX: "auto" }}> */}
