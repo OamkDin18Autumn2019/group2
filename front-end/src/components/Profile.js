@@ -69,7 +69,7 @@ export default class CreateProduct extends Component {
     return (
       <>
 
-        <Header user={this.props.user} />
+        {/* <Header user={this.props.user} /> */}
         <div className={styles.background}>
           <div className={styles.container}>
             <h2> Profile</h2>
