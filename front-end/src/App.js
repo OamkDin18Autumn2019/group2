@@ -25,22 +25,59 @@ export default class App extends React.Component {
       cart: []
     };
   }
-  addToCart = (product) => {
-    let currentCart = [];
-    currentCart.push(product);
-    console.log(this.state.cart)
-  for (let i = 0; i < this.state.cart.length; i++) {
-    if(this.state.cart[i].id == product.id) {
-      console.log('Found')
-      // this.setState({
+  // addToCart = (product) => {
+  //   let currentCart = [];
+  //   currentCart.push(product);
+  //   console.log(this.state.cart)
+  // for (let i = 0; i < this.state.cart.length; i++) {
+  //   if(this.state.cart[i].id == product.id) {
+      
+  //     // this.setState({
         
-      // })  
-    }
+  //     // })  
+  //   }
     
-  }
-    this.setState({
-      cart: [...this.state.cart,product]
-    })
+  // }
+  //   this.setState({
+  //     cart: [...this.state.cart,product]
+  //   })
+  // }
+  addToCart = (product, amountOfProduct) => {
+    var currentCart = this.state.cart;
+    var productToCart = {
+      ...product,
+      amountInTheCart: amountOfProduct
+    }
+    console.log(productToCart)
+
+    if( this.state.cart.length == 0) {
+      let newCart = [ productToCart ];
+      this.setState({
+        cart : this.state.cart.concat(newCart)
+      });
+      newCart = [];
+    }
+    for (let i = 0; i < currentCart.length; i++) {
+      if (product.id === currentCart[i].id) {
+        console.log("found")
+        currentCart[i] = {
+          ...productToCart
+        }
+        this.setState({
+          cart : currentCart
+        });
+        break
+      } else {
+        console.log("nothing")  
+        let newCart = [ productToCart ];
+        this.setState({
+          cart : this.state.cart.concat(newCart)
+        });
+
+        newCart = [];
+      }
+    }  
+    console.log(this.state.cart)
   }
 
   deleteFromCartById = (id) => {
@@ -131,7 +168,7 @@ export default class App extends React.Component {
           <Route
             path="/product/:id"
             exact
-            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} addToCartGlobal = { this.addToCart } />}
+            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} cart = {this.state.cart} addToCartGlobal = { this.addToCart } />}
           />
           <Route
             path="/login"
