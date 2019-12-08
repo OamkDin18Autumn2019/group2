@@ -48,6 +48,23 @@ export default class CreateProduct extends Component {
       })
   }
 
+  deleteProduct(id) {
+    // event.preventDefault();
+    // axios.delete(`http://localhost:4000/v1/product/${id}`, {
+    //   headers: {
+    //     'x-access-token': this.props.user.token
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log(res)
+    //     this.componentDidUpdate()
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //     return null;
+    //   })
+  }
+
   render() {
     return (
       <>
@@ -99,8 +116,7 @@ export default class CreateProduct extends Component {
                         <Link to={`/editProduct/${sale.id}`}>   Edit   </Link>
                       </td>
                       <td className={styles.delete1}>
-                        {" "}
-                        <a href="#">Delete</a>{" "}
+                        <a href='#' onClick = {this.deleteProduct(sale.id)}>Delete</a>
                       </td>
                     </tr>
                   );
