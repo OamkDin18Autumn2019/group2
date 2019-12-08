@@ -34,11 +34,30 @@ nav a:hover {
     z-index: 10000;
     display: grid;
     grid-template-columns: 1fr 2fr;
+    transition: 0.4s all;
     /* display: block; */
     /* position: absolute; */
     top: 0;
     left: 0;
 }
+.mainNavScrolled, 
+.mainNavExpandedScrolled {
+    width: 100%;
+    height: 10%;
+    max-height: 10%;
+    background-color: rgba(0, 0, 0, 0.308); 
+    position: fixed;
+    overflow: hidden;
+    z-index: 10000;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* display: block; */
+    /* position: absolute; */
+    transition: 0.4s all;
+    top: 0;
+    left: 0;
+}
+
 
 .LogoDiv {
     place-self: center;
