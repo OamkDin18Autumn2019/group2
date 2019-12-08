@@ -20,9 +20,12 @@ export default class Profile extends Component {
     this.state = {
       currentSaleItems: [],
       historyItems: [],
-      activeTab: OnSellProducts
+      showActiveTab: OnSellProducts,
+      activeTab: ButtonStyles.ActiveLink,
+      nonActiveTab: ButtonStyles.Link
     };
   }
+
   componentDidMount() {
     // let idProduct = parseInt(this.props.match.params.id);
     axios.get(`http://localhost:4000/v1/user/da/getHistory`, {
@@ -54,42 +57,42 @@ export default class Profile extends Component {
       })
   }
 
-  TabLoader = (ActiveTab) => {
+  TabLoader = () => {
     // console.log(ActiveTab);
-    const Name = this.state.activeTab;
+    const Name = this.state.showActiveTab;
     console.log(<Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />);
     return <Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />
   }
 
   TabPickHandler = (event) => {
-      console.log(event.target.name);
+      // console.log(event.target.name);
       const components = [
         OnSellProducts,
         Analytics,
         History
       ];
 
-      components.map(component => console.log(component.name));
+      console.log(event.target.className);
+
+      // components.map(component => console.log(component.name));
       components.map(component => {
         if (component.name == event.target.name) {
           const ChosenComponent = component;
           console.log(ChosenComponent);
-          this.setState({activeTab: component});
+          this.setState({showActiveTab: component});
+          // if (event.target.name)
+          // this.setState({})
           // this.TabLoader(ChosenComponent);
-          console.log("da");
-        } else {
-          console.log("net")
-        }
-      })
-
-      // console.log(this.state.activeTab);
-      
+          // console.log("da");
+        } 
+      })    
   }
 
 
   render() {
     // console.log(this.components.map());
-    console.log(this.state.activeTab[0])
+    console.log(this.state.showActiveTab[0])
+    console.log(<a id={this.state.showActiveTab == "OnSellProducts" ? ButtonStyles.ActiveLink : ""} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a>);
     const url = this.props.match.url;
     const path = this.props.match.path;
     // console.log(this.state.activeTab);
@@ -135,13 +138,13 @@ export default class Profile extends Component {
           </div>
           <div className={styles.SideNavBar}>
             <ul className={styles.SideBarUL}>
-              <li> <a className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </li>
-              <li> <a className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </li>
-              <li> <a className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </li>
+              <li> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </li>
+              <li> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </li>
+              <li> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="History"> History </a> </li>
             </ul>
           </div>
           <div className={styles.ProfileData}>
-              {this.TabLoader(this.state.activeTab)}
+              {this.TabLoader(this.state.showActiveTab)}
           </div>
           
         
