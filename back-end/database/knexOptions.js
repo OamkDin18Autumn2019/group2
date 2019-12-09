@@ -1,5 +1,4 @@
-import dotenv from "dotenv";
-dotenv.configure();
+require('dotenv').config();
 
 module.exports = {
   client: "mysql2",
