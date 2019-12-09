@@ -97,11 +97,12 @@ export default class ProductPage extends Component {
         }
         else {
             return (
+                <>
                 <div className="container">
                     <div className="row">
                         <div className="col-3">
                             <div className="h-100 border border-secondary">
-                                <img className="h-100 w-100 no-gutters m-0" src="https://i2.wp.com/stevecorn.com/wp-content/uploads/2019/04/empty.jpg?fit=786%2C410&ssl=1"></img>
+                                <img className="h-100 w-100 no-gutters m-0" src="https://i2.wp.com/stevecorn.com/wp-content/uploads/2019/04/empty.jpg?fit=786%2C410&ssl=1"/>
                             </div>
                         </div>
                         <div className="col border border-secondary p-4">
@@ -109,8 +110,8 @@ export default class ProductPage extends Component {
                             <div>You see this message because there's no such product.</div>
                         </div>
                     </div>
-
                 </div>
+                </>
             )
         }
 
