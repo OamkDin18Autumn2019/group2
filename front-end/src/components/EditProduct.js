@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header';
 import axios from 'axios';
 // import ImageUploader from 'react-images-upload';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";

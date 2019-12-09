@@ -20,9 +20,7 @@ export default class Profile extends Component {
     this.state = {
       currentSaleItems: [],
       historyItems: [],
-      showActiveTab: OnSellProducts,
-      activeTab: ButtonStyles.ActiveLink,
-      nonActiveTab: ButtonStyles.Link
+      showActiveTab: OnSellProducts
     };
   }
 
@@ -91,8 +89,7 @@ export default class Profile extends Component {
 
   render() {
     // console.log(this.components.map());
-    console.log(this.state.showActiveTab[0])
-    console.log(<a id={this.state.showActiveTab == "OnSellProducts" ? ButtonStyles.ActiveLink : ""} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a>);
+    // console.log(this.state.showActiveTab[0])
     const url = this.props.match.url;
     const path = this.props.match.path;
     // console.log(this.state.activeTab);
@@ -107,14 +104,6 @@ export default class Profile extends Component {
             <div className={styles.ProfileInfoNames}>
               <h5 className={styles.Username}> MotherSeller {this.props.user.username} </h5>
               <h6 className={styles.Email}> something@example.com {this.props.user.email} </h6>
-            </div>
-            <div className={styles.DescriptionContainer}>
-              <p className={styles.Description}> 
-                Lorem Ipsum motherseller. Here is the description of your page and yourself. 
-                Some Other shit about that other shit that you like or might not like I do not even care
-                You just need to do this or otherwise I will start reading Hitler's book MeinKampf 
-                So you better know your place you piece of undercode.
-              </p>
             </div>
             <div className={styles.BasicStatistics}>
               <div className={styles.BasicStatisticsElement}>
@@ -138,9 +127,9 @@ export default class Profile extends Component {
           </div>
           <div className={styles.SideNavBar}>
             <ul className={styles.SideBarUL}>
-              <li> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </li>
-              <li> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </li>
-              <li> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="History"> History </a> </li>
+              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </span> </li>
+              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li>
+              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li>
             </ul>
           </div>
           <div className={styles.ProfileData}>

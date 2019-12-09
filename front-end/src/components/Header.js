@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from 'classnames';
@@ -40,25 +40,25 @@ export default class Header extends React.Component {
             ArrowState: ArrowDown,
             NavbarClass: styles.mainNav,
             // NavbarOpen: false,
-            // backgroundColor: "rgba(0, 0, 0, 0)"
+            backgroundColor: "rgba(0, 0, 0, 0)",
             searchInput: ""
         }
     }
 
     // we should not use that because it violates React principle
-    scroll = window.onscroll = function () {
-        var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
-        if (scrolled !== 0) {
+    // scroll = window.onscroll = function () {
+    //     var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
+    //     if (scrolled !== 0) {
 
-            // If the scrollbar is scrolled it makes the background transparent
-            // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
-            // console.log(scrolled)
-        } else {
-            // Если нет, то делаем его полностью видимым
-            // else it makes the background visible
-            // document.querySelector('#navbar').styles.mainNav.opacity = '1';
-        };
-    };
+    //         // If the scrollbar is scrolled it makes the background transparent
+    //         // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
+    //         // console.log(scrolled)
+    //     } else {
+    //         // Если нет, то делаем его полностью видимым
+    //         // else it makes the background visible
+    //         // document.querySelector('#navbar').styles.mainNav.opacity = '1';
+    //     };
+    // };
 
     DropDownClickHandler = event => {
         this.setState({ DropDownMenuButton: this.state.DropDownMenuButton === styles.ArrowDownCollapsed ? styles.ArrowDownExpanded : styles.ArrowDownCollapsed });
@@ -83,19 +83,22 @@ export default class Header extends React.Component {
         console.log("submited");
         this.props.history.push('/search?q='+encodeURIComponent(this.state.searchInput));
     }
+
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
-    // listenScrollEvent = e => {
-    //     if (window.scrollY > 50) {
-    //         this.setState({backgroundColor: 'black'})
-    //     } else {
-    //         this.setState({backgroundColor: 'rgba(0, 0, 0, 0)'})
-    //     }
-    // }
+    listenScrollEvent = e => {
+        if (window.scrollY > 50) {
+            console.log("success");
+            this.setState({backgroundColor: 'black'})
+        } else {
+            console.log("no");          
+            this.setState({backgroundColor: 'rgba(0, 0, 0, 0)'})
+        }
+    }
 
     // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
-    // componentDidMount() {
-    //     window.addEventListener('scroll', this.listenScrollEvent)
-    // }
+    componentDidMount() {
+        window.addEventListener('scroll', this.listenScrollEvent)
+    }
 
     // It changes the state of the navbar, which slides the navbar in or out
     // NavbarClickHandler = () => {
@@ -119,7 +122,7 @@ export default class Header extends React.Component {
 
         // <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" />
             return (
-                <nav className={this.state.NavbarClass}>
+                <nav className={this.state.NavbarClass} >
                     <div className={styles.LogoDiv}>
                         <Link to="/"> mothersell </Link>
                     </div>
@@ -128,7 +131,7 @@ export default class Header extends React.Component {
                             searchSubmitHandler={this.searchSubmitHandler}
                             searchInputChangeHandler={this.searchInputChangeHandler}
                             searchInput={this.state.searchInput}
-                        ></SearchBar>
+                        />
                         <div className={styles.LoginRegisterButtons}>
                             { this.props.user.username ? (
                                     <>

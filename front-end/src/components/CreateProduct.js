@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header';
 import axios from 'axios';
 import styles from '../CSS/CreateProduct.module.css';
 import classNames from 'classnames';

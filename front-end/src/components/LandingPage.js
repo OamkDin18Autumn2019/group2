@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+// import Header from './Header';
 import styles from '../CSS/LandingPage.module.css';
 import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
 import { IconContext } from "react-icons";
@@ -45,7 +45,7 @@ export default class LandingPage extends React.Component {
         return (
             <React.Fragment>
                 <div className={styles.wrapper}>
-                    <Header user={this.props.user} {...this.props}/>
+                    {/* <Header user={this.props.user} {...this.props}/> */}
                     <section className={styles.topContainer}>
                         <div className={styles.showCase}>
                             <h1> We can sell everything</h1>

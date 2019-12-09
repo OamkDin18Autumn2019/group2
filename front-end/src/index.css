@@ -19,9 +19,12 @@ code {
   --primary-light: #6CCF6D;
   --background-primary: #ddd;
   --nonactive-border: #E8E8E8;
+  --gray: #D1D1D1;
   --dark:#333;
   --light:#fff;
-  --danger: red;
+  --succes: #19B51B;
+  --danger: rgb(230, 36, 36);
   --shadow:0 1px 5px rgba(104, 104, 104, 0.8);
   --font-family-sans-serif: "Montserrat", "Roboto", Helvetica, Arial, sans-serif;
+  --header-height: 10vh;
 }
