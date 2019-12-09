@@ -115,6 +115,7 @@ export default class Profile extends Component {
     // console.log("url: " + url);
     // console.log(path);
 
+
     return (
       <Router>
         <>
@@ -174,32 +175,9 @@ export default class Profile extends Component {
         </div> */}
       
         {/* <div className={styles.background} onClick={this.onClick}>
-          <div className={styles.container}>
-            <h2> Profile</h2>
-            <div className={styles.personalInfo}>
-              <div className={styles.profileInfoBlock}>
-                <img
-                  className={classNames(styles.profileImg, styles.inline)}
-                  alt="profileImg"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png"
-                ></img>
 
-                <div className={styles.username}>{ this.props.user.username}</div>
-              </div>
-              <div className={styles.profileInfoBlock}>
-                <img
-                  className={classNames(styles.profileImg, styles.inline)}
-                  alt="email"
-                  src="https://www.stickpng.com/assets/images/584856b4e0bb315b0f7675ac.png"
-                ></img>
-
-                <div className={styles.username}>Dmitrii231@mail.ru</div>
-              </div>
-            </div>
-            <br></br>
-            <h2> On sell products</h2> */}
-
-
+        {/* <Header user={this.props.user} /> */}
+        <div className={styles.background}>
 
               {/* <table className={styles.productTable}>
                 <tr>

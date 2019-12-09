@@ -46,30 +46,22 @@ export default class Header extends React.Component {
     }
 
     // we should not use that because it violates React principle
-    scroll = window.onscroll = function () {
-        var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
-        if (scrolled !== 0) {
-
-            // If the scrollbar is scrolled it makes the background transparent
-            // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
-            // console.log(scrolled)
-        } else {
-            // Если нет, то делаем его полностью видимым
-            // else it makes the background visible
-            // document.querySelector('#navbar').styles.mainNav.opacity = '1';
-        };
-    };
+    // scroll = window.onscroll = function () {
+    //     var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
+    //     if (scrolled !== 0) {
+    //         console.log(this.state)
+    //     } else {
+    //         // Если нет, то делаем его полностью видимым
+    //         // else it makes the background visible
+    //         // document.querySelector('#navbar').styles.mainNav.opacity = '1';
+    //     };
+    // };
 
     DropDownClickHandler = event => {
         this.setState({ DropDownMenuButton: this.state.DropDownMenuButton === styles.ArrowDownCollapsed ? styles.ArrowDownExpanded : styles.ArrowDownCollapsed });
         this.setState({ DropDownMenu: this.state.DropDownMenu === styles.DropDownMenuCollapsed ? styles.DropDownMenuExpanded : styles.DropDownMenuCollapsed });
         this.setState({ ArrowState: this.state.ArrowState === ArrowUp ? ArrowDown : ArrowUp });
         this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
-
-
-        console.log(this.state.NavbarClass);
-        // console.log(this.state.DropDownMenuButton);
-        // console.log(this.state.ArrowState);
     }
 
     searchInputChangeHandler = (event) => {
@@ -84,18 +76,18 @@ export default class Header extends React.Component {
         this.props.history.push('/search?q='+encodeURIComponent(this.state.searchInput));
     }
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
-    // listenScrollEvent = e => {
-    //     if (window.scrollY > 50) {
-    //         this.setState({backgroundColor: 'black'})
-    //     } else {
-    //         this.setState({backgroundColor: 'rgba(0, 0, 0, 0)'})
-    //     }
-    // }
+    listenScrollEvent = e => {
+        if (window.scrollY > window.innerHeight - window.innerHeight / 4) {
+             this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNavExpandedScrolled ? styles.mainNavExpanded : styles.mainNavScrolled });
+        } else {
+            this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
+        }
+    }
 
     // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
-    // componentDidMount() {
-    //     window.addEventListener('scroll', this.listenScrollEvent)
-    // }
+    componentDidMount() {
+        window.addEventListener('scroll', this.listenScrollEvent)
+    }
 
     // It changes the state of the navbar, which slides the navbar in or out
     // NavbarClickHandler = () => {
