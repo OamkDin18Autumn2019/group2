@@ -88,4 +88,19 @@ router.get("/da/getHistory", isAuth, function(req, res, next) {
   });
 });
 
+router.post("/da/createHistory", isAuth, function (req, res, next) {
+      user.addHistory({
+          idUser: req.user.id,
+          idProduct: req.body.id,
+          amount: req.body.amountInTheCart
+      }, {
+          then: rows => {
+              res.status(202).json({ code: 1, rows });
+          },
+          catch: err => {
+              res.status(500).json({ code: 0, err });
+          }
+      });
+});
+
 module.exports = router;

@@ -12,11 +12,14 @@ export default class BasketPage extends Component {
     }
   }
  
-  buyProducts = () => {
+  buyProducts = async () => {
+    let arrayToDelete = []
     let currentCart = this.props.cart
-    console.log(this.props.cart)
+// This function goes through all the products in the cart,
+// changes the product in the db 
+// and creates a history row in the db
   for (let i = 0; i < this.props.cart.length; i++) {
-    axios.put(`http://localhost:4000/v1/product/${this.props.cart[i].id}`,
+   await axios.put(`http://localhost:4000/v1/product/${this.props.cart[i].id}`,
     {
       amountOfProduct: this.props.cart[i].amountOfProduct - this.props.cart[i].amountInTheCart,
       amountOfSoldProduct: this.props.cart[i].amountOfSoldProduct + this.props.cart[i].amountInTheCart,
@@ -26,11 +29,9 @@ export default class BasketPage extends Component {
         Authorization: this.props.user.token
       }
     })
-    .then((res) => {
-      // this.props.deleteFromCartById(i);
-      // da.push(i);
-      // console.log(res)
-       axios.post(`http://localhost:4000/v1/history`,
+    .then( async (res1) => {
+      // console.log(res1)
+      await axios.post(`http://localhost:4000/v1/user/da/createHistory`,
       {
         ...this.props.cart[i]
       },
@@ -39,18 +40,25 @@ export default class BasketPage extends Component {
           Authorization: this.props.user.token
         }
       })
-      .then((res) => {
-        console.log(res)
-        currentCart.splice(i,1)
-        console.log(currentCart)
-        this.props.updateCart(currentCart)
-
+      .then(async(res) => {
+        // console.log(res)
+        arrayToDelete.push(this.props.cart[i]);
       })
       .catch( err => console.log(err))
     })
     .catch( err => console.log(err))
   }
- 
+// This function deletes all sold products from the current cart
+// and then changes the global cart
+  arrayToDelete.forEach(element => {
+    for (let i = 0; i < currentCart.length; i++) {
+      if (currentCart[i].id === element.id) {
+        // console.log('da')
+        currentCart.splice(i,1);
+      }
+    }
+   this.props.updateCart(currentCart)
+  });
 
   }
   render() {
