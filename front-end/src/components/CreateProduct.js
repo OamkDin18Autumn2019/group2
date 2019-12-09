@@ -11,22 +11,66 @@ export default class CreateProduct extends Component {
       idUser: 1,
       name: "",
       price: 0,
-      tags: "",
+      tags: [],
       images: "",
       category: "",
       description: "",
-      amountOfProduct: 0
+      amountOfProduct: 0,
+      tagSearchInput: "",
+      tagSuggestions: []
     }
   }
+
+  componentDidUpdate() {
+    console.log("tagSuggestions: ", this.state.tagSuggestions);
+    console.log("tags: ", this.state.tags);
+  }
+
   handleChange = (event) => {
     // console.log(this.state)
     this.setState({ [event.target.name]: event.target.value });
   }
+
+  handleChangeTag = (event) => {
+    this.setState({ tagSearchInput: event.target.value })
+    fetch(`http://localhost:4000/v1/tag/name/${event.target.value}`, { crossDomain: true })
+      .then(res => res.json())
+      .then(results => {
+        console.log(results.rows);
+        this.setState({ tagSuggestions: results.rows })
+      })
+      .catch(err => err);
+  }
+
+  selectTag = (tag) => {
+    console.log("selected tag: ", tag);
+    if (!this.state.tags.find(x => x.id === tag.id)) {
+      this.setState({ tags: [...this.state.tags, tag], tagSuggestions: [], tagSearchInput: "" });
+    }
+  }
+
+  removeTag = (tag) => {
+    console.log("removed tag: ", tag);
+    let temporaryArray = this.state.tags;
+    let index = this.state.tags.findIndex(x=>x.id===tag.id);
+    temporaryArray.splice(index,1);
+    this.setState({tags: temporaryArray});
+  }
+
   createProduct = (event) => {
     event.preventDefault();
-    const product = {
-      ...this.state
+    let product = {
+      idUser: this.state.idUser,
+      name: this.state.name,
+      price: this.state.price,
+      tags: this.state.tags.map(x=>x.id),
+      images: this.state.images,
+      category: this.state.category,
+      description: this.state.description,
+      amountOfProduct: this.state.amountOfProduct
     }
+    product = JSON.stringify(product);
+    console.log("create product: ", product);
     axios.post(`http://localhost:4000/v1/product/`, {
       // headers: {
       //     'x-access-token': this.props.user.token
@@ -34,8 +78,8 @@ export default class CreateProduct extends Component {
       ...product
 
     })
-    .then(result => console.log(result))
-    .catch(err => console.log(err))
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -49,7 +93,7 @@ export default class CreateProduct extends Component {
             <form onSubmit={this.createProduct}>
               <div className={styles.row}>
                 <div className={styles.col_25}>
-                  <label for="productName">Name of the product</label>
+                  <label htmlFor="productName">Name of the product</label>
                 </div>
                 <div className={styles.col_75}>
                   <input required type="text" onChange={this.handleChange} id="name" name="name" placeholder="Name.." />
@@ -57,7 +101,7 @@ export default class CreateProduct extends Component {
               </div>
               <div className={styles.row}>
                 <div className={styles.col_25}>
-                  <label for="price">Price</label>
+                  <label htmlFor="price">Price</label>
                 </div>
                 <div className={styles.col_75}>
                   <input required type="number" id="price" onChange={this.handleChange} name="price" min="0" placeholder="0" />
@@ -65,16 +109,25 @@ export default class CreateProduct extends Component {
               </div>
               <div className={styles.row}>
                 <div className={styles.col_25}>
-                  <label for="tags">Tags (for better search)</label>
+                  <label htmlFor="tags">Tags:
+                  {
+                      this.state.tags.map((tag, index) => <span key={index}>
+                        {tag.nameOfTag}
+                        <button className={styles.removeTagButton} onClick={()=>this.removeTag(tag)}>x</button>
+                      </span>)
+                    }
+                  </label>
                 </div>
-
                 <div className={styles.col_75}>
-                  <input required type="text" onChange={this.handleChange} id="tags" name="tags" placeholder="Tags..." />
+                  <input type="text" onChange={this.handleChangeTag} id="tags" name="tags" placeholder="Find a tag..." value={this.state.tagSearchInput} />
+                </div>
+                <div className={this.state.tagSuggestions.length !== 0 ? styles.tagSuggestionsBox : ""}>
+                  {this.state.tagSuggestions.map((tag, index) => <button key={index} className={styles.tagSuggestions} onClick={() => this.selectTag(tag)}>{tag.nameOfTag}</button>)}
                 </div>
               </div>
               <div className={styles.row}>
                 <div className={styles.col_25}>
-                  <label for="amountOfProduct">Amount</label>
+                  <label htmlFor="amountOfProduct">Amount</label>
                 </div>
                 <div className={styles.col_75}>
                   <input required type="number" id="amount" onChange={this.handleChange} name="amountOfProduct" placeholder="1" />
@@ -82,7 +135,7 @@ export default class CreateProduct extends Component {
               </div>
               <div className={styles.row}>
                 <div className={styles.col_25}>
-                  <label for="images">Images </label>
+                  <label htmlFor="images">Images </label>
                 </div>
 
                 <div className={styles.col_75}>
@@ -91,7 +144,7 @@ export default class CreateProduct extends Component {
               </div>
               <div className={styles.col_75}>
                 <div className={styles.col_25}>
-                  <label for="category">Category</label>
+                  <label htmlFor="category">Category</label>
                 </div>
                 <div className={styles.col_75}>
                   <select id="category" onChange={this.handleChange} name="category">
@@ -104,7 +157,7 @@ export default class CreateProduct extends Component {
               <div className={styles.row}>
 
                 <div className={styles.col_25}>
-                  <label for="subject">Description</label>
+                  <label htmlFor="subject">Description</label>
                 </div>
                 <div className={styles.col_75}>
                   <textarea id="description" onChange={this.handleChange} name="description" placeholder="Write something about your selling .." styles={{ height: 200 }}></textarea>

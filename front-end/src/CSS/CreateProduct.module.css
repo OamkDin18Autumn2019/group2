@@ -6,6 +6,10 @@ input[type=text], select, textarea {
     resize: vertical;
 }
 
+/* input[type=text]:disabled:hover {
+    background-color: white;
+} */
+
 label {
     padding: 12px 12px 12px 0;
     display: inline-block;
@@ -68,6 +72,40 @@ input[type=submit]:hover {
     content: "";
     display: table;
     clear: both;
+}
+
+.tagSuggestionsBox {
+    max-width: 50%;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    resize: vertical;
+    background-color: white;
+}
+
+.tagSuggestions {
+    margin: 5px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.tagSuggestions:hover {
+    background-color: cornsilk;
+}
+
+span {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #ccc;
+}
+
+.removeTagButton {
+    border: none;
+    background-color: #ccc;
+    font-weight: bold;
 }
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
