@@ -15,7 +15,7 @@
   background-size: cover;
   background-position: center;
 }
-.da {
+.mainCon {
   border-radius: 1%;
   padding-top: 1%;
   box-shadow:0 1px 5px rgba(255, 255, 255, 0.418);
@@ -25,24 +25,7 @@
   /* box-shadow: ; */
   background-color: rgb(255, 255, 255);
 }
-.showCase {
-  grid-area: showCase;
-  height: 100vh;
-  background: url(https://images.pexels.com/photos/6105/flowers-shoes-white-modern.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
-  background-size: cover;
-  background-position: center;
-  padding: 3rem;
-  /* margin-bottom: 0; */
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  box-shadow: var(--shadow);
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 
 .titleBar {
   height: 20%;
@@ -58,4 +41,31 @@
 }
 .items {
   margin: 5%;
+}
+@media(max-width: 500px) {
+  .mainCon {
+    border-radius: 1%;
+    padding-top: 1%;
+    box-shadow:0 1px 5px rgba(255, 255, 255, 0.418);
+    height: 100%;
+    padding: 3%;
+    width: 100%;
+    /* box-shadow: ; */
+    background: url('');
+    background-color: rgb(255, 255, 255);
+  }
+  .background {
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    width: 100vw;
+    background-color: white;
+    /* background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: url(https://images.pexels.com/photos/6105/flowers-shoes-white-modern.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-size: cover;
+    background-position: center; */
+  }
 }

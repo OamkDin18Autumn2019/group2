@@ -62,106 +62,104 @@ export default class BasketPage extends Component {
 
   }
   render() {
-    return (
-
-      <>
-      <div className = {styles.background}>
-
-     
-        <div className={styles.main}>
-          <div class="container mb-4 mt-5">
-            <div className={styles.da}>
-              <div class="row">
-                <h2 class="text-justify  pl-4"> Products is the cart</h2>
-                <div class="col-12">
-                  <div class="table-responsive ">
-                    <table class="table table-striped table-bordered ">
-                      <thead>
-                        <tr>
-                          <th scope="col"> </th>
-                          <th scope="col">Product</th>
-                          <th scope="col">Available</th>
-                          <th scope="col" class="text-center">Quantity</th>
-                          <th scope="col" class="text-right">Price</th>
-                          <th> </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Product Name Dada</td>
-                          <td>In stock</td>
-                          <td><input class="form-control" type="text" value="1" /></td>
-                          <td class="text-right">124,90 €</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger">Delete </button> </td>
-                        </tr>
-                        <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Product Name Toto</td>
-                          <td>In stock</td>
-                          <td><input class="form-control" type="text" value="1" /></td>
-                          <td class="text-right">33,90 €</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger">Delete</button> </td>
-                        </tr>
-                        <tr>
-                          <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                          <td>Product Name Titi</td>
-                          <td>In stock</td>
-                          <td><input class="form-control" type="text" value="1" /></td>
-                          <td class="text-right">70,00 €</td>
-                          <td class="text-right"><button class="btn btn-sm btn-danger">Delete </button> </td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>Sub-Total</td>
-                          <td class="text-right">255,90 €</td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>Shipping</td>
-                          <td class="text-right">6,90 €</td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td><strong>Total</strong></td>
-                          <td class="text-right"><strong>346,90 €</strong></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div class="col mb-2">
+    if(this.props.cart.length !== 0){
+      return (
+        <>
+          <div className={styles.background}>
+            <div className={styles.main}>
+              <div class="container mb-4 mt-5">
+                <div className={styles.mainCon}>
                   <div class="row">
-                    <div class="col-sm-12  col-md-6">
-                      <button class="btn btn-lg btn-block btn-info">Continue Shopping</button>
+                    <h2 class="text-justify  pl-4"> Products is the cart</h2>
+                    <div class="col-12">
+                      <div class="table table-responsive ">
+                        <table class="table table-striped table-bordered ">
+                          <thead>
+                            <tr>
+                              <th scope="col">Image</th>
+                              <th scope="col">Product</th>
+                              <th scope="col">Available</th>
+                              <th scope="col" class="text-center">Quantity</th>
+                              <th scope="col" class="text-right">Price</th>
+                              <th> </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {this.props.cart.map((entry, i) => (
+                              <BasketProductEntry key={i} data={entry} />
+                            ))}
+                            <tr> 
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td>Sub-Total</td>
+                              <td class="text-right">{this.props.cart.reduce(function (sum, current) {
+                                return sum + current.price * current.amountInTheCart;
+                              }, 0)}€</td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td>Shipping</td>
+                              <td class="text-right">0 €</td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><strong>Total</strong></td>
+                              <td class="text-right"><strong>{this.props.cart.reduce(function (sum, current) {
+                                return sum + current.price * current.amountInTheCart;
+                              }, 0)} €</strong></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                    <div class="col-sm-12 col-md-6 text-right">
-                      <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                    <div class="col mb-2">
+                      <div class="row">
+                        <div class="col-sm-12  col-md-6">
+                          <button class="btn btn-lg btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
+                        </div>
+                        <div class="col-sm-12 col-md-6 text-right">
+                          <button class="btn btn-lg mt-1 btn-block btn-success text-uppercase" onClick={this.buyProducts}>Buy</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* <div className={styles.titleBar}>
-            <button onClick={this.buyProducts} className={styles.paymentButton}>Buy</button>
-            <button onClick={() => this.props.history.goBack()}>Go back</button>
+        </>
+      );
+    } else {
+  return (
+    <>
+    <div className={styles.background}>
+      <div className={styles.main}>
+        <div class="container mb-4 mt-5">
+          <div className={styles.mainCon}>
+            <div class="row">
+              <h2 class="text-justify mx-auto  pl-4"> You have nothing in your cart</h2>
+              <div class="col-12">
+                <img alt="cat" class="img-fluid mx-auto d-block"  src="https://cdn.telegram-site.com/images/stickers/9/6/0/11.jpg"></img>
+              <button class="btn mt-2 btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
+              </div>
+              <div class="col mb-2">
+              </div>
+            </div>
           </div>
-          <div className={styles.items}>{this.props.cart.map((entry, i) => (
-            <BasketProductEntry key={i} data={entry} />
-          ))}</div> */}
         </div>
-        </div>
-      </>
-    );
+      </div>
+    </div>
+  </>
+  )
+    }
+    
   }
 }

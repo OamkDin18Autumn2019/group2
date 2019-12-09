@@ -2,7 +2,10 @@
   width: 100%;
   height: 100%;
 }
-
+.productImageInBasket{
+  width: 200px;
+  /* display: hide; */
+}
 .name {
   font-weight: bold;
 }
