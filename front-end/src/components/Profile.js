@@ -3,6 +3,9 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import OnSellProducts from './OnSellProducts';
 import Analytics from './Analytics';
 import History from './History';
+import StarRatings from 'react-star-ratings';
+import Loader from 'react-loader-spinner';
+import LoaderStyle from '../CSS/Loader.module.css';
 import axios from "axios";
 import styles from "../CSS/Profile.module.css"; 
 import ButtonStyles from '../CSS/Buttons.module.css';
@@ -20,6 +23,7 @@ export default class Profile extends Component {
     this.state = {
       currentSaleItems: [],
       historyItems: [],
+      userInfo: [],
       showActiveTab: OnSellProducts
     };
   }
@@ -53,6 +57,22 @@ export default class Profile extends Component {
         console.log(err);
         return null;
       })
+      axios.get(`http://localhost:4000/v1/user/`, {
+        headers: {
+          'x-access-token': this.props.user.token
+        }
+      })
+        .then(res => {
+          console.log(res);
+          this.setState({userInfo: res.data.rows});
+          console.log(this.state.userInfo);
+          console.log(this.state.userInfo[0]);
+          console.log(this.state.userInfo[0].ratingUser);
+        })
+        .catch(err => {
+          console.log(err);
+          return null;
+        })
   }
   
   TabLoader = () => {
@@ -104,17 +124,22 @@ export default class Profile extends Component {
   }
 
   render() {
-    // console.log(this.components.map());
-    const url = this.props.match.url;
-    const path = this.props.match.path;
-    // console.log(this.state.activeTab);
-    // console.log("url: " + url);
-    // console.log(path);
 
     return (
       <Router>
         <>
-        <div className={styles.ProfilePage}>
+        {
+        !this.state.currentSellItems ? (
+          <Loader 
+            type="Triangle"
+            color="#000"
+            height={150}
+            width={150}
+            timeout={99000}
+            className={LoaderStyle.Loader}
+          />
+        ) : (
+          <div className={styles.ProfilePage}>
           <div className={styles.ProfileInfo}>
             <div className={styles.ProfileInfoNames}>
               <h5 className={styles.Username}> MotherSeller {this.props.user.username} </h5>
@@ -123,8 +148,16 @@ export default class Profile extends Component {
             <div className={styles.BasicStatistics}>
               <div className={styles.BasicStatisticsElement}>
                 <label> Your rating </label>
-                {/* <h6> {this.state.user.rating} </h6> */}
-                <h6> Here lies the user rating </h6>
+                {console.log(this.state.userInfo)}
+                <StarRatings
+                        starDimension='35px'
+                        // rating={this.state.userInfo[0].ratingUser}
+                        // starHoverColor='yellow'
+                        starRatedColor='yellow'
+                        starEmptyColor='white'
+                        numberOfStars={5}
+                        starSpacing='1px'
+                />
               </div>
               <div className={styles.BasicStatisticsElement}>
                 <label> Products Sold </label>
@@ -150,6 +183,9 @@ export default class Profile extends Component {
           <div className={styles.ProfileData}>
               {this.TabLoader(this.state.showActiveTab)}
           </div>
+        </div>
+        )
+        }
           
         
         {/* <div style={{ overflowX: "auto" }}>
@@ -231,7 +267,6 @@ export default class Profile extends Component {
             {/* </div>
           </div>
         </div> */}
-        </div>
         </>
       </Router>
       

@@ -47,9 +47,9 @@
     display: inline-block;
     font-weight: bold;
     max-width: 150px;
-    /* color: var(--primary); */
-    color: white;
-    mix-blend-mode: difference;
+    color: var(--primary);
+    /* color: var(--dark); */
+    /* mix-blend-mode: difference; */
 }
 
 .Link::after {

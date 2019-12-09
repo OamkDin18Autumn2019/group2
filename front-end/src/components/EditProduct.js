@@ -3,8 +3,8 @@ import axios from 'axios';
 // import ImageUploader from 'react-images-upload';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
-import styles from '../CSS/CreateProduct.module.css';
 import LoaderStyle from '../CSS/Loader.module.css';
+import styles from '../CSS/CreateProduct.module.css';
 // import classNames from 'classnames';
 // import { FaSlidersH } from 'react-icons/fa';
 
