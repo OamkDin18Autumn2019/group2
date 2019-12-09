@@ -45,10 +45,17 @@ export default class ProductPage extends Component {
         }
         this.setState({ amount: temporary_amount })
     }
+    checkCart = () => {
+        this.props.cart.forEach(item => {
+            if (this.state.data.id === item.id) {
+                return true
+            }
+        });
+    }
     addToCart = (event) => {
       event.preventDefault(); 
     //   this.props.addToCartGlobal
-      this.props.addToCartGlobal({...this.state.data, amountInTheCart: this.state.amount})
+      this.props.addToCartGlobal({...this.state.data}, this.state.amount)
         // console.log(this.props );
 
     }
@@ -76,6 +83,7 @@ export default class ProductPage extends Component {
                                 <button onClick={this.increaseAmount}>+</button>
                             </div>
                             <div>
+                                { this.checkCart}
                                 <button className="mr-2">Buy now</button>
                                 <button className="mr-2" onClick={this.addToCart}>Put into cart</button>
                                 <button onClick={ () => this.props.history.goBack() }>Go back</button>

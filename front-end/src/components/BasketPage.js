@@ -11,39 +11,54 @@ export default class BasketPage extends Component {
     }
   }
  
-  buyProducts = () => {
-    let da = [];
-    // let length = this.props.cart.length
-   this.props.cart.forEach((element, i) => {
-    axios.post(`http://localhost:4000/v1/history/`,
-    element,
+  buyProducts = async () => {
+    let arrayToDelete = []
+    let currentCart = this.props.cart
+// This function goes through all the products in the cart,
+// changes the product in the db 
+// and creates a history row in the db
+  for (let i = 0; i < this.props.cart.length; i++) {
+   await axios.put(`http://localhost:4000/v1/product/${this.props.cart[i].id}`,
+    {
+      amountOfProduct: this.props.cart[i].amountOfProduct - this.props.cart[i].amountInTheCart,
+      amountOfSoldProduct: this.props.cart[i].amountOfSoldProduct + this.props.cart[i].amountInTheCart,
+    },
     {
       headers: {
         Authorization: this.props.user.token
       }
     })
-    .then(result => {
-      axios.put(`http://localhost:4000/v1/product/${element.id}`,
-        {
-          amountOfProduct: element.amountOfProduct - element.amountInTheCart,
-          amountOfSoldProduct: element.amountOfSoldProduct + element.amountInTheCart,
-        },
-        {
-          headers: {
-            Authorization: this.props.user.token
-          }
-        })
-        .then(res => {
-          this.props.deleteFromCartById(i);
-          da.push(i);
-          console.log(da, this.props.cart)
-        })
+    .then( async (res1) => {
+      // console.log(res1)
+      await axios.post(`http://localhost:4000/v1/user/da/createHistory`,
+      {
+        ...this.props.cart[i]
+      },
+      {
+        headers: {
+          Authorization: this.props.user.token
+        }
+      })
+      .then(async(res) => {
+        // console.log(res)
+        arrayToDelete.push(this.props.cart[i]);
+      })
+      .catch( err => console.log(err))
     })
-    .catch(err => console.log(err))
-   });
-   da.forEach(i => {
-    this.props.deleteFromCartById(i);
-   });
+    .catch( err => console.log(err))
+  }
+// This function deletes all sold products from the current cart
+// and then changes the global cart
+  arrayToDelete.forEach(element => {
+    for (let i = 0; i < currentCart.length; i++) {
+      if (currentCart[i].id === element.id) {
+        // console.log('da')
+        currentCart.splice(i,1);
+      }
+    }
+   this.props.updateCart(currentCart)
+  });
+
   }
   render() {
     return (

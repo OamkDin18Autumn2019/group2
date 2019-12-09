@@ -49,10 +49,7 @@ export default class Header extends React.Component {
     // scroll = window.onscroll = function () {
     //     var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
     //     if (scrolled !== 0) {
-
-    //         // If the scrollbar is scrolled it makes the background transparent
-    //         // document.querySelector('#navbar').styles.mainNav.opacity = '0.5';
-    //         // console.log(scrolled)
+    //         console.log(this.state)
     //     } else {
     //         // Если нет, то делаем его полностью видимым
     //         // else it makes the background visible
@@ -65,11 +62,6 @@ export default class Header extends React.Component {
         this.setState({ DropDownMenu: this.state.DropDownMenu === styles.DropDownMenuCollapsed ? styles.DropDownMenuExpanded : styles.DropDownMenuCollapsed });
         this.setState({ ArrowState: this.state.ArrowState === ArrowUp ? ArrowDown : ArrowUp });
         this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
-
-
-        console.log(this.state.NavbarClass);
-        // console.log(this.state.DropDownMenuButton);
-        // console.log(this.state.ArrowState);
     }
 
     searchInputChangeHandler = (event) => {
@@ -86,12 +78,10 @@ export default class Header extends React.Component {
 
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
     listenScrollEvent = e => {
-        if (window.scrollY > 50) {
-            console.log("success");
-            this.setState({backgroundColor: 'black'})
+        if (window.scrollY > window.innerHeight - window.innerHeight / 4) {
+             this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNavExpandedScrolled ? styles.mainNavExpanded : styles.mainNavScrolled });
         } else {
-            console.log("no");          
-            this.setState({backgroundColor: 'rgba(0, 0, 0, 0)'})
+            this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
         }
     }
 
@@ -115,8 +105,8 @@ export default class Header extends React.Component {
 
     render() {
 
-        console.log(this.props.style)
-        console.log(this.props.user);
+        // console.log(this.props.style)
+        // console.log(this.props.user);
 
         // The line of code below is the commented logo picture
 

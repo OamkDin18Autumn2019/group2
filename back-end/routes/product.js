@@ -32,24 +32,33 @@ router.get("/:id?", function(req, res, next) {
 
 // It gives you an error in console when you send an array of objects
 // But it works, so you can use it
-router.post("/", async function(req, res, next) {
-  try {
-    if (Array.isArray(req.body)) {
-      let results = [];
-
-      for (let i = 0; i < req.body.length; i++) {
-        const d = req.body[i];
-        const p = await product.add(d);
-        results.add(p);
+router.post("/", function(req, res, next) {
+  if (Array.isArray(req.body)) {
+    console.log(req.body);
+    Promise.all([
+      req.body.forEach(element => {
+        console.log(element);
+        product.add(element, {
+          then: rows => {
+            console.log(rows);
+            res.status(202).json({ code: 1, rows });
+          },
+          catch: err => {
+            console.log(err);
+            res.status(500).json({ code: 0, err });
+          }
+        });
+      })
+    ]);
+  } else {
+    product.add(req.body, {
+      then: rows => {
+        res.status(202).json({ code: 1, rows });
+      },
+      catch: err => {
+        res.status(500).json({ code: 0, err });
       }
-    } else {
-      const p = await product.add(d);
-      results.add(p);
-    }
-
-    res.status(200).json({ results });
-  } catch (err) {
-    res.status(400).json({ err });
+    });
   }
 });
 
@@ -67,11 +76,11 @@ router.delete("/:id", isAuth, function(req, res, next) {
 router.put("/:id", isAuth, function(req, res, next) {
   product.update(req.params.id, req.body, {
     then: rows => {
-      console.log(req);
+      // console.log(req);
       res.status(202).json({ code: 1, rows });
     },
     catch: err => {
-      console.log(err);
+      // console.log(err);
       res.status(500).json({ code: 0, err });
     }
   });

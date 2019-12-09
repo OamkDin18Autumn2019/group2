@@ -60,12 +60,9 @@ export default class Product extends React.Component {
     render() {
 
         return (
-            <>{
-                // console.log(this.props.user)
-
-            }
+            <>
                 <div className={styles.img_block}>
-                    <a className={styles.content_block}><img alt="product" src={this.props.images} />
+                    <div className={styles.content_block}><img alt="product" src={this.props.images} />
                         <div className={styles.over_block}>
                         </div>
                         {/* {this.props.ratingProduct} */}
@@ -90,7 +87,7 @@ export default class Product extends React.Component {
                                 </div>
                             </div>
                         </span>
-                    </a>
+                    </div>
                 </div>
             </>
         )

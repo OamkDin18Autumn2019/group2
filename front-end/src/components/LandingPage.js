@@ -1,7 +1,8 @@
 import React from 'react';
 // import Header from './Header';
 import styles from '../CSS/LandingPage.module.css';
-import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
+import { FaChartPie, FaGlobe, FaCog, FaUsers, FaArrowDown } from 'react-icons/fa';
+import { TiArrowDownOutline } from 'react-icons/ti';
 import { IconContext } from "react-icons";
 import Product from './Product';
 import Footer from './Footer';
@@ -38,8 +39,6 @@ export default class LandingPage extends React.Component {
                 return null;
             })
     }
-    // console.log(props);
-    // console.log(window.scrollY);
     render() {
 
         return (
@@ -54,6 +53,8 @@ export default class LandingPage extends React.Component {
                                 Curabitur nec gravida massa.
                         Aenean ut libero. </p>
                             <a href="#" className={styles.btn}> Get started </a>
+                            <div className={styles.arrowDown}>  Read more <br></br><IconContext.Provider value={{ size: "2em", opacity:"20% " }}><TiArrowDownOutline/></IconContext.Provider> </div>
+
                         </div>
                     </section>
                     {/* <h2> Our products </h2> */}
@@ -69,7 +70,7 @@ export default class LandingPage extends React.Component {
                         <div className={styles.bestSellersName}> Best sellers </div>
                         <section className={styles.products}>
 
-                            <Product images="https://source.unsplash.com/random/200x201"/>
+                            <Product images="https://source.unsplash.com/random/200x211"/>
                             <Product images="https://source.unsplash.com/random/200x202"/>
                             <Product images="https://source.unsplash.com/random/200x203"/>
                             <Product images="https://source.unsplash.com/random/200x204"/>
@@ -84,24 +85,23 @@ export default class LandingPage extends React.Component {
                 <div className={ styles.bestSellersName}> New arrivals </div>
                 <section className={styles.products}>
                   
-                    <Product >https://source.unsplash.com/random/200x201</Product> 
-                    <Product >https://source.unsplash.com/random/201x202</Product> 
-                    <Product >https://source.unsplash.com/random/202x203</Product> 
-                    <Product >https://source.unsplash.com/random/203x204</Product> 
-                    <Product >https://source.unsplash.com/random/204x205</Product> 
-                    <Product >https://source.unsplash.com/random/205x206</Product> 
+                <Product images="https://source.unsplash.com/random/200x201"/>
+                            <Product images="https://source.unsplash.com/random/211x242"/>
+                            <Product images="https://source.unsplash.com/random/220x203"/>
+                            <Product images="https://source.unsplash.com/random/230x204"/>
+                            <Product images="https://source.unsplash.com/random/240x205"/>
+                            <Product images="https://source.unsplash.com/random/250x206"/>
                     
 
                 </section>
                 <div className={ styles.bestSellersName}> Discounts </div>
                 <section className={styles.products}>
-                  
-                    <Product >https://source.unsplash.com/random/200x201</Product> 
-                    <Product >https://source.unsplash.com/random/201x202</Product> 
-                    <Product >https://source.unsplash.com/random/202x203</Product> 
-                    <Product >https://source.unsplash.com/random/203x204</Product> 
-                    <Product >https://source.unsplash.com/random/204x205</Product> 
-                    <Product >https://source.unsplash.com/random/205x206</Product> 
+                <Product images="https://source.unsplash.com/random/222x201"/>
+                            <Product images="https://source.unsplash.com/random/213x202"/>
+                            <Product images="https://source.unsplash.com/random/202x203"/>
+                            <Product images="https://source.unsplash.com/random/203x204"/>
+                            <Product images="https://source.unsplash.com/random/204x205"/>
+                            <Product images="https://source.unsplash.com/random/205x206"/>
 
                 </section>
                 
@@ -165,7 +165,7 @@ export default class LandingPage extends React.Component {
 
                         <section className={styles.info}>
 
-                            <img src="https://images.pexels.com/photos/2317408/pexels-photo-2317408.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
+                            <img src="https://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
                             <div>
                                 <h2> Start now</h2>
                                 <p> Lorem, ipsum dolor sit amet consectetur
