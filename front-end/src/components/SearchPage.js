@@ -15,16 +15,16 @@ function VerticalProductDisplay(props) {
                 <div className="pl-5 pt-3">
                     <b className="mb-2">{props.name}</b>
                     <div className="my-2">
-                    <StarRatings
-                        rating={props.ratingProduct}
-                        starDimension="25px"
-                        starRatedColor="yellow"
-                        starEmptyColor="lightgray"
-                    />
+                        <StarRatings
+                            rating={props.ratingProduct}
+                            starDimension="25px"
+                            starRatedColor="yellow"
+                            starEmptyColor="lightgray"
+                        />
                     </div>
                     <div className="mb-2">${props.price}</div>
                     <div className="mb-2">Description: {props.description}</div>
-                    
+
                 </div>
             </div>
         </div>
@@ -52,8 +52,7 @@ export default class SearchPage extends React.Component {
         super(props);
         this.state = {
             data: [],
-            lastQuery: null,
-            sortRatings: "highest"
+            lastQuery: null
         }
     }
 
@@ -92,20 +91,20 @@ export default class SearchPage extends React.Component {
     }
 
 
-    highestPrice = () => {
-        this.setState({data: this.state.data.sort((a,b) => {return b.price-a.price})});
+    highestPrice = (event) => {
+            this.setState({ data: this.state.data.sort((a, b) => { return b.price - a.price }) });
     }
 
-    lowestPrice = () => {
-        this.setState({data: this.state.data.sort((a,b) => {return a.price-b.price})});
+    lowestPrice = (event) => {
+            this.setState({data: this.state.data.sort((a,b) => {return a.price-b.price})});
     }
 
-    highestRatings = () => {
-        this.setState({data: this.state.data.sort((a,b) => {return b.ratingProduct-a.ratingProduct})});
+    highestRatings = (event) => {
+            this.setState({ data: this.state.data.sort((a, b) => { return b.ratingProduct - a.ratingProduct }) });
     }
 
-    lowestRatings = () => {
-        this.setState({data: this.state.data.sort((a,b) => {return a.ratingProduct-b.ratingProduct})})
+    lowestRatings = (event) => {
+            this.setState({ data: this.state.data.sort((a, b) => { return a.ratingProduct - b.ratingProduct }) });
     }
 
     render() {
@@ -117,17 +116,17 @@ export default class SearchPage extends React.Component {
                         <div className={`col-2 ${styles.Filters}`}>
                             <form className="mx-auto">
                                 <div className="form-group container border border-secondary border-box rounded">
-                                    <b><a href="#" data-toggle="collapse" data-target="#price">&#9660; Price</a></b>
+                                    <b><a href="#" data-toggle="collapse" data-target="#price">&#9660; Sort by price</a></b>
                                     <div id="price" className="collapse show">
-                                    <div><input type="radio" className="my-2 ml-4" name="price" onClick={this.highestPrice} ></input>Highest price</div>
-                                    <div><input type="radio" className="my-2 ml-4" name="price" onClick={this.lowestPrice} ></input>Lowest price</div>
+                                        <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.highestPrice} ></input>Highest price</div>
+                                        <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.lowestPrice} ></input>Lowest price</div>
                                     </div>
                                 </div>
                                 <div className="form-group container my-3 border border-secondary border-box rounded">
-                                    <b><a href="#" data-toggle="collapse" data-target="#ratings">&#9660; Ratings</a></b>
+                                    <b><a href="#" data-toggle="collapse" data-target="#ratings">&#9660; Sort by ratings</a></b>
                                     <div id="ratings" className="collapse show">
-                                    <div><input type="radio" className="my-2 ml-4" name="ratings" onClick={this.highestRatings} ></input>Highest ratings</div>
-                                    <div><input type="radio" className="my-2 ml-4" name="ratings" onClick={this.lowestRatings} ></input>Lowest ratings</div>
+                                        <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.highestRatings} ></input>Highest ratings</div>
+                                        <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.lowestRatings} ></input>Lowest ratings</div>
                                     </div>
                                 </div>
                             </form>
