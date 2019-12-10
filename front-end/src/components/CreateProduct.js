@@ -18,8 +18,19 @@ export default class CreateProduct extends Component {
       description: "",
       amountOfProduct: 0,
       tagSearchInput: "",
-      tagSuggestions: []
+      tagSuggestions: [],
+      categoryOptions: []
     }
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:4000/v1/category`, { crossDomain: true })
+      .then(res => res.json())
+      .then(results => {
+        console.log(results.rows);
+        this.setState({ categoryOptions: results.rows })
+      })
+      .catch(err => err);
   }
 
   handleChange = (event) => {
@@ -155,9 +166,10 @@ export default class CreateProduct extends Component {
                 </div>
                 <div className={styles.col_75}>
                   <select id="category" onChange={this.handleChange} name="category">
-                    <option value="bikes">Bikes</option>
+                    {this.state.categoryOptions.map((x,index) => <option key={index} value={x.id}>{x.nameOfCategory}</option>)}
+                    {/* <option value="bikes">Bikes</option>
                     <option value="clothes">Clothes</option>
-                    <option value="forHome">For home</option>
+                    <option value="forHome">For home</option> */}
                   </select>
                 </div>
               </div>
