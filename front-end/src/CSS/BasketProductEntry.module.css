@@ -10,13 +10,7 @@
   font-weight: bold;
 }
 
-.description {
-}
 .priceAndQuantity {
   display: flex;
   justify-content: space-between;
-}
-.price {
-}
-.quantity {
 }

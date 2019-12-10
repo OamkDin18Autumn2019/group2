@@ -68,8 +68,6 @@ export default class CreateProduct extends Component {
   render() {
     return (
       <>
-
-        {/* <Header user={this.props.user} /> */}
         <div className={styles.background}>
           <div className={styles.container}>
             <h2> Profile</h2>

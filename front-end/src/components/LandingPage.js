@@ -62,7 +62,7 @@ export default class LandingPage extends React.Component {
                         <div className={styles.bestSellersName}> New arrivals  </div>
                         <section className={styles.products}>
                                 {this.state.bestSellers.map((item, i) => (
-                                    <Product key={i}  {...item} user = { this.props.user} />
+                                    <Product key={i}  {...item} user = {this.props.user} />
                                   ))}                     
                         </section>
                         {/* </div>
