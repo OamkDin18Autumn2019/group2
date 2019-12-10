@@ -1,11 +1,13 @@
+// Data for product table
+// The following array is to be POST to "localhost:4000/v1/product/" in JSON format
 [
     {
         "idUser": 1,
         "name": "Adidas boots",
         "price": 50,
         "description": "Good Adidas boots. In normal condition",
-        "tags": "Boots, Sportswear, Adidas",
-        "category": "shoes",
+        "tags": "1, 2, 3, 4",
+        "category": "Shoes",
         "amountOfProduct": 1,
         "amountOfSoldProduct": 0,
         "images":"https://www.loofes-clothing.com/images/adidas-performance-juniors-predator-19-3-fg-football-boots-blue-p25867-101474_image.jpg"
@@ -15,8 +17,8 @@
         "name": "Bike",
         "price": 30,
         "description": "Bike in good condition. 26 wheel size. Brakes work well",
-        "tags": "Bikes, hobbies, wheels",
-        "category": "bikes",
+        "tags": "5, 6, 7, 4",
+        "category": "Vehicles",
         "amountOfProduct": 1,
         "amountOfSoldProduct": 0,
         "images":"https://storage.needpix.com/rsynced_images/bike-2570413_1280.jpg"
@@ -26,8 +28,8 @@
         "name": "Adidas Gloves",
         "price": 10,
         "description": "I'm moving to Egypt, so I don't need them anymore",
-        "tags": "Gloves, hands, adidas",
-        "category": "For home",
+        "tags": "2, 3, 4, 8",
+        "category": "Clothes",
         "amountOfProduct": 2,
         "amountOfSoldProduct": 0,
         "images":"https://www.misterrunning.com/images/2018-media/Adidas_Gloves_CY6007_Black_A.jpg"
@@ -37,8 +39,8 @@
         "name": "Laptop",
         "price": 699,
         "description": "HP, intel core i5, 8th Gen 200, NVIDIA GeForce GTX 1050. In usage half a year",
-        "tags": "Laptops, gaming, Nursultan",
-        "category": "Computers",
+        "tags": "9, 10, 11",
+        "category": "Electronics",
         "amountOfProduct": 1,
         "amountOfSoldProduct": 0,
         "images":"https://cdn.uc.assets.prezly.com/b739d65b-5711-4129-b49f-f0ccef381145/-/preview/2048x2048/-/quality/best/-/format/auto/"
@@ -48,10 +50,37 @@
         "name": "Socks",
         "price": 3,
         "description": "Children socks, cotton",
-        "tags": "Socks, children, clothes",
+        "tags": "12, 13",
         "category": "Clothes",
         "amountOfProduct": 12,
         "amountOfSoldProduct": 0,
         "images":"https://i.pinimg.com/originals/79/10/e4/7910e40a546dffe2162593a325b58599.jpg"
     }   
+]
+
+// Data for categories table
+// The following data is to be inserted manually
+[
+    {"id": 1, "nameOfCategory": "Shoes"},
+    {"id": 2, "nameOfCategory": "Vehicles"},
+    {"id": 3, "nameOfCategory": "Clothes"},
+    {"id": 4, "nameOfCategory": "Electronics"}
+]
+
+// Data for tags table
+// The following data is to be inserted manually
+[
+    {"id": 1, "nameOfTag": "Boots"},
+    {"id": 2, "nameOfTag": "Sportswear"},
+    {"id": 3, "nameOfTag": "Adidas"},
+    {"id": 4, "nameOfTag": "Sports"},
+    {"id": 5, "nameOfTag": "Bikes"},
+    {"id": 6, "nameOfTag": "Hobbies"},
+    {"id": 7, "nameOfTag": "Wheels"},
+    {"id": 8, "nameOfTag": "Gloves"},
+    {"id": 9, "nameOfTag": "Laptops"},
+    {"id": 10, "nameOfTag": "Gaming"},
+    {"id": 11, "nameOfTag": "Nursultan"},
+    {"id": 12, "nameOfTag": "Socks"},
+    {"id": 13, "nameOfTag": "Children"}
 ]
