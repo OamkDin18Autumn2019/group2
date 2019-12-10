@@ -110,7 +110,7 @@ export default class SearchPage extends React.Component {
     render() {
         return (
             <>
-                <Header user={this.props.user} {... this.props}></Header>
+                {/* <Header user={this.props.user} {... this.props}></Header> */}
                 <div className={styles.Container}>
                     <div className="row">
                         <div className={`col-2 ${styles.Filters}`}>

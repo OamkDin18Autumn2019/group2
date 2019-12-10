@@ -78,7 +78,8 @@ var product = {
     return knex
       .from("products")
       .select()
-      .where("id", id)
+      .innerJoin('users','products.idUser','users.id')
+      .where("products.id", id)
       .then(data => {
         callback.then(data);
       })
