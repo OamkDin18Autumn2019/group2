@@ -22,11 +22,6 @@ export default class CreateProduct extends Component {
     }
   }
 
-  componentDidUpdate() {
-    console.log("tagSuggestions: ", this.state.tagSuggestions);
-    console.log("tags: ", this.state.tags);
-  }
-
   handleChange = (event) => {
     // console.log(this.state)
     this.setState({ [event.target.name]: event.target.value });
@@ -53,9 +48,9 @@ export default class CreateProduct extends Component {
   removeTag = (tag) => {
     console.log("removed tag: ", tag);
     let temporaryArray = this.state.tags;
-    let index = this.state.tags.findIndex(x=>x.id===tag.id);
-    temporaryArray.splice(index,1);
-    this.setState({tags: temporaryArray});
+    let index = this.state.tags.findIndex(x => x.id === tag.id);
+    temporaryArray.splice(index, 1);
+    this.setState({ tags: temporaryArray });
   }
 
   createProduct = (event) => {
@@ -64,7 +59,7 @@ export default class CreateProduct extends Component {
       idUser: this.state.idUser,
       name: this.state.name,
       price: this.state.price,
-      tags: this.state.tags.map(x=>x.id),
+      tags: this.state.tags.map(x => x.id).toString(),
       images: this.state.images,
       category: this.state.category,
       description: this.state.description,
@@ -72,15 +67,26 @@ export default class CreateProduct extends Component {
     }
     product = JSON.stringify(product);
     console.log("create product: ", product);
-    axios.post(`http://localhost:4000/v1/product/`, {
+    fetch(`http://localhost:4000/v1/product/`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: product
+    })
+      .then(res => res.json())
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
+    /* axios.post(`http://localhost:4000/v1/product/`, {
       // headers: {
       //     'x-access-token': this.props.user.token
       // },
-      ...product
+      product
 
     })
       .then(result => console.log(result))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err)) */
   }
 
   render() {
@@ -114,7 +120,7 @@ export default class CreateProduct extends Component {
                   {
                       this.state.tags.map((tag, index) => <span key={index}>
                         {tag.nameOfTag}
-                        <button className={styles.removeTagButton} onClick={()=>this.removeTag(tag)}>x</button>
+                        <button className={styles.removeTagButton} onClick={() => this.removeTag(tag)}>x</button>
                       </span>)
                     }
                   </label>
