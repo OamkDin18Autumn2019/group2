@@ -48,7 +48,7 @@ export default class App extends React.Component {
       ...product,
       amountInTheCart: amountOfProduct
     }
-    console.log(productToCart)
+    console.log(currentCart, this.state.cart)
 
     if( this.state.cart.length == 0) {
       let newCart = [ productToCart ];
@@ -58,7 +58,7 @@ export default class App extends React.Component {
       newCart = [];
     }
     for (let i = 0; i < currentCart.length; i++) {
-      if (product.id === currentCart[i].id) {
+      if (product.name === currentCart[i].name) {
         console.log("found")
         currentCart[i] = {
           ...productToCart

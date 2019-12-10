@@ -70,29 +70,41 @@ export default class ProductPage extends Component {
             return (
                 <div className={styles.background} >
                     <div className={styles.main}>
-                        <div className="container">
+                        <div className="container py-5">
                             <div className={styles.mainCon}>
                                 <div className="d-flex align-content-start flex-wrap p-4">
-                                   <div class="col-md-4 col-s-12 col-lg-5"><img class="img img-fluid" className={styles.productImg} alt="product image" src={this.state.data.images}></img></div> 
-                                    <div class="col-md-8 col-s-12 col-lg-7"><div class=""> <h3>{this.state.data.name}</h3></div>
-                                       <div class="row"> {this.state.data.description}</div>
-                                       <div class="row">Price: {this.state.data.price}€ </div>
-                                       <div class="row"><StarRatings
-                                    starDimension='30px'
-                                    rating={this.state.data.ratingProduct}
-                                    starHoverColor='yellow'
-                                    starRatedColor='yellow'
-                                    // starEmptyColor='red'
-                                    // changeRating={this.changeRating}
-                                    numberOfStars={5}
-                                    starSpacing='1px'
-                                /> </div>
-                                {(this.props.user.username !== "") ? 
-         <Link to={`/profile/${this.state.data.idUser}`}><div class="row">by {this.state.data.username}</div>   </Link>
-         : 
-         <Link to={`/login`}><div class="row">by {this.state.data.username}</div> </Link>
-                            }
-                                {console.log(this.state.data)}
+                                    <div class="col-md-4 col-s-12 col-lg-5"><img class="img img-fluid" className={styles.productImg} alt="product image" src={this.state.data.images}></img></div>
+                                    <div class="col-md-8 col-s-12 col-lg-7 pl-4"><div class=""> <h1 class="">{this.state.data.name}</h1></div>
+                                        <div class="row"> {this.state.data.description}</div>
+                                        <div class="row py-2"><div class='my-auto'>Price:</div> <div class=""className={ styles.price }>€{this.state.data.price}</div> </div>
+                                        <div class="row"><StarRatings
+                                            starDimension='30px'
+                                            rating={this.state.data.ratingProduct}
+                                            starHoverColor='yellow'
+                                            starRatedColor='yellow'
+                                            // starEmptyColor='red'
+                                            // changeRating={this.changeRating}
+                                            numberOfStars={5}
+                                            starSpacing='1px'
+                                        /> </div>
+                                        {(this.props.user.username !== "") ?
+                                            <Link to={`/profile/${this.state.data.idUser}`}><div class="row">by {this.state.data.username}</div>   </Link>
+                                            :
+                                            <Link to={`/login`}><div class="row">by {this.state.data.username}</div> </Link>
+                                        }
+                                        <div className="py-4">
+                                            <span className="pr-2">Amount:</span>
+                                            <button class="btn btn-danger btn-sm" onClick={this.decreaseAmount}>-</button>
+                                            <span className="p-2">{this.state.amount}</span>
+                                            <button class="btn btn-info btn-sm"onClick={this.increaseAmount}>+</button>
+                                        </div>
+                                        <div>
+                                            {this.checkCart}
+                                            {/* <button className="btn btn-primary mr-2">Buy now</button> */}
+                                            <button className="mr-2 btn btn-success btn-lg" onClick={this.addToCart}>Put into cart</button>
+                                            <button class ="btn btn-primary btn-lg" onClick={() => this.props.history.goBack()}>Go back</button>
+
+                                        </div>
                                     </div>
                                 </div>
                                 {/* <div className="row">
