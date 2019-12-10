@@ -3,8 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../CSS/LandingPage.module.css';
 import axios from 'axios';
-
-
 import StarRatings from 'react-star-ratings';
 
 export default class Product extends React.Component {
@@ -14,6 +12,7 @@ export default class Product extends React.Component {
         this.state = {
             showProduct: styles.hide,
             rating: null,
+            user: {...this.props.user}
         }
     }
 
@@ -76,7 +75,7 @@ export default class Product extends React.Component {
                                     starHoverColor='yellow'
                                     starRatedColor='yellow'
                                     starEmptyColor='white'
-                                    changeRating={this.changeRating}
+                                    changeRating={this.state.user.username !== "" ? (this.changeRating): ""}
                                     numberOfStars={5}
                                     starSpacing='1px'
                                 /> 
@@ -84,6 +83,8 @@ export default class Product extends React.Component {
                                 {
                                     (this.props.ratingProduct == 0 && this.state.rating == null) ? 'No rates yet' : "" 
                                 }
+                                { console.log(this.state.user.username)}
+                                {/* { (this.props.user.username) ? console.log(this.props.user) : console.log('Yes')}     */}
                                 </div>
                             </div>
                         </span>

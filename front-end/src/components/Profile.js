@@ -115,7 +115,6 @@ export default class Profile extends Component {
     // console.log("url: " + url);
     // console.log(path);
 
-
     return (
       <Router>
         <>

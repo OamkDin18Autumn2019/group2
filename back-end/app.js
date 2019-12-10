@@ -14,6 +14,7 @@ var productsRouter = require("./routes/product");
 // var historyRouter = require("./routes/history")
 var searchRouter =  require("./routes/search");
 var tagRouter = require("./routes/tag");
+var categoryRouter = require("./routes/category");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -38,6 +39,7 @@ app.use("/v1/user", usersRouter);
 app.use("/v1/product", productsRouter);
 app.use("/v1/search", searchRouter);
 app.use("/v1/tag", tagRouter);
+app.use("/v1/category", categoryRouter);
 
 const isAuth = require("./middlewares/isAuth");
 app.get("/protected", isAuth, (req, res, next) => {

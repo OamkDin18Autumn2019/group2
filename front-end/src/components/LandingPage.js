@@ -44,7 +44,7 @@ export default class LandingPage extends React.Component {
         return (
             <React.Fragment>
                 <div className={styles.wrapper}>
-                    <Header user={this.props.user} {...this.props}/>
+                    {/* <Header user={this.props.user} {...this.props}/>  */}
                     <section className={styles.topContainer}>
                         <div className={styles.showCase}>
                             <h1> We can sell everything</h1>
@@ -62,7 +62,7 @@ export default class LandingPage extends React.Component {
                         <div className={styles.bestSellersName}> New arrivals  </div>
                         <section className={styles.products}>
                                 {this.state.bestSellers.map((item, i) => (
-                                    <Product key={i}  {...item} user = { this.props.user} />
+                                    <Product key={i}  {...item} user = {this.props.user} />
                                   ))}                     
                         </section>
                         {/* </div>
