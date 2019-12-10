@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styles from '../CSS/CreateProduct.module.css';
+import InputStyles from '../CSS/InputFields.module.css';
+import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from 'classnames';
 
 
@@ -96,7 +98,7 @@ export default class CreateProduct extends Component {
                   <label htmlFor="productName">Name of the product</label>
                 </div>
                 <div className={styles.col_75}>
-                  <input required type="text" onChange={this.handleChange} id="name" name="name" placeholder="Name.." />
+                  <input className={InputStyles.InputField} required type="text" onChange={this.handleChange} id="name" name="name" placeholder="Name.." />
                 </div>
               </div>
               <div className={styles.row}>
@@ -104,7 +106,7 @@ export default class CreateProduct extends Component {
                   <label htmlFor="price">Price</label>
                 </div>
                 <div className={styles.col_75}>
-                  <input required type="number" id="price" onChange={this.handleChange} name="price" min="0" placeholder="0" />
+                  <input className={InputStyles.InputField} required type="number" id="price" onChange={this.handleChange} name="price" min="0" placeholder="0" />
                 </div>
               </div>
               <div className={styles.row}>
@@ -119,7 +121,7 @@ export default class CreateProduct extends Component {
                   </label>
                 </div>
                 <div className={styles.col_75}>
-                  <input type="text" onChange={this.handleChangeTag} id="tags" name="tags" placeholder="Find a tag..." value={this.state.tagSearchInput} />
+                  <input className={InputStyles.InputField} type="text" onChange={this.handleChangeTag} id="tags" name="tags" placeholder="Find a tag..." value={this.state.tagSearchInput} />
                 </div>
                 <div className={this.state.tagSuggestions.length !== 0 ? styles.tagSuggestionsBox : ""}>
                   {this.state.tagSuggestions.map((tag, index) => <button key={index} className={styles.tagSuggestions} onClick={() => this.selectTag(tag)}>{tag.nameOfTag}</button>)}
@@ -130,7 +132,7 @@ export default class CreateProduct extends Component {
                   <label htmlFor="amountOfProduct">Amount</label>
                 </div>
                 <div className={styles.col_75}>
-                  <input required type="number" id="amount" onChange={this.handleChange} name="amountOfProduct" placeholder="1" />
+                  <input className={InputStyles.InputField} required type="number" id="amount" onChange={this.handleChange} name="amountOfProduct" placeholder="1" />
                 </div>
               </div>
               <div className={styles.row}>
@@ -139,7 +141,7 @@ export default class CreateProduct extends Component {
                 </div>
 
                 <div className={styles.col_75}>
-                  <input required type="text" id="images" onChange={this.handleChange} name="images" placeholder="Put the link here..." />
+                  <input className={InputStyles.InputField} required type="text" id="images" onChange={this.handleChange} name="images" placeholder="Put the link here..." />
                 </div>
               </div>
               <div className={styles.col_75}>
@@ -147,7 +149,7 @@ export default class CreateProduct extends Component {
                   <label htmlFor="category">Category</label>
                 </div>
                 <div className={styles.col_75}>
-                  <select id="category" onChange={this.handleChange} name="category">
+                  <select className={InputStyles.InputField} id="category" onChange={this.handleChange} name="category">
                     <option value="bikes">Bikes</option>
                     <option value="clothes">Clothes</option>
                     <option value="forHome">For home</option>
@@ -160,11 +162,11 @@ export default class CreateProduct extends Component {
                   <label htmlFor="subject">Description</label>
                 </div>
                 <div className={styles.col_75}>
-                  <textarea id="description" onChange={this.handleChange} name="description" placeholder="Write something about your selling .." styles={{ height: 200 }}></textarea>
+                  <textarea className={classNames(InputStyles.InputField, InputStyles.Textarea)} id="description" onChange={this.handleChange} name="description" placeholder="Write something about your selling .." styles={{ height: 300 }}></textarea>
                 </div>
               </div>
               <div className={styles.row}>
-                <input required type="submit" value="Submit" />
+                <input className={ButtonStyles.SubmitButton} required type="submit" value="Submit" />
               </div>
             </form>
           </div>

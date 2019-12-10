@@ -153,7 +153,7 @@ export default class Profile extends Component {
                 <label> Your rating </label>
                 {console.log(this.state.userInfo)}
                 <StarRatings
-                        starDimension='35px'
+                        starDimension='30px'
                         rating={this.state.userInfo[0].ratingUser}
                         starHoverColor='#6CCF6D'
                         starRatedColor='#19B51B'
