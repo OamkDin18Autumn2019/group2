@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from 'classnames';
@@ -40,22 +40,10 @@ export default class Header extends React.Component {
             ArrowState: ArrowDown,
             NavbarClass: styles.mainNav,
             // NavbarOpen: false,
-            backgroundColor: "rgba(0, 0, 0, 0)",
-            searchInput: ""
+            searchInput: "",
+            display: this.props.location.pathname
         }
     }
-
-    // we should not use that because it violates React principle
-    // scroll = window.onscroll = function () {
-    //     var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
-    //     if (scrolled !== 0) {
-    //         console.log(this.state)
-    //     } else {
-    //         // Если нет, то делаем его полностью видимым
-    //         // else it makes the background visible
-    //         // document.querySelector('#navbar').styles.mainNav.opacity = '1';
-    //     };
-    // };
 
     DropDownClickHandler = event => {
         this.setState({ DropDownMenuButton: this.state.DropDownMenuButton === styles.ArrowDownCollapsed ? styles.ArrowDownExpanded : styles.ArrowDownCollapsed });
@@ -83,11 +71,21 @@ export default class Header extends React.Component {
         } else {
             this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
         }
+        console.log(this.state.display);
     }
 
     // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
     componentDidMount() {
-        window.addEventListener('scroll', this.listenScrollEvent)
+        window.addEventListener('scroll', this.listenScrollEvent);
+
+        if (this.props.location.pathname == '/register' || this.props.location.pathname == '/login') {
+            this.setState({display: {display: "none" }});
+            // console.log("almost done");
+        } else {
+            this.setState({display: {display: "grid"}});
+            // console.log("almost not");
+        }
+
     }
 
     // It changes the state of the navbar, which slides the navbar in or out
@@ -108,9 +106,13 @@ export default class Header extends React.Component {
         // console.log(this.props.style)
         // console.log(this.props.user);
 
-        // The line of code below is the commented logo picture
+        // console.log(this.props.location.pathname);
 
-        // <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" />
+        // const headerShower = () => {
+            
+            console.log(this.state.display);
+        // }
+
             return (
                 <nav className={this.state.NavbarClass} >
                     <div className={styles.LogoDiv}>

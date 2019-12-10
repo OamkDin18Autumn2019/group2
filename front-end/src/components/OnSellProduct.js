@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from '../CSS/OnSellProduct.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import StarRatings from 'react-star-ratings';
 
 export default function OnSellProduct(props) {
 
-    console.log(props.props);
+    console.log(props);
+
+    const Delete = () => {
+        console.log(props.id);
+    }
 
     return(
         <>
@@ -22,9 +27,9 @@ export default function OnSellProduct(props) {
                     <StarRatings
                         starDimension='35px'
                         rating={props.rating}
-                        // starHoverColor='yellow'
-                        starRatedColor='yellow'
-                        starEmptyColor='white'
+                        starHoverColor='#6CCF6D'
+                        starRatedColor='#19B51B'
+                        starEmptyColor='black'
                         numberOfStars={5}
                         starSpacing='1px'
                     /> 
@@ -34,11 +39,11 @@ export default function OnSellProduct(props) {
                     <p> {props.amountOfRates} </p>
                 </div>
                 <div className={styles.amountOfProduct}>
-                    <p> {props.amountOfProduct} </p> / <p> {props.amountOfSoldProduct} </p>
+                    <p> {props.amountOfProduct} </p> <p> {props.amountOfSoldProduct} </p>
                 </div>
                 <div className={styles.Buttons}>
-                    <button className={ButtonStyles.EditButton}>Edit</button>
-                    <button className={ButtonStyles.DeleteButton}>Delete</button>
+                    <Link to={`/editProduct/${props.id}`}> <button className={ButtonStyles.EditButton}> Edit </button></Link>
+                    <button onClick={Delete} className={ButtonStyles.DeleteButton}>Delete</button>
                 </div>
             </div>
         </div>

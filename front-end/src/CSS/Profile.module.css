@@ -152,7 +152,7 @@ body {
   display: grid;
   grid-area: ProfileInfo;
   grid-template-areas:
-  'ProfileInfoNames BasicStatistics';
+  'ProfileInfoNames DescriptionBox BasicStatistics';
   background-color: transparent;
 }
 
@@ -166,6 +166,11 @@ body {
   width: 35vw;
   color: var(--dark);
   /* margin-left: 1.5vw; */
+}
+
+.DescriptionBox {
+  grid-area: DescriptionBox;
+  display: block;
 }
 
 .BasicStatistics {

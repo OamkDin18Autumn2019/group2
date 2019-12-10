@@ -57,11 +57,11 @@
     display: block;
     width: 0;
     height: 3px;
-    background: var(--primary);
+    background: var(--primary-light);
     transition: width 0.2s;
 }
 .Link:hover {
-    color: var(--primary);
+    /* color: var(--primary-light); */
     text-decoration: none;
 }
 

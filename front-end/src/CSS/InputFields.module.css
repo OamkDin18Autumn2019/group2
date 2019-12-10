@@ -96,6 +96,27 @@ input:focus {
     /* background: red; */
 }
 
+.Description {
+    border-radius: 0 !important;
+    border: 1px solid var(--nonactive-border);
+    width: 200px;
+    height: 100%;
+}
+
+.Description:hover {
+    border: 1px solid var(--primary-light);
+}
+
+.Description:focus {
+    border: 1px solid var(--primary);
+}
+
+.FilterField {
+    margin-bottom: 5vh;
+}
+
+
+
 
 
 

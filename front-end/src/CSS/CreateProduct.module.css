@@ -33,7 +33,6 @@ input[type=submit]:hover {
     height: 100%;
     padding-top: 7%;
     padding-bottom: 3%;
-
     background: url(https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
     /* https://images.pexels.com/photos/3170430/pexels-photo-3170430.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 */
     background-size: cover;
@@ -95,7 +94,7 @@ input[type=submit]:hover {
     background-color: cornsilk;
 }
 
-span {
+.Span {
     margin: 5px;
     padding: 5px;
     border-radius: 5px;

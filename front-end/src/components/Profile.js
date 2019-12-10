@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import OnSellProducts from './OnSellProducts';
 import Analytics from './Analytics';
 import History from './History';
 import StarRatings from 'react-star-ratings';
 import Loader from 'react-loader-spinner';
 import LoaderStyle from '../CSS/Loader.module.css';
-import axios from "axios";
 import styles from "../CSS/Profile.module.css"; 
 import ButtonStyles from '../CSS/Buttons.module.css';
+import InputStyles from '../CSS/InputFields.module.css';
+import axios from "axios";
 import classNames from "classnames";
 
 
@@ -67,7 +67,7 @@ export default class Profile extends Component {
           this.setState({userInfo: res.data.rows});
           console.log(this.state.userInfo);
           console.log(this.state.userInfo[0]);
-          console.log(this.state.userInfo[0].ratingUser);
+          console.log(this.state.userInfo[0].created_at);
         })
         .catch(err => {
           console.log(err);
@@ -126,10 +126,10 @@ export default class Profile extends Component {
   render() {
 
     return (
-      <Router>
+      // <Router>
         <>
         {
-        !this.state.currentSellItems ? (
+        !this.state.userInfo[0] ? (
           <Loader 
             type="Triangle"
             color="#000"
@@ -139,11 +139,14 @@ export default class Profile extends Component {
             className={LoaderStyle.Loader}
           />
         ) : (
-          <div className={styles.ProfilePage}>
+        <div className={styles.ProfilePage}>
           <div className={styles.ProfileInfo}>
             <div className={styles.ProfileInfoNames}>
-              <h5 className={styles.Username}> MotherSeller {this.props.user.username} </h5>
-              <h6 className={styles.Email}> something@example.com {this.props.user.email} </h6>
+              <h5 className={styles.Username}>  {this.state.userInfo[0].username} </h5>
+              <h6 className={styles.Email}> {this.state.userInfo[0].email} </h6>
+            </div>
+            <div className={styles.DescriptionBox}>
+              <input className={InputStyles.Description} type="text" placeholder="Tell them why they should fear you!" value={this.state.userInfo.description}/>
             </div>
             <div className={styles.BasicStatistics}>
               <div className={styles.BasicStatisticsElement}>
@@ -151,25 +154,21 @@ export default class Profile extends Component {
                 {console.log(this.state.userInfo)}
                 <StarRatings
                         starDimension='35px'
-                        // rating={this.state.userInfo[0].ratingUser}
-                        // starHoverColor='yellow'
-                        starRatedColor='yellow'
-                        starEmptyColor='white'
+                        rating={this.state.userInfo[0].ratingUser}
+                        starHoverColor='#6CCF6D'
+                        starRatedColor='#19B51B'
+                        starEmptyColor='black'
                         numberOfStars={5}
                         starSpacing='1px'
                 />
               </div>
-              <div className={styles.BasicStatisticsElement}>
+              {/* <div className={styles.BasicStatisticsElement}>
                 <label> Products Sold </label>
                 <h6> Here lies the number of products the user sold </h6>
-              </div>
+              </div> */}
               <div className={styles.BasicStatisticsElement}>
-                <label> Registered Since </label>
-                <h6> Here lies the data of registration of the user </h6>
-              </div>
-              <div className={styles.BasicStatisticsElement}>
-                <label> You are this many days with us </label>
-                <h6> Here lies the number of days the user is with us </h6>
+                <label> Date of the registration </label>
+                <h6> {this.state.userInfo[0].created_at.slice(0,10)} </h6>
               </div>
             </div>
           </div>
@@ -186,90 +185,7 @@ export default class Profile extends Component {
         </div>
         )
         }
-          
-        
-        {/* <div style={{ overflowX: "auto" }}>
-              {
-                // let products = this.state.currentSaleItems;
-                this.state.currentSaleItems.map(product => {
-                  return <OnSellProduct {...product} />
-                } ) 
-              } 
-        </div> */}
-      
-        {/* <div className={styles.background} onClick={this.onClick}>
-          <div className={styles.container}>
-            <h2> Profile</h2>
-            <div className={styles.personalInfo}>
-              <div className={styles.profileInfoBlock}>
-                <img
-                  className={classNames(styles.profileImg, styles.inline)}
-                  alt="profileImg"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png"
-                ></img>
-
-                <div className={styles.username}>{ this.props.user.username}</div>
-              </div>
-              <div className={styles.profileInfoBlock}>
-                <img
-                  className={classNames(styles.profileImg, styles.inline)}
-                  alt="email"
-                  src="https://www.stickpng.com/assets/images/584856b4e0bb315b0f7675ac.png"
-                ></img>
-
-                <div className={styles.username}>Dmitrii231@mail.ru</div>
-              </div>
-            </div>
-            <br></br>
-            <h2> On sell products</h2> */}
-
-
-
-              {/* <table className={styles.productTable}>
-                <tr>
-                  <th>Product Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Date</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-                {this.state.currentSaleItems.map(sale => {
-                  return (
-                    <tr>
-                      <td>{sale.name}</td>
-                      <td>$ {sale.price}</td>
-                      <td>{sale.amountOfProduct}</td>
-                      <td>{sale.created_at.substr(0,10)}</td>
-                      <td className={styles.edit1}>
-                        <Link to={`/editProduct/${sale.id}`}>   Edit   </Link>
-                      </td>
-                      <td className={styles.delete1}>
-                        <a href='#' onClick = {this.deleteProduct(sale.id)}>Delete</a>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </table>
-            </div>
-            <br></br>
-            <h2> History</h2>
-            <div style={{ overflowX: "auto" }}> */}
-              {/* <table className={styles.productTable}>
-                <tr>
-                  <th>Product Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Date of buying</th>
-                </tr>
-                {this.state.history}
-              </table> */}
-            {/* </div>
-          </div>
-        </div> */}
         </>
-      </Router>
-      
     );
   }
 }

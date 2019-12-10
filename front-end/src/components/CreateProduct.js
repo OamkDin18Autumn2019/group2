@@ -111,7 +111,7 @@ export default class CreateProduct extends Component {
                 <div className={styles.col_25}>
                   <label htmlFor="tags">Tags:
                   {
-                      this.state.tags.map((tag, index) => <span key={index}>
+                      this.state.tags.map((tag, index) => <span className={styles.Span} key={index}>
                         {tag.nameOfTag}
                         <button className={styles.removeTagButton} onClick={()=>this.removeTag(tag)}>x</button>
                       </span>)

@@ -6,7 +6,6 @@ import styles from '../CSS/Header.module.css';
 import InputStyles from '../CSS/InputFields.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import LoaderStyle from '../CSS/Loader.module.css';
-import SearchLogo from '../icons/icons8_search_50px.png';
 
 export default function OnSellProducts(props) {
 
@@ -33,11 +32,10 @@ export default function OnSellProducts(props) {
 
     return (
         <>
-            <div>
-                <form className={InputStyles.SearchContainer}>
-                    <input type="search" className={InputStyles.Search} onChange={SearchHandler} value={filter} />
-                    <button type="submit" className={ButtonStyles.IconButtons}> <img src={SearchLogo} alt="decorative" className={classNames(styles.SearchLogo, styles.Icons)} /> </button>
-                </form>
+            <div className={InputStyles.FilterField}>
+                <div className={InputStyles.SearchContainer}>
+                    <input type="search" placeholder="Filter your products" className={InputStyles.Search} onChange={SearchHandler} value={filter} />
+                </div>
             </div>
             {
             !props.currentSaleItems ? (
