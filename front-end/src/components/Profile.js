@@ -80,7 +80,7 @@ export default class Profile extends Component {
     console.log(this.props.user);
     const Name = this.state.showActiveTab;
     // console.log(<Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />);
-    return <Name token={this.state.token} currentSaleItems={this.state.currentSaleItems} deleteFunction={this.deleteProduct} historyItems={this.state.historyItems} />
+    return <Name DeleteHandler={this.DeleteHandler} token={this.state.token} currentSaleItems={this.state.currentSaleItems} deleteFunction={this.deleteProduct} historyItems={this.state.historyItems} />
   }
 
   TabPickHandler = (event) => {
@@ -105,6 +105,14 @@ export default class Profile extends Component {
           // console.log("da");
         } 
       })    
+  }
+
+  DeleteHandler = (deleteId) => {
+    let currentState = this.state.currentSaleItems;
+    const removedElement = currentState.splice(currentState.indexOf(deleteId), 1);
+    // console.log(removedElement);
+    // console.log(currentState);
+    this.setState({currentSaleItems: currentState});
   }
 
   render() {

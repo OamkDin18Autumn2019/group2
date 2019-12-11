@@ -46,7 +46,7 @@ export default function OnSellProducts(props) {
                     props.currentSaleItems.filter(onSell => 
                         (onSell.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
                         return(
-                            <OnSellProduct token={props.token} {...item} />
+                            <OnSellProduct DeleteHandler={props.DeleteHandler} token={props.token} {...item} />
                         )})
                 )
             }

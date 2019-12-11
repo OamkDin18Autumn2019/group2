@@ -7,7 +7,7 @@ import StarRatings from 'react-star-ratings';
 
 export default function OnSellProduct(props) {
 
-    console.log(props);
+    console.log(props.id);
 
     const deleteProduct = (e) => {
         e.preventDefault();
@@ -19,14 +19,14 @@ export default function OnSellProduct(props) {
         })
           .then(res => {
             console.log(res)
-            this.componentDidUpdate()
+            props.DeleteHandler(props.id) 
           })
           .catch(err => {
             console.log(err);
             return null;
           })
     }
-    
+
     return(
         <>
         <div className={styles.OnSellProduct}>
