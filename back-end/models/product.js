@@ -3,9 +3,9 @@ var knex = require("../database/database");
 
 var product = {
   createTableProducts: async () => {
-    knex.schema.hasTable("products").then(function (exists) {
+    knex.schema.hasTable("products").then(function(exists) {
       if (!exists) {
-        return knex.schema.createTable("products", function (t) {
+        return knex.schema.createTable("products", function(t) {
           t.increments("id").primary();
           t.integer("idUser", 10)
             .unsigned()
@@ -14,20 +14,21 @@ var product = {
             .inTable("users");
           t.text("name", 255);
           t.float("price", 25, 2);
-          t.float("discount", 4, 2)
-          .defaultTo(0);
+          t.float("discount", 4, 2).defaultTo(0);
           t.text("description", 1024);
-          t.float("ratingProduct", 10, 2)
-            .defaultTo(0);
-          t.integer("amountOfRates")
-            .defaultTo(0);
-          t.string('tags', 512);
-          t.string('category');
-          t.integer('amountOfProduct');
-          t.integer('amountOfSoldProduct');
-          t.string('images', 1024);
-          t.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
-          t.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
+          t.float("ratingProduct", 10, 2).defaultTo(0);
+          t.integer("amountOfRates").defaultTo(0);
+          t.string("tags", 512);
+          t.string("category");
+          t.integer("amountOfProduct");
+          t.integer("amountOfSoldProduct");
+          t.string("images", 1024);
+          t.dateTime("created_at")
+            .notNullable()
+            .defaultTo(knex.raw("CURRENT_TIMESTAMP"));
+          t.dateTime("updated_at").defaultTo(
+            knex.raw("NULL ON UPDATE CURRENT_TIMESTAMP")
+          );
         });
       } else {
         return null;
@@ -36,9 +37,9 @@ var product = {
   },
 
   createTableCategories: async () => {
-    knex.schema.hasTable("categories").then(function (exists) {
+    knex.schema.hasTable("categories").then(function(exists) {
       if (!exists) {
-        return knex.schema.createTable("categories", function (t) {
+        return knex.schema.createTable("categories", function(t) {
           t.increments("id").primary();
           t.string("nameOfCategory");
         });
@@ -49,9 +50,9 @@ var product = {
   },
 
   createTableTags: async () => {
-    knex.schema.hasTable("tags").then(function (exists) {
+    knex.schema.hasTable("tags").then(function(exists) {
       if (!exists) {
-        return knex.schema.createTable("tags", function (t) {
+        return knex.schema.createTable("tags", function(t) {
           t.increments("id").primary();
           t.string("nameOfTag");
         });
@@ -61,7 +62,7 @@ var product = {
     });
   },
 
-  get: async function (callback) {
+  get: async function(callback) {
     return knex
       .from("products")
       .select()
@@ -73,12 +74,26 @@ var product = {
       });
   },
 
-  getById: async function (id, callback) {
+  getById: async function(id, callback) {
     console.log(id);
     return knex
       .from("products")
-      .select('products.id','products.idUser','name','discount','description','ratingProduct','price','amountOfProduct','amountOfSoldProduct','images','username','products.created_at','products.updated_at')
-      .innerJoin('users','products.idUser','users.id')
+      .select(
+        "products.id",
+        "products.idUser",
+        "name",
+        "discount",
+        "description",
+        "ratingProduct",
+        "price",
+        "amountOfProduct",
+        "amountOfSoldProduct",
+        "images",
+        "username",
+        "products.created_at",
+        "products.updated_at"
+      )
+      .innerJoin("users", "products.idUser", "users.id")
       .where("products.id", id)
       .then(data => {
         callback.then(data);
@@ -88,13 +103,12 @@ var product = {
       });
   },
 
-
-  getnewArrivals: async function (callback) {
+  getnewArrivals: async function(callback) {
     return knex
-      .from('products')
+      .from("products")
       .select()
       .limit(8)
-      .orderBy('created_at','desc')
+      .orderBy("created_at", "desc")
       .then(data => {
         callback.then(data);
       })
@@ -103,7 +117,7 @@ var product = {
       });
   },
 
-  getCurrentSellings: async function (id, callback) {
+  getCurrentSellings: async function(id, callback) {
     console.log(id);
     return knex
       .from("products")
@@ -118,20 +132,22 @@ var product = {
       });
   },
 
-  getByUserId: async function (id, callback) {
+  getByUserId: async function(id, callback) {
     console.log(id);
-    return knex
-      .from("products")
-      .select()
-      // .where("id", 1)
-      .then(data => {
-        callback.then(data);
-      })
-      .catch(err => {
-        callback.catch(err);
-      });
+    return (
+      knex
+        .from("products")
+        .select()
+        // .where("id", 1)
+        .then(data => {
+          callback.then(data);
+        })
+        .catch(err => {
+          callback.catch(err);
+        })
+    );
   },
-  add: async function (product, callback) {
+  add: async function(product, callback) {
     // console.log(product);
     return knex("products")
       .insert([{ ...product }])
@@ -143,7 +159,7 @@ var product = {
       });
   },
 
-  delete: async function (id, callback) {
+  delete: async function(id, callback) {
     return knex
       .from("products")
       .delete()
@@ -156,12 +172,11 @@ var product = {
       });
   },
 
-  update: function (id, product, callback) {
+  update: function(id, product, callback) {
     return knex("products")
       .where("id", id)
       .update({
         ...product
-
       })
       .then(data => {
         callback.then(data);
@@ -172,4 +187,7 @@ var product = {
   }
 };
 
+// product.createTableCategories();
+// product.createTableTags();
+// product.createTableProducts();
 module.exports = product;

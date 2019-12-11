@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
-import Header from './components/Header';
+import Header from "./components/Header";
 import LandingPage from "./components/LandingPage";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -9,9 +9,9 @@ import SearchPage from "./components/SearchPage";
 import ProductPage from "./components/ProductPage";
 import BasketPage from "./components/BasketPage";
 import CreateProduct from "./components/CreateProduct";
-import Profile from './components/Profile';
-import EditProduct from './components/EditProduct'
-
+import Profile from "./components/Profile";
+import EditProduct from "./components/EditProduct";
+import { getToken, saveToken } from "./Utilities/TokenUtility";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ export default class App extends React.Component {
       user: {
         username: "",
         password: "",
-        token: "",
+        token: ""
       },
       cart: []
     };
@@ -30,61 +30,61 @@ export default class App extends React.Component {
     var productToCart = {
       ...product,
       amountInTheCart: amountOfProduct
-    }
-    console.log(currentCart, this.state.cart)
+    };
+    console.log(currentCart, this.state.cart);
 
-    if( this.state.cart.length == 0) {
-      let newCart = [ productToCart ];
+    if (this.state.cart.length == 0) {
+      let newCart = [productToCart];
       this.setState({
-        cart : this.state.cart.concat(newCart)
+        cart: this.state.cart.concat(newCart)
       });
       newCart = [];
     }
     for (let i = 0; i < currentCart.length; i++) {
       if (product.name === currentCart[i].name) {
-        console.log("found")
+        console.log("found");
         currentCart[i] = {
           ...productToCart
-        }
+        };
         this.setState({
-          cart : currentCart
+          cart: currentCart
         });
-        break
+        break;
       } else {
-        console.log("nothing")  
-        let newCart = [ productToCart ];
+        console.log("nothing");
+        let newCart = [productToCart];
         this.setState({
-          cart : this.state.cart.concat(newCart)
+          cart: this.state.cart.concat(newCart)
         });
 
         newCart = [];
       }
-    }  
-    console.log(this.state.cart)
-  }
+    }
+    console.log(this.state.cart);
+  };
 
-  deleteFromCartById = (id) => {
+  deleteFromCartById = id => {
     let currentCart = this.state.cart;
     for (let i = 0; i < currentCart.length; i++) {
       if (id === currentCart[i].id) {
-        console.log("found")
-          currentCart.splice(i,1)
+        console.log("found");
+        currentCart.splice(i, 1);
         this.setState({
-          cart : currentCart
+          cart: currentCart
         });
-        break
+        break;
       }
     }
-  }
+  };
 
-  updateCart = (newCart) => {
+  updateCart = newCart => {
     this.setState({
       cart: newCart
-    })
-    console.log(this.state.cart)
-  }
+    });
+    console.log(this.state.cart);
+  };
 
-  handleSubmit = (un, pw) => {
+  handleSubmit = async (un, pw) => {
     const user = {
       username: un,
       password: pw
@@ -92,11 +92,10 @@ export default class App extends React.Component {
 
     axios
       .post(`http://localhost:4000/v1/user/login`, { user })
-      .then(res => {
-
+      .then(async res => {
         // console.log(res);
         console.log(res.data);
-        // console.log(this.state.user);
+        await saveToken(res.data.token());
         this.setState({
           user: {
             username: un,
@@ -107,7 +106,6 @@ export default class App extends React.Component {
         // event.preventDefault();
         this.props.history.goBack();
         // console.log(this.state.user);
-
       })
       .catch(err => {
         console.log(err);
@@ -115,35 +113,54 @@ export default class App extends React.Component {
       });
   };
 
-  render() {
+  initalPage = async routerProps => {
+    console.log("token", await getToken());
+    const token = await getToken();
+    token == null
+      ? console.log("no token found")
+      : (this.state.user.token = token);
+    const landingPage = <LandingPage user={this.state.user} {...routerProps} />;
+    const profilePage = <Profile user={this.state.user} {...routerProps} />;
+    return this.state.token == "" ? landingPage : profilePage;
+  };
 
+  render() {
     return (
       <React.Fragment>
         <Router>
-          <Route 
+          <Route
             path="/"
-            render={routerProps => <Header {...routerProps} user={this.state.user} /> }
+            render={routerProps => (
+              <Header {...routerProps} user={this.state.user} />
+            )}
           />
 
+          {}
           <Route
             path="/"
             exact
-            render={routerProps => <LandingPage {...routerProps} user={ this.state.user } />}
+            render={routerProps => this.initalPage(routerProps)}
           />
-           <Route
+          <Route
             path="/createProduct"
             exact
-            render={routerProps => <CreateProduct {...routerProps} user={ this.state.user } />}
+            render={routerProps => (
+              <CreateProduct {...routerProps} user={this.state.user} />
+            )}
           />
           <Route
             path="/editProduct/:id"
             exact
-            render={routerProps => <EditProduct {...routerProps} user={ this.state.user } />}
+            render={routerProps => (
+              <EditProduct {...routerProps} user={this.state.user} />
+            )}
           />
           <Route
             path="/profile/:id"
             exact
-            render={routerProps => <Profile {...routerProps} user={ this.state.user } />}
+            render={routerProps => (
+              <Profile {...routerProps} user={this.state.user} />
+            )}
           />
           <Route
             path="/register"
@@ -153,12 +170,21 @@ export default class App extends React.Component {
           <Route
             path="/search"
             exact
-            render={routerProps => <SearchPage {...routerProps} user={ this.state.user } />}
+            render={routerProps => (
+              <SearchPage {...routerProps} user={this.state.user} />
+            )}
           />
           <Route
             path="/product/:id"
             exact
-            render={routerProps => <ProductPage {...routerProps} user = {this.state.user} cart = {this.state.cart} addToCartGlobal = { this.addToCart } />}
+            render={routerProps => (
+              <ProductPage
+                {...routerProps}
+                user={this.state.user}
+                cart={this.state.cart}
+                addToCartGlobal={this.addToCart}
+              />
+            )}
           />
           <Route
             path="/login"
@@ -176,12 +202,24 @@ export default class App extends React.Component {
           <Route
             path="/basket"
             exact
-            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } updateCart = { this.updateCart } deleteFromCartById = { this.deleteFromCartById }/>}
+            render={routerProps => (
+              <BasketPage
+                {...routerProps}
+                user={this.state.user}
+                cart={this.state.cart}
+                updateCart={this.updateCart}
+                deleteFromCartById={this.deleteFromCartById}
+              />
+            )}
           />
-          
+
           <Route
             path="/profile"
-            exact render={(routerProps ) => <Profile {...routerProps} user={ this.state.user } />} />  
+            exact
+            render={routerProps => (
+              <Profile {...routerProps} user={this.state.user} />
+            )}
+          />
           {/* // <Route
           //   path="/admin"
           //   exact render={(routerProps ) => <AdminPage  />} />
