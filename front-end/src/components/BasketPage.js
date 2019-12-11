@@ -86,7 +86,7 @@ export default class BasketPage extends Component {
                           </thead>
                           <tbody>
                             {this.props.cart.map((entry, i) => (
-                              <BasketProductEntry key={i} data={entry} />
+                              <BasketProductEntry deleteFromCartById={ this.props.deleteFromCartById }key={i} data={entry} />
                             ))}
                             <tr> 
                               <td></td>

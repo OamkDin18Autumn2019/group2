@@ -4,7 +4,7 @@ import ButtonStyles from '../CSS/Buttons.module.css';
 
 export default function OnSellProduct(props) {
 
-    console.log(props);
+    // console.log(props);
 
     return(
         <>

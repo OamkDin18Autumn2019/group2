@@ -25,23 +25,6 @@ export default class App extends React.Component {
       cart: []
     };
   }
-  // addToCart = (product) => {
-  //   let currentCart = [];
-  //   currentCart.push(product);
-  //   console.log(this.state.cart)
-  // for (let i = 0; i < this.state.cart.length; i++) {
-  //   if(this.state.cart[i].id == product.id) {
-      
-  //     // this.setState({
-        
-  //     // })  
-  //   }
-    
-  // }
-  //   this.setState({
-  //     cart: [...this.state.cart,product]
-  //   })
-  // }
   addToCart = (product, amountOfProduct) => {
     var currentCart = this.state.cart;
     var productToCart = {
@@ -82,10 +65,16 @@ export default class App extends React.Component {
 
   deleteFromCartById = (id) => {
     let currentCart = this.state.cart;
-    currentCart.splice(id,1);
-    this.setState({
-      cart: currentCart
-    })
+    for (let i = 0; i < currentCart.length; i++) {
+      if (id === currentCart[i].id) {
+        console.log("found")
+          currentCart.splice(i,1)
+        this.setState({
+          cart : currentCart
+        });
+        break
+      }
+    }
   }
 
   updateCart = (newCart) => {
@@ -186,7 +175,7 @@ export default class App extends React.Component {
           <Route
             path="/basket"
             exact
-            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } updateCart = { this.updateCart } />}
+            render={routerProps => <BasketPage {...routerProps} user={ this.state.user } cart={ this.state.cart } updateCart = { this.updateCart } deleteFromCartById = { this.deleteFromCartById }/>}
           />
           
           <Route
