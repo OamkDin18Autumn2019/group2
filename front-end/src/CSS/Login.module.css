@@ -1,8 +1,8 @@
-input:focus,
+/* input:focus,
 button:focus {
     outline: none;
     border: var(--primary) solid 1px;
-}
+} */
 
 body {
     background-color: var(--background-primary);

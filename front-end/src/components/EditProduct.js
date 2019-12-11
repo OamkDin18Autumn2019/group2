@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Header from './Header';
 import axios from 'axios';
 // import ImageUploader from 'react-images-upload';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
-import styles from '../CSS/CreateProduct.module.css';
 import LoaderStyle from '../CSS/Loader.module.css';
-// import classNames from 'classnames';
+import styles from '../CSS/CreateProduct.module.css';
+import InputStyles from '../CSS/InputFields.module.css';
+import ButtonStyles from '../CSS/Buttons.module.css';
+import classNames from 'classnames';
 // import { FaSlidersH } from 'react-icons/fa';
 
 
@@ -164,7 +165,7 @@ export default class EditProduct extends Component {
                                         <label for="productName">Name of the product</label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <input type="text" id="name" name="name" placeholder="Name.." value={this.state.name} onChange={this.onChange}  />
+                                        <input className={InputStyles.InputField} type="text" id="name" name="name" placeholder="Name.." value={this.state.name} onChange={this.onChange}  />
                                     </div>
                                 </div>
                                 <div className={styles.row}>
@@ -172,7 +173,7 @@ export default class EditProduct extends Component {
                                         <label for="price">Price</label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <input type="number" id="price" name="price" placeholder="0" value={this.state.price} onChange={this.onChange} /> €
+                                        <input className={InputStyles.InputField} type="number" id="price" name="price" placeholder="0" value={this.state.price} onChange={this.onChange} /> 
                                     </div>
                                 </div>
                                 <div className={styles.row} >
@@ -180,22 +181,22 @@ export default class EditProduct extends Component {
                                         <label for="discount">Discount</label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <input type="number" min="0" max="100" id="discount" name="discount" placeholder="0" onChange={this.newPriceCalculator} value={this.state.discount} maxlength="2" /> %
+                                        <input className={InputStyles.InputField} type="number" min="0" max="100" id="discount" name="discount" placeholder="0" onChange={this.newPriceCalculator} value={this.state.discount} maxlength="2" /> 
                                     </div>
                                     <div className={styles.col_75}>
                                         <label for="newPrice"> New price  </label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <input type="number" id="newPrice" name="newPrice"  onChange={this.discountCalculator} value={this.state.newPrice} /> €
+                                        <input className={InputStyles.InputField} type="number" id="newPrice" name="newPrice"  onChange={this.discountCalculator} value={this.state.newPrice} /> 
                                     </div>
                                 </div>
                                 <div className={styles.row}>
                                     <div className={styles.col_25}>
-                                        <label for="tags">Tags (for better search)</label>
+                                        <label className={InputStyles.InputField} for="tags">Tags (for better search)</label>
                                     </div>
 
                                     <div className={styles.col_75}>
-                                        <input type="text" id="tags" name="tags" placeholder="Tags..." value={this.state.tags} onChange={this.onChange} />
+                                        <input className={InputStyles.InputField} type="text" id="tags" name="tags" placeholder="Tags..." value={this.state.tags} onChange={this.onChange} />
                                     </div>
                                 </div>
                                 <div className={styles.col_75}>
@@ -203,7 +204,7 @@ export default class EditProduct extends Component {
                                         <label for="category">Category</label>
                                     </div>
                                     <div className={styles.col_75} >
-                                        <select id="category" name="category" selected={this.state.category} onChange={this.onChange}>
+                                        <select className={InputStyles.InputField} id="category" name="category" selected={this.state.category} onChange={this.onChange}>
                                             <option value="bikes">Bikes</option>
                                             <option value="clothes">Clothes</option>
                                             <option value="forHome">For home</option>
@@ -217,7 +218,7 @@ export default class EditProduct extends Component {
                                         <label for="subject">Description</label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <textarea id="description" name="description" placeholder="Write something about your selling .." styles={{ height: 200 }} value={this.state.description} onChange={this.onChange} ></textarea>
+                                        <textarea className={classNames(InputStyles.InputField, InputStyles.Textarea)} id="description" name="description" placeholder="Write something about your selling .." styles={{ height: 200 }} value={this.state.description} onChange={this.onChange} ></textarea>
                                     </div>
                                 </div>
                                 <div className={styles.row}>
@@ -234,11 +235,11 @@ export default class EditProduct extends Component {
                                         singleImage={true}
                                     /> */}
                                     <div className={styles.col_75}>
-                                        <input type="text" id="images" name="images" placeholder="Put the link here..." value={this.state.images} onChange={this.onChange} />
+                                        <input className={InputStyles.InputField} type="text" id="images" name="images" placeholder="Put the link here..." value={this.state.images} onChange={this.onChange} />
                                     </div>
                                 </div>
-                                <div className={styles.row}>
-                                    <input type="button" value="Submit" onClick={this.onSubmit}  />
+                                <div className={classNames(styles.row, styles.SubmitBox)}>
+                                    <input className={ButtonStyles.SubmitButton} type="button" value="Submit" onClick={this.onSubmit}  />
                                 </div>
                             </form>
                         </div>

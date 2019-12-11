@@ -48,6 +48,8 @@
     font-weight: bold;
     max-width: 150px;
     color: var(--primary);
+    /* color: var(--dark); */
+    /* mix-blend-mode: difference; */
 }
 
 .Link::after {
@@ -56,24 +58,28 @@
     width: 0;
     height: 3px;
     background: var(--primary-light);
-    transition: width .3s;
+    transition: width 0.2s;
 }
-
 .Link:hover {
-    color: var(--primary-light);
+    /* color: var(--primary-light); */
     text-decoration: none;
 }
 
 .Link:hover::after {
-    color: white;
+    /* color: white; */
+    position: center;
     width: 100%;
-    transition: width .3s;
+    transition: width 0.2s;
+}
+
+#ActiveLink {
+    transition: all 0.3s;
 }
 
 #ActiveLink::after {
     content:"";
     width: 100%;
     height: 3px;
-    background: var(--primary);
+    background-color: var(--primary);
     transition: all 0.3s;
 }

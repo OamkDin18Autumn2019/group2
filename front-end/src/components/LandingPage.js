@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header';
+// import Header from './Header';
 import styles from '../CSS/LandingPage.module.css';
 import { FaChartPie, FaGlobe, FaCog, FaUsers, FaArrowDown } from 'react-icons/fa';
 import { TiArrowDownOutline } from 'react-icons/ti';

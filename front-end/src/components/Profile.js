@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import OnSellProducts from './OnSellProducts';
 import Analytics from './Analytics';
 import History from './History';
-import axios from "axios";
+import StarRatings from 'react-star-ratings';
+import Loader from 'react-loader-spinner';
+import LoaderStyle from '../CSS/Loader.module.css';
 import styles from "../CSS/Profile.module.css"; 
 import ButtonStyles from '../CSS/Buttons.module.css';
+import InputStyles from '../CSS/InputFields.module.css';
+import axios from "axios";
 import classNames from "classnames";
 
 
@@ -20,9 +23,8 @@ export default class Profile extends Component {
     this.state = {
       currentSaleItems: [],
       historyItems: [],
-      showActiveTab: OnSellProducts,
-      activeTab: ButtonStyles.ActiveLink,
-      nonActiveTab: ButtonStyles.Link
+      userInfo: [],
+      showActiveTab: OnSellProducts
     };
   }
 
@@ -55,6 +57,22 @@ export default class Profile extends Component {
         console.log(err);
         return null;
       })
+      axios.get(`http://localhost:4000/v1/user/`, {
+        headers: {
+          'x-access-token': this.props.user.token
+        }
+      })
+        .then(res => {
+          console.log(res);
+          this.setState({userInfo: res.data.rows});
+          console.log(this.state.userInfo);
+          console.log(this.state.userInfo[0]);
+          console.log(this.state.userInfo[0].created_at);
+        })
+        .catch(err => {
+          console.log(err);
+          return null;
+        })
   }
   
   TabLoader = () => {
@@ -89,7 +107,6 @@ export default class Profile extends Component {
   }
 
   deleteProduct(id) {
-    // event.preventDefault();
     // axios.delete(`http://localhost:4000/v1/product/${id}`, {
     //   headers: {
     //     'x-access-token': this.props.user.token
@@ -106,124 +123,68 @@ export default class Profile extends Component {
   }
 
   render() {
-    // console.log(this.components.map());
-    console.log(this.state.showActiveTab[0])
-    console.log(<a id={this.state.showActiveTab == "OnSellProducts" ? ButtonStyles.ActiveLink : ""} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a>);
-    const url = this.props.match.url;
-    const path = this.props.match.path;
-    // console.log(this.state.activeTab);
-    // console.log("url: " + url);
-    // console.log(path);
 
     return (
-      <Router>
+      // <Router>
         <>
+        {
+        !this.state.userInfo[0] ? (
+          <Loader 
+            type="Triangle"
+            color="#000"
+            height={150}
+            width={150}
+            timeout={99000}
+            className={LoaderStyle.Loader}
+          />
+        ) : (
         <div className={styles.ProfilePage}>
           <div className={styles.ProfileInfo}>
             <div className={styles.ProfileInfoNames}>
-              <h5 className={styles.Username}> MotherSeller {this.props.user.username} </h5>
-              <h6 className={styles.Email}> something@example.com {this.props.user.email} </h6>
+              <h5 className={styles.Username}>  {this.state.userInfo[0].username} </h5>
+              <h6 className={styles.Email}> {this.state.userInfo[0].email} </h6>
             </div>
-            <div className={styles.DescriptionContainer}>
-              <p className={styles.Description}> 
-                Lorem Ipsum motherseller. Here is the description of your page and yourself. 
-                Some Other shit about that other shit that you like or might not like I do not even care
-                You just need to do this or otherwise I will start reading Hitler's book MeinKampf 
-                So you better know your place you piece of undercode.
-              </p>
+            <div className={styles.DescriptionBox}>
+              <input className={InputStyles.Description} type="text" placeholder="Tell them why they should fear you!" value={this.state.userInfo.description}/>
             </div>
             <div className={styles.BasicStatistics}>
               <div className={styles.BasicStatisticsElement}>
                 <label> Your rating </label>
-                {/* <h6> {this.state.user.rating} </h6> */}
-                <h6> Here lies the user rating </h6>
+                {console.log(this.state.userInfo)}
+                <StarRatings
+                        starDimension='30px'
+                        rating={this.state.userInfo[0].ratingUser}
+                        starHoverColor='#6CCF6D'
+                        starRatedColor='#19B51B'
+                        starEmptyColor='black'
+                        numberOfStars={5}
+                        starSpacing='1px'
+                />
               </div>
-              <div className={styles.BasicStatisticsElement}>
+              {/* <div className={styles.BasicStatisticsElement}>
                 <label> Products Sold </label>
                 <h6> Here lies the number of products the user sold </h6>
-              </div>
+              </div> */}
               <div className={styles.BasicStatisticsElement}>
-                <label> Registered Since </label>
-                <h6> Here lies the data of registration of the user </h6>
-              </div>
-              <div className={styles.BasicStatisticsElement}>
-                <label> You are this many days with us </label>
-                <h6> Here lies the number of days the user is with us </h6>
+                <label> Date of the registration </label>
+                <h6> {this.state.userInfo[0].created_at.slice(0,10)} </h6>
               </div>
             </div>
           </div>
           <div className={styles.SideNavBar}>
             <ul className={styles.SideBarUL}>
-              <li> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </li>
-              <li> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </li>
-              <li> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={this.state.nonActiveTab} onClick={this.TabPickHandler} name="History"> History </a> </li>
+              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </span> </li>
+              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li>
+              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li>
             </ul>
           </div>
           <div className={styles.ProfileData}>
               {this.TabLoader(this.state.showActiveTab)}
           </div>
-          
-        
-        {/* <div style={{ overflowX: "auto" }}>
-              {
-                // let products = this.state.currentSaleItems;
-                this.state.currentSaleItems.map(product => {
-                  return <OnSellProduct {...product} />
-                } ) 
-              } 
-        </div> */}
-      
-        {/* <div className={styles.background} onClick={this.onClick}>
-
-        {/* <Header user={this.props.user} /> */}
-        <div className={styles.background}>
-
-              {/* <table className={styles.productTable}>
-                <tr>
-                  <th>Product Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Date</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-                {this.state.currentSaleItems.map(sale => {
-                  return (
-                    <tr>
-                      <td>{sale.name}</td>
-                      <td>$ {sale.price}</td>
-                      <td>{sale.amountOfProduct}</td>
-                      <td>{sale.created_at.substr(0,10)}</td>
-                      <td className={styles.edit1}>
-                        <Link to={`/editProduct/${sale.id}`}>   Edit   </Link>
-                      </td>
-                      <td className={styles.delete1}>
-                        <a href='#' onClick = {this.deleteProduct(sale.id)}>Delete</a>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </table>
-            </div>
-            <br></br>
-            <h2> History</h2>
-            <div style={{ overflowX: "auto" }}> */}
-              {/* <table className={styles.productTable}>
-                <tr>
-                  <th>Product Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Date of buying</th>
-                </tr>
-                {this.state.history}
-              </table> */}
-            {/* </div>
-          </div>
-        </div> */}
         </div>
+        )
+        }
         </>
-      </Router>
-      
     );
   }
 }

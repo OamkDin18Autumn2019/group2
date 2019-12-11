@@ -15,7 +15,7 @@ export default function Login(props) {
 
     function handleSubmitHandler(event) {
         event.preventDefault();
-        console.log(event.target);
+        // console.log(event.target);
         // console.log(props);
         props.handleSubmit( event.target["username"].value,
                             event.target["password"].value );

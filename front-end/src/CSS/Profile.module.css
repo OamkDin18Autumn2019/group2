@@ -136,25 +136,106 @@ th {
   }
 } */
 
+body {
+  background-color: var(--light);
+}
+
 .ProfilePage {
   display: grid;
   grid-template-areas: 
-  'ProfileInfo ProfileInfo ProfileInfo'
-  'SideNavBar ProfileData ProfileData';
-  margin-top: 100px;
+  'ProfileInfo ProfileInfo ProfileInfo ProfileInfo'
+  'SideNavBar ProfileData ProfileData ProfileData';
+  margin-top: var(--header-height);
 }
 
 .ProfileInfo {
   display: grid;
-  grid-area: "ProfileInfo";
+  grid-area: ProfileInfo;
+  grid-template-areas:
+  'ProfileInfoNames DescriptionBox BasicStatistics';
+  background-color: transparent;
 }
+
+
+.ProfileInfoNames {
+  display: grid;
+  grid-area: ProfileInfoNames;
+  place-self: center;
+  justify-items: start;
+  /* grid-template-columns: 1fr 1fr;  */
+  width: 35vw;
+  color: var(--dark);
+  /* margin-left: 1.5vw; */
+}
+
+.DescriptionBox {
+  grid-area: DescriptionBox;
+  display: block;
+}
+
+.BasicStatistics {
+  display: flex;
+  flex-direction: column;
+  max-width: 50vw;
+  place-self: center;
+  /* justify-items: center; */
+  grid-area: BasicStatistics;
+  grid-template-rows: 1fr 1fr 1fr 1fr; 
+}
+
+.BasicStatisticsElement {
+  display: grid;
+  /* flex-direction: row; */
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+}
+
+.Username {
+  /* color: var(--primary); */
+  color: var(--dark);
+  font-size: 3em;
+}
+
+.Email {
+  color: var(--gray);
+  font-size: 1.8em; 
+  transition: 0.2s ease-in-out;
+}
+
+.Email:hover {
+  color: var(--dark);
+}
+
+/* SideNavBar classes */
 
 .SideNavBar {
   display: grid;
-  grid-area: "SideNavBar";
+  grid-area: SideNavBar;
+  /* background-color: var(--light); */
+  position: sticky;
+  top: 11vh;
+  max-width: 25vw;
+  max-height: 10vh;
+  margin-top: 2vh;
+  /* padding-right: 1vw; */
+  background-color: transparent;
+  border-right: 2px solid black;
 }
+
+.SideNavBar ul {
+  list-style: none;
+}
+
+.SideNavBar ul li a {
+  text-decoration: none;
+
+}
+
+/* ProfileData classes */
 
 .ProfileData {
   display: grid;
-  grid-area: "ProfileData"
+  margin-top: 2vh;
+  grid-area: ProfileData;
+  background-color: transparent;
 }

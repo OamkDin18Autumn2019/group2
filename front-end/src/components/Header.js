@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from 'classnames';
@@ -41,22 +41,10 @@ export default class Header extends React.Component {
             NavbarClass: styles.mainNav,
             nav: styles.nav,
             // NavbarOpen: false,
-            // backgroundColor: "rgba(0, 0, 0, 0)"
-            searchInput: ""
+            searchInput: "",
+            display: this.props.location.pathname
         }
     }
-
-    // we should not use that because it violates React principle
-    // scroll = window.onscroll = function () {
-    //     var scrolled = window.pageYOffset || document.documentElement.scrollTop; // Получаем положение скролла
-    //     if (scrolled !== 0) {
-    //         console.log(this.state)
-    //     } else {
-    //         // Если нет, то делаем его полностью видимым
-    //         // else it makes the background visible
-    //         // document.querySelector('#navbar').styles.mainNav.opacity = '1';
-    //     };
-    // };
 
     DropDownClickHandler = event => {
         this.setState({ DropDownMenuButton: this.state.DropDownMenuButton === styles.ArrowDownCollapsed ? styles.ArrowDownExpanded : styles.ArrowDownCollapsed });
@@ -76,6 +64,7 @@ export default class Header extends React.Component {
         console.log("submited");
         this.props.history.push('/search?q='+encodeURIComponent(this.state.searchInput));
     }
+
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
     listenScrollEvent = e => {
         if (window.scrollY > window.innerHeight - window.innerHeight / 4) {
@@ -87,11 +76,21 @@ export default class Header extends React.Component {
 
             // this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
         }
+        console.log(this.state.display);
     }
 
     // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
     componentDidMount() {
-        window.addEventListener('scroll', this.listenScrollEvent)
+        window.addEventListener('scroll', this.listenScrollEvent);
+
+        if (this.props.location.pathname == '/register' || this.props.location.pathname == '/login') {
+            this.setState({display: {display: "none" }});
+            // console.log("almost done");
+        } else {
+            this.setState({display: {display: "grid"}});
+            // console.log("almost not");
+        }
+
     }
 
     // It changes the state of the navbar, which slides the navbar in or out
@@ -112,26 +111,13 @@ export default class Header extends React.Component {
         // console.log(this.props.style)
         // console.log(this.props.user);
 
+        // console.log(this.props.location.pathname);
 
-        // The line of code below is the commented logo picture
-        if (this.props.user.username) {
-            return (
-                <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
-                    <div className={styles.LogoDiv}>
-                        <Link to="/"> <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" /> </Link>
-                    </div>
-                    <div className={this.state.DropDownMenu}>
-                        <SearchBar
-                            searchSubmitHandler={this.searchSubmitHandler}
-                            searchInputChangeHandler={this.searchInputChangeHandler}
-                            searchInput={this.state.searchInput}
-                        ></SearchBar>
-                        <div className={styles.LoginRegisterButtons}>
+        // const headerShower = () => {
+            
+            console.log(this.state.display);
+        // }
 
-                            <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
-                            <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
-
-        // <img className={styles.logo} src="https://www.moodysfoodtrucks.com/wp-content/uploads/2012/12/logo-copy.png" alt="logo" />
             return (
                 <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
                     <div className={styles.LogoDiv}>
@@ -142,7 +128,7 @@ export default class Header extends React.Component {
                             searchSubmitHandler={this.searchSubmitHandler}
                             searchInputChangeHandler={this.searchInputChangeHandler}
                             searchInput={this.state.searchInput}
-                        ></SearchBar>
+                        />
                         <div className={styles.LoginRegisterButtons}>
                             { this.props.user.username ? (
                                     <>

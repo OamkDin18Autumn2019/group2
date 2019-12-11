@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "../CSS/Basket.module.css";
-import Header from "./Header"
 import BasketProductEntry from "./BasketProductEntry";
 import axios from 'axios';
 
