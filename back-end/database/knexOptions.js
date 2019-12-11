@@ -6,6 +6,7 @@ module.exports = {
     host: "localhost",
     user: "root",
     password: "root",
+    // password: "root",
     database: "anystore2019",
     // host: process.env.DB_URL,
     // user: process.env.DB_USER,

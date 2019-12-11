@@ -6,7 +6,7 @@ import StarRatings from 'react-star-ratings';
 
 export default function OnSellProduct(props) {
 
-    console.log(props);
+    // console.log(props);
 
     const Delete = () => {
         console.log(props.id);

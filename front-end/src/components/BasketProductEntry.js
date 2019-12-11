@@ -1,17 +1,22 @@
 import React from "react";
 import styles from "../CSS/BasketProductEntry.module.css";
-export default props => {
+
+
+export default function BasketProductEntry (props) {
   const data = props.data;
-// console.log(data)
+ function deleteProduct(){
+    props.deleteFromCartById(props.data.id);
+ }
   return (
-    
-    <div className={styles.main}>
-      <div className={styles.name}>{data.name}</div>
-      <div className={styles.description}>{data.description}</div>
-      <div className={styles.priceAndQuantity}>
-        <div className={styles.price}>{`Price: ${data.price}`}</div>
-        <div className={styles.quantity}>{`Quantity: ${data.amountInTheCart}`}</div>
-      </div>
-    </div>
+    <>
+      <tr>
+        <td><img className={styles.productImageInBasket} src={data.images}/> </td>
+        <td>{data.name}</td>
+        <td>In stock</td>
+        <td><input class="form-control" type="text" readOnly value={data.amountInTheCart} /></td>
+        <td class="text-right">{data.price * data.amountInTheCart} €</td>
+        <td class="text-right"><button onClick={ deleteProduct }class="btn btn-sm btn-danger">Delete</button> </td>
+      </tr>
+    </>
   );
 };

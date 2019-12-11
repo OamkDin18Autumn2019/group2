@@ -106,7 +106,6 @@ export default class Profile extends Component {
       })    
   }
 
-
   deleteProduct(id) {
     // axios.delete(`http://localhost:4000/v1/product/${id}`, {
     //   headers: {

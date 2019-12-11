@@ -39,6 +39,7 @@ export default class Header extends React.Component {
             DropDownMenu: styles.DropDownMenuCollapsed,
             ArrowState: ArrowDown,
             NavbarClass: styles.mainNav,
+            nav: styles.nav,
             // NavbarOpen: false,
             searchInput: "",
             display: this.props.location.pathname
@@ -67,9 +68,13 @@ export default class Header extends React.Component {
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
     listenScrollEvent = e => {
         if (window.scrollY > window.innerHeight - window.innerHeight / 4) {
-             this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNavExpandedScrolled ? styles.mainNavExpanded : styles.mainNavScrolled });
+            //  this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNavExpandedScrolled ? styles.mainNavScrolled : styles.mainNavExpandedScrolled });
+            this.setState({nav: styles.navScrolled})
         } else {
-            this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
+            this.setState({nav: styles.nav})
+
+
+            // this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
         }
         console.log(this.state.display);
     }
@@ -114,7 +119,7 @@ export default class Header extends React.Component {
         // }
 
             return (
-                <nav className={this.state.NavbarClass} >
+                <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
                     <div className={styles.LogoDiv}>
                         <Link to="/"> mothersell </Link>
                     </div>
