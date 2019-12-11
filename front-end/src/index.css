@@ -20,6 +20,7 @@ code {
   --nonactive-border: #E8E8E8;
   --dark:#333;
   --light:#fff;
+  --danger: red;
   --shadow:0 1px 5px rgba(104, 104, 104, 0.8);
   --font-family-sans-serif: "Montserrat", "Roboto", Helvetica, Arial, sans-serif;
 }

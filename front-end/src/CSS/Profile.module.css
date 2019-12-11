@@ -1,21 +1,21 @@
-.profileImg {
+/* .profileImg {
   width: 40px;
   justify-content: center;
   align-content: center;
 }
 .edit {
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s; /* Safari 
   transition-duration: 0.4s;
   min-width: 50%;
-  background-color: rgb(76, 175, 79); /* Green */
+  background-color: rgb(76, 175, 79); /* Green 
   border: none;
   color: white;
   padding: 20px;
   text-align: center;
   text-decoration: none;
-  /* display: inline-block; */
+  display: inline-block; 
   font-size: 16px;
-  /* margin: 4px 2px; */
+  margin: 4px 2px; 
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
@@ -27,7 +27,7 @@
   width: 50%;
 }
 .edit1 a {
-  /* background-color: rgba(51, 126, 54, 0.651);*/
+  background-color: rgba(51, 126, 54, 0.651);
   color: rgb(51, 126, 53);
   font-weight: bold;
   font-size: larger;
@@ -38,18 +38,18 @@
   font-size: larger;
 }
 .delete {
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s; 
   transition-duration: 0.4s;
   min-width: 50%;
-  background-color: #f44336; /* Green */
+  background-color: #f44336; 
   border: none;
   color: white;
   padding: 20px;
   text-align: center;
   text-decoration: none;
-  /* display: inline-block; */
+  display: inline-block; 
   font-size: 16px;
-  /* margin: 4px 2px; */
+  margin: 4px 2px; 
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
@@ -65,8 +65,8 @@
   padding-top: 7%;
   padding-bottom: 3%;
 
-  /* background: url(https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); */
-  /* https://images.pexels.com/photos/3170430/pexels-photo-3170430.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 */
+  background: url(https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); 
+  https://images.pexels.com/photos/3170430/pexels-photo-3170430.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -105,10 +105,10 @@
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
-  /* background-color: #f2f2f2f3; */
-  /* box-shadow: 0 1px 5px rgba(104, 104, 104, 0.8); */
+  background-color: #f2f2f2f3; 
+  box-shadow: 0 1px 5px rgba(104, 104, 104, 0.8); 
   padding: 20px;
-  /* padding-top: 10% */
+  padding-top: 10% 
 }
 .productTable {
   border-collapse: collapse;
@@ -134,4 +134,27 @@ th {
     width: 100%;
     margin-top: 0;
   }
+} */
+
+.ProfilePage {
+  display: grid;
+  grid-template-areas: 
+  'ProfileInfo ProfileInfo ProfileInfo'
+  'SideNavBar ProfileData ProfileData';
+  margin-top: 100px;
+}
+
+.ProfileInfo {
+  display: grid;
+  grid-area: "ProfileInfo";
+}
+
+.SideNavBar {
+  display: grid;
+  grid-area: "SideNavBar";
+}
+
+.ProfileData {
+  display: grid;
+  grid-area: "ProfileData"
 }
