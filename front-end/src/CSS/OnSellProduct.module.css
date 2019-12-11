@@ -26,6 +26,12 @@
     /* white-space: nowrap; */
 }
 
+.AmountOfProduct label,
+.AmountOfRates label,
+.AmountOfSoldProduct label {
+    padding: 0;
+}
+
 .Buttons button {
     height: 50%;
     width: 100%;

@@ -5,9 +5,11 @@
 }
 
 .ButtonContainer {
+    min-width: 8em;
     right: 50px;
 }
 
 .FilterField {
+    max-width: 75%;
     margin-bottom: 5vh;
 }
