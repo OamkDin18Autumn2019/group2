@@ -112,7 +112,8 @@ export default class Header extends React.Component {
             return (
                 <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
                     <div className={styles.LogoDiv}>
-                        <Link to="/"> mothersell </Link>
+                        <Link to="/"> 
+                            <img src={'/logo-copy.png'} /> </Link>
                     </div>
                     <div className={this.state.DropDownMenu}>
                         <SearchBar
