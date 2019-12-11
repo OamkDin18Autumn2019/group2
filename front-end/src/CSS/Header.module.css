@@ -46,7 +46,7 @@ nav a:hover {
     place-self: center;
 }
 
-.logo {
+.LogoDiv img {
     width: 50%;
     max-width: 300px;
     vertical-align: middle;
