@@ -76,7 +76,7 @@ export default class Header extends React.Component {
 
             // this.setState({ NavbarClass: this.state.NavbarClass === styles.mainNav ? styles.mainNavExpanded : styles.mainNav });
         }
-        console.log(this.state.display);
+        // console.log(this.state.display);
     }
 
     // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
@@ -115,13 +115,14 @@ export default class Header extends React.Component {
 
         // const headerShower = () => {
             
-            console.log(this.state.display);
+            // console.log(this.state.display);
         // }
 
             return (
                 <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
                     <div className={styles.LogoDiv}>
-                        <Link to="/"> mothersell </Link>
+                        <Link to="/"> 
+                            <img src={'/logo-copy.png'} /> </Link>
                     </div>
                     <div className={this.state.DropDownMenu}>
                         <SearchBar
