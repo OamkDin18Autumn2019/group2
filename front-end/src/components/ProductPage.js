@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styles from "../CSS/ProductPage.module.css";
+import Loader from 'react-loader-spinner';
+import LoaderStyle from '../CSS/Loader.module.css';
 import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
 
@@ -76,7 +78,7 @@ export default class ProductPage extends Component {
                                     <div class="col-md-4 col-s-12 col-lg-5"><img class="img img-fluid" className={styles.productImg} alt="product image" src={this.state.data.images}></img></div>
                                     <div class="col-md-8 col-s-12 col-lg-7 pl-4"><div class=""> <h1 class="">{this.state.data.name}</h1></div>
                                         <div class="row"> {this.state.data.description}</div>
-                                        <div class="row py-2"><div class='my-auto'>Price:</div> <div class=""className={ styles.price }>€{this.state.data.price}</div> </div>
+                                        <div class="row py-2"><div class='my-auto'>Price:</div> <div class="" className={styles.price}>€{this.state.data.price}</div> </div>
                                         <div class="row"><StarRatings
                                             starDimension='30px'
                                             rating={this.state.data.ratingProduct}
@@ -96,13 +98,13 @@ export default class ProductPage extends Component {
                                             <span className="pr-2">Amount:</span>
                                             <button class="btn btn-danger btn-sm" onClick={this.decreaseAmount}>-</button>
                                             <span className="p-2">{this.state.amount}</span>
-                                            <button class="btn btn-info btn-sm"onClick={this.increaseAmount}>+</button>
+                                            <button class="btn btn-info btn-sm" onClick={this.increaseAmount}>+</button>
                                         </div>
                                         <div>
                                             {this.checkCart}
                                             {/* <button className="btn btn-primary mr-2">Buy now</button> */}
                                             <button className="mr-2 btn btn-success btn-lg" onClick={this.addToCart}>Put into cart</button>
-                                            <button class ="btn btn-primary btn-lg" onClick={() => this.props.history.goBack()}>Go back</button>
+                                            <button class="btn btn-primary btn-lg" onClick={() => this.props.history.goBack()}>Go back</button>
 
                                         </div>
                                     </div>
@@ -142,16 +144,26 @@ export default class ProductPage extends Component {
         else {
             return (
                 <>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-3">
-                                <div className="h-100 border border-secondary">
-                                    <img className="h-100 w-100 no-gutters m-0" src="https://i2.wp.com/stevecorn.com/wp-content/uploads/2019/04/empty.jpg?fit=786%2C410&ssl=1" />
+                <Loader 
+            type="Triangle"
+            color="#000"
+            height={150}
+            width={150}
+            timeout={99000}
+            className={LoaderStyle.Loader}
+          />
+                    <div className={styles.background}>
+                        <div className={styles.main}>
+                            <div class="container ">
+                                <div className={styles.mainCon}>
+                                    <div class="row">
+                                        <h2 class="text-justify mx-auto  pl-4"> There is no product with such id</h2>
+                                        <div class="col-12">
+                                            <img alt="cat" class="img-fluid mx-auto d-block col-md-6" src="https://yt3.ggpht.com/a/AGF-l78MImGNB_OC916gqlmdX4vkRIewWdt-1dgIJg=s900-c-k-c0xffffffff-no-rj-mo"></img>
+                                            <button class="btn  btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col border border-secondary p-4">
-                                <div>Nothing's here.</div>
-                                <div>You see this message because there's no such product.</div>
                             </div>
                         </div>
                     </div>

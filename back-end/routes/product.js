@@ -102,7 +102,7 @@ router.put("/changeRating/:id", function(req, res, next) {
       } else {
         update = {
           amountOfRates: rows[0].amountOfRates + 1,
-          ratingProduct: (req.body.ratingProduct + rows[0].ratingProduct) / 2
+          ratingProduct: (req.body.ratingProduct + rows[0].ratingProduct * rows[0].amountOfRates) / (1 + rows[0].amountOfRates)
         };
       }
       product.update(id, update, {
