@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 import { Link } from 'react-router-dom';
 import styles from '../CSS/OnSellProduct.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
@@ -6,12 +7,26 @@ import StarRatings from 'react-star-ratings';
 
 export default function OnSellProduct(props) {
 
-    // console.log(props);
+    console.log(props);
 
-    const Delete = () => {
-        console.log(props.id);
+    const deleteProduct = (e) => {
+        e.preventDefault();
+        console.log(props.token);
+        axios.delete(`http://localhost:4000/v1/product/${props.id}`, {
+          headers: {
+            'x-access-token': props.token
+          }
+        })
+          .then(res => {
+            console.log(res)
+            this.componentDidUpdate()
+          })
+          .catch(err => {
+            console.log(err);
+            return null;
+          })
     }
-
+    
     return(
         <>
         <div className={styles.OnSellProduct}>
@@ -43,7 +58,7 @@ export default function OnSellProduct(props) {
                 </div>
                 <div className={styles.Buttons}>
                     <Link to={`/editProduct/${props.id}`}> <button className={ButtonStyles.EditButton}> Edit </button></Link>
-                    <button onClick={Delete} className={ButtonStyles.DeleteButton}>Delete</button>
+                    <button onClick={deleteProduct} className={ButtonStyles.DeleteButton}>Delete</button>
                 </div>
             </div>
         </div>

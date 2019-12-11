@@ -1,0 +1,13 @@
+.OnSellHeader {
+    display: grid;
+    grid-template-columns: 80% 20%;
+
+}
+
+.ButtonContainer {
+    right: 50px;
+}
+
+.FilterField {
+    margin-bottom: 5vh;
+}

@@ -24,12 +24,13 @@ export default class Profile extends Component {
       currentSaleItems: [],
       historyItems: [],
       userInfo: [],
-      showActiveTab: OnSellProducts
+      showActiveTab: OnSellProducts,
+      token: this.props.user.token
     };
   }
 
   componentDidMount() {
-    // let idProduct = parseInt(this.props.match.params.id);
+    console.log(this.props.user.token);
     axios.get(`http://localhost:4000/v1/user/da/getHistory`, {
       headers: {
         'x-access-token': this.props.user.token
@@ -76,10 +77,10 @@ export default class Profile extends Component {
   }
   
   TabLoader = () => {
-    // console.log(ActiveTab);
+    console.log(this.props.user);
     const Name = this.state.showActiveTab;
-    console.log(<Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />);
-    return <Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />
+    // console.log(<Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />);
+    return <Name token={this.state.token} currentSaleItems={this.state.currentSaleItems} deleteFunction={this.deleteProduct} historyItems={this.state.historyItems} />
   }
 
   TabPickHandler = (event) => {
@@ -106,22 +107,6 @@ export default class Profile extends Component {
       })    
   }
 
-  deleteProduct(id) {
-    // axios.delete(`http://localhost:4000/v1/product/${id}`, {
-    //   headers: {
-    //     'x-access-token': this.props.user.token
-    //   }
-    // })
-    //   .then(res => {
-    //     console.log(res)
-    //     this.componentDidUpdate()
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //     return null;
-    //   })
-  }
-
   render() {
 
     return (
@@ -144,9 +129,9 @@ export default class Profile extends Component {
               <h5 className={styles.Username}>  {this.state.userInfo[0].username} </h5>
               <h6 className={styles.Email}> {this.state.userInfo[0].email} </h6>
             </div>
-            <div className={styles.DescriptionBox}>
+            {/* <div className={styles.DescriptionBox}>
               <input className={InputStyles.Description} type="text" placeholder="Tell them why they should fear you!" value={this.state.userInfo.description}/>
-            </div>
+            </div> */}
             <div className={styles.BasicStatistics}>
               <div className={styles.BasicStatisticsElement}>
                 <label> Your rating </label>
@@ -174,8 +159,8 @@ export default class Profile extends Component {
           <div className={styles.SideNavBar}>
             <ul className={styles.SideBarUL}>
               <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </span> </li>
-              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li>
               <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li>
+              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li>
             </ul>
           </div>
           <div className={styles.ProfileData}>

@@ -117,10 +117,6 @@ textarea {
     border: 1px solid var(--primary);
 }
 
-.FilterField {
-    margin-bottom: 5vh;
-}
-
 /* .InputText {
     width: 100%;
     padding: 12px;
