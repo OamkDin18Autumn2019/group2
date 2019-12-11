@@ -19,6 +19,11 @@ export default function Analytics() {
                     Graph3
                 </div>
             </div>
+            <div className={styles.AnalyticsElement}>
+                <div className={styles.Graph1}>
+                    Graph3
+                </div>
+            </div>
         </>
     )
 }
