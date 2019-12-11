@@ -74,10 +74,10 @@ var product = {
   },
 
   getById: async function (id, callback) {
-    console.log(id);
+    // console.log(id);
     return knex
       .from("products")
-      .select('products.id','products.idUser','name','discount','description','ratingProduct','price','amountOfProduct','amountOfSoldProduct','images','username','products.created_at','products.updated_at')
+      .select('products.id','products.idUser','name','discount','description','products.amountOfRates','ratingProduct','price','amountOfProduct','amountOfSoldProduct','images','username','products.created_at','products.updated_at')
       .innerJoin('users','products.idUser','users.id')
       .where("products.id", id)
       .then(data => {
