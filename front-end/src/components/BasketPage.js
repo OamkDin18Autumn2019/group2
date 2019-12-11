@@ -81,12 +81,12 @@ export default class BasketPage extends Component {
                               <th scope="col">Available</th>
                               <th scope="col" class="text-center">Quantity</th>
                               <th scope="col" class="text-right">Price</th>
-                              <th> </th>
+                              <th> Delete from the cart</th>
                             </tr>
                           </thead>
                           <tbody>
                             {this.props.cart.map((entry, i) => (
-                              <BasketProductEntry key={i} data={entry} />
+                              <BasketProductEntry deleteFromCartById={ this.props.deleteFromCartById }key={i} data={entry} />
                             ))}
                             <tr> 
                               <td></td>
