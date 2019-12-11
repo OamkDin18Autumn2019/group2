@@ -237,7 +237,7 @@ body {
 .ProfileData {
   display: grid;
   margin-top: 2vh;
-  margin-left: 5vw;
+  /* margin-left: 5vw; */
   grid-area: ProfileData;
   background-color: transparent;
 }
