@@ -151,12 +151,12 @@ nav a:hover {
         transition: all 0.4s ease-in-out;
     }
     .mainNavExpanded {
-        height: 28%;
-        max-height: 28%;
+        height: 32%;
+        max-height: 32%;
     }
     .mainNav {
-        height: 10%;
-        max-height: 20%;
+        height: 13%;
+        max-height: 28%;
     }
     .DropDownMenuCollapsed, .DropDownMenuExpanded {
         display: grid;

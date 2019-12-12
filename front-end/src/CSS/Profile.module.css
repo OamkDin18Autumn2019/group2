@@ -232,12 +232,38 @@ body {
 
 }
 
-/* ProfileData classes */
-
 .ProfileData {
   display: grid;
+  width: 60vw;
   margin-top: 2vh;
-  margin-left: 5vw;
+  /* margin-left: 5vw; */
   grid-area: ProfileData;
   background-color: transparent;
+}
+
+@media(max-width: 700px) {
+  .ProfilePage {
+    grid-template-areas: 
+      'ProfileInfo'
+      'SideNavBar' 
+      'ProfileData';
+    
+  }
+
+  .SideNavBar {
+    border: 0;
+    /* border-bottom: 2px solid var(--dark); */
+    position: static;
+  }
+
+  .SideNavBar ul {
+    display: grid;
+    grid-template-columns: 32vw 32vw 32vw;
+    margin-left: 0.75em;
+    margin-right: 0.75em;
+    place-items: center;
+    padding: 0 6px;
+    padding-bottom: 0.75em;
+    border-bottom: 2px solid var(--dark);
+  }
 }
