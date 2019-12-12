@@ -2,37 +2,29 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 var logger = require("morgan");
-var cors = require('cors');
+var cors = require("cors");
 
-var app = express();
+const app = express();
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static(__dirname + "/public"));
+app.use("/static", express.static("images"));
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/user");
 var productsRouter = require("./routes/product");
 // var historyRouter = require("./routes/history")
-var searchRouter =  require("./routes/search");
+var searchRouter = require("./routes/search");
 var tagRouter = require("./routes/tag");
 var categoryRouter = require("./routes/category");
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+const imagesRouter = require("./routes/images");
 
 app.use("/v1/", indexRouter);
 app.use("/v1/user", usersRouter);
@@ -40,6 +32,7 @@ app.use("/v1/product", productsRouter);
 app.use("/v1/search", searchRouter);
 app.use("/v1/tag", tagRouter);
 app.use("/v1/category", categoryRouter);
+app.use("/v1/uploads", imagesRouter);
 
 const isAuth = require("./middlewares/isAuth");
 app.get("/protected", isAuth, (req, res, next) => {

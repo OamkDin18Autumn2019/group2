@@ -73,7 +73,6 @@ export default class Header extends React.Component {
         } else {
             this.setState({nav: styles.nav});
         }
-        // console.log(this.state.display);
     }
 
     // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
@@ -109,11 +108,6 @@ export default class Header extends React.Component {
         // console.log(this.props.user);
 
         // console.log(this.props.location.pathname);
-
-        // const headerShower = () => {
-            
-            // console.log(this.state.display);
-        // }
 
             return (
                 <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
