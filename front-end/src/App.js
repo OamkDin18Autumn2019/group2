@@ -94,8 +94,8 @@ export default class App extends React.Component {
       .post(`http://localhost:4000/v1/user/login`, { user })
       .then(async res => {
         // console.log(res);
-        console.log(res.data);
-        await saveToken(res.data.token());
+        // console.log(res.data);
+        // await saveToken(res.data.token());
         this.setState({
           user: {
             username: un,

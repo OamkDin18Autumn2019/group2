@@ -2,7 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from '../CSS/SearchPage.module.css';
 import StarRatings from 'react-star-ratings';
-
+import { FiFilter } from 'react-icons/fi';
+import { FaRegFile } from 'react-icons/fa';
+import { IconContext } from "react-icons";
 import Header from './Header';
 import Footer from './Footer';
 
@@ -110,10 +112,31 @@ export default class SearchPage extends React.Component {
     render() {
         return (
             <>
+            <div class="container flex-column">
+                <div class='row'>
+                    <div class="col-md-2">  
+                    <IconContext.Provider value={{ size: "2.5em" }}>
+                                    <FiFilter />
+                    </IconContext.Provider>
+                    filters are here
+                    <hr/>
+                    </div>
+                    <div class="col-md-10">
+                    <IconContext.Provider value={{ size: "2em" }}>
+                                    <FaRegFile />
+                    </IconContext.Provider>
+
+                        Results are here
+                        <hr/>
+                        </div>
+                   
+                        
+                </div>
+            </div>
                 {/* <Header user={this.props.user} {... this.props}></Header> */}
-                <div className={styles.Container}>
+                {/* <div class="container" >
                     <div className="row">
-                        <div className={`col-2 ${styles.Filters}`}>
+                        <div className={`col-md-2 ${styles.Filters}`}>
                             <form className="mx-auto">
                                 <div className="form-group container border border-secondary border-box rounded">
                                     <b><a href="#" data-toggle="collapse" data-target="#price">&#9660; Sort by price</a></b>
@@ -131,15 +154,11 @@ export default class SearchPage extends React.Component {
                                 </div>
                             </form>
                         </div>
-
-
-
-
-                        <div className="col-10 m-0 mx-auto">
+                        <div className="col-md-10 m-0 mx-auto">
                             {this.state.data.map((item, index) => <VerticalProductDisplay {...item} key={index} ></VerticalProductDisplay>)}
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <Footer></Footer>
             </>
         )
