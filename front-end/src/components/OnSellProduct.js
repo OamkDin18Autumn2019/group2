@@ -49,7 +49,7 @@ export default function OnSellProduct(props) {
                         rating={props.rating}
                         starHoverColor='#6CCF6D'
                         starRatedColor='#19B51B'
-                        starEmptyColor='black'
+                        starEmptyColor='lightgray'
                         numberOfStars={5}
                         starSpacing='1px'
                     /> 

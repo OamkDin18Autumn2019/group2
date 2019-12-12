@@ -2,6 +2,10 @@ body {
   background-color: var(--light);
 }
 
+.Container {
+  /* background: url(https://66.media.tumblr.com/5c6c0ac84e3d530eedb7aecb68bd9c4d/tumblr_pa4ishAvv01s865f6o1_r1_500.jpg); */
+}
+
 .ProfilePage {
   display: grid;
   grid-template-areas: 
@@ -27,6 +31,7 @@ body {
   width: 20vw;
   background-color: transparent;
   height: 36vh;
+  border-bottom: 3px solid var(--dark);
 }
 
 
@@ -88,7 +93,7 @@ body {
   top: 11vh;
   width: 20vw;
   padding-right: 5vw;
-  height: 12vh;
+  height: 8vh;
   margin-top: 2vh;
   /* padding-right: 1vw; */
   background-color: transparent;

@@ -3,11 +3,13 @@
     grid-template-columns: 1fr 2fr 10vw;
     width: 100%;
     padding: 0.5em;
-    border: 3px solid var(--dark);
+    /* border: 3px solid var(--dark); */
+    border-radius: 5px;
+    box-shadow: var(--shadow);
 }
 
 .Image {
-    border: 1px solid var(--dark);
+    /* border: 1px solid var(--dark); */
     width: 18em;
     height: 10em;
 }
