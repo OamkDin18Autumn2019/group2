@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from "../CSS/Analytics.module.css";
 
-export default function Analytics() {
+export default function Analytics(props) {
+
+    console.log(props);
+
     return (
         <>
             <div className={styles.AnalyticsElement}>

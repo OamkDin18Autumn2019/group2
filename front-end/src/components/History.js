@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import HistoryItem from './HistoryItem'
-import styles from '../CSS/Header.module.css';
 import classNames from 'classnames';
+import styles from '../CSS/OnSellProducts.module.css';
 import InputStyles from '../CSS/InputFields.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
-import SearchLogo from '../icons/icons8_search_50px.png';
 
 export default function History(props) {
 
@@ -22,9 +22,14 @@ export default function History(props) {
 
     return (
         <>
-            <div>
-                <div className={InputStyles.SearchContainer}>
-                    <input type="search" placeholder="Filter your products" className={InputStyles.Search} onChange={SearchHandler} value={filter} />
+            <div className={styles.OnSellHeader}>
+                <div className={styles.FilterField}>
+                    <div className={InputStyles.SearchContainer}>
+                        <input type="search" placeholder="Filter your products" className={InputStyles.Search} onChange={SearchHandler} value={filter} />
+                    </div>
+                </div>
+                <div className={styles.ButtonContainer}>
+                    <Link to={`/createProduct`}> <button className={ButtonStyles.CreateButton}> Add a product </button></Link>
                 </div>
             </div>
            { props.historyItems.filter(archivedItem => 

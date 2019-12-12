@@ -46,7 +46,7 @@ nav a:hover {
     place-self: center;
 }
 
-.logo {
+.LogoDiv img {
     width: 50%;
     max-width: 300px;
     vertical-align: middle;
@@ -151,12 +151,12 @@ nav a:hover {
         transition: all 0.4s ease-in-out;
     }
     .mainNavExpanded {
-        height: 28%;
-        max-height: 28%;
+        height: 32%;
+        max-height: 32%;
     }
     .mainNav {
-        height: 10%;
-        max-height: 20%;
+        height: 13%;
+        max-height: 28%;
     }
     .DropDownMenuCollapsed, .DropDownMenuExpanded {
         display: grid;

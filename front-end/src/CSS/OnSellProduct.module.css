@@ -1,8 +1,44 @@
 .OnSellProduct {
     display: grid;
-    /* grid-template-columns: 1fr 3fr; */
+    grid-template-columns: 1fr 2fr 10vw;
+    width: 90%;
+    padding: 0.5em;
+    border: 3px solid var(--dark);
+}
+
+.Image {
+    border: 1px solid var(--dark);
+    width: 18em;
+    height: 10em;
 }
 
 .ProductInfo {
-    
+    display: grid;
+    margin-left: 2vw;
 }
+
+.AmountOfProduct,
+.AmountOfRates,
+.AmountOfSoldProduct {
+    display: grid;
+    grid-template-columns: 50% 40% 10%;
+    align-items: center;
+    /* white-space: nowrap; */
+}
+
+.AmountOfProduct label,
+.AmountOfRates label,
+.AmountOfSoldProduct label {
+    padding: 0;
+}
+
+.Buttons button {
+    height: 50%;
+    width: 100%;
+}
+
+.Buttons button a {
+    text-decoration: none;
+    color: var(--dark);
+}
+
