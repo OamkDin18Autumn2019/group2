@@ -5,7 +5,7 @@ import InputStyles from "../CSS/InputFields.module.css";
 import ButtonStyles from "../CSS/Buttons.module.css";
 import classNames from "classnames";
 import ImageUploader from "react-images-upload";
-
+import { uploadImage } from "../Utilities/ImageUploadUtility";
 export default class CreateProduct extends Component {
   constructor(props) {
     super(props);
@@ -105,6 +105,11 @@ export default class CreateProduct extends Component {
     })
       .then(result => console.log(result))
       .catch(err => console.log(err)) */
+  };
+
+  uploadImageToWeb = async e => {
+    e.preventDefault();
+    uploadImage(e);
   };
 
   render() {
@@ -252,7 +257,7 @@ export default class CreateProduct extends Component {
                 <div className={styles.col_25}>
                   <label htmlFor="subject">Description</label>
                 </div>
-                <ImageUploader
+                {/* <ImageUploader
                   withIcon={true}
                   buttonText="Choose images"
                   onChange={this.onDrop}
@@ -260,7 +265,13 @@ export default class CreateProduct extends Component {
                   maxFileSize={5242880}
                   withPreview={true}
                   singleImage={true}
-                />
+                /> */}
+
+                <input
+                  type="file"
+                  name="productImage"
+                  onChange={e => this.uploadImageToWeb(e)}
+                ></input>
                 <div className={styles.col_75}>
                   <textarea
                     className={classNames(

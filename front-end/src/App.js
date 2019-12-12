@@ -114,11 +114,11 @@ export default class App extends React.Component {
   };
 
   initalPage = async routerProps => {
-    console.log("token", await getToken());
     const token = await getToken();
     token == null
       ? console.log("no token found")
       : (this.state.user.token = token);
+    console.log("token", this.state.user.token);
     const landingPage = <LandingPage user={this.state.user} {...routerProps} />;
     const profilePage = <Profile user={this.state.user} {...routerProps} />;
     return this.state.token == "" ? landingPage : profilePage;
@@ -139,7 +139,9 @@ export default class App extends React.Component {
           <Route
             path="/"
             exact
-            render={routerProps => this.initalPage(routerProps)}
+            render={routerProps => (
+              <LandingPage user={this.state.user} {...routerProps} />
+            )}
           />
           <Route
             path="/createProduct"
