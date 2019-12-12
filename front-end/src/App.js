@@ -95,7 +95,7 @@ export default class App extends React.Component {
       .then(async res => {
         // console.log(res);
         console.log(res.data);
-        await saveToken(res.data.token());
+        // await saveToken(res.data.token());
         this.setState({
           user: {
             username: un,
@@ -113,16 +113,16 @@ export default class App extends React.Component {
       });
   };
 
-  initalPage = async routerProps => {
-    const token = await getToken();
-    token == null
-      ? console.log("no token found")
-      : (this.state.user.token = token);
-    console.log("token", this.state.user.token);
-    const landingPage = <LandingPage user={this.state.user} {...routerProps} />;
-    const profilePage = <Profile user={this.state.user} {...routerProps} />;
-    return this.state.token == "" ? landingPage : profilePage;
-  };
+  // initalPage = async routerProps => {
+  //   const token = await getToken();
+  //   token == null
+  //     ? console.log("no token found")
+  //     : (this.state.user.token = token);
+  //   console.log("token", this.state.user.token);
+  //   const landingPage = <LandingPage user={this.state.user} {...routerProps} />;
+  //   const profilePage = <Profile user={this.state.user} {...routerProps} />;
+  //   return this.state.token == "" ? landingPage : profilePage;
+  // };
 
   render() {
     return (

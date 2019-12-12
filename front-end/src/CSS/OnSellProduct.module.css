@@ -1,7 +1,7 @@
 .OnSellProduct {
     display: grid;
     grid-template-columns: 1fr 2fr 10vw;
-    width: 90%;
+    width: 100%;
     padding: 0.5em;
     border: 3px solid var(--dark);
 }
