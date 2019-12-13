@@ -1,34 +1,8 @@
-.Container {
-    margin-top: 10%;
-    padding-left: 10%;
-    padding-right: 10%;
-    min-height: 75vh;
-    /* background: url(https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); */
+.test {
+    /* background-color: blue;
+    padding: 2%;
+    widows: 100%;
+    min-height: 80vh;
+    height: 100%; */
 }
 
-.SearchBar {
-    grid-area: search;
-    background-color: rgb(128, 255, 128);
-}
-
-.SearchBar > input {
-    width: 80%;
-    margin-left: 10%;
-}
-
-.Filters {
-    
-}
-
-
-.Img {
-    max-height: 200px;
-    border: solid 2px black;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin: 0px;
-}
-
-.Info {
-    
-}
