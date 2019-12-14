@@ -13,7 +13,7 @@ const uploadImage = async e => {
   try {
     console.log("uploading image...", e.target.files[0]);
     const res = await axios.post(URL, imageForm, config);
-    return { res };
+    return res.data.filename;
   } catch (err) {
     console.log(err);
     return { err };

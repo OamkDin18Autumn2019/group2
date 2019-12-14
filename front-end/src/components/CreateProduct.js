@@ -14,7 +14,8 @@ export default class CreateProduct extends Component {
       name: "",
       price: 0,
       tags: [],
-      images: "",
+      image: null,
+      imageUrl: null,
       category: "",
       description: "",
       amountOfProduct: 0,
@@ -78,7 +79,7 @@ export default class CreateProduct extends Component {
       name: this.state.name,
       price: this.state.price,
       tags: this.state.tags.map(x => x.id).toString(),
-      images: this.state.images,
+      images: this.state.imageUrl,
       category: this.state.category,
       description: this.state.description,
       amountOfProduct: this.state.amountOfProduct
@@ -109,7 +110,17 @@ export default class CreateProduct extends Component {
 
   uploadImageToWeb = async e => {
     e.preventDefault();
-    uploadImage(e);
+    let newState = this.state;
+    newState.image = e.target.files[0];
+    this.setState({
+      ...newState
+    });
+    console.log(this.state);
+    const imageUploadRes = await uploadImage(e);
+    console.log(imageUploadRes);
+    newState = this.state;
+    newState.imageUrl = imageUploadRes;
+    this.setState({ ...newState });
   };
 
   render() {
@@ -215,7 +226,7 @@ export default class CreateProduct extends Component {
                   />
                 </div>
               </div>
-              <div className={styles.row}>
+              {/* <div className={styles.row}>
                 <div className={styles.col_25}>
                   <label htmlFor="images">Images </label>
                 </div>
@@ -231,7 +242,7 @@ export default class CreateProduct extends Component {
                     placeholder="Put the link here..."
                   />
                 </div>
-              </div>
+              </div> */}
               <div className={styles.col_75}>
                 <div className={styles.col_25}>
                   <label htmlFor="category">Category</label>
@@ -267,11 +278,28 @@ export default class CreateProduct extends Component {
                   singleImage={true}
                 /> */}
 
-                <input
-                  type="file"
-                  name="productImage"
-                  onChange={e => this.uploadImageToWeb(e)}
-                ></input>
+                <div className={styles.row}>
+                  <div className={styles.col_25}>
+                    <label htmlFor="images">Image </label>
+                  </div>
+                  {this.state.image == null ? (
+                    <input
+                      display={this.state.image == null ? "visible" : "none"}
+                      type="file"
+                      name="productImage"
+                      onChange={e => this.uploadImageToWeb(e)}
+                      accept="image/png, image/jpeg, image/jpg"
+                    ></input>
+                  ) : (
+                    <img
+                      width="100"
+                      height="100"
+                      alt="Product image"
+                      src={URL.createObjectURL(this.state.image)}
+                    ></img>
+                  )}
+                </div>
+
                 <div className={styles.col_75}>
                   <textarea
                     className={classNames(
