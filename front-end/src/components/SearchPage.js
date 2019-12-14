@@ -1,36 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from '../CSS/SearchPage.module.css';
-import StarRatings from 'react-star-ratings';
-
+import { FiFilter } from 'react-icons/fi';
+import { FaRegFile } from 'react-icons/fa';
+import { IconContext } from "react-icons";
 import Header from './Header';
 import Footer from './Footer';
-
-function VerticalProductDisplay(props) {
-    return (
-        <div className="row mb-5 no-gutters">
-            <div className="col-1"></div>
-            <img className={`col-2 ${styles.Img}`} alt="decorative" src={props.images}></img>
-            <div className={`col ${styles.Info}`}>
-                <div className="pl-5 pt-3">
-                    <b className="mb-2">{props.name}</b>
-                    <div className="my-2">
-                        <StarRatings
-                            rating={props.ratingProduct}
-                            starDimension="25px"
-                            starRatedColor="yellow"
-                            starEmptyColor="lightgray"
-                        />
-                    </div>
-                    <div className="mb-2">${props.price}</div>
-                    <div className="mb-2">Description: {props.description}</div>
-
-                </div>
-            </div>
-        </div>
-    )
-}
-
+import VerticalProductDisplay from './SearchProductDisplay';
 /**
  * This function is to remove commas, dots and duplicated spaces
  * @param {str} str String
@@ -92,28 +68,70 @@ export default class SearchPage extends React.Component {
 
 
     highestPrice = (event) => {
-            this.setState({ data: this.state.data.sort((a, b) => { return b.price - a.price }) });
+        this.setState({ data: this.state.data.sort((a, b) => { return b.price - a.price }) });
     }
 
     lowestPrice = (event) => {
-            this.setState({data: this.state.data.sort((a,b) => {return a.price-b.price})});
+        this.setState({ data: this.state.data.sort((a, b) => { return a.price - b.price }) });
     }
 
     highestRatings = (event) => {
-            this.setState({ data: this.state.data.sort((a, b) => { return b.ratingProduct - a.ratingProduct }) });
+        this.setState({ data: this.state.data.sort((a, b) => { return b.ratingProduct - a.ratingProduct }) });
     }
 
     lowestRatings = (event) => {
-            this.setState({ data: this.state.data.sort((a, b) => { return a.ratingProduct - b.ratingProduct }) });
+        this.setState({ data: this.state.data.sort((a, b) => { return a.ratingProduct - b.ratingProduct }) });
     }
 
     render() {
         return (
             <>
+                <div className={styles.background}>
+                    <div class="container flex-column pt-5 ">
+                        <div className={styles.test}>
+                            <div class='row'>
+                                <div class="col-md-2 col-sm-12">
+                                    <div class="row ml-3">
+                                        <IconContext.Provider value={{ size: "1.5em" }}>
+                                            <FiFilter />
+                                        </IconContext.Provider>
+                                        <h4 class="ml-2">Filters</h4>
+                                    </div>
+
+                                    <hr />
+                                    <div class="mb-5">
+                                        <h4>By price</h4>
+                                        <div id="price" className="collapse show mb-3">
+                                            <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.highestPrice} ></input>Highest price</div>
+                                            <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.lowestPrice} ></input>Lowest price</div>
+                                        </div>
+                                        <h4>By rating</h4>
+                                        <div id="ratings" className="collapse show">
+                                            <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.highestRatings} ></input>Highest ratings</div>
+                                            <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.lowestRatings} ></input>Lowest ratings</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-sm-12">
+                                    <div class="row ml-3">
+                                        <IconContext.Provider value={{ size: "1.5em" }}>
+                                            <FaRegFile />
+                                        </IconContext.Provider>
+                                        <h4 class="ml-2">Results</h4>
+                                    </div>
+                                    <hr />
+                                    <div className="col-md-10 m-0 mx-auto">
+                                        {this.state.data.map((item, index) => <VerticalProductDisplay {...item} key={index} ></VerticalProductDisplay>)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {/* <Header user={this.props.user} {... this.props}></Header> */}
-                <div className={styles.Container}>
+                {/* <div class="container" >
                     <div className="row">
-                        <div className={`col-2 ${styles.Filters}`}>
+                        <div className={`col-md-2 ${styles.Filters}`}>
                             <form className="mx-auto">
                                 <div className="form-group container border border-secondary border-box rounded">
                                     <b><a href="#" data-toggle="collapse" data-target="#price">&#9660; Sort by price</a></b>
@@ -131,16 +149,13 @@ export default class SearchPage extends React.Component {
                                 </div>
                             </form>
                         </div>
-
-
-
-
-                        <div className="col-10 m-0 mx-auto">
+                        <div className="col-md-10 m-0 mx-auto">
                             {this.state.data.map((item, index) => <VerticalProductDisplay {...item} key={index} ></VerticalProductDisplay>)}
                         </div>
                     </div>
-                </div>
-                <Footer></Footer>
+                </div> */}
+                {/* <div> class</div> */}
+                {/* <Footer></Footer> */}
             </>
         )
     }

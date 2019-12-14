@@ -6,6 +6,9 @@ module.exports = {
     host: "localhost",
     user: "root",
     // password: "root",
+    database: "anystore2019",
+
+    // password: "root",
     // database: "anystore2019",
     password: "root",
     port: 8889,
