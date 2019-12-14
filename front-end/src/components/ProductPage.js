@@ -122,16 +122,18 @@ export default class ProductPage extends Component {
         else {
             return (
                 <>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-3">
-                                <div className="h-100 border border-secondary">
-                                    <img className="h-100 w-100 no-gutters m-0" src="https://i2.wp.com/stevecorn.com/wp-content/uploads/2019/04/empty.jpg?fit=786%2C410&ssl=1" />
+                    <div className={styles.backgroundNo}>
+                        <div className={styles.mainNo}>
+                            <div class="container">
+                                <div className={styles.mainCon}>
+                                    <div class="row p-2">
+                                        <h2 class="text-justify mx-auto"> There is no product with such an ID</h2>
+                                        <div class="col-12">
+                                            <img alt="cat" class="img-fluid mx-auto d-block" src="https://telegram.org.ru/uploads/posts/2017-03/1490200280_28.png"></img>
+                                            <button class="btn mt-2 btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col border border-secondary p-4">
-                                <div>Nothing's here.</div>
-                                <div>You see this message because there's no such product.</div>
                             </div>
                         </div>
                     </div>

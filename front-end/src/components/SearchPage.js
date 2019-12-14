@@ -130,6 +130,7 @@ export default class SearchPage extends React.Component {
                                             <h3>No search results</h3>
                                             <h4> You found only this beautiful cat</h4>
                                         <img src="https://www.pinclipart.com/picdir/big/57-576568_pusheen-cat-clipart.png" class="img img-fluid col-md-6"></img>
+                                        <h6>P.S it's priceless</h6>
                                             </div>
                                         
                                         </div>
