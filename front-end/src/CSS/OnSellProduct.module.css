@@ -5,6 +5,8 @@
     padding: 0.5em;
     /* border: 3px solid var(--dark); */
     border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.9;
     box-shadow: var(--shadow);
 }
 
@@ -17,6 +19,16 @@
 .ProductInfo {
     display: grid;
     margin-left: 2vw;
+}
+
+.OldPrice {
+    text-decoration: line-through;
+}
+
+.NewPrice {
+    display: block;
+    background-color: var(--danger);
+    font-size: 1.2em;
 }
 
 .AmountOfProduct,
@@ -35,11 +47,11 @@
 }
 
 .Buttons button {
-    height: 50%;
+    height: 49%;
     width: 100%;
 }
 
-.Buttons button a {
+.Buttons a {
     text-decoration: none;
     color: var(--dark);
 }

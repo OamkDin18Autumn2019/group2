@@ -7,7 +7,7 @@ import StarRatings from 'react-star-ratings';
 
 export default function OnSellProduct(props) {
 
-    console.log(props.id);
+    console.log(props);
 
     const deleteProduct = (e) => {
         e.preventDefault();
@@ -40,8 +40,21 @@ export default function OnSellProduct(props) {
             </div>
             <div className={styles.ProductInfo}>
                 <div className={styles.Name}>
-                    <h3> {props.name} </h3> 
-                    <p> {props.price} €</p>
+                    <h3> {props.name} </h3>
+                    <div>
+                        {
+                        props.discount !== 0 ? (
+                            <>
+                                <p className={styles.OldPrice}> {props.price} €</p>
+                                <p className={styles.NewPrice}> {props.price * (100/props.discount)} </p>
+                            </>
+                        ) : (
+                            <>
+                                <p> {props.price} € </p>
+                            </>
+                        )
+                        }
+                    </div>
                 </div>
                 <div className={styles.Rating}>
                     <StarRatings
@@ -70,7 +83,7 @@ export default function OnSellProduct(props) {
                 </div>
             </div>
             <div className={styles.Buttons}>
-                <button className={ButtonStyles.EditButton}> <Link to={`/editProduct/${props.id}`}> Edit </Link> </button>
+                <Link to={`/editProduct/${props.id}`}> <button className={ButtonStyles.EditButton}> Edit  </button> </Link>
                 <button onClick={deleteProduct} className={ButtonStyles.DeleteButton}>Delete</button>
             </div>
         </div>

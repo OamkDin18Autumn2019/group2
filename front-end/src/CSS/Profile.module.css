@@ -3,7 +3,10 @@ body {
 }
 
 .Container {
-  /* background: url(https://66.media.tumblr.com/5c6c0ac84e3d530eedb7aecb68bd9c4d/tumblr_pa4ishAvv01s865f6o1_r1_500.jpg); */
+  background: url(../images/White_Smartphone_Beside_Silver_Laptop_Computer.jpg);
+  background-size: cover;
+  background-position: center;
+  /* background-repeat: no-repeat; */
 }
 
 .ProfilePage {
@@ -29,9 +32,12 @@ body {
   'ProfileInfoNames'
   'BasicStatistics';
   width: 20vw;
-  background-color: transparent;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.9;
   height: 36vh;
-  border-bottom: 3px solid var(--dark);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+  /* border-bottom: 3px solid var(--dark); */
 }
 
 
@@ -96,8 +102,11 @@ body {
   height: 8vh;
   margin-top: 2vh;
   /* padding-right: 1vw; */
-  background-color: transparent;
-  border-right: 2px solid black;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.9;
+  /* border-right: 2px solid black; */
+  border-radius: 5px;
+  box-shadow: var(--shadow);
 }
 
 .SideNavBar ul {
