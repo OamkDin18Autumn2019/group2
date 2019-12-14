@@ -109,6 +109,7 @@ var product = {
       .select()
       .limit(10)
       .orderBy("created_at", "desc")
+      .where('amountOfProduct', ">", 0)
       .then(data => {
         callback.then(data);
       })
@@ -123,6 +124,7 @@ var product = {
       .select()
       .limit(10)
       .orderBy("amountOfSoldProduct", "desc")
+      .where('amountOfProduct', ">", 0)
       .then(data => {
         callback.then(data);
       })
@@ -137,6 +139,7 @@ var product = {
       .select()
       .limit(10)
       .orderBy("discount", "desc")
+      .where('amountOfProduct', ">", 0)
       .then(data => {
         callback.then(data);
       })

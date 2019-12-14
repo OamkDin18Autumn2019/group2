@@ -38,16 +38,24 @@ export default class ProductPage extends Component {
             })
     }
     increaseAmount = () => {
-        let temporary_amount = this.state.amount;
-        temporary_amount++;
-        this.setState({ amount: temporary_amount })
+        if(this.state.amount < this.state.data.amountOfProduct)
+        {
+            let temporary_amount = this.state.amount;
+            temporary_amount++;
+            this.setState({ amount: temporary_amount })
+        }
+      
     }
     decreaseAmount = () => {
-        let temporary_amount = this.state.amount;
-        if (temporary_amount > 1) {
-            temporary_amount--;
+        if (this.state.amount !== 1)
+        {
+            let temporary_amount = this.state.amount;
+            if (temporary_amount > 1) {
+                temporary_amount--;
+            }
+            this.setState({ amount: temporary_amount })
         }
-        this.setState({ amount: temporary_amount })
+      
     }
     checkCart = () => {
         this.props.cart.forEach(item => {
@@ -58,9 +66,7 @@ export default class ProductPage extends Component {
     }
     addToCart = (event) => {
         event.preventDefault();
-        //   this.props.addToCartGlobal
         this.props.addToCartGlobal({ ...this.state.data }, this.state.amount)
-        // console.log(this.props );
 
     }
     render() {
