@@ -49,7 +49,7 @@ export default function Footer() {
                 <div className={styles.FooterElementBottom}>
                     <div>
                         <h5>
-                            We support these methods of payment
+                            We would like to support these methods of payment
                         </h5>
                     </div>
                     <div className={styles.PaymentMethods}>

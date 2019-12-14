@@ -1,34 +1,38 @@
-.Container {
-    margin-top: 10%;
-    padding-left: 10%;
-    padding-right: 10%;
-    min-height: 75vh;
-    /* background: url(https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); */
+.test {
+    background-color: rgb(255, 255, 255);
+    padding: 2%;
+    widows: 100%;
+    min-height: 80vh;
+    height: 100%;
+    border-radius: 5px;
+    -webkit-box-shadow: 8px 4px 5px 0px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow:    8px 4px 5px 0px rgba(0, 0, 0, 0.22);
+    box-shadow:         8px 4px 5px 0px rgba(0, 0, 0, 0.22);
 }
 
-.SearchBar {
-    grid-area: search;
-    background-color: rgb(128, 255, 128);
-}
+.background {
+    padding: 3% 0;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    width: 100vw;
+    top:0px; 
+    bottom: 0px;
+    height: 100%;
+    /* z-index: 0; */
+    background-repeat: repeat;
+    position: fixed;
+    overflow-y: scroll;
+    /* overflow-x: auto; */
+    /* background-attachment: scroll; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: url(https://images.pexels.com/photos/892617/pexels-photo-892617.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  }
+  @media(max-width: 400px) {
+   .background {
+    padding: 14% 0;
 
-.SearchBar > input {
-    width: 80%;
-    margin-left: 10%;
-}
-
-.Filters {
-    
-}
-
-
-.Img {
-    max-height: 200px;
-    border: solid 2px black;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin: 0px;
-}
-
-.Info {
-    
+   }
 }
