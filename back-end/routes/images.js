@@ -37,8 +37,8 @@ const upload = multer({
 router.post("/images", upload.single("productImage"), (req, res, next) => {
   const filename = req.file.filename;
   //TODO
-  return res.json({
-    image: null
+  res.status(202).json({
+    filename
   });
 });
 
