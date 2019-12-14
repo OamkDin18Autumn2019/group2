@@ -11,7 +11,7 @@ import BasketPage from "./components/BasketPage";
 import CreateProduct from "./components/CreateProduct";
 import Profile from "./components/Profile";
 import EditProduct from "./components/EditProduct";
-import { getToken, saveToken } from "./Utilities/TokenUtility";
+import Cookie from "react-cookies";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ export default class App extends React.Component {
       user: {
         username: "",
         password: "",
-        token: ""
+        token: Cookie.load("MOTHERSELLERS")
       },
       cart: []
     };
@@ -94,8 +94,10 @@ export default class App extends React.Component {
       .post(`http://localhost:4000/v1/user/login`, { user })
       .then(async res => {
         // console.log(res);
-        // console.log(res.data);
-        // await saveToken(res.data.token());
+
+        console.log(res.data);
+        Cookie.save("MOTHERSELLERS", res.data.token, { path: "/" });
+
         this.setState({
           user: {
             username: un,
@@ -113,17 +115,6 @@ export default class App extends React.Component {
       });
   };
 
-  initalPage = async routerProps => {
-    const token = await getToken();
-    token == null
-      ? console.log("no token found")
-      : (this.state.user.token = token);
-    console.log("token", this.state.user.token);
-    const landingPage = <LandingPage user={this.state.user} {...routerProps} />;
-    const profilePage = <Profile user={this.state.user} {...routerProps} />;
-    return this.state.token == "" ? landingPage : profilePage;
-  };
-
   render() {
     return (
       <React.Fragment>
@@ -135,14 +126,24 @@ export default class App extends React.Component {
             )}
           />
 
-          {}
-          <Route
-            path="/"
-            exact
-            render={routerProps => (
-              <LandingPage user={this.state.user} {...routerProps} />
-            )}
-          />
+          {this.state.user.token ? (
+            <Route
+              path="/"
+              exact
+              render={routerProps => (
+                <Profile user={this.state.user} {...routerProps} />
+              )}
+            />
+          ) : (
+            <Route
+              path="/"
+              exact
+              render={routerProps => (
+                <LandingPage user={this.state.user} {...routerProps} />
+              )}
+            />
+          )}
+
           <Route
             path="/createProduct"
             exact
@@ -200,7 +201,6 @@ export default class App extends React.Component {
               />
             )}
           />
-
           <Route
             path="/basket"
             exact
@@ -214,7 +214,6 @@ export default class App extends React.Component {
               />
             )}
           />
-
           <Route
             path="/profile"
             exact
