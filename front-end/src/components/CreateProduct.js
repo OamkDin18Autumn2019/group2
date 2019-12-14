@@ -222,7 +222,8 @@ export default class CreateProduct extends Component {
                     id="amount"
                     onChange={this.handleChange}
                     name="amountOfProduct"
-                    placeholder="1"
+                    min="0"
+                    placeholder="0"
                   />
                 </div>
               </div>

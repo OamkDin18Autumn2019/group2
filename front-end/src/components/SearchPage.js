@@ -121,41 +121,26 @@ export default class SearchPage extends React.Component {
                                     </div>
                                     <hr />
                                     <div className="col-md-10 m-0 mx-auto">
-                                        {this.state.data.map((item, index) => <VerticalProductDisplay {...item} key={index} ></VerticalProductDisplay>)}
+                                        {
+                                            (this.state.data.length !== 0)?
+                                        this.state.data.map((item, index) => <VerticalProductDisplay {...item} key={index} ></VerticalProductDisplay>)
+                                        :
+                                        <div class="container">
+                                            <div class="text-center">
+                                            <h3>No search results</h3>
+                                            <h4> You found only this beautiful cat</h4>
+                                        <img src="https://www.pinclipart.com/picdir/big/57-576568_pusheen-cat-clipart.png" class="img img-fluid col-md-6"></img>
+                                        <h6>P.S it's priceless</h6>
+                                            </div>
+                                        
+                                        </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {/* <Header user={this.props.user} {... this.props}></Header> */}
-                {/* <div class="container" >
-                    <div className="row">
-                        <div className={`col-md-2 ${styles.Filters}`}>
-                            <form className="mx-auto">
-                                <div className="form-group container border border-secondary border-box rounded">
-                                    <b><a href="#" data-toggle="collapse" data-target="#price">&#9660; Sort by price</a></b>
-                                    <div id="price" className="collapse show">
-                                        <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.highestPrice} ></input>Highest price</div>
-                                        <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.lowestPrice} ></input>Lowest price</div>
-                                    </div>
-                                </div>
-                                <div className="form-group container my-3 border border-secondary border-box rounded">
-                                    <b><a href="#" data-toggle="collapse" data-target="#ratings">&#9660; Sort by ratings</a></b>
-                                    <div id="ratings" className="collapse show">
-                                        <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.highestRatings} ></input>Highest ratings</div>
-                                        <div><input type="radio" className="my-2 pl-4" name="x" onClick={this.lowestRatings} ></input>Lowest ratings</div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div className="col-md-10 m-0 mx-auto">
-                            {this.state.data.map((item, index) => <VerticalProductDisplay {...item} key={index} ></VerticalProductDisplay>)}
-                        </div>
-                    </div>
-                </div> */}
-                {/* <div> class</div> */}
-                {/* <Footer></Footer> */}
             </>
         )
     }

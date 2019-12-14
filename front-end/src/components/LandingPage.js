@@ -12,7 +12,9 @@ export default class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bestSellers: []
+            newArrivals: [],
+            bestSellers: [],
+            discounts:[]
         }
     }
     componentDidMount() {
@@ -20,19 +22,44 @@ export default class LandingPage extends React.Component {
         console.log(this.props.user.token)
         axios.get(`http://localhost:4000/v1/product/da/newArrivals`, {
             headers: {
-              'x-access-token':this.props.user.token 
+                'x-access-token': this.props.user.token
             }
-           })
+        })
             .then(res => {
-                // console.log(this.props.user);
-                // console.log(res.data);
-                //The following line is to check the response JSON due to the weird structure of the response
-                // console.log(res.data.rows[0]);
+                if (res.data.rows[0] !== undefined) {
+                    this.setState({ newArrivals: res.data.rows });
+                    console.log(this.state.newArrivals)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                return null;
+            })
+        axios.get(`http://localhost:4000/v1/product/da/bestSellers`, {
+            headers: {
+                'x-access-token': this.props.user.token
+            }
+        })
+            .then(res => {
                 if (res.data.rows[0] !== undefined) {
                     this.setState({ bestSellers: res.data.rows });
-                    console.log(this.state.bestSellers)
+                    console.log(this.state.newArrivals)
                 }
-
+            })
+            .catch(err => {
+                console.log(err);
+                return null;
+            })
+        axios.get(`http://localhost:4000/v1/product/da/discounts`, {
+            headers: {
+                'x-access-token': this.props.user.token
+            }
+        })
+            .then(res => {
+                if (res.data.rows[0] !== undefined) {
+                    this.setState({ discounts: res.data.rows });
+                    console.log(this.state.newArrivals)
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -53,7 +80,7 @@ export default class LandingPage extends React.Component {
                                 Curabitur nec gravida massa.
                         Aenean ut libero. </p>
                             <a href="#" className={styles.btn}> Get started </a>
-                            <div className={styles.arrowDown}>  Read more <br></br><IconContext.Provider value={{ size: "2em", opacity:"20% " }}><TiArrowDownOutline/></IconContext.Provider> </div>
+                            <div className={styles.arrowDown}>  Read more <br></br><IconContext.Provider value={{ size: "2em", opacity: "20% " }}><TiArrowDownOutline /></IconContext.Provider> </div>
 
                         </div>
                     </section>
@@ -61,59 +88,37 @@ export default class LandingPage extends React.Component {
                     <div className={styles.bestSellersBox}>
                         <div className={styles.bestSellersName}> New arrivals  </div>
                         <section className={styles.products}>
-                                {this.state.bestSellers.map((item, i) => (
-                                    <Product key={i}  {...item} user = {this.props.user} />
-                                  ))}                     
+                            {this.state.newArrivals.map((item, i) => (
+                                <Product key={i}  {...item} user={this.props.user} />
+                            ))}
                         </section>
                         {/* </div>
                 <div className={styles.bestSellersBox}> */}
                         <div className={styles.bestSellersName}> Best sellers </div>
                         <section className={styles.products}>
 
-                            <Product images="https://source.unsplash.com/random/200x211"/>
-                            <Product images="https://source.unsplash.com/random/200x202"/>
-                            <Product images="https://source.unsplash.com/random/200x203"/>
-                            <Product images="https://source.unsplash.com/random/200x204"/>
-                            <Product images="https://source.unsplash.com/random/200x205"/>
-                            <Product images="https://source.unsplash.com/random/200x206"/>
+                        {this.state.bestSellers.map((item, i) => (
+                                <Product key={i}  {...item} user={this.props.user} />
+                            ))}
 
 
                         </section>
+                        <div className={styles.bestSellersName}> Discounts </div>
+                        <section className={styles.products}>
+                        {this.state.discounts.map((item, i) => (
+                                <Product key={i}  {...item} user={this.props.user} />
+                            ))}
+                        </section>
 
 
-                        
-                <div className={ styles.bestSellersName}> New arrivals </div>
-                <section className={styles.products}>
-                  
-                <Product images="https://source.unsplash.com/random/200x201"/>
-                            <Product images="https://source.unsplash.com/random/211x242"/>
-                            <Product images="https://source.unsplash.com/random/220x203"/>
-                            <Product images="https://source.unsplash.com/random/230x204"/>
-                            <Product images="https://source.unsplash.com/random/240x205"/>
-                            <Product images="https://source.unsplash.com/random/250x206"/>
-                    
 
-                </section>
-                <div className={ styles.bestSellersName}> Discounts </div>
-                <section className={styles.products}>
-                <Product images="https://source.unsplash.com/random/222x201"/>
-                            <Product images="https://source.unsplash.com/random/213x202"/>
-                            <Product images="https://source.unsplash.com/random/202x203"/>
-                            <Product images="https://source.unsplash.com/random/203x204"/>
-                            <Product images="https://source.unsplash.com/random/204x205"/>
-                            <Product images="https://source.unsplash.com/random/205x206"/>
-
-                </section>
-                
-
-
-                <section className={styles.middleContainer}>
-                    <header className={styles.showCaseMiddle}>
-                        <h1>We are universal</h1>
-                        <p> Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit.
-                            Curabitur nec gravida massa.
-
+                        <section className={styles.middleContainer}>
+                            <header className={styles.showCaseMiddle}>
+                                <h1>We are universal</h1>
+                                <p> Lorem ipsum dolor sit amet,
+                                    consectetur adipiscing elit.
+                                    Curabitur nec gravida massa.
+        
                         Aenean ut libero. </p>
                                 <a href="#" className={styles.btn}> Buy now </a>
                             </header>
