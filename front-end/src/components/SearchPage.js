@@ -87,12 +87,12 @@ export default class SearchPage extends React.Component {
         return (
             <>
                 <div className={styles.background}>
-                    <div class="container flex-column mt-5 px-4">
+                    <div class="container flex-column pt-5 ">
                         <div className={styles.test}>
                             <div class='row'>
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-sm-12">
                                     <div class="row ml-3">
-                                        <IconContext.Provider value={{ size: "2.5em" }}>
+                                        <IconContext.Provider value={{ size: "1.5em" }}>
                                             <FiFilter />
                                         </IconContext.Provider>
                                         <h4 class="ml-2">Filters</h4>
@@ -112,9 +112,9 @@ export default class SearchPage extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-10 col-sm-12">
                                     <div class="row ml-3">
-                                        <IconContext.Provider value={{ size: "2em" }}>
+                                        <IconContext.Provider value={{ size: "1.5em" }}>
                                             <FaRegFile />
                                         </IconContext.Provider>
                                         <h4 class="ml-2">Results</h4>
@@ -154,7 +154,8 @@ export default class SearchPage extends React.Component {
                         </div>
                     </div>
                 </div> */}
-                <Footer></Footer>
+                {/* <div> class</div> */}
+                {/* <Footer></Footer> */}
             </>
         )
     }

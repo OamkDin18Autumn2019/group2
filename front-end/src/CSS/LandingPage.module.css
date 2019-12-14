@@ -30,6 +30,7 @@ img {
 }
 
 .wrapper {
+    background-color: var(--background-primary);
     display: grid;
     grid-gap: 20px;
 }
