@@ -310,7 +310,7 @@ There is also the same img in @media which changes automatically to 100%
     grid-gap: 20px;
     /* background-color: var(--background-primary); */
     scroll-snap-type: x mandatory;
-    grid-template-columns: repeat(auto-fit, minmax( 200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax( 250px, 1fr));
 }
 
 .products img {

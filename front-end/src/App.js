@@ -131,7 +131,7 @@ export default class App extends React.Component {
               path="/"
               exact
               render={routerProps => (
-                <Profile user={this.state.user} {...routerProps} />
+                <LandingPage user={this.state.user} {...routerProps} />
               )}
             />
           ) : (

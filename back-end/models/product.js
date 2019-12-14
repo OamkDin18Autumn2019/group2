@@ -107,8 +107,36 @@ var product = {
     return knex
       .from("products")
       .select()
-      .limit(8)
+      .limit(10)
       .orderBy("created_at", "desc")
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+  },
+
+  getBestSellers: async function(callback) {
+    return knex
+      .from("products")
+      .select()
+      .limit(10)
+      .orderBy("amountOfSoldProduct", "desc")
+      .then(data => {
+        callback.then(data);
+      })
+      .catch(err => {
+        callback.catch(err);
+      });
+  },
+
+  getDiscounts: async function(callback) {
+    return knex
+      .from("products")
+      .select()
+      .limit(10)
+      .orderBy("discount", "desc")
       .then(data => {
         callback.then(data);
       })
