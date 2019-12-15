@@ -81,7 +81,12 @@ export default class ProductPage extends Component {
                                     <div class="col-md-8 col-s-12 col-lg-7 pl-5"><div class=""> <h1 class="">{this.state.data.name}</h1></div>
                                         <div class="row"> {this.state.data.description}</div>
                                         <div class="row py-2"><div class='my-auto'>Price:</div>
+                                        {(this.state.data.discount !== 0) ?
                                             <div className={styles.price}>€{this.state.data.price - this.state.data.price * this.state.data.discount / 100} (-{this.state.data.discount}%)</div>
+                                            :
+                                            <div className={styles.price}>€{this.state.data.price }</div>
+
+                                        }
                                         </div>
                                         <div class="row"><StarRatings
                                             starDimension='30px'

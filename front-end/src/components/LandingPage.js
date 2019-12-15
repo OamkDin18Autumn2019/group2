@@ -75,10 +75,9 @@ export default class LandingPage extends React.Component {
                     <section className={styles.topContainer}>
                         <div className={styles.showCase}>
                             <h1> We can sell everything</h1>
-                            <p> Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit.
-                                Curabitur nec gravida massa.
-                        Aenean ut libero. </p>
+                            <p> Here you can put your products for selling
+                                or buy something from other people
+                                 </p>
                             <a href="#" className={styles.btn}> Get started </a>
                             <div className={styles.arrowDown}>  Read more <br></br><IconContext.Provider value={{ size: "2em", opacity: "20% " }}><TiArrowDownOutline /></IconContext.Provider> </div>
 
