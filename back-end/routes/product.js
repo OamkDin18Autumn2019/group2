@@ -152,6 +152,27 @@ router.get("/da/newArrivals/", function(req, res, next) {
     }
   });
 });
+router.get("/da/bestSellers/", function(req, res, next) {
+  product.getBestSellers({
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
+
+router.get("/da/discounts/", function(req, res, next) {
+  product.getDiscounts({
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
 
 router.get("/da/currentSellings/", isAuth, function(req, res, next) {
   // console.log(req.user.id)
