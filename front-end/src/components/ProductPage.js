@@ -38,24 +38,22 @@ export default class ProductPage extends Component {
             })
     }
     increaseAmount = () => {
-        if(this.state.amount < this.state.data.amountOfProduct)
-        {
+        if (this.state.amount < this.state.data.amountOfProduct) {
             let temporary_amount = this.state.amount;
             temporary_amount++;
             this.setState({ amount: temporary_amount })
         }
-      
+
     }
     decreaseAmount = () => {
-        if (this.state.amount !== 1)
-        {
+        if (this.state.amount !== 1) {
             let temporary_amount = this.state.amount;
             if (temporary_amount > 1) {
                 temporary_amount--;
             }
             this.setState({ amount: temporary_amount })
         }
-      
+
     }
     checkCart = () => {
         this.props.cart.forEach(item => {
@@ -82,7 +80,9 @@ export default class ProductPage extends Component {
                                     <div class="col-md-4 col-s-12 col-lg-5"><img class="img img-fluid" className={styles.productImg} alt="product image" src={this.state.data.images}></img></div>
                                     <div class="col-md-8 col-s-12 col-lg-7 pl-5"><div class=""> <h1 class="">{this.state.data.name}</h1></div>
                                         <div class="row"> {this.state.data.description}</div>
-                                        <div class="row py-2"><div class='my-auto'>Price:</div> <div className={ styles.price }>€{this.state.data.price}</div> </div>
+                                        <div class="row py-2"><div class='my-auto'>Price:</div>
+                                            <div className={styles.price}>€{this.state.data.price - this.state.data.price * this.state.data.discount / 100} (-{this.state.data.discount}%)</div>
+                                        </div>
                                         <div class="row"><StarRatings
                                             starDimension='30px'
                                             rating={this.state.data.ratingProduct}
@@ -102,13 +102,13 @@ export default class ProductPage extends Component {
                                             <span className="pr-2">Amount:</span>
                                             <button class="btn btn-secondary btn-sm" onClick={this.decreaseAmount}>-</button>
                                             <span className="p-2">{this.state.amount}</span>
-                                            <button class="btn btn-info btn-sm"onClick={this.increaseAmount}>+</button>
+                                            <button class="btn btn-info btn-sm" onClick={this.increaseAmount}>+</button>
                                         </div>
                                         <div>
                                             {this.checkCart}
                                             {/* <button className="btn btn-primary mr-2">Buy now</button> */}
                                             <button className="mr-2 btn btn-info mt-1 btn-lg" onClick={this.addToCart}>Put into cart</button>
-                                            <button class ="btn btn-info mt-1 btn-lg" onClick={() => this.props.history.goBack()}>Go back</button>
+                                            <button class="btn btn-info mt-1 btn-lg" onClick={() => this.props.history.goBack()}>Go back</button>
 
                                         </div>
                                     </div>

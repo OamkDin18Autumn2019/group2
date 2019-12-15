@@ -31,6 +31,9 @@ export default class App extends React.Component {
       ...product,
       amountInTheCart: amountOfProduct
     };
+    if(productToCart.discount !== 0){
+       productToCart.price = productToCart.price - productToCart.price * productToCart.discount / 100
+    }
     console.log(currentCart, this.state.cart);
 
     if (this.state.cart.length == 0) {
