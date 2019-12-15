@@ -21,7 +21,7 @@
       padding-left: 0.5rem;
       font-weight: 700;
       font-size: xx-large;
-      color: rgb(255, 115, 0);
+      /* color: rgb(255, 115, 0); */
   }
   .background {
     padding: 10% 0;
@@ -59,7 +59,9 @@
     /* padding: 3%; */
     width: 100%;
     /* margin-top: 5%; */
-    box-shadow: var(--shadow);
+    -webkit-box-shadow: 8px 4px 5px 0px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow:    8px 4px 5px 0px rgba(0, 0, 0, 0.22);
+    box-shadow:         8px 4px 5px 0px rgba(0, 0, 0, 0.22);
     background-color: rgba(255, 255, 255, 0.959);
   }
   
