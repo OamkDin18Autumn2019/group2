@@ -22,6 +22,7 @@ export default class App extends React.Component {
         password: "",
         token: Cookie.load("MOTHERSELLERS")
       },
+      rememberMe: false,
       cart: []
     };
   }
@@ -84,7 +85,7 @@ export default class App extends React.Component {
     console.log(this.state.cart);
   };
 
-  handleSubmit = async (un, pw) => {
+  handleSubmit = async (un, pw, rm) => {
     const user = {
       username: un,
       password: pw
@@ -96,8 +97,10 @@ export default class App extends React.Component {
         // console.log(res);
 
         console.log(res.data);
-        Cookie.save("MOTHERSELLERS", res.data.token, { path: "/" });
-
+        if (rm) {
+          console.log("Remember me is active");
+          Cookie.save("MOTHERSELLERS", res.data.token, { path: "/" });
+        }
         this.setState({
           user: {
             username: un,
