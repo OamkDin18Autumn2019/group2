@@ -3,7 +3,7 @@ body {
 }
 
 .Container {
-  background: url(../images/White_Smartphone_Beside_Silver_Laptop_Computer.jpg);
+  /* background: url(../images/White_Smartphone_Beside_Silver_Laptop_Computer.jpg); */
   background-size: cover;
   background-position: center;
   /* background-repeat: no-repeat; */
