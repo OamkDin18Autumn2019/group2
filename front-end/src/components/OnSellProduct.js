@@ -40,21 +40,16 @@ export default function OnSellProduct(props) {
             </div>
             <div className={styles.ProductInfo}>
                 <div className={styles.Name}>
-                    <h3> {props.name} </h3>
-                    <div>
-                        {
-                        props.discount !== 0 ? (
-                            <>
-                                <p className={styles.OldPrice}> {props.price} €</p>
-                                <p className={styles.NewPrice}> {props.price * (100/props.discount)} </p>
-                            </>
-                        ) : (
-                            <>
-                                <p> {props.price} € </p>
-                            </>
-                        )
-                        }
-                    </div>
+                    <h3> {props.name} </h3> 
+                    {/* Nursultan it is a discount system, it touches only the calculations for 
+                        products with discount
+                    */}
+                    {
+                        (props.discount == 0) ? 
+                    <p> {props.price} €</p>
+                    :
+                    <p> {props.price - props.price * props.discount / 100} € (-{props.discount}%)</p>
+                    }
                 </div>
                 <div className={styles.Rating}>
                     <StarRatings
