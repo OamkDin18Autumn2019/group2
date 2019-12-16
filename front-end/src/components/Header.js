@@ -68,7 +68,6 @@ export default class Header extends React.Component {
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
     listenScrollEvent = e => {
         if (window.scrollY > window.innerHeight - window.innerHeight / 1.5 ) {
-            // console.log('scrolling stones')
             this.setState({nav: styles.navScrolled});
         } else {
             this.setState({nav: styles.nav});

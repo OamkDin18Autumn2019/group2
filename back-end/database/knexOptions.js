@@ -5,7 +5,7 @@ module.exports = {
   connection: {
     host: "localhost",
     user: "root",
-    password: "root",
+    // password: "root",
     database: "anystore2019",
     // password: "root",
     // database: "anystore2019",
