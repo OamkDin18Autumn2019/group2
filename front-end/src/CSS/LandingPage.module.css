@@ -102,7 +102,14 @@ There is also the same img in @media which changes automatically to 100%
     /* border-color: #DDDDDD; */
     /* box-shadow: 10px 10px 6px -6px #777777;  */
 }
-
+.column {
+    display: flex;
+    flex-direction: column;
+}
+.previousPrice {
+   margin-top: -12%;
+   color: rgba(255, 255, 255, 0.527);
+}
 .img_block .content_block {
     display: block;
     position: relative;

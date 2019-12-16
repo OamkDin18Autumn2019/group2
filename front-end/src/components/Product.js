@@ -66,7 +66,20 @@ export default class Product extends React.Component {
                         </div>
                         {/* {this.props.ratingProduct} */}
                     
-                        <span>    <Link to={`/product/${this.props.id}`}>{this.props.price}$      </Link>
+                        <span>    
+                            {
+                                (this.props.discount === 0 ) ? 
+                                <Link to={`/product/${this.props.id}`}>{this.props.price}$      </Link>
+                                :
+                                <Link to={`/product/${this.props.id}`}>
+                                    <div className={styles.column}>
+                                    {this.props.price - this.props.price * this.props.discount/100}$  
+                                    <strike className={styles.previousPrice}><i>{this.props.price}$</i></strike> 
+                                        </div> </Link>
+
+
+
+                            }
                             <div className={styles.stars}>
                               
                                     <StarRatings

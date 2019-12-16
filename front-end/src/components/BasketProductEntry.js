@@ -14,7 +14,7 @@ export default function BasketProductEntry (props) {
         <td>{data.name}</td>
         <td>In stock</td>
         <td><input class="form-control" type="text" readOnly value={data.amountInTheCart} /></td>
-        <td class="text-right">{data.price * data.amountInTheCart} €</td>
+        <td class="text-right">{data.price * data.amountInTheCart} € (-{data.discount}%)</td>
         <td class="text-right"><button onClick={ deleteProduct }class="btn btn-sm btn-danger">Delete</button> </td>
       </tr>
     </>
