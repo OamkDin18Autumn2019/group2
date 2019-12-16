@@ -1,15 +1,14 @@
 .OnSellHeader {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 75% 25%;
 
 }
 
 .ButtonContainer {
-    min-width: 8em;
-    right: 50px;
+    justify-self: end;
 }
 
 .FilterField {
-    max-width: 75%;
+    width: 70%;
     margin-bottom: 5vh;
 }

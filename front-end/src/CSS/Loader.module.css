@@ -1,5 +1,9 @@
 .Loader {
-    position: absolute;
-    left: 40%;
-    top: 40%;
+    /* position: absolute; */
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    /* left: 37%; */
+    /* top: 30%; */
 }

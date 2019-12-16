@@ -125,54 +125,46 @@ export default class Profile extends Component {
           <Loader 
             type="Triangle"
             color="#000"
-            height={150}
-            width={150}
+            height={250}
+            width={250}
             timeout={99000}
             className={LoaderStyle.Loader}
           />
         ) : (
-        <div className={styles.ProfilePage}>
-          <div className={styles.ProfileInfo}>
-            <div className={styles.ProfileInfoNames}>
-              <h5 className={styles.Username}>  {this.state.userInfo[0].username} </h5>
-              <h6 className={styles.Email}> {this.state.userInfo[0].email} </h6>
-            </div>
-            {/* <div className={styles.DescriptionBox}>
-              <input className={InputStyles.Description} type="text" placeholder="Tell them why they should fear you!" value={this.state.userInfo.description}/>
-            </div> */}
-            <div className={styles.BasicStatistics}>
-              <div className={styles.BasicStatisticsElement}>
-                <label> Your rating </label>
-                {console.log(this.state.userInfo)}
-                <StarRatings
-                        starDimension='30px'
-                        rating={this.state.userInfo[0].ratingUser}
-                        starHoverColor='#6CCF6D'
-                        starRatedColor='#19B51B'
-                        starEmptyColor='black'
-                        numberOfStars={5}
-                        starSpacing='1px'
-                />
+        <div className={styles.Container}>
+          <div className={styles.ProfilePage}>
+            <div className={styles.LinksAndPersonalData}>
+              <div className={styles.ProfileInfo}>
+                <div className={styles.ProfileInfoNames}>
+                  <h5 className={styles.Username}>  {this.state.userInfo[0].username} </h5>
+                  <h6 className={styles.Email}> {this.state.userInfo[0].email} </h6>
+                </div>
+                <div className={styles.BasicStatistics}>
+                    <label> Your rating </label>
+                    <p> {this.state.userInfo[0].ratingUser} </p>
+                    {/* {console.log(this.state.userInfo)}
+                    <StarRatings
+                            starDimension='30px'
+                            rating={this.state.userInfo[0].ratingUser}
+                            starHoverColor='#6CCF6D'
+                            starRatedColor='#19B51B'
+                            starEmptyColor='black'
+                            numberOfStars={5}
+                            starSpacing='1px'
+                    /> */}
+                </div>
               </div>
-              {/* <div className={styles.BasicStatisticsElement}>
-                <label> Products Sold </label>
-                <h6> Here lies the number of products the user sold </h6>
-              </div> */}
-              <div className={styles.BasicStatisticsElement}>
-                <label> Date of the registration </label>
-                <h6> {this.state.userInfo[0].created_at.slice(0,10)} </h6>
+              <div className={styles.SideNavBar}>
+                <ul className={styles.SideBarUL}>
+                  <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </a> </span> </li>
+                  <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li>
+                  {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li> */}
+                </ul>
               </div>
             </div>
-          </div>
-          <div className={styles.SideNavBar}>
-            <ul className={styles.SideBarUL}>
-              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> Currently on sell </a> </span> </li>
-              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li>
-              <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li>
-            </ul>
-          </div>
-          <div className={styles.ProfileData}>
-              {this.TabLoader(this.state.showActiveTab)}
+            <div className={styles.ProfileData}>
+                {this.TabLoader(this.state.showActiveTab)}
+            </div>
           </div>
         </div>
         )

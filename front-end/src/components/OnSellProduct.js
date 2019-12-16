@@ -7,7 +7,7 @@ import StarRatings from 'react-star-ratings';
 
 export default function OnSellProduct(props) {
 
-    console.log(props.id);
+    console.log(props);
 
     const deleteProduct = (e) => {
         e.preventDefault();
@@ -57,7 +57,7 @@ export default function OnSellProduct(props) {
                         rating={props.rating}
                         starHoverColor='#6CCF6D'
                         starRatedColor='#19B51B'
-                        starEmptyColor='black'
+                        starEmptyColor='lightgray'
                         numberOfStars={5}
                         starSpacing='1px'
                     /> 
@@ -78,7 +78,7 @@ export default function OnSellProduct(props) {
                 </div>
             </div>
             <div className={styles.Buttons}>
-                <button className={ButtonStyles.EditButton}> <Link to={`/editProduct/${props.id}`}> Edit </Link> </button>
+                <Link to={`/editProduct/${props.id}`}> <button className={ButtonStyles.EditButton}> Edit  </button> </Link>
                 <button onClick={deleteProduct} className={ButtonStyles.DeleteButton}>Delete</button>
             </div>
         </div>
