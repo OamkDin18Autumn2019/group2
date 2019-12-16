@@ -1,5 +1,5 @@
 import React from 'react';
-// import Header from './Header';
+import { Link } from 'react-router-dom';
 import styles from '../CSS/LandingPage.module.css';
 import { FaChartPie, FaGlobe, FaCog, FaUsers, FaArrowDown } from 'react-icons/fa';
 import { TiArrowDownOutline } from 'react-icons/ti';
@@ -78,7 +78,7 @@ export default class LandingPage extends React.Component {
                             <p> Here you can put your products for selling
                                 or buy something from other people
                                  </p>
-                            <a href="#" className={styles.btn}> Get started </a>
+                            <a href="#bestSellers" className={styles.btn}> Get started </a>
                             <div className={styles.arrowDown}>  Read more <br></br><IconContext.Provider value={{ size: "2em", opacity: "20% " }}><TiArrowDownOutline /></IconContext.Provider> </div>
 
                         </div>
@@ -91,9 +91,7 @@ export default class LandingPage extends React.Component {
                                 <Product key={i}  {...item} user={this.props.user} />
                             ))}
                         </section>
-                        {/* </div>
-                <div className={styles.bestSellersBox}> */}
-                        <div className={styles.bestSellersName}> Best sellers </div>
+                        <div id="bestSellers"  className={styles.bestSellersName}> Best sellers </div>
                         <section className={styles.products}>
 
                         {this.state.bestSellers.map((item, i) => (
@@ -111,15 +109,14 @@ export default class LandingPage extends React.Component {
 
 
 
-                        <section className={styles.middleContainer}>
+                        <section  className={styles.middleContainer}>
                             <header className={styles.showCaseMiddle}>
                                 <h1>We are universal</h1>
-                                <p> Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit.
-                                    Curabitur nec gravida massa.
-        
-                        Aenean ut libero. </p>
-                                <a href="#" className={styles.btn}> Buy now </a>
+                                <p> We don't consider only one type of product 
+                                    we let you sell whatever you want
+                                </p>
+                                <Link to={`/basket`}  className={styles.btn}>Buy now </Link>
+
                             </header>
                         </section>
 
@@ -127,40 +124,32 @@ export default class LandingPage extends React.Component {
                             <div className={styles.box}>
                                 <IconContext.Provider value={{ size: "4em" }}>
                                     <FaChartPie />
-                                    <h3> Just </h3>
-                                    <p> Lorem Lorem ipsum dolor sit amet,
-                                      consectetur adipiscing elit.
-                            Curabitur </p>
+                                    <h3> Statistics </h3>
+                                    <p> We have a great plan to replace Facebook Marketplace in future </p>
                                 </IconContext.Provider>
                             </div>
 
                             <div className={styles.box}>
                                 <IconContext.Provider value={{ size: "4em" }}>
                                     <FaGlobe />
-                                    <h3> Stupid </h3>
-                                    <p> Lorem Lorem ipsum dolor sit amet,
-                                      consectetur adipiscing elit.
-                            Curabitur </p>
+                                    <h3> Online </h3>
+                                    <p> You dont need to go to shops anymore because you can buy everything here </p>
                                 </IconContext.Provider>
                             </div>
 
                             <div className={styles.box}>
                                 <IconContext.Provider value={{ size: "4em" }}>
                                     <FaCog />
-                                    <h3> Words </h3>
-                                    <p> Lorem Lorem ipsum dolor sit amet,
-                                      consectetur adipiscing elit.
-                            Curabitur </p>
+                                    <h3> System </h3>
+                                    <p> The system is tested and verified by us. It's reliable </p>
                                 </IconContext.Provider>
                             </div>
 
                             <div className={styles.box}>
                                 <IconContext.Provider value={{ size: "4em" }}>
                                     <FaUsers />
-                                    <h3> Here </h3>
-                                    <p> Lorem Lorem ipsum dolor sit amet,
-                                      consectetur adipiscing elit.
-                            Curabitur </p>
+                                    <h3> Community  </h3>
+                                    <p> Our site is becoming more popular day by day </p>
                                 </IconContext.Provider>
                             </div>
                         </section>
@@ -172,13 +161,14 @@ export default class LandingPage extends React.Component {
                             <img src="https://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
                             <div>
                                 <h2> Start now</h2>
-                                <p> Lorem, ipsum dolor sit amet consectetur
-                                    adipisicing elit. Cum, omnis odit
-                                    provident saepe, repudiandae quo dolore
-                                    ab officiis veniam quibusdam velit nesciunt
-                                     ut atque. Eum eos illo saepe magni vitae!
+                                <p> Just register and use all our lovely 
+                                    functionalities like the ability to get new arrivals, 
+                                    best sellers or discounts. The smart search algorithm 
+                                    will help you to find everything quickly, the ability to 
+                                    control your sellings in the profile will display all the 
+                                    information needed. And this is absolutely free!
                         </p>
-                                <a href="#" className={styles.btn}> Buy something now! </a>
+                                <Link to={`/register`}  className={styles.btn}>Begin your jorney now! </Link>
                             </div>
                         </section>
                         <Footer />
