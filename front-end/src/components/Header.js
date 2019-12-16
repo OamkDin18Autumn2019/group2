@@ -116,88 +116,81 @@ export default class Header extends React.Component {
       this.setState({ display: { display: "grid" } });
       // console.log("almost not");
     }
-  }
 
-  // It changes the state of the navbar, which slides the navbar in or out
-  // NavbarClickHandler = () => {
-  //     this.setState((prevsState) => {
-  //         console.log("it works");
-  //         return {NavbarOpen: !prevsState.NavbarOpen};
-  //     });
-  // };
 
-  // When you press on the gray background when navbar is open it closes the navbar.
-  // BackdropClickHandler = () => {
-  //     this.setState({NavbarOpen: false})
-  // }
+    searchSubmitHandler = (event) => {
+        event.preventDefault();
+        //let history =  useHistory();
+        console.log("submited");
+        this.props.history.push('/search?q='+encodeURIComponent(this.state.searchInput));
+    }
 
-  render() {
-    return (
-      <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
-        <div className={styles.LogoDiv}>
-          <Link to="/">
-            <img src={"/logo-copy.png"} />{" "}
-          </Link>
-        </div>
-        <div className={this.state.DropDownMenu}>
-          <SearchBar
-            searchSubmitHandler={this.searchSubmitHandler}
-            searchInputChangeHandler={this.searchInputChangeHandler}
-            searchInput={this.state.searchInput}
-          />
-          <div className={styles.LoginRegisterButtons}>
-            {this.props.user.token ? (
-              <>
-                <button
-                  id={styles.Login}
-                  className={ButtonStyles.PrimaryButton}
-                >
-                  {" "}
-                  <Link to="/basket">
-                    {" "}
-                    <img src={BasketLogo} className={styles.Icons} />{" "}
-                  </Link>
-                </button>
-                <button
-                  id={styles.Register}
-                  className={ButtonStyles.PrimaryButton}
-                >
-                  {" "}
-                  <Link to="/profile"> Profile </Link>
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  id={styles.Login}
-                  className={ButtonStyles.PrimaryButton}
-                >
-                  {" "}
-                  <Link to="/login"> Login </Link>
-                </button>
-                <button
-                  id={styles.Register}
-                  className={ButtonStyles.PrimaryButton}
-                >
-                  {" "}
-                  <Link to="/register"> Register </Link>
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-        <span
-          className={this.state.DropDownMenuButton}
-          onClick={this.DropDownClickHandler}
-        >
-          {" "}
-          <img
-            alt="decorative"
-            src={this.state.ArrowState}
-            className={styles.Icons}
-          />{" "}
-        </span>
-      </nav>
-    );
-  }
+    // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
+    listenScrollEvent = e => {
+        if (window.scrollY > window.innerHeight - window.innerHeight / 1.5 ) {
+            this.setState({nav: styles.navScrolled});
+        } else {
+            this.setState({nav: styles.nav});
+        }
+    }
+
+    // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
+    componentDidMount() {
+        window.addEventListener('scroll', this.listenScrollEvent);
+
+        if (this.props.location.pathname == '/register' || this.props.location.pathname == '/login') {
+            this.setState({display: {display: "none" }});
+            // console.log("almost done");
+        } else {
+            this.setState({display: {display: "grid"}});
+            // console.log("almost not");
+        }
+
+    }
+
+    // It changes the state of the navbar, which slides the navbar in or out
+    // NavbarClickHandler = () => {
+    //     this.setState((prevsState) => {
+    //         console.log("it works");
+    //         return {NavbarOpen: !prevsState.NavbarOpen};
+    //     });
+    // };
+
+    // When you press on the gray background when navbar is open it closes the navbar.
+    // BackdropClickHandler = () => {
+    //     this.setState({NavbarOpen: false})
+    // }
+
+    render() {
+            return (
+                <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
+                    <div className={styles.LogoDiv}>
+                        <Link to="/"> 
+                            <img src={'/logo-copy.png'} /> </Link>
+                    </div>
+                    <div className={this.state.DropDownMenu}>
+                        <SearchBar
+                            searchSubmitHandler={this.searchSubmitHandler}
+                            searchInputChangeHandler={this.searchInputChangeHandler}
+                            searchInput={this.state.searchInput}
+                        />
+                        <div className={styles.LoginRegisterButtons}>
+                            { this.props.user.username ? (
+                                    <>
+                                        <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
+                                        <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
+                                    </>
+                                ) : (
+                                    <>
+                                        <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/login" > Login </Link></button>
+                                        <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/register" > Register </Link></button>
+                                    </>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <span className={this.state.DropDownMenuButton} onClick={this.DropDownClickHandler} > <img alt="decorative" src={this.state.ArrowState} className={styles.Icons} /> </span>
+                </nav>
+            )
+        }
 }

@@ -72,7 +72,8 @@ textarea {
 .Search {
     background-color: transparent;
     width: 70%;
-    /* min-width: 150px; */
+    min-width: 11em;
+    max-width: 63vw;
     background-color: transparent;
     border: 0;
     border-bottom: 2px solid var(--dark);

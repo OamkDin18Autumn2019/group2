@@ -93,7 +93,7 @@ router.put("/changeRating/:id", function(req, res, next) {
   // console.log(req.body);
   product.getById(id, {
     then: rows => {
-      console.log(rows[0].amountOfRates);
+      // console.log(rows[0]);
       if (rows[0].amountOfRates == 0) {
         update = {
           amountOfRates: rows[0].amountOfRates + 1,
@@ -102,7 +102,7 @@ router.put("/changeRating/:id", function(req, res, next) {
       } else {
         update = {
           amountOfRates: rows[0].amountOfRates + 1,
-          ratingProduct: (req.body.ratingProduct + rows[0].ratingProduct) / 2
+          ratingProduct: (req.body.ratingProduct + rows[0].ratingProduct * rows[0].amountOfRates) / (1 + rows[0].amountOfRates)
         };
       }
       product.update(id, update, {
@@ -152,7 +152,6 @@ router.get("/da/newArrivals/", function(req, res, next) {
     }
   });
 });
-
 router.get("/da/bestSellers/", function(req, res, next) {
   product.getBestSellers({
     then: rows => {

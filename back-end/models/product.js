@@ -88,6 +88,7 @@ var product = {
         "price",
         "amountOfProduct",
         "amountOfSoldProduct",
+        "products.amountOfRates",
         "images",
         "username",
         "products.created_at",
