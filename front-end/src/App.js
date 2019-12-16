@@ -18,9 +18,9 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: {
-        username: "",
+        username: (Cookie.load("MOTHERSELLERSUSERNAME")!== '') ? Cookie.load("MOTHERSELLERSUSERNAME") : "",
         password: "",
-        token: Cookie.load("MOTHERSELLERS")
+        token: (Cookie.load("MOTHERSELLERS")!== '') ? Cookie.load("MOTHERSELLERS") : ""
       },
       rememberMe: false,
       cart: []
@@ -76,6 +76,7 @@ export default class App extends React.Component {
         break;
       }
     }
+    console.log(this.state.user)
   };
 
   updateCart = newCart => {
@@ -100,6 +101,7 @@ export default class App extends React.Component {
         if (rm) {
           console.log("Remember me is active");
           Cookie.save("MOTHERSELLERS", res.data.token, { path: "/" });
+          Cookie.save("MOTHERSELLERSUSERNAME", user.username, { path: "/" });
         }
         this.setState({
           user: {
@@ -121,6 +123,7 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
+        {console.log(this.state.user)}
         <Router>
           <Route
             path="/"
