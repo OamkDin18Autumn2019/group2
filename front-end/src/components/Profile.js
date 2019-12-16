@@ -12,11 +12,6 @@ import axios from "axios";
 import classNames from "classnames";
 
 
-// IMPORTANT TODO
-// We have to add a button/link on this page
-// to move to the place where
-// user can create a new product
-
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +39,8 @@ export default class Profile extends Component {
         console.log(err);
         return null;
       })
-    axios.get(`http://localhost:4000/v1/product/da/currentSellings/`, {
+    let userId = this.props.match.params.id
+    axios.get(`http://localhost:4000/v1/product/da/currentSellings/${userId}`, {
       headers: {
         'x-access-token': this.props.user.token
       }
@@ -57,8 +53,8 @@ export default class Profile extends Component {
       .catch(err => {
         console.log(err);
         return null;
-      })
-      axios.get(`http://localhost:4000/v1/user/`, {
+    })
+      axios.get(`http://localhost:4000/v1/user/${userId}`, {
         headers: {
           'x-access-token': this.props.user.token
         }
@@ -74,13 +70,28 @@ export default class Profile extends Component {
           console.log(err);
           return null;
         })
+        axios.get(`http://localhost:4000/v1/user/`, {
+          headers: {
+            'x-access-token': this.props.user.token
+          }
+        })
+          .then(res => {
+            console.log(res);
+            this.setState({userInfo: res.data.rows});
+            console.log(this.state.userInfo);
+            console.log(this.state.userInfo[0]);
+            console.log(this.state.userInfo[0].created_at);
+          })
+          .catch(err => {
+            console.log(err);
+            return null;
+          })
   }
   
   TabLoader = () => {
     console.log(this.props.user);
     const Name = this.state.showActiveTab;
-    // console.log(<Name currentSaleItems={this.state.currentSaleItems} historyItems={this.state.historyItems} />);
-    return <Name DeleteHandler={this.DeleteHandler} token={this.state.token} currentSaleItems={this.state.currentSaleItems} deleteFunction={this.deleteProduct} historyItems={this.state.historyItems} />
+    return <Name DeleteHandler={this.DeleteHandler} urlId={this.props.match.params.id} token={this.state.token} currentSaleItems={this.state.currentSaleItems} deleteFunction={this.deleteProduct} historyItems={this.state.historyItems} />
   }
 
   TabPickHandler = (event) => {
@@ -109,16 +120,14 @@ export default class Profile extends Component {
 
   DeleteHandler = (deleteId) => {
     let currentState = this.state.currentSaleItems;
-    const removedElement = currentState.splice(currentState.indexOf(deleteId), 1);
+    currentState.splice(currentState.indexOf(deleteId), 1);
     // console.log(removedElement);
     // console.log(currentState);
     this.setState({currentSaleItems: currentState});
   }
 
   render() {
-
     return (
-      // <Router>
         <>
         {
         !this.state.userInfo[0] ? (
@@ -131,7 +140,8 @@ export default class Profile extends Component {
             className={LoaderStyle.Loader}
           />
         ) : (
-        <div className={styles.Container}>
+        !this.props.match.params.id ? (
+          <div className={styles.Container}>
           <div className={styles.ProfilePage}>
             <div className={styles.LinksAndPersonalData}>
               <div className={styles.ProfileInfo}>
@@ -142,18 +152,9 @@ export default class Profile extends Component {
                 <div className={styles.BasicStatistics}>
                     <label> Your rating </label>
                     <p> {this.state.userInfo[0].ratingUser} </p>
-                    {/* {console.log(this.state.userInfo)}
-                    <StarRatings
-                            starDimension='30px'
-                            rating={this.state.userInfo[0].ratingUser}
-                            starHoverColor='#6CCF6D'
-                            starRatedColor='#19B51B'
-                            starEmptyColor='black'
-                            numberOfStars={5}
-                            starSpacing='1px'
-                    /> */}
                 </div>
               </div>
+              <hr></hr>
               <div className={styles.SideNavBar}>
                 <ul className={styles.SideBarUL}>
                   <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </a> </span> </li>
@@ -167,6 +168,35 @@ export default class Profile extends Component {
             </div>
           </div>
         </div>
+        ) : (
+          <div className={styles.Container}>
+          <div className={styles.ProfilePage}>
+            <div className={styles.LinksAndPersonalData}>
+              <div className={styles.ProfileInfo}>
+                <div className={styles.ProfileInfoNames}>
+                  <h5 className={styles.Username}>  {this.state.userInfo[0].username} </h5>
+                  <h6 className={styles.Email}> {this.state.userInfo[0].email} </h6>
+                </div>
+                <div className={styles.BasicStatistics}>
+                    <label> User's rating </label>
+                    <p> {this.state.userInfo[0].ratingUser} </p>
+                </div>
+              </div>
+              <hr></hr>
+              <div className={styles.SideNavBar}>
+                <ul className={styles.SideBarUL}>
+                  <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </a> </span> </li>
+                  {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li> */}
+                  {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li> */}
+                </ul>
+              </div>
+            </div>
+            <div className={styles.ProfileData}>
+                {this.TabLoader(this.state.showActiveTab)}
+            </div>
+          </div>
+        </div>
+        )
         )
         }
         </>

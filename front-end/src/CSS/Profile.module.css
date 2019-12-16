@@ -13,9 +13,13 @@ body {
   display: grid;
   grid-template-areas: 
   'LinksAndPersonalData ProfileData';
+  padding:2%;
   margin-top: var(--header-height);
   margin-left: 5vw;
   margin-right: 5vw;
+  /* border: 2px solid black; */
+  box-shadow: var(--shadow);
+  border-radius: 5px;
 }
 
 .LinksAndPersonalData {
@@ -35,8 +39,8 @@ body {
   background-color: rgb(255, 255, 255);
   opacity: 0.9;
   height: 36vh;
-  border-radius: 5px;
-  box-shadow: var(--shadow);
+  /* border-radius: 5px; */
+  /* box-shadow: var(--shadow); */
   /* border-bottom: 3px solid var(--dark); */
 }
 
@@ -103,10 +107,9 @@ body {
   margin-top: 2vh;
   /* padding-right: 1vw; */
   background-color: rgb(255, 255, 255);
-  opacity: 0.9;
+  /* opacity: 0.9; */
   /* border-right: 2px solid black; */
-  border-radius: 5px;
-  box-shadow: var(--shadow);
+  /* border-radius: 5px; */
 }
 
 .SideNavBar ul {
@@ -121,9 +124,11 @@ body {
 
 .ProfileData {
   display: grid;
-  width: 65vw;
+  width: 63.2vw;
+  /* align-self: center; */
+  justify-self: center;
   margin-top: 2vh;
-  margin-left: 5vw;
+  /* margin-left: 5vw; */
   grid-area: ProfileData;
   background-color: transparent;
 }
@@ -134,8 +139,8 @@ body {
       'ProfileInfo'
       'SideNavBar' 
       'ProfileData';
-    /* margin-left: 5vw; */
-    margin-right: 5vw;
+    /* margin-left: 0; */
+    /* margin-right: 0; */
   }
 
   .ProfileInfo {

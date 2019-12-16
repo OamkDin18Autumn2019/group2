@@ -25,18 +25,15 @@ export default function History(props) {
             <div className={styles.OnSellHeader}>
                 <div className={styles.FilterField}>
                     <div className={InputStyles.SearchContainer}>
-                        <input type="search" placeholder="Filter your products" className={InputStyles.Search} onChange={SearchHandler} value={filter} />
+                        <input type="search" placeholder="Filter products" className={InputStyles.Search} onChange={SearchHandler} value={filter} />
                     </div>
                 </div>
-                <div className={styles.ButtonContainer}>
-                    <Link to={`/createProduct`}> <button className={ButtonStyles.CreateButton}> Add a product </button></Link>
-                </div>
             </div>
-           { props.historyItems.filter(archivedItem => 
-                        (archivedItem.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
-                        return(
-                            <HistoryItem {...item} />
-                        )})
+            { props.historyItems.filter(archivedItem => 
+                (archivedItem.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
+                    return(
+                        <HistoryItem {...item} />
+                    )})
             } 
         </>
     )

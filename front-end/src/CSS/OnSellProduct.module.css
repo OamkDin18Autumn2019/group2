@@ -1,23 +1,22 @@
 .OnSellProduct {
     display: grid;
-    grid-template-columns: 1fr 2fr 10vw;
+    grid-template-areas: 
+    'Image ProductInfo Buttons';
     width: 100%;
     padding: 0.5em;
-    /* border: 3px solid var(--dark); */
-    border-radius: 5px;
     background-color: rgb(255, 255, 255);
-    opacity: 0.9;
-    box-shadow: var(--shadow);
 }
 
 .Image {
-    /* border: 1px solid var(--dark); */
-    width: 18em;
-    height: 10em;
+    grid-area: Image;
+    width: auto;
+    height: auto;
 }
 
 .ProductInfo {
+    grid-area: ProductInfo;
     display: grid;
+    width: 30vw;
     margin-left: 2vw;
 }
 
@@ -46,6 +45,10 @@
     padding: 0;
 }
 
+.Buttons {
+    grid-area: Buttons;
+}
+
 .Buttons button {
     height: 49%;
     width: 100%;
@@ -56,3 +59,14 @@
     color: var(--dark);
 }
 
+@media(max-width: 700px) {
+    .OnSellProduct {
+        grid-template-areas: 
+        'Image ProductInfo'
+        'Buttons Buttons';
+    }
+
+    .Button {
+
+    }
+}

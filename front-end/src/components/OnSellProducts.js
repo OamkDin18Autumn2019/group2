@@ -25,12 +25,19 @@ export default function OnSellProducts(props) {
             <div className={styles.OnSellHeader}>
                 <div className={styles.FilterField}>
                     <div className={InputStyles.SearchContainer}>
-                        <input type="search" placeholder="Filter your products" className={InputStyles.Search} onChange={SearchHandler} value={filter} />
+                        <input type="search" placeholder="Filter products" className={InputStyles.Search} onChange={SearchHandler} value={filter} />
                     </div>
                 </div>
-                <div className={styles.ButtonContainer}>
-                    <Link to={`/createProduct`}> <button className={ButtonStyles.CreateButton}> Add a product </button></Link>
-                </div>
+                {
+                    !props.urlId ? (
+                        <div className={styles.ButtonContainer}>
+                            <Link to={`/createProduct`}> <button className={ButtonStyles.CreateButton}> Add a product </button></Link>
+                        </div>
+                    ) : (
+                        <>
+                        </>
+                    )
+                }
             </div>
             {
             !props.currentSaleItems ? (
@@ -46,7 +53,7 @@ export default function OnSellProducts(props) {
                     props.currentSaleItems.filter(onSell => 
                         (onSell.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
                         return(
-                            <OnSellProduct DeleteHandler={props.DeleteHandler} token={props.token} {...item} />
+                            <OnSellProduct urlId={props.urlId} DeleteHandler={props.DeleteHandler} token={props.token} {...item} />
                         )})
                 )
             }

@@ -53,7 +53,7 @@ export default function OnSellProduct(props) {
                 </div>
                 <div className={styles.Rating}>
                     <StarRatings
-                        starDimension='35px'
+                        starDimension='30px'
                         rating={props.rating}
                         starHoverColor='#6CCF6D'
                         starRatedColor='#19B51B'
@@ -77,12 +77,19 @@ export default function OnSellProduct(props) {
                     </div>
                 </div>
             </div>
-            <div className={styles.Buttons}>
-                <Link to={`/editProduct/${props.id}`}> <button className={ButtonStyles.EditButton}> Edit  </button> </Link>
-                <button onClick={deleteProduct} className={ButtonStyles.DeleteButton}>Delete</button>
-            </div>
+            {
+            !props.urlId ? (
+                <div className={styles.Buttons}>
+                    <Link to={`/editProduct/${props.id}`}> <button className={ButtonStyles.EditButton}> Edit  </button> </Link>
+                    <button onClick={deleteProduct} className={ButtonStyles.DeleteButton}>Delete</button>
+                </div>
+            ) : (
+                <>
+                </>
+            )
+            }
         </div>
-        <hr/>
+        <hr style={{"width": "100%"}}></hr>
         </>
     )
 }
