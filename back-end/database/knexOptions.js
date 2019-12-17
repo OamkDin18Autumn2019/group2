@@ -6,10 +6,10 @@ module.exports = {
     host: "localhost",
     user: "root",
     // password: "root",
-    database: "anystore2019",
+    // database: "anystore2019",
     // password: "root",
-    // database: "library",
-    // password: "root",
-    // port: 8889
+    database: "library",
+    password: "root",
+    port: 8889
   }
 };
