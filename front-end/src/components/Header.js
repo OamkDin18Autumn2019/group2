@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from 'classnames';
@@ -42,7 +42,7 @@ export default class Header extends React.Component {
             nav: styles.nav,
             // NavbarOpen: false,
             searchInput: "",
-            display: this.props.location.pathname
+            backgroundColor: styles.ProfileHeader
         }
     }
     DropDownClickHandler = event => {
@@ -76,19 +76,19 @@ export default class Header extends React.Component {
     // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
     componentDidMount() {
         window.addEventListener('scroll', this.listenScrollEvent);
-
-        if (this.props.location.pathname == '/register' || this.props.location.pathname == '/login') {
-            this.setState({display: {display: "none" }});
-        } else {
-            this.setState({display: {display: "grid"}});
-        }
+        // if (this.props.location.pathname == '/profile') {
+        //     this.setState({backgroundColor: styles.Profile});
+        //     console.log(this.props.match)
+        // } else {
+        //     this.setState({backgroundColor: ""});
+        //     console.log(this.props.match)
+        // }
 
     }
-
-
     render() {
             return (
-                <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
+                // console.log("yeah");
+                <nav className={classNames(this.state.NavbarClass, this.state.nav, this.props.location.pathname === '/profile' ? (this.state.backgroundColor) : (console.log("bruh")) )}>
                     <div className={styles.LogoDiv}>
                         <Link to="/"> 
                             <img src={'/logo-copy.png'} /> </Link>

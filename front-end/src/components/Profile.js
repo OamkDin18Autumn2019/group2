@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import OnSellProducts from './OnSellProducts';
 import Analytics from './Analytics';
 import History from './History';
-import StarRatings from 'react-star-ratings';
+// import StarRatings from 'react-star-ratings';
 import Loader from 'react-loader-spinner';
 import LoaderStyle from '../CSS/Loader.module.css';
 import styles from "../CSS/Profile.module.css"; 
 import ButtonStyles from '../CSS/Buttons.module.css';
-import InputStyles from '../CSS/InputFields.module.css';
+// import InputStyles from '../CSS/InputFields.module.css';
 import axios from "axios";
-import classNames from "classnames";
+// import classNames from "classnames";
 
 
 export default class Profile extends Component {
@@ -40,6 +40,20 @@ export default class Profile extends Component {
         return null;
       })
     let userId = this.props.match.params.id
+    axios.get(`http://localhost:4000/v1/product/da/currentSellings/`, {
+      headers: {
+        'x-access-token': this.props.user.token
+      }
+    })
+      .then(res => {
+        //The following line is to check the response JSON due to the weird structure of the response
+        this.setState({ currentSaleItems: res.data.rows });
+        console.log(this.state);
+      })
+      .catch(err => {
+        console.log(err);
+        return null;
+    })
     axios.get(`http://localhost:4000/v1/product/da/currentSellings/${userId}`, {
       headers: {
         'x-access-token': this.props.user.token
