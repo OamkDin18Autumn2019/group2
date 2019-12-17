@@ -11,8 +11,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + "/public"));
-app.use("/static", express.static("images"));
+// app.use(express.static(path.resolve("./public")));
+// app.use(express.static(__dirname + "/uploads"));
+// console.log(__dirname + "/uploads");
+
+app.use(express.static("public"));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
