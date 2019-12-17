@@ -94,7 +94,7 @@ export default class Product extends React.Component {
                                 /> 
                                 <div className={styles.notification}>
                                 {
-                                    (this.props.ratingProduct == 0 && this.state.rating == null) ? 'No rates yet' : "" 
+                                    (this.props.ratingProduct === 0 && this.state.rating === null) ? 'No rates yet' : "" 
                                 }
                                 { console.log(this.state.user.username)}
                                 {/* { (this.props.user.username) ? console.log(this.props.user) : console.log('Yes')}     */}

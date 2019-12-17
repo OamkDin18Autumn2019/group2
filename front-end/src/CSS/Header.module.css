@@ -136,6 +136,12 @@ nav a:hover {
     /* width: 30px; */
 }
 
+.ProfileHeader {
+    background-color: black;
+    transition: 0.4s ease-in-out;
+
+}
+
 @media(max-width: 580px) {
     .mainNav ul li a {
         padding-bottom: 1rem;

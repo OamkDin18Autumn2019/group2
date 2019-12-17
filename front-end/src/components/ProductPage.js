@@ -77,7 +77,7 @@ export default class ProductPage extends Component {
                         <div className="container py-5">
                             <div className={styles.mainCon}>
                                 <div className="d-flex align-content-start flex-wrap p-4">
-                                    <div class="col-md-4 col-s-12 col-lg-5"><img class="img img-fluid" className={styles.productImg} alt="product image" src={this.state.data.images}></img></div>
+                                    <div class="col-md-4 col-s-12 col-lg-5"><img class="img img-fluid" className={styles.productImg} alt="product" src={this.state.data.images}></img></div>
                                     <div class="col-md-8 col-s-12 col-lg-7 pl-5"><div class=""> <h1 class="">{this.state.data.name}</h1></div>
                                         <div class="row"> {this.state.data.description}</div>
                                         <div class="row py-2"><div class='my-auto'>Price:</div>

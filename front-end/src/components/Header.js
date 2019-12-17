@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../CSS/Header.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
 import classNames from 'classnames';
@@ -42,7 +42,7 @@ export default class Header extends React.Component {
             nav: styles.nav,
             // NavbarOpen: false,
             searchInput: "",
-            display: this.props.location.pathname
+            backgroundColor: styles.ProfileHeader
         }
     }
 
@@ -79,32 +79,20 @@ export default class Header extends React.Component {
     componentDidMount() {
         window.addEventListener('scroll', this.listenScrollEvent);
 
-        if (this.props.location.pathname == '/register' || this.props.location.pathname == '/login') {
-            this.setState({display: {display: "none" }});
-            // console.log("almost done");
-        } else {
-            this.setState({display: {display: "grid"}});
-            // console.log("almost not");
-        }
+        // if (this.props.location.pathname == '/profile') {
+        //     this.setState({backgroundColor: styles.Profile});
+        //     console.log(this.props.match)
+        // } else {
+        //     this.setState({backgroundColor: ""});
+        //     console.log(this.props.match)
+        // }
 
     }
 
-    // It changes the state of the navbar, which slides the navbar in or out
-    // NavbarClickHandler = () => {
-    //     this.setState((prevsState) => {
-    //         console.log("it works");
-    //         return {NavbarOpen: !prevsState.NavbarOpen};
-    //     });
-    // };
-
-    // When you press on the gray background when navbar is open it closes the navbar.
-    // BackdropClickHandler = () => {
-    //     this.setState({NavbarOpen: false})
-    // }
-
     render() {
             return (
-                <nav className={classNames(this.state.NavbarClass, this.state.nav)}>
+                // console.log("yeah");
+                <nav className={classNames(this.state.NavbarClass, this.state.nav, this.props.location.pathname === '/profile' ? (this.state.backgroundColor) : (console.log("bruh")) )}>
                     <div className={styles.LogoDiv}>
                         <Link to="/"> 
                             <img src={'/logo-copy.png'} /> </Link>
