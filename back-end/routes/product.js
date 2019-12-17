@@ -186,4 +186,16 @@ router.get("/da/currentSellings/", isAuth, function(req, res, next) {
   });
 });
 
+router.get("/da/currentSellings/:userId", isAuth, function(req, res, next) {
+  console.log(req)
+  product.getCurrentSellings(req.params.userId, {
+    then: rows => {
+      res.status(202).json({ code: 1, rows });
+    },
+    catch: err => {
+      res.status(500).json({ code: 0, err });
+    }
+  });
+});
+
 module.exports = router;
