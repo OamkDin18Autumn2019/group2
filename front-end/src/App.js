@@ -20,7 +20,7 @@ export default class App extends React.Component {
       user: {
         username: (Cookie.load("MOTHERSELLERSUSERNAME") !== '') ? Cookie.load("MOTHERSELLERSUSERNAME") : "",
         password: "",
-        token: (Cookie.load("MOTHERSELLERSTOKEN") !== '') ? Cookie.load("MOTHERSELLERS") : ""
+        token: (Cookie.load("MOTHERSELLERS") !== '') ? Cookie.load("MOTHERSELLERS") : ""
       },
       rememberMe: false,
       cart: []

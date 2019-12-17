@@ -71,7 +71,7 @@ export default class ProductPage extends Component {
         this.setState({
             added: true
         })
-        this.props.history.goBack()
+        // this.props.history.goBack()
         // console.log(this.state.data)
     }
     render() {

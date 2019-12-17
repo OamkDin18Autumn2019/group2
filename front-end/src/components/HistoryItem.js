@@ -11,7 +11,7 @@ export default function HistoryItem(props) {
     return (
         <div className={styles.OnSellProduct}>
         <div className={styles.ImageAndDescription}>
-            <img src={props.images} className={styles.Image} alt="Padoru Padoru!" />
+            <img src={`http://localhost:4000/${props.images}`} className={styles.Image} alt="Padoru Padoru!" />
             <div className={styles.Description}>
                 <p>
                     {props.description}
