@@ -26,7 +26,7 @@ nav a:hover {
     overflow: hidden;
     z-index: 10000;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 3fr;
     transition: 0.4s all;
     /* display: block; */
     /* position: absolute; */
@@ -152,8 +152,8 @@ nav a:hover {
     }
     .mainNavExpanded {
         background-color: rgba(0, 0, 0, 0.671); 
-        height: 32%;
-        max-height: 32%;
+        height: 42%;
+        max-height: 42%;
     }
     .mainNav {
         height: 13%;
