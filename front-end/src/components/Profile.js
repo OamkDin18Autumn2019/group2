@@ -7,7 +7,6 @@ import Loader from 'react-loader-spinner';
 import LoaderStyle from '../CSS/Loader.module.css';
 import styles from "../CSS/Profile.module.css"; 
 import ButtonStyles from '../CSS/Buttons.module.css';
-import BackgroundImage from "../background-images/pens-near-keyboard-and-paper-clips-1558690.jpg";
 // import InputStyles from '../CSS/InputFields.module.css';
 import axios from "axios";
 // import classNames from "classnames";
@@ -41,37 +40,34 @@ export default class Profile extends Component {
         return null;
       })
     let userId = this.props.match.params.id
-    if (!userId) {
-      axios.get(`http://localhost:4000/v1/product/da/currentSellings/`, {
-        headers: {
-          'x-access-token': this.props.user.token
-        }
+    axios.get(`http://localhost:4000/v1/product/da/currentSellings/`, {
+      headers: {
+        'x-access-token': this.props.user.token
+      }
+    })
+      .then(res => {
+        //The following line is to check the response JSON due to the weird structure of the response
+        this.setState({ currentSaleItems: res.data.rows });
+        console.log(this.state);
       })
-        .then(res => {
-          //The following line is to check the response JSON due to the weird structure of the response
-          this.setState({ currentSaleItems: res.data.rows });
-          console.log(this.state);
-        })
-        .catch(err => {
-          console.log(err);
-          return null;
+      .catch(err => {
+        console.log(err);
+        return null;
+    })
+    axios.get(`http://localhost:4000/v1/product/da/currentSellings/${userId}`, {
+      headers: {
+        'x-access-token': this.props.user.token
+      }
+    })
+      .then(res => {
+        //The following line is to check the response JSON due to the weird structure of the response
+        this.setState({ currentSaleItems: res.data.rows });
+        console.log(this.state);
       })
-    } else {
-      axios.get(`http://localhost:4000/v1/product/da/currentSellings/${userId}`, {
-        headers: {
-          'x-access-token': this.props.user.token
-        }
-      })
-        .then(res => {
-          //The following line is to check the response JSON due to the weird structure of the response
-          this.setState({ currentSaleItems: res.data.rows });
-          console.log(this.state);
-        })
-        .catch(err => {
-          console.log(err);
-          return null;
-      })
-    }
+      .catch(err => {
+        console.log(err);
+        return null;
+    })
       axios.get(`http://localhost:4000/v1/user/${userId}`, {
         headers: {
           'x-access-token': this.props.user.token
@@ -160,7 +156,6 @@ export default class Profile extends Component {
         ) : (
         !this.props.match.params.id ? (
           <div className={styles.Container}>
-          <img src={BackgroundImage} className={styles.Image}/>
           <div className={styles.ProfilePage}>
             <div className={styles.LinksAndPersonalData}>
               <div className={styles.ProfileInfo}>
