@@ -45,7 +45,6 @@ export default class Header extends React.Component {
             display: this.props.location.pathname
         }
     }
-
     DropDownClickHandler = event => {
         this.setState({ DropDownMenuButton: this.state.DropDownMenuButton === styles.ArrowDownCollapsed ? styles.ArrowDownExpanded : styles.ArrowDownCollapsed });
         this.setState({ DropDownMenu: this.state.DropDownMenu === styles.DropDownMenuCollapsed ? styles.DropDownMenuExpanded : styles.DropDownMenuCollapsed });
@@ -56,7 +55,7 @@ export default class Header extends React.Component {
     searchInputChangeHandler = (event) => {
         event.preventDefault();
         this.setState({ searchInput: event.target.value })
-    }
+    }   
 
     searchSubmitHandler = (event) => {
         event.preventDefault();
@@ -80,26 +79,12 @@ export default class Header extends React.Component {
 
         if (this.props.location.pathname == '/register' || this.props.location.pathname == '/login') {
             this.setState({display: {display: "none" }});
-            // console.log("almost done");
         } else {
             this.setState({display: {display: "grid"}});
-            // console.log("almost not");
         }
 
     }
 
-    // It changes the state of the navbar, which slides the navbar in or out
-    // NavbarClickHandler = () => {
-    //     this.setState((prevsState) => {
-    //         console.log("it works");
-    //         return {NavbarOpen: !prevsState.NavbarOpen};
-    //     });
-    // };
-
-    // When you press on the gray background when navbar is open it closes the navbar.
-    // BackdropClickHandler = () => {
-    //     this.setState({NavbarOpen: false})
-    // }
 
     render() {
             return (
@@ -119,6 +104,8 @@ export default class Header extends React.Component {
                                     <>
                                         <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
                                         <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
+                                        <button id={styles.Register} onClick={this.props.deleteCookie} className={ButtonStyles.PrimaryButton}> <Link to="/">Logout</Link> </button> 
+
                                     </>
                                 ) : (
                                     <>

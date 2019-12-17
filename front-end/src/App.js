@@ -18,13 +18,13 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: {
-        username: (Cookie.load("MOTHERSELLERSUSERNAME")!== '') ? Cookie.load("MOTHERSELLERSUSERNAME") : "",
+        username: (Cookie.load("MOTHERSELLERSUSERNAME") !== '') ? Cookie.load("MOTHERSELLERSUSERNAME") : "",
         password: "",
-        token: (Cookie.load("MOTHERSELLERS")!== '') ? Cookie.load("MOTHERSELLERS") : ""
+        token: (Cookie.load("MOTHERSELLERSTOKEN") !== '') ? Cookie.load("MOTHERSELLERS") : ""
       },
       rememberMe: false,
       cart: []
-    };
+        };
   }
   addToCart = (product, amountOfProduct) => {
     var currentCart = this.state.cart;
@@ -32,8 +32,8 @@ export default class App extends React.Component {
       ...product,
       amountInTheCart: amountOfProduct
     };
-    if(productToCart.discount !== 0){
-       productToCart.price = productToCart.price - productToCart.price * productToCart.discount / 100
+    if (productToCart.discount !== 0) {
+      productToCart.price = productToCart.price - productToCart.price * productToCart.discount / 100
     }
     console.log(currentCart, this.state.cart);
 
@@ -60,13 +60,21 @@ export default class App extends React.Component {
         this.setState({
           cart: this.state.cart.concat(newCart)
         });
-
+        Cookie.save("MOTHERSELLERSCART", newCart, { path: "/" });
         newCart = [];
       }
     }
-    console.log(this.state.cart);
   };
-
+  deleteCookies = () => {
+    Cookie.save("MOTHERSELLERS", '', { path: "/" });
+    Cookie.save("MOTHERSELLERSUSERNAME", '', { path: "/" });
+    this.setState({
+      user: {
+        username: "",
+        token: ""
+      }
+    })
+  }
   deleteFromCartById = id => {
     let currentCart = this.state.cart;
     for (let i = 0; i < currentCart.length; i++) {
@@ -86,7 +94,6 @@ export default class App extends React.Component {
     this.setState({
       cart: newCart
     });
-    console.log(this.state.cart);
   };
 
   handleSubmit = async (un, pw, rm) => {
@@ -131,27 +138,18 @@ export default class App extends React.Component {
           <Route
             path="/"
             render={routerProps => (
-              <Header {...routerProps} user={this.state.user} />
+              <Header {...routerProps} user={this.state.user} deleteCookie={this.deleteCookies} />
             )}
           />
 
-          {this.state.user.token ? (
-            <Route
-              path="/"
-              exact
-              render={routerProps => (
-                <LandingPage user={this.state.user} {...routerProps} />
-              )}
-            />
-          ) : (
-            <Route
-              path="/"
-              exact
-              render={routerProps => (
-                <LandingPage user={this.state.user} {...routerProps} />
-              )}
-            />
-          )}
+          <Route
+            path="/"
+            exact
+            render={routerProps => (
+              <LandingPage user={this.state.user} {...routerProps} />
+            )}
+          />
+
 
           <Route
             path="/createProduct"
