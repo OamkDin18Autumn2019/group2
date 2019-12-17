@@ -7,7 +7,7 @@ module.exports = {
     user: "root",
     password: "root",
     database: "anystore2019",
-    // password: "root",
+    password: "root",
     // database: "library",
     // password: "root",
     // port: 8889

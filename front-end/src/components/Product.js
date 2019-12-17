@@ -61,7 +61,7 @@ export default class Product extends React.Component {
         return (
             <>
                 <div className={styles.img_block}>
-                    <div className={styles.content_block}><img alt="product" src={this.props.images} />
+                    <div className={styles.content_block}><img alt="product" src={`http://localhost:4000/${this.props.images}`} />
                         <div className={styles.over_block}>
                         </div>
                         {/* {this.props.ratingProduct} */}
