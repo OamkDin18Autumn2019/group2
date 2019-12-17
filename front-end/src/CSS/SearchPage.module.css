@@ -30,7 +30,7 @@
     background-size: cover;
     background: url(https://images.pexels.com/photos/892617/pexels-photo-892617.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
   }
-  @media(max-width: 400px) {
+  @media(max-width: 580px) {
    .background {
     padding: 14% 0;
 

@@ -45,7 +45,6 @@ export default class Header extends React.Component {
             backgroundColor: styles.ProfileHeader
         }
     }
-
     DropDownClickHandler = event => {
         this.setState({ DropDownMenuButton: this.state.DropDownMenuButton === styles.ArrowDownCollapsed ? styles.ArrowDownExpanded : styles.ArrowDownCollapsed });
         this.setState({ DropDownMenu: this.state.DropDownMenu === styles.DropDownMenuCollapsed ? styles.DropDownMenuExpanded : styles.DropDownMenuCollapsed });
@@ -56,7 +55,7 @@ export default class Header extends React.Component {
     searchInputChangeHandler = (event) => {
         event.preventDefault();
         this.setState({ searchInput: event.target.value })
-    }
+    }   
 
     searchSubmitHandler = (event) => {
         event.preventDefault();
@@ -68,7 +67,6 @@ export default class Header extends React.Component {
     // this function changes the background color of the header component depeneding on the position of the scrollbar on Y axis    
     listenScrollEvent = e => {
         if (window.scrollY > window.innerHeight - window.innerHeight / 1.5 ) {
-            // console.log('scrolling stones')
             this.setState({nav: styles.navScrolled});
         } else {
             this.setState({nav: styles.nav});
@@ -78,7 +76,6 @@ export default class Header extends React.Component {
     // I copied this function so I do not know what exactly it does. I suppose it "listens" to the scroll of the window
     componentDidMount() {
         window.addEventListener('scroll', this.listenScrollEvent);
-
         // if (this.props.location.pathname == '/profile') {
         //     this.setState({backgroundColor: styles.Profile});
         //     console.log(this.props.match)
@@ -88,7 +85,6 @@ export default class Header extends React.Component {
         // }
 
     }
-
     render() {
             return (
                 // console.log("yeah");
@@ -108,6 +104,8 @@ export default class Header extends React.Component {
                                     <>
                                         <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
                                         <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
+                                        <button id={styles.Register} onClick={this.props.deleteCookie} className={ButtonStyles.PrimaryButton}> <Link to="/">Logout</Link> </button> 
+
                                     </>
                                 ) : (
                                     <>
