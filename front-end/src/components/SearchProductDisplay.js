@@ -8,7 +8,7 @@ export default function VerticalProductDisplay(props) {
         <>
             <div class="container">
                 <div className="d-flex flex-wrap">
-                    <div class="col-md-4 col-s-12 col-lg-2"><img class="img img-fluid" alt="product image" src={props.images}></img></div>
+                    <div class="col-md-4 col-s-12 col-lg-2"><img class="img img-fluid" alt="product image" src={`http://localhost:4000/${props.images}`}></img></div>
                     <div class="col-md-6 col-s-10 col-lg-8 pl-4"><div class="row">  <Link to={`/product/${props.id}`}><h3 class="">{props.name}</h3></Link></div>
                         <div class="row"> {props.description}</div>
                         <div class="row">

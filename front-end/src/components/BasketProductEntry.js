@@ -10,7 +10,7 @@ export default function BasketProductEntry(props) {
   }
   return (
     <>
-      <tr>
+      <tr>  
         <td><img className={styles.productImageInBasket} src={`http://localhost:4000/${data.images}`}/> </td>
         <td>{data.name}</td>
         <td>In stock</td>
