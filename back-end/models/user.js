@@ -108,6 +108,7 @@ var user = {
     });
   },
   login: async function(user, callback) {
+    console.log("something");
     console.log(user);
     let userData = await knex
       .from("users")

@@ -18,8 +18,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: {
+        userId: (Cookie.load("MOTHERSELLERSUSERID") !== '') ? Cookie.load("MOTHERSELLERSUSERID") : "",
         username: (Cookie.load("MOTHERSELLERSUSERNAME") !== '') ? Cookie.load("MOTHERSELLERSUSERNAME") : "",
-        password: "",
         token: (Cookie.load("MOTHERSELLERSTOKEN") !== '') ? Cookie.load("MOTHERSELLERS") : ""
       },
       rememberMe: false,
@@ -70,6 +70,7 @@ export default class App extends React.Component {
     Cookie.save("MOTHERSELLERSUSERNAME", '', { path: "/" });
     this.setState({
       user: {
+        userId: "",
         username: "",
         token: ""
       }
@@ -110,19 +111,20 @@ export default class App extends React.Component {
         console.log(res.data);
         if (rm) {
           console.log("Remember me is active");
+          Cookie.save("MOTHERSELLERSUSERID", res.data.user.id, { path: "/" });
           Cookie.save("MOTHERSELLERS", res.data.token, { path: "/" });
           Cookie.save("MOTHERSELLERSUSERNAME", user.username, { path: "/" });
         }
         this.setState({
           user: {
+            userId: res.data.user.id,
             username: un,
-            password: pw,
             token: res.data.token
           }
         });
         // event.preventDefault();
         this.props.history.goBack();
-        // console.log(this.state.user);
+        console.log(this.state.user);
       })
       .catch(err => {
         console.log(err);
