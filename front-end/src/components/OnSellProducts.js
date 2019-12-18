@@ -42,19 +42,19 @@ export default function OnSellProducts(props) {
             {
             !props.currentSaleItems ? (
                 <Loader 
-                            type="Triangle"
-                            color="#000"
-                            height={150}
-                            width={150}
-                            timeout={3000}
-                            className={LoaderStyle.Loader}
+                    type="Triangle"
+                    color="#000"
+                    height={150}
+                    width={150}
+                    timeout={3000}
+                    className={LoaderStyle.Loader}
                 />
                 ) : (
                     props.currentSaleItems.filter(onSell => 
                         (onSell.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
-                        return(
-                            <OnSellProduct urlId={props.urlId} DeleteHandler={props.DeleteHandler} token={props.token} {...item} />
-                        )})
+                            return(
+                                <OnSellProduct urlId={props.urlId} DeleteHandler={props.DeleteHandler} token={props.token} {...item} />
+                            )})
                 )
             }
         </>
