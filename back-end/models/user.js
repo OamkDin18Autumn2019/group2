@@ -25,7 +25,6 @@ var user = {
           t.string("username", 255).unique();
           t.string("email", 255);
           t.string("password", 255);
-          t.integer("ratingUser").defaultTo(0);
           t.integer("amountOfRates").defaultTo(0);
           t.dateTime("created_at")
             .notNullable()

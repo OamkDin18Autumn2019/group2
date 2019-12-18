@@ -107,7 +107,7 @@ export default class Profile extends Component {
           console.log(err);
           return null;
         })
-      }   
+      }
   }
   
   TabLoader = () => {
@@ -132,10 +132,6 @@ export default class Profile extends Component {
           const ChosenComponent = component;
           console.log(ChosenComponent);
           this.setState({showActiveTab: component});
-          // if (event.target.name)
-          // this.setState({})
-          // this.TabLoader(ChosenComponent);
-          // console.log("da");
         } 
       })    
   }
@@ -146,6 +142,24 @@ export default class Profile extends Component {
     // console.log(removedElement);
     // console.log(currentState);
     this.setState({currentSaleItems: currentState});
+  }
+
+  UserRatingCounter = () => {
+      let OnSaleAmount = this.state.currentSaleItems.length;
+      let HistoryAmount = this.state.historyItems.length;
+      let OnSaleItemRatingSum = this.state.currentSaleItems.reduce((sum, item) => {
+        let newSum = sum;
+        newSum = newSum + item.ratingProduct;
+        return newSum;
+      }, 0)
+      let HistoryItemsRatingSum = this.state.historyItems.reduce((sum, item) => {
+        let newSum = sum;
+        newSum = newSum + item.ratingProduct;
+        return newSum;
+      }, 0)
+      let averageRating = (OnSaleItemRatingSum + HistoryItemsRatingSum) / (OnSaleAmount + HistoryAmount);
+      console.log(averageRating);
+      return <p> {averageRating.toFixed(1)} </p>;
   }
 
   render() {
@@ -174,14 +188,14 @@ export default class Profile extends Component {
                 </div>
                 <div className={styles.BasicStatistics}>
                     <label> Your rating </label>
-                    <p> {this.state.userInfo[0].ratingUser} </p>
+                    {this.UserRatingCounter()}
                 </div>
               </div>
               <hr></hr>
               <div className={styles.SideNavBar}>
                 <ul className={styles.SideBarUL}>
-                  <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </a> </span> </li>
-                  <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li>
+                  <li> <span className={ButtonStyles.Test}> <button id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </button> </span> </li>
+                  <li> <span className={ButtonStyles.Test}> <button id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </button> </span> </li>
                   {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li> */}
                 </ul>
               </div>
@@ -203,7 +217,7 @@ export default class Profile extends Component {
                 </div>
                 <div className={styles.BasicStatistics}>
                     <label> User's rating </label>
-                    <p> {this.state.userInfo[0].ratingUser} </p>
+                    {this.UserRatingCounter()}
                 </div>
               </div>
               <hr></hr>

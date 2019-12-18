@@ -1,3 +1,7 @@
+button:focus {
+    outline: 0;
+}
+
 .PrimaryButton {
     border: none;
     background-color: transparent;
@@ -66,6 +70,8 @@
     font-weight: bold;
     max-width: 150px;
     color: var(--primary);
+    border: 0;
+    background-color: var(--light);
     /* color: var(--dark); */
     /* mix-blend-mode: difference; */
 }
