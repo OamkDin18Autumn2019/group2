@@ -102,7 +102,7 @@ export default class EditProduct extends Component {
                 this.setState({
                     isUpdated: true
                 })
-                setTimeout(() => this.props.history.goBack(), 10000);
+                setTimeout(() => this.props.history.goBack(), 3000);
             })
             .catch(err => {
                 console.log(err);
@@ -258,7 +258,7 @@ export default class EditProduct extends Component {
                                         <img
                                             width="100"
                                             height="100"
-                                            alt="Product image"
+                                            alt="Product"
                                             src={(this.state.imageUrl !== null) ? `http://localhost:4000/${this.state.imageUrl}` : `http://localhost:4000/${this.state.images}`}
 
                                         ></img>

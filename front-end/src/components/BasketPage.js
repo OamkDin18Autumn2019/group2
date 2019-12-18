@@ -47,7 +47,7 @@ export default class BasketPage extends Component {
                 isProceeded : true
               })
               await arrayToDelete.push(this.props.cart[i]);
-              setTimeout(() => this.props.history.goBack(), 10000);
+              setTimeout(() => this.props.history.goBack(), 3000);
             })
             .catch(err => console.log(err))
         })

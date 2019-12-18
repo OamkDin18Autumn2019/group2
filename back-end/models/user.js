@@ -12,7 +12,7 @@ function generateAuthToken(id, isAdmin = false, user) {
       isAdmin
     },
     jwtKey,
-    { expiresIn: "1h" }
+    { expiresIn: "7d" }
   );
   return token;
 }
@@ -108,6 +108,7 @@ var user = {
     });
   },
   login: async function(user, callback) {
+    console.log("something");
     console.log(user);
     let userData = await knex
       .from("users")

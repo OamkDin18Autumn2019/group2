@@ -26,7 +26,7 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.user.token);
+    console.log(this.props.user);
     axios.get(`http://localhost:4000/v1/user/da/getHistory`, {
       headers: {
         'x-access-token': this.props.user.token
@@ -42,7 +42,7 @@ export default class Profile extends Component {
       })
     let userId = this.props.match.params.id
     if (!userId) {
-      axios.get(`http://localhost:4000/v1/product/da/currentSellings/`, {
+      axios.get(`http://localhost:4000/v1/product/da/currentSellings/${this.props.user.userId}`, {
         headers: {
           'x-access-token': this.props.user.token
         }
@@ -50,6 +50,7 @@ export default class Profile extends Component {
         .then(res => {
           //The following line is to check the response JSON due to the weird structure of the response
           this.setState({ currentSaleItems: res.data.rows });
+          console.log(res);
           console.log(this.state);
         })
         .catch(err => {
@@ -73,7 +74,7 @@ export default class Profile extends Component {
       })
       }
       if (!userId) {
-        axios.get(`http://localhost:4000/v1/user/`, {
+        axios.get(`http://localhost:4000/v1/user/${this.props.user.userId}`, {
           headers: {
             'x-access-token': this.props.user.token
           }
@@ -192,6 +193,7 @@ export default class Profile extends Component {
         </div>
         ) : (
           <div className={styles.Container}>
+          <img src={BackgroundImage} className={styles.Image}/>
           <div className={styles.ProfilePage}>
             <div className={styles.LinksAndPersonalData}>
               <div className={styles.ProfileInfo}>

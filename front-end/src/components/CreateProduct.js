@@ -10,7 +10,7 @@ export default class CreateProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idUser: 1,
+      idUser: this.props.user.userId,
       name: "",
       price: 0,
       tags: [],
@@ -101,7 +101,7 @@ export default class CreateProduct extends Component {
         await this.setState({
           isCreated: true
         })
-        setTimeout(() => this.props.history.goBack(), 10000);
+        setTimeout(() => this.props.history.goBack(), 3000);
       })
       .catch(err => console.log(err));
 
