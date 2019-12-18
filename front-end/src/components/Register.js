@@ -72,6 +72,7 @@ export default class Register extends React.Component {
         <img
           src={imgLink}
           className={styles.backgroundImg}
+          alt="background"
         />
         <div className={styles.Login}>
           <div className={styles.LoginForm}>
