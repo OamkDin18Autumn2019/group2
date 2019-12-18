@@ -12,7 +12,7 @@ function generateAuthToken(id, isAdmin = false, user) {
       isAdmin
     },
     jwtKey,
-    { expiresIn: "1h" }
+    { expiresIn: "7d" }
   );
   return token;
 }
