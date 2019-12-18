@@ -82,7 +82,7 @@ export default class ProductPage extends Component {
             return (
                 <div className={styles.background} >
                     <div className={styles.main}>
-                        <div className="container py-5">
+                        <div className="container py-4">
                             <div className={styles.mainCon}>
                                 <div className="d-flex align-content-start flex-wrap p-4">
                                     <div className="col-md-4 col-s-12 col-lg-5"><img className={styles.productImg} alt="product" src={`http://localhost:4000/${this.state.data.images}`}></img></div>

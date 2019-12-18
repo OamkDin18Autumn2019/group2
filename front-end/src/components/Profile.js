@@ -127,8 +127,8 @@ export default class Profile extends Component {
       console.log(event.target.className);
 
       // components.map(component => console.log(component.name));
-      components.map(component => {
-        if (component.name == event.target.name) {
+      components.forEach(component => {
+        if (component.name === event.target.name) {
           const ChosenComponent = component;
           console.log(ChosenComponent);
           this.setState({showActiveTab: component});
@@ -178,7 +178,7 @@ export default class Profile extends Component {
         ) : (
         !this.props.match.params.id ? (
           <div className={styles.Container}>
-          <img src={BackgroundImage} className={styles.Image}/>
+          <img src={BackgroundImage} className={styles.Image} alt="background"/>
           <div className={styles.ProfilePage}>
             <div className={styles.LinksAndPersonalData}>
               <div className={styles.ProfileInfo}>
@@ -207,7 +207,7 @@ export default class Profile extends Component {
         </div>
         ) : (
           <div className={styles.Container}>
-          <img src={BackgroundImage} className={styles.Image}/>
+          <img src={BackgroundImage} className={styles.Image} alt="back-ground"/>
           <div className={styles.ProfilePage}>
             <div className={styles.LinksAndPersonalData}>
               <div className={styles.ProfileInfo}>
@@ -223,7 +223,7 @@ export default class Profile extends Component {
               <hr></hr>
               <div className={styles.SideNavBar}>
                 <ul className={styles.SideBarUL}>
-                  <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </a> </span> </li>
+                  <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab === OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </a> </span> </li>
                   {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li> */}
                   {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li> */}
                 </ul>
