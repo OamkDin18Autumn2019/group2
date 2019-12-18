@@ -26,11 +26,23 @@ export default function History(props) {
                     </div>
                 </div>
             </div>
-            { props.historyItems.filter(archivedItem => 
-                (archivedItem.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
-                    return(
-                        <HistoryItem {...item} />
-                    )})
+            {
+            !props.historyItems.length ? (
+                <div class="container">
+                    <div class="text-center">
+                        <h3>No search results</h3>
+                        <h4> You found only this beautiful cat</h4>
+                        <img src="https://www.pinclipart.com/picdir/big/57-576568_pusheen-cat-clipart.png" class="img img-fluid col-md-6" alt="decoration"></img>
+                        <h6>P.S it's priceless</h6>
+                    </div>                
+                </div>
+            ) : (
+                props.historyItems.filter(archivedItem => 
+                    (archivedItem.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
+                        return(
+                            <HistoryItem {...item} />
+                        )})
+            )
             } 
         </>
     )
