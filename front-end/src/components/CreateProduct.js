@@ -101,7 +101,7 @@ export default class CreateProduct extends Component {
         await this.setState({
           isCreated: true
         })
-        setTimeout(() => this.props.history.goBack(), 10000);
+        setTimeout(() => this.props.history.goBack(), 3000);
       })
       .catch(err => console.log(err));
 
