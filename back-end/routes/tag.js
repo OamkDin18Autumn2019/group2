@@ -37,26 +37,28 @@ router.get("/name/:name?", function (req, res, next) {
     });
 });
 
+//GET tag with name like
+router.get("/namelike/:name?", function (req, res, next) {
+    tag.getByNameLike(req.params.name, {
+        then: rows => {
+            res.status(202).json({ code: 1, rows });
+        },
+        catch: err => {
+            res.status(500).json({ code: 0, err });
+        }
+    });
+});
+
 // CREATE tag
 router.post("/", async function (req, res, next) {
-    try {
-        console.log(req.body)
-        if (Array.isArray(req.body)) {
-            let results = [];
-            for (let i = 0; i < req.body.length; i++) {
-                const d = req.body[i];
-                const p = await tag.add(d);
-                results.add(p);
-            }
-        } else {
-            const p = await tag.add(d);
-            results.add(p);
+    tag.add(req.body, {
+        then: rows => {
+            res.status(202).json({ code: 1, rows });
+        },
+        catch: err => {
+            res.status(500).json({ code: 0, err });
         }
-        res.status(200).json({ results });
-    } catch (err) {
-        console.log(err)
-        res.status(400).json({ err });
-    }
+    });
 });
 
 router.delete("/:id", function (req, res, next) {

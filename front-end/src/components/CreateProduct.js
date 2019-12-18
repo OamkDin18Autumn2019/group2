@@ -30,32 +30,28 @@ export default class CreateProduct extends Component {
     fetch(`http://localhost:4000/v1/category`, { crossDomain: true })
       .then(res => res.json())
       .then(results => {
-        console.log(results.rows);
         this.setState({ categoryOptions: results.rows });
       })
       .catch(err => err);
   }
 
   handleChange = event => {
-    // console.log(this.state)
     this.setState({ [event.target.name]: event.target.value });
   };
 
   handleChangeTag = event => {
     this.setState({ tagSearchInput: event.target.value });
-    fetch(`http://localhost:4000/v1/tag/name/${event.target.value}`, {
+    fetch(`http://localhost:4000/v1/tag/namelike/${event.target.value}`, {
       crossDomain: true
     })
       .then(res => res.json())
       .then(results => {
-        console.log(results.rows);
         this.setState({ tagSuggestions: results.rows });
       })
       .catch(err => err);
   };
 
   selectTag = tag => {
-    console.log("selected tag: ", tag);
     if (!this.state.tags.find(x => x.id === tag.id)) {
       this.setState({
         tags: [...this.state.tags, tag],
@@ -66,12 +62,51 @@ export default class CreateProduct extends Component {
   };
 
   removeTag = tag => {
-    console.log("removed tag: ", tag);
     let temporaryArray = this.state.tags;
     let index = this.state.tags.findIndex(x => x.id === tag.id);
     temporaryArray.splice(index, 1);
     this.setState({ tags: temporaryArray });
   };
+
+  handleKeyDownTag = async event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      this.state.tagSuggestions.forEach(x => {
+        if (this.state.tagSearchInput === x.nameOfTag) {
+          this.selectTag(x);
+        }
+      });
+      if (!this.state.tagSuggestions.find(x => x.nameOfTag === this.state.tagSearchInput) && this.state.tagSearchInput !== "") {
+        await fetch('http://localhost:4000/v1/tag', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            nameOfTag: this.state.tagSearchInput,
+          })
+        })
+          .then(res => res.json())
+          .then(result => console.log(result))
+          .catch(err => err);
+
+        await fetch(`http://localhost:4000/v1/tag/namelike/${this.state.tagSearchInput}`, {
+          crossDomain: true
+        })
+          .then(res => res.json())
+          .then(results => {
+            results.rows.forEach(x => {
+              if (this.state.tagSearchInput === x.nameOfTag) {
+                this.selectTag(x);
+              }
+            })
+          })
+          .catch(err => err);
+      }
+    }
+  }
 
   createProduct = event => {
     event.preventDefault();
@@ -86,7 +121,6 @@ export default class CreateProduct extends Component {
       amountOfProduct: this.state.amountOfProduct
     };
     product = JSON.stringify(product);
-    console.log("create product: ", product);
     fetch(`http://localhost:4000/v1/product/`, {
       method: "POST",
       headers: {
@@ -101,7 +135,7 @@ export default class CreateProduct extends Component {
         await this.setState({
           isCreated: true
         })
-        setTimeout(() => this.props.history.goBack(), 3000);
+        setTimeout(() => this.props.history.push('/profile'), 3000);
       })
       .catch(err => console.log(err));
 
@@ -144,6 +178,7 @@ export default class CreateProduct extends Component {
                       id="name"
                       name="name"
                       placeholder="Name.."
+                      onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
                     />
                   </div>
                 </div>
@@ -161,6 +196,7 @@ export default class CreateProduct extends Component {
                       name="price"
                       min="0"
                       placeholder="0"
+                      onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
                     />
                   </div>
                 </div>
@@ -173,7 +209,7 @@ export default class CreateProduct extends Component {
                           {tag.nameOfTag}
                           <button
                             className={styles.removeTagButton}
-                            onClick={() => this.removeTag(tag)}
+                            onClick={(event) => {event.preventDefault(); this.removeTag(tag)}}
                           >
                             x
                         </button>
@@ -190,6 +226,8 @@ export default class CreateProduct extends Component {
                       name="tags"
                       placeholder="Find a tag..."
                       value={this.state.tagSearchInput}
+                      onKeyPress={this.handleKeyDownTag}
+                      autoComplete="off"
                     />
                   </div>
                   <div
@@ -203,12 +241,13 @@ export default class CreateProduct extends Component {
                       <button
                         key={index}
                         className={styles.tagSuggestions}
-                        onClick={() => this.selectTag(tag)}
+                        onClick={(event) => {event.preventDefault(); this.selectTag(tag)}}
                       >
                         {tag.nameOfTag}
                       </button>
                     ))}
                   </div>
+                  <small style={{color: "gray"}}>If the tag you are looking for is not available, just press Enter and it will be added</small>
                 </div>
                 <div className={styles.row}>
                   <div className={styles.col_25}>
@@ -224,6 +263,7 @@ export default class CreateProduct extends Component {
                       name="amountOfProduct"
                       min="0"
                       placeholder="0"
+                      onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
                     />
                   </div>
                 </div>
@@ -281,6 +321,7 @@ export default class CreateProduct extends Component {
                       name="description"
                       placeholder="Write something about your selling .."
                       styles={{ height: 300 }}
+                      onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
                     ></textarea>
                   </div>
                 </div>
