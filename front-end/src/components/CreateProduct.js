@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
 import styles from "../CSS/CreateProduct.module.css";
 import InputStyles from "../CSS/InputFields.module.css";
 import ButtonStyles from "../CSS/Buttons.module.css";
 import classNames from "classnames";
-import ImageUploader from "react-images-upload";
+//import ImageUploader from "react-images-upload";
 import { uploadImage } from "../Utilities/ImageUploadUtility";
 export default class CreateProduct extends Component {
   constructor(props) {
@@ -295,7 +294,7 @@ export default class CreateProduct extends Component {
                     <img
                       width="100"
                       height="100"
-                      alt="Product image"
+                      alt="Product"
                       src={URL.createObjectURL(this.state.image)}
                     ></img>
                   )}

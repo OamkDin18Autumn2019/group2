@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../CSS/LandingPage.module.css';
-import { FaChartPie, FaGlobe, FaCog, FaUsers, FaArrowDown } from 'react-icons/fa';
+import { FaChartPie, FaGlobe, FaCog, FaUsers } from 'react-icons/fa';
 import { TiArrowDownOutline } from 'react-icons/ti';
 import { IconContext } from "react-icons";
 import Product from './Product';
@@ -18,7 +18,7 @@ export default class LandingPage extends React.Component {
         }
     }
     componentDidMount() {
-        let idProduct = parseInt(this.props.match.params.id);
+        //let idProduct = parseInt(this.props.match.params.id);
         console.log(this.props.user.token)
         axios.get(`http://localhost:4000/v1/product/da/newArrivals`, {
             headers: {

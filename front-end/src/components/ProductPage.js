@@ -78,18 +78,18 @@ export default class ProductPage extends Component {
                         <div className="container py-5">
                             <div className={styles.mainCon}>
                                 <div className="d-flex align-content-start flex-wrap p-4">
-                                    <div class="col-md-4 col-s-12 col-lg-5"><img class="img img-fluid" className={styles.productImg} alt="product image" src={this.state.data.images}></img></div>
-                                    <div class="col-md-8 col-s-12 col-lg-7 pl-5"><div class=""> <h1 class="">{this.state.data.name}</h1></div>
-                                        <div class="row"> {this.state.data.description}</div>
-                                        <div class="row py-2"><div class='my-auto'>Price:</div>
-                                        {(this.state.data.discount !== 0) ?
-                                            <div className={styles.price}>€{this.state.data.price - this.state.data.price * this.state.data.discount / 100} (-{this.state.data.discount}%)</div>
-                                            :
-                                            <div className={styles.price}>€{this.state.data.price }</div>
+                                    <div className="col-md-4 col-s-12 col-lg-5"><img className={styles.productImg} alt="product image" src={this.state.data.images}></img></div>
+                                    <div className="col-md-8 col-s-12 col-lg-7 pl-5"><div> <h1>{this.state.data.name}</h1></div>
+                                        <div className="row"> {this.state.data.description}</div>
+                                        <div className="row py-2"><div className='my-auto'>Price:</div>
+                                            {(this.state.data.discount !== 0) ?
+                                                <div className={styles.price}>€{this.state.data.price - this.state.data.price * this.state.data.discount / 100} (-{this.state.data.discount}%)</div>
+                                                :
+                                                <div className={styles.price}>€{this.state.data.price}</div>
 
-                                        }
+                                            }
                                         </div>
-                                        <div class="row"><StarRatings
+                                        <div className="row"><StarRatings
                                             starDimension='30px'
                                             rating={this.state.data.ratingProduct}
                                             starHoverColor='yellow'
@@ -100,21 +100,21 @@ export default class ProductPage extends Component {
                                             starSpacing='1px'
                                         /> </div>
                                         {(this.props.user.username !== "") ?
-                                            <Link to={`/profile/${this.state.data.idUser}`}><div class="row">by {this.state.data.username}</div>   </Link>
+                                            <Link to={`/profile/${this.state.data.idUser}`}><div className="row">by {this.state.data.username}</div>   </Link>
                                             :
-                                            <Link to={`/login`}><div class="row">by {this.state.data.username}</div> </Link>
+                                            <Link to={`/login`}><div className="row">by {this.state.data.username}</div> </Link>
                                         }
                                         <div className="py-4">
                                             <span className="pr-2">Amount:</span>
-                                            <button class="btn btn-secondary btn-sm" onClick={this.decreaseAmount}>-</button>
+                                            <button className="btn btn-secondary btn-sm" onClick={this.decreaseAmount}>-</button>
                                             <span className="p-2">{this.state.amount}</span>
-                                            <button class="btn btn-info btn-sm" onClick={this.increaseAmount}>+</button>
+                                            <button className="btn btn-info btn-sm" onClick={this.increaseAmount}>+</button>
                                         </div>
                                         <div>
                                             {this.checkCart}
                                             {/* <button className="btn btn-primary mr-2">Buy now</button> */}
                                             <button className="mr-2 btn btn-info mt-1 btn-lg" onClick={this.addToCart}>Put into cart</button>
-                                            <button class="btn btn-info mt-1 btn-lg" onClick={() => this.props.history.goBack()}>Go back</button>
+                                            <button className="btn btn-info mt-1 btn-lg" onClick={() => this.props.history.goBack()}>Go back</button>
 
                                         </div>
                                     </div>
@@ -130,13 +130,13 @@ export default class ProductPage extends Component {
                 <>
                     <div className={styles.backgroundNo}>
                         <div className={styles.mainNo}>
-                            <div class="container">
+                            <div className="container">
                                 <div className={styles.mainCon}>
-                                    <div class="row p-2">
-                                        <h2 class="text-justify mx-auto"> There is no product with such an ID</h2>
-                                        <div class="col-12">
-                                            <img alt="cat" class="img-fluid mx-auto d-block" src={BugCat}></img>
-                                            <button class="btn mt-2 btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
+                                    <div className="row p-2">
+                                        <h2 className="text-justify mx-auto"> There is no product with such an ID</h2>
+                                        <div className="col-12">
+                                            <img alt="cat" className="img-fluid mx-auto d-block" src={BugCat}></img>
+                                            <button className="btn mt-2 btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
                                         </div>
                                     </div>
                                 </div>

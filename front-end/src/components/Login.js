@@ -59,6 +59,7 @@ export default function Login(props) {
       <img
         src={imgLink}
         className={styles.backgroundImg}
+        alt="background"
       />
       <div className={styles.Login}>
         <div className={styles.LoginForm}>
@@ -113,7 +114,6 @@ export default function Login(props) {
   );
 }
 
-{
   /* <div className={styles.Login}>
 <div className={styles.LoginForm}>
     <h2 className={styles.h2}>Log in to mothersell</h2>
@@ -136,6 +136,6 @@ export default function Login(props) {
     <a href="#" >Forgot account?</a>
 </div>
 </div> */
-}
+
 
 // onClick={handleSubmitHandler}
