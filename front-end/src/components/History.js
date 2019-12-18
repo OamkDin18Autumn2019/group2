@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
 import HistoryItem from './HistoryItem'
-import classNames from 'classnames';
 import styles from '../CSS/OnSellProducts.module.css';
 import InputStyles from '../CSS/InputFields.module.css';
-import ButtonStyles from '../CSS/Buttons.module.css';
 
 export default function History(props) {
 

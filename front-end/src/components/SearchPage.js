@@ -1,11 +1,11 @@
 import React from 'react';
-import classNames from 'classnames';
+//import classNames from 'classnames';
 import styles from '../CSS/SearchPage.module.css';
 import { FiFilter } from 'react-icons/fi';
 import { FaRegFile } from 'react-icons/fa';
 import { IconContext } from "react-icons";
-import Header from './Header';
-import Footer from './Footer';
+//import Header from './Header';
+//import Footer from './Footer';
 import VerticalProductDisplay from './SearchProductDisplay';
 /**
  * This function is to remove commas, dots and duplicated spaces
@@ -129,7 +129,7 @@ export default class SearchPage extends React.Component {
                                             <div class="text-center">
                                             <h3>No search results</h3>
                                             <h4> You found only this beautiful cat</h4>
-                                        <img src="https://www.pinclipart.com/picdir/big/57-576568_pusheen-cat-clipart.png" class="img img-fluid col-md-6"></img>
+                                        <img src="https://www.pinclipart.com/picdir/big/57-576568_pusheen-cat-clipart.png" class="img img-fluid col-md-6" alt="decoration"></img>
                                         <h6>P.S it's priceless</h6>
                                             </div>
                                         

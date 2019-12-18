@@ -5,6 +5,10 @@ import InputStyles from "../CSS/InputFields.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const imgLink =
+  "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  ;
+
 export default class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -64,65 +68,71 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <div className={styles.Login}>
-        <div className={styles.LoginForm}>
-          <h2 className={styles.h2}>Register to mothersell</h2>
-          <form className={styles.Form} onSubmit={this.handleSubmit}>
-            <div className={styles.EmailPassword}>
-              <input
-                required
-                className={InputStyles.InputField}
-                name="username"
-                placeholder="Enter your username"
-                value={this.state.username}
-                onChange={this.handleChange}
-              />
-              <input
-                required
-                type="email"
-                className={InputStyles.InputField}
-                name="email"
-                placeholder="Enter your email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-              <input
-                required
-                type="password"
-                className={InputStyles.InputField}
-                name="password"
-                placeholder="Enter your password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-              <input
-                required
-                type="password"
-                className={InputStyles.InputField}
-                name="passwordConfirmation"
-                placeholder="Enter your password again"
-                value={this.state.passwordConfirmation}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className={styles.Buttons}>
-              <button type="submit" className={ButtonStyles.SubmitButton}>
-                Register
+      <div className={styles.background}>
+        <img
+          src={imgLink}
+          className={styles.backgroundImg}
+        />
+        <div className={styles.Login}>
+          <div className={styles.LoginForm}>
+            <h2 className={styles.h2}>Register</h2>
+            <form className={styles.Form} onSubmit={this.handleSubmit}>
+              <div className={styles.EmailPassword}>
+                <input
+                  required
+                  className={InputStyles.InputField}
+                  name="username"
+                  placeholder="Enter your username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
+                <input
+                  required
+                  type="email"
+                  className={InputStyles.InputField}
+                  name="email"
+                  placeholder="Enter your email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+                <input
+                  required
+                  type="password"
+                  className={InputStyles.InputField}
+                  name="password"
+                  placeholder="Enter your password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+                <input
+                  required
+                  type="password"
+                  className={InputStyles.InputField}
+                  name="passwordConfirmation"
+                  placeholder="Enter your password again"
+                  value={this.state.passwordConfirmation}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className={styles.Buttons}>
+                <button type="submit" className={ButtonStyles.SubmitButton}>
+                  Register
               </button>
-            </div>
-          </form>
-          <span>
-            {" "}
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              id={styles.RegisterLink}
-              className={ButtonStyles.Link}
-            >
+              </div>
+            </form>
+            <span>
               {" "}
-              Login{" "}
-            </Link>{" "}
-          </span>
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                id={styles.RegisterLink}
+                className={ButtonStyles.Link}
+              >
+                {" "}
+                Login{" "}
+              </Link>{" "}
+            </span>
+          </div>
         </div>
       </div>
     );

@@ -9,8 +9,33 @@ body {
 }
 
 .h2 {
+    min-width: 20vw;
     margin-bottom: 1em;
     text-align: center;
+}
+
+.background {
+    /* padding: 2% 0;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    width: 100vw;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: url(https://images.pexels.com/photos/632470/pexels-photo-632470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-size: cover;
+    background-position: center; */
+}
+
+.backgroundImg {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+    /* -webkit-filter: blur(2px);
+    filter: blur(2px); */
 }
 
 .Login {
@@ -29,9 +54,10 @@ body {
     background-color: var(--background-primary);
     text-align: left;
     border: 2px solid var(--nonactive-border);
-    /* border-radius: 3px; */
+    border-radius: 3px;
     margin: auto;
-    padding: 10% 15%;
+    padding: 10% 20%;
+    background-color: white;
 }
 
 .Form {

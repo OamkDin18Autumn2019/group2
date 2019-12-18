@@ -9,8 +9,9 @@ label {
 }
 
 .background {
+    min-height: 100vh;
     height: 100%;
-    padding-top: 7%;
+    padding-top: 9%;
     padding-bottom: 3%;
     background: url(https://images.pexels.com/photos/1087727/pexels-photo-1087727.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
     /* https://images.pexels.com/photos/3170430/pexels-photo-3170430.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 */
@@ -94,6 +95,28 @@ label {
 @media screen and (max-width: 700px) {
     .col-25, .col-75, .container, input[type=submit] {
         width: 100%;
-        margin-top: 0;
+        height: 100%;
+        /* margin-top: 0; */
+        margin-top: 10%;
     }
+
+}
+@media screen and (max-width: 500px) {
+    .col-25, .col-75, .container, input[type=submit] {
+        width: 100%;
+        height: 100%;
+        /* height: 80vh; */
+        /* margin-top: 0; */
+        margin-top: 20%;
+    }
+
+}
+@media screen and (max-width: 350px) {
+    .col-25, .col-75, .container, input[type=submit] {
+        width: 100%;
+        /* height: 60vh; */
+        /* margin-top: 0; */
+        margin-top: 25%;
+    }
+
 }
