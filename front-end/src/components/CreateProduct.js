@@ -10,7 +10,7 @@ export default class CreateProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idUser: 1,
+      idUser: this.props.user.userId,
       name: "",
       price: 0,
       tags: [],
