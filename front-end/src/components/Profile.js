@@ -71,23 +71,8 @@ export default class Profile extends Component {
           console.log(err);
           return null;
       })
-    }
-      axios.get(`http://localhost:4000/v1/user/${userId}`, {
-        headers: {
-          'x-access-token': this.props.user.token
-        }
-      })
-        .then(res => {
-          console.log(res);
-          this.setState({userInfo: res.data.rows});
-          console.log(this.state.userInfo);
-          console.log(this.state.userInfo[0]);
-          console.log(this.state.userInfo[0].created_at);
-        })
-        .catch(err => {
-          console.log(err);
-          return null;
-        })
+      }
+      if (!userId) {
         axios.get(`http://localhost:4000/v1/user/`, {
           headers: {
             'x-access-token': this.props.user.token
@@ -104,6 +89,24 @@ export default class Profile extends Component {
             console.log(err);
             return null;
           })
+      } else {
+        axios.get(`http://localhost:4000/v1/user/${userId}`, {
+        headers: {
+          'x-access-token': this.props.user.token
+        }
+      })
+        .then(res => {
+          console.log(res);
+          this.setState({userInfo: res.data.rows});
+          console.log(this.state.userInfo);
+          console.log(this.state.userInfo[0]);
+          console.log(this.state.userInfo[0].created_at);
+        })
+        .catch(err => {
+          console.log(err);
+          return null;
+        })
+      }   
   }
   
   TabLoader = () => {
