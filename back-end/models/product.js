@@ -180,7 +180,6 @@ var product = {
     );
   },
   add: async function(product, callback) {
-    // console.log(product);
     return knex("products")
       .insert([{ ...product }])
       .then(data => {

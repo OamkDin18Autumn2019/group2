@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import styles from "../CSS/Basket.module.css";
 import BasketProductEntry from "./BasketProductEntry";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 export default class BasketPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      isProceeded : false,
     }
   }
 
@@ -41,7 +43,11 @@ export default class BasketPage extends Component {
             })
             .then(async (res) => {
               // console.log(res)
-              arrayToDelete.push(this.props.cart[i]);
+             await this.setState({
+                isProceeded : true
+              })
+              await arrayToDelete.push(this.props.cart[i]);
+              setTimeout(() => this.props.history.goBack(), 10000);
             })
             .catch(err => console.log(err))
         })
@@ -61,7 +67,7 @@ export default class BasketPage extends Component {
 
   }
   render() {
-    if(this.props.cart.length !== 0){
+    if (this.props.cart.length !== 0) {
       return (
         <>
           <div className={styles.background}>
@@ -85,9 +91,9 @@ export default class BasketPage extends Component {
                           </thead>
                           <tbody>
                             {this.props.cart.map((entry, i) => (
-                              <BasketProductEntry deleteFromCartById={ this.props.deleteFromCartById }key={i} data={entry} />
+                              <BasketProductEntry deleteFromCartById={this.props.deleteFromCartById} key={i} data={entry} />
                             ))}
-                            <tr> 
+                            <tr>
                               <td></td>
                               <td></td>
                               <td></td>
@@ -136,29 +142,51 @@ export default class BasketPage extends Component {
           </div>
         </>
       );
-    } else {
-  return (
-    <>
-    <div className={styles.background}>
-      <div className={styles.main}>
-        <div class="container mb-4 mt-5">
-          <div className={styles.mainCon}>
-            <div class="row">
-              <h2 class="text-justify mx-auto  pl-4"> You have nothing in your cart</h2>
-              <div class="col-12">
-                <img alt="cat" class="img-fluid mx-auto d-block"  src="https://cdn.telegram-site.com/images/stickers/9/6/0/11.jpg"></img>
-              <button class="btn mt-2 btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
-              </div>
-              <div class="col mb-2">
+    } else if (this.state.isProceeded  === false) {
+      return (
+        <>
+          <div className={styles.background}>
+            <div className={styles.main}>
+              <div class="container mb-4 mt-5">
+                <div className={styles.mainCon}>
+                  <div class="row">
+                    <h2 class="text-justify mx-auto  pl-4"> You have nothing in your cart</h2>
+                    <div class="col-12">
+                      <img alt="cat" class="img-fluid col-md-5 col-sm-10 mx-auto d-block" src="https://cdn.telegram-site.com/images/stickers/9/6/0/11.jpg"></img>
+                      <button class="btn mt-2 btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
+                    </div>
+                    <div class="col mb-2">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </>
-  )
+
+        </>
+      )
+    } else  {
+      return(
+        <>
+          <div className={styles.background}>
+            <div className={styles.main}>
+              <div class="container mb-4 mt-5">
+                <div className={styles.mainCon}>
+                  <div class="row">
+                    <h2 class="text-justify mx-auto  pl-4"> Done successfully</h2>
+                    <div class="col-12">
+                      <img alt="cat" class="img-fluid mx-auto d-block my-2 col-md-3 col-sm-10" src="https://www.datakrat.ru/upload/medialibrary/e6d/Безымянный-22.png"></img>
+                    </div>
+                    <h4 class="text-justify mx-auto pl-4"> Check your <Link to={`/profile`}>profile</Link>  </h4>
+             
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )
     }
-    
   }
+      
 }

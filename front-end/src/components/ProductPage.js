@@ -13,7 +13,8 @@ export default class ProductPage extends Component {
         this.state = {
             productAvailability: false,
             amount: 1,
-            data: null
+            data: null,
+            added: false
         }
     }
     componentDidMount() {
@@ -42,7 +43,9 @@ export default class ProductPage extends Component {
         if (this.state.amount < this.state.data.amountOfProduct) {
             let temporary_amount = this.state.amount;
             temporary_amount++;
-            this.setState({ amount: temporary_amount })
+            this.setState({
+                amount: temporary_amount,
+            })
         }
 
     }
@@ -66,7 +69,11 @@ export default class ProductPage extends Component {
     addToCart = (event) => {
         event.preventDefault();
         this.props.addToCartGlobal({ ...this.state.data }, this.state.amount)
-
+        this.setState({
+            added: true
+        })
+        // this.props.history.goBack()
+        // console.log(this.state.data)
     }
     render() {
 
@@ -78,10 +85,10 @@ export default class ProductPage extends Component {
                         <div className="container py-5">
                             <div className={styles.mainCon}>
                                 <div className="d-flex align-content-start flex-wrap p-4">
-                                    <div className="col-md-4 col-s-12 col-lg-5"><img className={styles.productImg} alt="product image" src={this.state.data.images}></img></div>
+                                    <div className="col-md-4 col-s-12 col-lg-5"><img className={styles.productImg} alt="product" src={`http://localhost:4000/${this.state.data.images}`}></img></div>
                                     <div className="col-md-8 col-s-12 col-lg-7 pl-5"><div> <h1>{this.state.data.name}</h1></div>
                                         <div className="row"> {this.state.data.description}</div>
-                                        <div className="row py-2"><div className='my-auto'>Price:</div>
+                                        <div className="row py-2"><div class='my-auto'>Price:</div>
                                             {(this.state.data.discount !== 0) ?
                                                 <div className={styles.price}>€{this.state.data.price - this.state.data.price * this.state.data.discount / 100} (-{this.state.data.discount}%)</div>
                                                 :
@@ -108,10 +115,12 @@ export default class ProductPage extends Component {
                                             <span className="pr-2">Amount:</span>
                                             <button className="btn btn-secondary btn-sm" onClick={this.decreaseAmount}>-</button>
                                             <span className="p-2">{this.state.amount}</span>
-                                            <button className="btn btn-info btn-sm" onClick={this.increaseAmount}>+</button>
+                                            <button class="btn btn-info btn-sm " onClick={this.increaseAmount}>+</button>
+                                            {/* <br/> */}
+                                            <h6> {(this.state.added)?`Added into the cart`:" "}</h6>
                                         </div>
                                         <div>
-                                            {this.checkCart}
+                                            {/* {this.checkCart} */}
                                             {/* <button className="btn btn-primary mr-2">Buy now</button> */}
                                             <button className="mr-2 btn btn-info mt-1 btn-lg" onClick={this.addToCart}>Put into cart</button>
                                             <button className="btn btn-info mt-1 btn-lg" onClick={() => this.props.history.goBack()}>Go back</button>

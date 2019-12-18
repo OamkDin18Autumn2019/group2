@@ -33,6 +33,7 @@ export default function Login(props) {
     }
   }
 
+
   function handleChangeInRememberMe(event) {
     setRememberMe(event.target.checked);
   }
@@ -113,29 +114,3 @@ export default function Login(props) {
     </div>
   );
 }
-
-  /* <div className={styles.Login}>
-<div className={styles.LoginForm}>
-    <h2 className={styles.h2}>Log in to mothersell</h2>
-    <div className={styles.Form}>
-        <div className={styles.EmailPassword}>
-             <input className={styles.InputField} placeholder="Enter your email or username" />  
-            
-             <input className={styles.InputField} placeholder="Enter your password" />  
-        </div>
-        <div className={styles.RememberMe}>
-             <input type="checkbox" id="RememberMe" /> 
-            <label for="RememberMe" > Remember me </label> 
-    
-        </div>
-        <div className={styles.Buttons}>
-             <button type="submit"> Log In </button> 
-             <button type="reset"> Cancel </button> 
-        </div>
-    </div>
-    <a href="#" >Forgot account?</a>
-</div>
-</div> */
-
-
-// onClick={handleSubmitHandler}
