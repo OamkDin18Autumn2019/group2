@@ -15,7 +15,7 @@ import BasketLogo from '../icons/icons8_shopping_cart_filled_50px.png';
 // It was initially a functional component but then, 
 // I realized that the code will be less coupled and easier to understand if it was a class component.
 
-const loggedIn = 0;
+//const loggedIn = 0;
 
 const SearchBar = (props) => {
     return (
@@ -83,7 +83,6 @@ export default class Header extends React.Component {
         //     this.setState({backgroundColor: ""});
         //     console.log(this.props.match)
         // }
-
     }
     render() {
             return (
@@ -91,7 +90,7 @@ export default class Header extends React.Component {
                 <nav className={classNames(this.state.NavbarClass, this.state.nav, this.props.location.pathname === '/profile' ? (this.state.backgroundColor) : (console.log("bruh")) )}>
                     <div className={styles.LogoDiv}>
                         <Link to="/"> 
-                            <img src={'/logo-copy.png'} /> </Link>
+                            <img src={'/logo-copy.png'} alt="logo"/> </Link>
                     </div>
                     <div className={this.state.DropDownMenu}>
                         <SearchBar
@@ -102,7 +101,7 @@ export default class Header extends React.Component {
                         <div className={styles.LoginRegisterButtons}>
                             { this.props.user.username ? (
                                     <>
-                                        <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} /> </Link></button> 
+                                        <button id={styles.Login} className={ButtonStyles.PrimaryButton}> <Link to="/basket" > <img src={BasketLogo} className={styles.Icons} alt="logo"/> </Link></button> 
                                         <button id={styles.Register} className={ButtonStyles.PrimaryButton}> <Link to="/profile" > Profile </Link></button> 
                                         <button id={styles.Register} onClick={this.props.deleteCookie} className={ButtonStyles.PrimaryButton}> <Link to="/">Logout</Link> </button> 
 

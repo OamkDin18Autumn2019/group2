@@ -45,7 +45,7 @@ export default function OnSellProduct(props) {
                         products with discount
                     */}
                     {
-                        (props.discount == 0) ? 
+                        (props.discount === 0) ? 
                     <p> {props.price} €</p>
                     :
                     <p> {props.price - props.price * props.discount / 100} € (-{props.discount}%)</p>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from '../CSS/OnSellProduct.module.css';
 // import ButtonStyles from '../CSS/Buttons.module.css';
 import StarRatings from 'react-star-ratings';
@@ -22,7 +21,7 @@ export default function HistoryItem(props) {
             <div className={styles.Name}>
                 <h3> {props.name} </h3> 
                 {
-                    (props.discount == 0) ? 
+                    (props.discount === 0) ? 
                 <p> {props.price} €</p>
                 :
                 <p> {props.price - props.price * props.discount / 100} € (-{props.discount}%)</p>
