@@ -31,8 +31,9 @@ export default function OnSellProduct(props) {
         <>
         <div className={styles.OnSellProduct}>
             <div className={styles.ImageAndDescription}>
-                <img src={`http://localhost:4000/${props.images}`} className={styles.Image} alt="Padoru Padoru!" />
+                <img src={`http://localhost:4000/${props.images}`} class="img img-fluid" alt="Padoru Padoru!" />
                 <div className={styles.Description}>
+                    <p style={{"font-size": "1.4em"}}>Description</p>
                     <p>
                         {props.description}
                     </p>
@@ -53,7 +54,7 @@ export default function OnSellProduct(props) {
                 </div>
                 <div className={styles.Rating}>
                     <StarRatings
-                        starDimension='30px'
+                        starDimension='35px'
                         rating={props.rating}
                         starHoverColor='#6CCF6D'
                         starRatedColor='#19B51B'

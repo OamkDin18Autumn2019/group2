@@ -9,6 +9,16 @@
 
 .ImageAndDescription {
     width: 100%;
+    padding-right: 1vw;
+}
+
+.Description {
+    margin-top: 1vh;
+}
+
+.Description p {
+    color: var(--dark);
+    font-size: 1.2em;
 }
 
 .Image {
@@ -66,11 +76,16 @@
 @media(max-width: 700px) {
     .OnSellProduct {
         grid-template-areas: 
-        'Image ProductInfo'
-        'Buttons Buttons';
+        'Image'
+        'ProductInfo'
+        'Buttons';
     }
 
-    .Button {
+    .ImageAndDescription {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
 
+    .ProductInfo {
+        width: 100%;
     }
 }

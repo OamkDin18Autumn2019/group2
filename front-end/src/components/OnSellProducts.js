@@ -50,11 +50,22 @@ export default function OnSellProducts(props) {
                     className={LoaderStyle.Loader}
                 />
                 ) : (
-                    props.currentSaleItems.filter(onSell => 
-                        (onSell.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
-                            return(
-                                <OnSellProduct urlId={props.urlId} DeleteHandler={props.DeleteHandler} token={props.token} {...item} />
-                            )})
+                    !props.currentSaleItems.length ? (
+                        <div class="container">
+                            <div class="text-center">
+                                <h3>No search results</h3>
+                                <h4> You found only this beautiful cat</h4>
+                                <img src="https://www.pinclipart.com/picdir/big/57-576568_pusheen-cat-clipart.png" class="img img-fluid col-md-6" alt="decoration"></img>
+                                <h6>P.S it's priceless</h6>
+                            </div>                
+                        </div>
+                    ) : (
+                        props.currentSaleItems.filter(onSell => 
+                            (onSell.name.toLowerCase().includes(filter.toLowerCase()))).map(item => {
+                                return(
+                                    <OnSellProduct urlId={props.urlId} DeleteHandler={props.DeleteHandler} token={props.token} {...item} />
+                                )})
+                    )
                 )
             }
         </>

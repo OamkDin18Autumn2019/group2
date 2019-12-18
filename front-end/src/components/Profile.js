@@ -159,7 +159,11 @@ export default class Profile extends Component {
       }, 0)
       let averageRating = (OnSaleItemRatingSum + HistoryItemsRatingSum) / (OnSaleAmount + HistoryAmount);
       console.log(averageRating);
-      return <p> {averageRating.toFixed(1)} </p>;
+      if (averageRating) {
+        return <p> {averageRating.toFixed(1)} </p>;
+      } else {
+        return <p> 0 </p>
+      }
   }
 
   render() {
@@ -187,7 +191,7 @@ export default class Profile extends Component {
                   <h6 className={styles.Email}> {this.state.userInfo[0].email} </h6>
                 </div>
                 <div className={styles.BasicStatistics}>
-                    <label> Your rating </label>
+                    <p style={{"margin-right": "5px"}}> Your rating </p>
                     {this.UserRatingCounter()}
                 </div>
               </div>
