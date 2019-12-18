@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from "../CSS/ProductPage.module.css";
 import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
+import BugCat from '../images/bugcatlick.gif';
 
 
 
@@ -134,7 +135,7 @@ export default class ProductPage extends Component {
                                     <div class="row p-2">
                                         <h2 class="text-justify mx-auto"> There is no product with such an ID</h2>
                                         <div class="col-12">
-                                            <img alt="cat" class="img-fluid mx-auto d-block" src="https://telegram.org.ru/uploads/posts/2017-03/1490200280_28.png"></img>
+                                            <img alt="cat" class="img-fluid mx-auto d-block" src={BugCat}></img>
                                             <button class="btn mt-2 btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
                                         </div>
                                     </div>
