@@ -87,7 +87,7 @@ export default class Header extends React.Component {
     render() {
             return (
                 // console.log("yeah");
-                <nav className={classNames(this.state.NavbarClass, this.state.nav, this.props.location.pathname === '/profile' ? (this.state.backgroundColor) : (console.log("bruh")) )}>
+                <nav className={classNames(this.state.NavbarClass, this.state.nav, this.props.location.pathname === '/profile' ? (this.state.backgroundColor) : null)}>
                     <div className={styles.LogoDiv}>
                         <Link to="/"> 
                             <img src={'/logo-copy.png'} alt="logo"/> </Link>

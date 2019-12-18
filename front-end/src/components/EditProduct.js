@@ -21,50 +21,65 @@ export default class EditProduct extends Component {
             productAvailability: false,
             amount: 1,
             name: "",
-            price: "",
+            price: 0,
             discount: "",
             newPrice: "",
-            tags: "",
-            images: [],
+            tags: [],
+            image: null,
             imageUrl: null,
             category: "",
             description: "",
+            tagSearchInput: "",
+            tagSuggestions: [],
+            categoryOptions: [],
             isUpdated: false
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
         let idProduct = parseInt(this.props.match.params.id);
-        axios.get(`http://localhost:4000/v1/product/${idProduct}`, {
-            headers: {
-                'x-access-token': this.props.user.token
-            }
+        await fetch(`http://localhost:4000/v1/product/${idProduct}`, {
+            crossDomain: true
         })
-            .then(res => {
-                console.log(this.props.user.username);
-                console.log(res.data);
+            .then(res => res.json())
+            .then(async res => {
+                //console.log(this.props.user.username);
+                //console.log(res.data);
                 //The following line is to check the response JSON due to the weird structure of the response
-                console.log(res.data.rows[0]);
-                if (res.data.rows[0] !== undefined) {
+                //console.log(res.rows[0]);
+                //console.log(res);
+                let tags = [];
+                for (let i = 0; i < res.rows[0].tags.split(",").length; i++) {
+                    await fetch(`http://localhost:4000/v1/tag/${res.rows[0].tags.split(",")[i]}`, { crossDomain: true })
+                        .then(res => res.json())
+                        .then(results => tags.push(results.rows[0]))
+                        .catch(err => err);
+                }
+                if (res.rows[0] !== undefined) {
 
                     this.setState({ productAvailability: true });
                     this.setState(
                         {
-                            name: res.data.rows[0].name,
-                            price: res.data.rows[0].price,
-                            discount: res.data.rows[0].discount,
-                            tags: res.data.rows[0].tags,
-                            images: res.data.rows[0].images,
-                            category: res.data.rows[0].category,
-                            description: res.data.rows[0].description
+                            name: res.rows[0].name,
+                            price: res.rows[0].price,
+                            discount: res.rows[0].discount,
+                            tags: tags,
+                            imageUrl: res.rows[0].images,
+                            category: res.rows[0].category,
+                            description: res.rows[0].description
                         });
-                    console.log(this.state)
                 }
             })
             .catch(err => {
                 console.log(err);
                 return null;
             })
+        await fetch(`http://localhost:4000/v1/category`, { crossDomain: true })
+            .then(res => res.json())
+            .then(results => {
+                this.setState({ categoryOptions: results.rows });
+            })
+            .catch(err => err);
     }
 
     onChange = (event) => {
@@ -75,14 +90,84 @@ export default class EditProduct extends Component {
 
     }
 
-    onSubmit = () => {
+    handleChangeTag = event => {
+        this.setState({ tagSearchInput: event.target.value });
+        fetch(`http://localhost:4000/v1/tag/namelike/${event.target.value}`, {
+            crossDomain: true
+        })
+            .then(res => res.json())
+            .then(results => {
+                this.setState({ tagSuggestions: results.rows });
+            })
+            .catch(err => err);
+    };
 
+    selectTag = tag => {
+        if (!this.state.tags.find(x => x.id === tag.id)) {
+            this.setState({
+                tags: [...this.state.tags, tag],
+                tagSuggestions: [],
+                tagSearchInput: ""
+            });
+        }
+    };
+
+    removeTag = tag => {
+        let temporaryArray = this.state.tags;
+        let index = this.state.tags.findIndex(x => x.id === tag.id);
+        temporaryArray.splice(index, 1);
+        this.setState({ tags: temporaryArray });
+    };
+
+    handleKeyDownTag = async event => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            this.state.tagSuggestions.forEach(x => {
+                if (this.state.tagSearchInput === x.nameOfTag) {
+                    this.selectTag(x);
+                }
+            });
+            if (!this.state.tagSuggestions.find(x => x.nameOfTag === this.state.tagSearchInput) && this.state.tagSearchInput !== "") {
+                await fetch('http://localhost:4000/v1/tag', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        nameOfTag: this.state.tagSearchInput,
+                    })
+                })
+                    .then(res => res.json())
+                    .then(result => console.log(result))
+                    .catch(err => err);
+
+                await fetch(`http://localhost:4000/v1/tag/name/${this.state.tagSearchInput}`, {
+                    crossDomain: true
+                })
+                    .then(res => res.json())
+                    .then(results => {
+                        results.rows.forEach(x => {
+                            if (this.state.tagSearchInput === x.nameOfTag) {
+                                this.selectTag(x);
+                            }
+                        })
+                    })
+                    .catch(err => err);
+            }
+        }
+    }
+
+    onSubmit = (event) => {
+        event.preventDefault();
         const editedProduct = {
             name: this.state.name,
             price: this.state.price,
             discount: this.state.discount,
-            tags: this.state.tags,
+            tags: this.state.tags.map(x => x.id).toString(),
             images: this.state.imageUrl,
+            category: this.state.category,
             description: this.state.description,
         }
 
@@ -94,6 +179,7 @@ export default class EditProduct extends Component {
         },
             {
                 headers: {
+                    'Access-Control-Allow-Origin': '*',
                     Authorization: this.props.user.token
                 }
             })
@@ -151,14 +237,14 @@ export default class EditProduct extends Component {
         newState = this.state;
         newState.imageUrl = imageUploadRes;
         this.setState({ ...newState });
-        console.log(this.state)
+        //console.log(this.state)
     };
 
 
     render() {
-        if (!this.state.productAvailability) {
+        /* if (!this.state.productAvailability) {
 
-            console.log(this.state.data);
+            //console.log(this.state.data);
             return (
                 <div>
                     <Loader
@@ -171,8 +257,8 @@ export default class EditProduct extends Component {
                     />
                 </div>
             )
-        }
-        if (this.state.productAvailability && this.state.isUpdated === false) {
+        } */
+        if (this.state.isUpdated === false) {
             return (
                 <>
                     <div className={styles.background}>
@@ -183,63 +269,154 @@ export default class EditProduct extends Component {
                             <form>
                                 <div className={styles.row}>
                                     <div className={styles.col_25}>
-                                        <label for="productName">Name of the product</label>
+                                        <label htmlFor="productName">Name of the product</label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <input className={InputStyles.InputField} type="text" id="name" name="name" placeholder="Name.." value={this.state.name} onChange={this.onChange} />
+                                        <input
+                                            className={InputStyles.InputField}
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Name.."
+                                            value={this.state.name}
+                                            onChange={this.onChange}
+                                            onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
+                                        />
                                     </div>
                                 </div>
                                 <div className={styles.row}>
                                     <div className={styles.col_25}>
-                                        <label for="price">Price</label>
+                                        <label htmlFor="price">Price</label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <input className={InputStyles.InputField} type="number" id="price" name="price" placeholder="0" value={this.state.price} onChange={this.onChange} />
+                                        <input
+                                            className={InputStyles.InputField}
+                                            type="number" id="price"
+                                            name="price"
+                                            placeholder="0"
+                                            value={this.state.price}
+                                            onChange={this.onChange}
+                                            onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
+                                        />
                                     </div>
                                 </div>
                                 <div className={styles.row} >
                                     <div className={styles.col_25}>
-                                        <label for="discount">Discount</label>
+                                        <label htmlFor="discount">Discount</label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <input className={InputStyles.InputField} type="number" min="0" max="100" id="discount" name="discount" placeholder="0" onChange={this.newPriceCalculator} value={this.state.discount} maxlength="2" />
+                                        <input
+                                            className={InputStyles.InputField}
+                                            type="number"
+                                            min="0"
+                                            max="100"
+                                            id="discount"
+                                            name="discount"
+                                            placeholder="0"
+                                            onChange={this.newPriceCalculator}
+                                            value={this.state.discount}
+                                            maxLength="2"
+                                            onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
+                                        />
                                     </div>
                                     <div className={styles.col_75}>
-                                        <label for="newPrice"> New price  </label>
+                                        <label htmlFor="newPrice"> New price  </label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <input className={InputStyles.InputField} type="number" id="newPrice" name="newPrice" onChange={this.discountCalculator} value={this.state.newPrice} />
+                                        <input
+                                            className={InputStyles.InputField}
+                                            type="number"
+                                            id="newPrice"
+                                            name="newPrice"
+                                            onChange={this.discountCalculator}
+                                            value={this.state.newPrice}
+                                            onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
+                                        />
                                     </div>
                                 </div>
                                 <div className={styles.row}>
                                     <div className={styles.col_25}>
-                                        <label className={InputStyles.InputField} for="tags">Tags (for better search)</label>
+                                        <label htmlFor="tags">
+                                            Tags:
+                                                {this.state.tags.map((tag, index) => (
+                                                <span className={styles.Span} key={index}>
+                                                    {tag.nameOfTag}
+                                                    <button
+                                                        className={styles.removeTagButton}
+                                                        onClick={(event) => {event.preventDefault(); this.removeTag(tag)}}
+                                                    >
+                                                        x
+                                                    </button>
+                                                </span>
+                                            ))}
+                                        </label>
                                     </div>
-
                                     <div className={styles.col_75}>
-                                        <input className={InputStyles.InputField} type="text" id="tags" name="tags" placeholder="Tags..." value={this.state.tags} onChange={this.onChange} />
+                                        <input
+                                            className={InputStyles.InputField}
+                                            type="text"
+                                            onChange={this.handleChangeTag}
+                                            id="tags"
+                                            name="tags"
+                                            placeholder="Find a tag..."
+                                            value={this.state.tagSearchInput}
+                                            onKeyPress={this.handleKeyDownTag}
+                                            autoComplete="off"
+                                        />
                                     </div>
+                                    <div
+                                        className={
+                                            this.state.tagSuggestions.length !== 0
+                                                ? styles.tagSuggestionsBox
+                                                : ""
+                                        }
+                                    >
+                                        {this.state.tagSuggestions.map((tag, index) => (
+                                            <button
+                                                key={index}
+                                                className={styles.tagSuggestions}
+                                                onClick={(event) => {event.preventDefault(); this.selectTag(tag)}}
+                                            >
+                                                {tag.nameOfTag}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <small style={{ color: "gray" }}>If the tag you are looking for is not available, just press Enter and it will be added</small>
                                 </div>
                                 <div className={styles.col_75}>
                                     <div className={styles.col_25}>
-                                        <label for="category">Category</label>
+                                        <label htmlFor="category">Category</label>
                                     </div>
-                                    <div className={styles.col_75} >
-                                        <select className={InputStyles.InputField} id="category" name="category" selected={this.state.category} onChange={this.onChange}>
-                                            <option value="bikes">Bikes</option>
-                                            <option value="clothes">Clothes</option>
-                                            <option value="forHome">For home</option>
-                                            <option value="shoes">Shoes</option>
+                                    <div className={styles.col_75}>
+                                        <select
+                                            id="category"
+                                            onChange={this.handleChange}
+                                            name="category"
+                                        >
+                                            {this.state.categoryOptions.map((x, index) => (
+                                                <option key={index} value={x.id}>
+                                                    {x.nameOfCategory}
+                                                </option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
                                 <div className={styles.row}>
 
                                     <div className={styles.col_25}>
-                                        <label for="subject">Description</label>
+                                        <label htmlFor="subject">Description</label>
                                     </div>
                                     <div className={styles.col_75}>
-                                        <textarea className={classNames(InputStyles.InputField, InputStyles.Textarea)} id="description" name="description" placeholder="Write something about your selling .." styles={{ height: 200 }} value={this.state.description} onChange={this.onChange} ></textarea>
+                                        <textarea
+                                            className={classNames(InputStyles.InputField, InputStyles.Textarea)}
+                                            id="description"
+                                            name="description"
+                                            placeholder="Write something about your selling .."
+                                            styles={{ height: 200 }}
+                                            value={this.state.description}
+                                            onChange={this.onChange}
+                                            onKeyPress={e => { if (e.key === 'Enter') e.preventDefault(); }}
+                                        />
                                     </div>
                                 </div>
                                 <div className={styles.row}>
@@ -278,14 +455,14 @@ export default class EditProduct extends Component {
                 <>
                     <div className={styles.background}>
                         <div className={styles.container}>
-                            <div class="container mb-4 mt-5">
+                            <div className="container mb-4 mt-5">
                                 <div className={styles.mainCon}>
-                                    <div class="row">
-                                        <h2 class="text-justify mx-auto  pl-4"> Done successfully</h2>
-                                        <div class="col-12">
-                                            <img alt="cat" class="img-fluid mx-auto d-block my-2 col-md-3 col-sm-10" src="https://www.datakrat.ru/upload/medialibrary/e6d/Безымянный-22.png"></img>
+                                    <div className="row">
+                                        <h2 className="text-justify mx-auto  pl-4"> Done successfully</h2>
+                                        <div className="col-12">
+                                            <img alt="cat" className="img-fluid mx-auto d-block my-2 col-md-3 col-sm-10" src="https://www.datakrat.ru/upload/medialibrary/e6d/Безымянный-22.png"></img>
                                         </div>
-                                        <h4 class="text-justify mx-auto pl-4"> Check your <Link to={`/profile`}>profile</Link>  </h4>
+                                        <h4 className="text-justify mx-auto pl-4"> Check your <Link to={`/profile`}>profile</Link>  </h4>
                                     </div>
                                 </div>
                             </div>

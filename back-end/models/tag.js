@@ -32,6 +32,19 @@ const tag = {
         return knex
           .from("tags")
           .select()
+          .where("nameOfTag", name)
+          .then(data => {
+            callback.then(data);
+          })
+          .catch(err => {
+            callback.catch(err);
+          });
+      },
+
+      getByNameLike: async function (name, callback) {
+        return knex
+          .from("tags")
+          .select()
           .where("nameOfTag", "like",  `%${name}%`)
           .then(data => {
             callback.then(data);
