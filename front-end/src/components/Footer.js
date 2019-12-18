@@ -19,31 +19,31 @@ export default function Footer() {
                 <div className={styles.FooterElement}>
                     <h5> Contact Us</h5>
                     <div className={styles.FooterInfo}>
-                        <img src={AddressLogo} className={styles.Inline}/>
+                        <img src={AddressLogo} className={styles.Inline} alt="address logo"/>
                         <p className={styles.Inline}>Oulu, Northern Ostrobothnia, Finland</p>
                     </div>
                     <div className={styles.FooterInfo}>
-                        <img src={PhoneLogo} className={styles.Inline}/>
+                        <img src={PhoneLogo} className={styles.Inline} alt="phone logo"/>
                         <p className={styles.Inline}>+358 555 3535</p>
                     </div>
                 </div>
                 <div className={styles.FooterElement}>
                     <h5> Customer Support</h5>
                     <div className={styles.FooterInfo}>
-                        <img src={PhoneLogo} className={styles.Inline}/>
+                        <img src={PhoneLogo} className={styles.Inline} alt="phone logo"/>
                         <p className={styles.Inline}>24/7: +358 555 3636</p>
                     </div>
                     <div className={styles.FooterInfo}>
-                        <img src={EmailLogo} className={styles.Inline} />
+                        <img src={EmailLogo} className={styles.Inline} alt="email logo"/>
                         <p className={styles.Inline}>customer.support@anystore.com</p>
                     </div>
                 </div>
                 <div className={styles.FooterElement}>
                     <h5> Social Media</h5>
                     <div className={styles.SocialMediaLogos}>
-                        <img src={FacebookLogo} />
-                        <img src={TwitterLogo} />
-                        <img src={InstagramLogo} />
+                        <img src={FacebookLogo} alt="FB logo"/>
+                        <img src={TwitterLogo} alt="Twitter logo"/>
+                        <img src={InstagramLogo} alt="Instagram logo"/>
                     </div>
                 </div>
                 <div className={styles.FooterElementBottom}>
@@ -53,9 +53,9 @@ export default function Footer() {
                         </h5>
                     </div>
                     <div className={styles.PaymentMethods}>
-                        <img src={VisaLogo} className={styles.PaymentMethods} />
-                        <img src={PayPalLogo} className={styles.PaymentMethods}/>
-                        <img src={MasterCardLogo} className={styles.PaymentMethods}/>
+                        <img src={VisaLogo} className={styles.PaymentMethods} alt="Visa logo"/>
+                        <img src={PayPalLogo} className={styles.PaymentMethods} alt="Paypal logo"/>
+                        <img src={MasterCardLogo} className={styles.PaymentMethods} alt="Master logo"/>
                     </div>
                     <div className={styles.Copyright}>
                         <p>mothersell (c) 2019 We sell everything. All rights reserved. Design stolen by us</p>

@@ -31,7 +31,7 @@ export default function OnSellProduct(props) {
         <>
         <div className={styles.OnSellProduct}>
             <div className={styles.ImageAndDescription}>
-                <img src={props.images} className={styles.Image} alt="Padoru Padoru!" />
+                <img src={`http://localhost:4000/${props.images}`} className={styles.Image} alt="Padoru Padoru!" />
                 <div className={styles.Description}>
                     <p>
                         {props.description}
@@ -45,7 +45,7 @@ export default function OnSellProduct(props) {
                         products with discount
                     */}
                     {
-                        (props.discount == 0) ? 
+                        (props.discount === 0) ? 
                     <p> {props.price} €</p>
                     :
                     <p> {props.price - props.price * props.discount / 100} € (-{props.discount}%)</p>

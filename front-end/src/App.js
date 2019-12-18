@@ -37,7 +37,7 @@ export default class App extends React.Component {
     }
     console.log(currentCart, this.state.cart);
 
-    if (this.state.cart.length == 0) {
+    if (this.state.cart.length === 0) {
       let newCart = [productToCart];
       this.setState({
         cart: this.state.cart.concat(newCart)

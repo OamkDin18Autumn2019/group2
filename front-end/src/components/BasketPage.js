@@ -9,7 +9,7 @@ export default class BasketPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: false,
+      isProceeded : false,
     }
   }
 
@@ -43,10 +43,11 @@ export default class BasketPage extends Component {
             })
             .then(async (res) => {
               // console.log(res)
-              this.setState({
-                message: true
+             await this.setState({
+                isProceeded : true
               })
-              arrayToDelete.push(this.props.cart[i]);
+              await arrayToDelete.push(this.props.cart[i]);
+              setTimeout(() => this.props.history.goBack(), 10000);
             })
             .catch(err => console.log(err))
         })
@@ -141,7 +142,7 @@ export default class BasketPage extends Component {
           </div>
         </>
       );
-    } else if (this.state.message === false) {
+    } else if (this.state.isProceeded  === false) {
       return (
         <>
           <div className={styles.background}>

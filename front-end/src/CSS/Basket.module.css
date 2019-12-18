@@ -17,6 +17,7 @@
   }
   .mainCon {
     border-radius: 1%;
+    /* margin-top: 5%; */
     padding-top: 1%;
     box-shadow:0 1px 5px rgba(255, 255, 255, 0.418);
     height: 100%;
@@ -51,7 +52,7 @@
       padding: 3%;
       width: 100%;
       /* box-shadow: ; */
-      background: url('');
+      /* background: url(''); */
       background-color: rgb(255, 255, 255);
     }
     .background {
