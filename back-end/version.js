@@ -2,13 +2,15 @@ const options = require("./database/knexOptions");
 
 const knex = require("knex")(options);
 
-knex
-  .raw("SELECT VERSION()")
-  .then(version => console.log(version[0][0]))
-  .catch(err => {
-    console.log(err);
-    throw err;
-  })
-  .finally(() => {
-    knex.destroy();
-  });
+const checkVersion = async () => {
+  try {
+    let a = knex.raw("SELECT VERSION()");
+    a = a[0][0];
+    console.log(a);
+    return a;
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = { checkVersion };
