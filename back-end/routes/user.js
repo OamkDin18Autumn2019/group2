@@ -6,8 +6,8 @@ const isAuth = require("../middlewares/isAuth");
 
 // Create tables "users" and "products"
 
-// user.createTableUsers().then(product.createTableProducts().then());
-// user.createTableHistory();
+user.createTableUsers().then(product.createTableProducts().then());
+user.createTableHistory();
 
 // CRUD endpoints for "user"
 router.get("/:id?", isAuth, function(req, res, next) {
