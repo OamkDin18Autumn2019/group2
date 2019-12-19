@@ -29,6 +29,19 @@ var tagRouter = require("./routes/tag");
 var categoryRouter = require("./routes/category");
 const imagesRouter = require("./routes/images");
 
+app.get("/status", async (req, res, next) => {
+  res.status(200).json({ status: "Up and running!" });
+});
+
+const { checkVersion } = require("./version");
+app.get("/version", async (req, res, next) => {
+  try {
+    const a = await checkVersion();
+    res.status(200).json({ version: a });
+  } catch (e) {
+    res.status(500).json({ e });
+  }
+});
 app.use("/v1/", indexRouter);
 app.use("/v1/user", usersRouter);
 app.use("/v1/product", productsRouter);
