@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import OnSellProducts from './OnSellProducts';
 import Analytics from './Analytics';
 import History from './History';
-// import StarRatings from 'react-star-ratings';
+import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import LoaderStyle from '../CSS/Loader.module.css';
 import styles from "../CSS/Profile.module.css"; 
@@ -198,8 +198,8 @@ export default class Profile extends Component {
               <hr></hr>
               <div className={styles.SideNavBar}>
                 <ul className={styles.SideBarUL}>
-                  <li> <span className={ButtonStyles.Test}> <button id={this.state.showActiveTab == OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </button> </span> </li>
-                  <li> <span className={ButtonStyles.Test}> <button id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </button> </span> </li>
+                  <li> <span className={ButtonStyles.Test}> <button id={this.state.showActiveTab === OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </button> </span> </li>
+                  <li> <span className={ButtonStyles.Test}> <button id={this.state.showActiveTab === History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </button> </span> </li>
                   {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li> */}
                 </ul>
               </div>
@@ -227,9 +227,7 @@ export default class Profile extends Component {
               <hr></hr>
               <div className={styles.SideNavBar}>
                 <ul className={styles.SideBarUL}>
-                  <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab === OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </a> </span> </li>
-                  {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == History ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="History"> History </a> </span> </li> */}
-                  {/* <li> <span className={ButtonStyles.Test}> <a id={this.state.showActiveTab == Analytics ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="Analytics"> Analytics </a> </span> </li> */}
+        <li> <span className={ButtonStyles.Test}> <Link><div  id={this.state.showActiveTab === OnSellProducts ? ButtonStyles.ActiveLink : "nonActive"} className={ButtonStyles.Link} onClick={this.TabPickHandler} name="OnSellProducts"> On sell </div> </Link></span> </li>
                 </ul>
               </div>
             </div>

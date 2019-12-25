@@ -8,8 +8,5 @@ module.exports = {
     password: "nokiaIsTheBest92",
     port: 3306,
     database: "mothersell"
-    // password: "root",
-    // password: "root",
-    // database: "library",
   }
 };

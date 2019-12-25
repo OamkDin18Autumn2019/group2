@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import ImageUploader from 'react-images-upload';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from 'react-loader-spinner';
-import LoaderStyle from '../CSS/Loader.module.css';
 import styles from '../CSS/CreateProduct.module.css';
 import InputStyles from '../CSS/InputFields.module.css';
 import ButtonStyles from '../CSS/Buttons.module.css';
