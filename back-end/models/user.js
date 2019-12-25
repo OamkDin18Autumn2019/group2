@@ -1,5 +1,5 @@
 var knex = require("../database/database");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const saltRounds = 4;
 const jwtKey = "BWWrCs!|M;e*oU.YWJ_W+6jposZKF-";
@@ -94,7 +94,7 @@ var user = {
 
   add: function(user, callback) {
     console.log(user);
-    bcrypt.hash(user.user.password, saltRounds).then(hash => {
+    bcryptjs.hash(user.user.password, saltRounds).then(hash => {
       return knex("users")
         .insert([{ ...user.user, password: hash }])
         .then(data => {
@@ -117,7 +117,7 @@ var user = {
     if (userData == null) {
       return { code: 0 };
     }
-    const correctPasswordSwitch = await bcrypt.compare(
+    const correctPasswordSwitch = await bcryptjs.compare(
       user.user.password,
       userData.password
     );
@@ -148,7 +148,7 @@ var user = {
   },
   update: function(id, user, callback) {
     if (user.password) {
-      bcrypt.hash(user.password, saltRounds).then(hash => {
+      bcryptjs.hash(user.password, saltRounds).then(hash => {
         console.log(user);
         return knex("users")
           .where("id", id)
