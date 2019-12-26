@@ -46,7 +46,7 @@ export default class Register extends React.Component {
       };
 
       axios
-        .post(`http://localhost:4000/v1/user/register`, { user })
+        .post(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/user/register`, { user })
         .then(res => {
           // console.log(req);
           console.log(res);

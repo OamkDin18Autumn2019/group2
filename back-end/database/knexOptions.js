@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 module.exports = {
-  client: "mysql2",
+  client: "mysql",
   connection: {
     host: "mothersell.mysql.database.azure.com",
     user: "motherseller@mothersell",
@@ -14,3 +14,4 @@ module.exports = {
   }
   }
 };
+
