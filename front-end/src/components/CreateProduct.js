@@ -27,7 +27,7 @@ export default class CreateProduct extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/category`, { crossDomain: true })
+    fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/category`, { crossDomain: true })
       .then(res => res.json())
       .then(results => {
         this.setState({ categoryOptions: results.rows });
@@ -41,7 +41,7 @@ export default class CreateProduct extends Component {
 
   handleChangeTag = event => {
     this.setState({ tagSearchInput: event.target.value });
-    fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/tag/namelike/${event.target.value}`, {
+    fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/tag/namelike/${event.target.value}`, {
       crossDomain: true
     })
       .then(res => res.json())
@@ -77,7 +77,7 @@ export default class CreateProduct extends Component {
         }
       });
       if (!this.state.tagSuggestions.find(x => x.nameOfTag === this.state.tagSearchInput) && this.state.tagSearchInput !== "") {
-        await fetch('http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/tag', {
+        await fetch('http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/tag', {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -92,7 +92,7 @@ export default class CreateProduct extends Component {
           .then(result => console.log(result))
           .catch(err => err);
 
-        await fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/tag/namelike/${this.state.tagSearchInput}`, {
+        await fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/tag/namelike/${this.state.tagSearchInput}`, {
           crossDomain: true
         })
           .then(res => res.json())
@@ -121,7 +121,7 @@ export default class CreateProduct extends Component {
       amountOfProduct: this.state.amountOfProduct
     };
     product = JSON.stringify(product);
-    fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/product/`, {
+    fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/product/`, {
       method: "POST",
       headers: {
         Accept: "application/json",

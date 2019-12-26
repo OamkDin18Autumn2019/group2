@@ -11,7 +11,7 @@ export default function BasketProductEntry(props) {
   return (
     <>
       <tr>  
-        <td><img className={styles.productImageInBasket} src={`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/${data.images}`} alt="product"/> </td>
+        <td><img className={styles.productImageInBasket} src={`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/${data.images}`} alt="product"/> </td>
         <td>{data.name}</td>
         <td>In stock</td>
         <td><input class="form-control" type="text" readOnly value={data.amountInTheCart} /></td>

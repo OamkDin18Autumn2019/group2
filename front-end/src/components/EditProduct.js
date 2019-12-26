@@ -36,7 +36,7 @@ export default class EditProduct extends Component {
 
     componentDidMount = async () => {
         let idProduct = parseInt(this.props.match.params.id);
-        await fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/product/${idProduct}`, {
+        await fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/product/${idProduct}`, {
             crossDomain: true
         })
             .then(res => res.json())
@@ -48,7 +48,7 @@ export default class EditProduct extends Component {
                 //console.log(res);
                 let tags = [];
                 for (let i = 0; i < res.rows[0].tags.split(",").length; i++) {
-                    await fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/tag/${res.rows[0].tags.split(",")[i]}`, { crossDomain: true })
+                    await fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/tag/${res.rows[0].tags.split(",")[i]}`, { crossDomain: true })
                         .then(res => res.json())
                         .then(results => tags.push(results.rows[0]))
                         .catch(err => err);
@@ -72,7 +72,7 @@ export default class EditProduct extends Component {
                 console.log(err);
                 return null;
             })
-        await fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/category`, { crossDomain: true })
+        await fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/category`, { crossDomain: true })
             .then(res => res.json())
             .then(results => {
                 this.setState({ categoryOptions: results.rows });
@@ -90,7 +90,7 @@ export default class EditProduct extends Component {
 
     handleChangeTag = event => {
         this.setState({ tagSearchInput: event.target.value });
-        fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/tag/namelike/${event.target.value}`, {
+        fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/tag/namelike/${event.target.value}`, {
             crossDomain: true
         })
             .then(res => res.json())
@@ -126,7 +126,7 @@ export default class EditProduct extends Component {
                 }
             });
             if (!this.state.tagSuggestions.find(x => x.nameOfTag === this.state.tagSearchInput) && this.state.tagSearchInput !== "") {
-                await fetch('http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/tag', {
+                await fetch('http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/tag', {
                     method: 'POST',
                     mode: 'cors',
                     headers: {
@@ -141,7 +141,7 @@ export default class EditProduct extends Component {
                     .then(result => console.log(result))
                     .catch(err => err);
 
-                await fetch(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/tag/name/${this.state.tagSearchInput}`, {
+                await fetch(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/tag/name/${this.state.tagSearchInput}`, {
                     crossDomain: true
                 })
                     .then(res => res.json())
@@ -172,7 +172,7 @@ export default class EditProduct extends Component {
         console.log(editedProduct);
 
         let idProduct = parseInt(this.props.match.params.id);
-        axios.put(`http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/v1/product/${idProduct}`, {
+        axios.put(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/product/${idProduct}`, {
             ...editedProduct
         },
             {
@@ -434,7 +434,7 @@ export default class EditProduct extends Component {
                                             width="100"
                                             height="100"
                                             alt="Product"
-                                            src={(this.state.imageUrl !== null) ? `http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/${this.state.imageUrl}` : `http://ec2-3-82-236-93.compute-1.amazonaws.com:4000/${this.state.images}`}
+                                            src={(this.state.imageUrl !== null) ? `http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/${this.state.imageUrl}` : `http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/${this.state.images}`}
 
                                         ></img>
                                     </div>
