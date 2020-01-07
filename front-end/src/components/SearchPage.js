@@ -37,7 +37,7 @@ export default class SearchPage extends React.Component {
         temp_query = processSearch(temp_query);
         temp_query = encodeURIComponent(temp_query);
         console.log("query: ", temp_query);
-        fetch('http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/search?q=' + temp_query, { crossDomain: true })
+        fetch('http://52.91.20.141:4000/v1/search?q=' + temp_query, { crossDomain: true })
             .then(res => res.json())
             .then(results => {
                 //console.log("fetch results: ", results.rows);
@@ -54,7 +54,7 @@ export default class SearchPage extends React.Component {
         temp_query = encodeURIComponent(temp_query);
         if (temp_query !== this.state.lastQuery) {
             console.group("updated");
-            fetch('http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/search?q=' + temp_query, { crossDomain: true })
+            fetch('http://52.91.20.141:4000/v1/search?q=' + temp_query, { crossDomain: true })
                 .then(res => res.json())
                 .then(results => {
                     //console.log("fetch results: ", results.rows);

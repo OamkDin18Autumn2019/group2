@@ -20,7 +20,7 @@ export default class LandingPage extends React.Component {
     componentDidMount() {
         //let idProduct = parseInt(this.props.match.params.id);
         console.log(this.props.user.token)
-        axios.get(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/product/da/newArrivals`, {
+        axios.get(`http://52.91.20.141:4000/v1/product/da/newArrivals`, {
             headers: {
                 'x-access-token': this.props.user.token
             }
@@ -35,7 +35,7 @@ export default class LandingPage extends React.Component {
                 console.log(err);
                 return null;
             })
-        axios.get(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/product/da/bestSellers`, {
+        axios.get(`http://52.91.20.141:4000/v1/product/da/bestSellers`, {
             headers: {
                 'x-access-token': this.props.user.token
             }
@@ -50,7 +50,7 @@ export default class LandingPage extends React.Component {
                 console.log(err);
                 return null;
             })
-        axios.get(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/product/da/discounts`, {
+        axios.get(`http://52.91.20.141:4000/v1/product/da/discounts`, {
             headers: {
                 'x-access-token': this.props.user.token
             }

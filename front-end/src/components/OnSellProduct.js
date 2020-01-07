@@ -12,7 +12,7 @@ export default function OnSellProduct(props) {
     const deleteProduct = (e) => {
         e.preventDefault();
         console.log(props.token);
-        axios.delete(`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/v1/product/${props.id}`, {
+        axios.delete(`http://52.91.20.141:4000/v1/product/${props.id}`, {
           headers: {
             'x-access-token': props.token
           }
@@ -31,7 +31,7 @@ export default function OnSellProduct(props) {
         <>
         <div className={styles.OnSellProduct}>
             <div className={styles.ImageAndDescription}>
-                <img src={`http://ec2-3-85-131-156.compute-1.amazonaws.com:4000/${props.images}`} class="img img-fluid" alt="Padoru Padoru!" />
+                <img src={`http://52.91.20.141:4000/${props.images}`} class="img img-fluid" alt="Padoru Padoru!" />
                 <div className={styles.Description}>
                     <p style={{"font-size": "1.4em"}}>Description</p>
                     <p>
