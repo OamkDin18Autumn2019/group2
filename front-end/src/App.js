@@ -104,7 +104,7 @@ export default class App extends React.Component {
     };
 
     axios
-      .post(`http://52.91.20.141:4000/v1/user/login`, { user })
+      .post(`http://localhost:4000/v1/user/login`, { user })
       .then(async res => {
         // console.log(res);
 

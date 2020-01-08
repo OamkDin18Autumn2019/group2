@@ -27,7 +27,7 @@ export default class Profile extends Component {
 
   componentDidMount() {
     console.log(this.props.user);
-    axios.get(`http://52.91.20.141:4000/v1/user/da/getHistory`, {
+    axios.get(`http://localhost:4000/v1/user/da/getHistory`, {
       headers: {
         'x-access-token': this.props.user.token
       }
@@ -42,7 +42,7 @@ export default class Profile extends Component {
       })
     let userId = this.props.match.params.id
     if (!userId) {
-      axios.get(`http://52.91.20.141:4000/v1/product/da/currentSellings/${this.props.user.userId}`, {
+      axios.get(`http://localhost:4000/v1/product/da/currentSellings/${this.props.user.userId}`, {
         headers: {
           'x-access-token': this.props.user.token
         }
@@ -58,7 +58,7 @@ export default class Profile extends Component {
           return null;
       })
     } else {
-      axios.get(`http://52.91.20.141:4000/v1/product/da/currentSellings/${userId}`, {
+      axios.get(`http://localhost:4000/v1/product/da/currentSellings/${userId}`, {
         headers: {
           'x-access-token': this.props.user.token
         }
@@ -74,7 +74,7 @@ export default class Profile extends Component {
       })
       }
       if (!userId) {
-        axios.get(`http://52.91.20.141:4000/v1/user/${this.props.user.userId}`, {
+        axios.get(`http://localhost:4000/v1/user/${this.props.user.userId}`, {
           headers: {
             'x-access-token': this.props.user.token
           }
@@ -91,7 +91,7 @@ export default class Profile extends Component {
             return null;
           })
       } else {
-        axios.get(`http://52.91.20.141:4000/v1/user/${userId}`, {
+        axios.get(`http://localhost:4000/v1/user/${userId}`, {
         headers: {
           'x-access-token': this.props.user.token
         }
