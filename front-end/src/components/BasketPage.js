@@ -20,7 +20,7 @@ export default class BasketPage extends Component {
     // changes the product in the db 
     // and creates a history row in the db
     for (let i = 0; i < this.props.cart.length; i++) {
-      await axios.put(`http://localhost:4000/v1/product/${this.props.cart[i].id}`,
+      await axios.put(`https://back-end-for-anystore.herokuapp.com/v1/product/${this.props.cart[i].id}`,
         {
           amountOfProduct: this.props.cart[i].amountOfProduct - this.props.cart[i].amountInTheCart,
           amountOfSoldProduct: this.props.cart[i].amountOfSoldProduct + this.props.cart[i].amountInTheCart,
@@ -32,7 +32,7 @@ export default class BasketPage extends Component {
         })
         .then(async (res1) => {
           // console.log(res1)
-          await axios.post(`http://localhost:4000/v1/user/da/createHistory`,
+          await axios.post(`https://back-end-for-anystore.herokuapp.com/v1/user/da/createHistory`,
             {
               ...this.props.cart[i]
             },

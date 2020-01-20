@@ -12,7 +12,7 @@ export default function OnSellProduct(props) {
     const deleteProduct = (e) => {
         e.preventDefault();
         console.log(props.token);
-        axios.delete(`http://localhost:4000/v1/product/${props.id}`, {
+        axios.delete(`https://back-end-for-anystore.herokuapp.com/v1/product/${props.id}`, {
           headers: {
             'x-access-token': props.token
           }
@@ -31,7 +31,7 @@ export default function OnSellProduct(props) {
         <>
         <div className={styles.OnSellProduct}>
             <div className={styles.ImageAndDescription}>
-                <img src={`http://localhost:4000/${props.images}`} class="img img-fluid" alt="Padoru Padoru!" />
+                <img src={`https://back-end-for-anystore.herokuapp.com/${props.images}`} class="img img-fluid" alt="Padoru Padoru!" />
                 <div className={styles.Description}>
                     <p style={{"font-size": "1.4em"}}>Description</p>
                     <p>

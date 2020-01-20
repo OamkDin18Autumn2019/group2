@@ -27,7 +27,7 @@ export default class CreateProduct extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:4000/v1/category`, { crossDomain: true })
+    fetch(`https://back-end-for-anystore.herokuapp.com/v1/category`, { crossDomain: true })
       .then(res => res.json())
       .then(results => {
         this.setState({ categoryOptions: results.rows });
@@ -41,7 +41,7 @@ export default class CreateProduct extends Component {
 
   handleChangeTag = event => {
     this.setState({ tagSearchInput: event.target.value });
-    fetch(`http://localhost:4000/v1/tag/namelike/${event.target.value}`, {
+    fetch(`https://back-end-for-anystore.herokuapp.com/v1/tag/namelike/${event.target.value}`, {
       crossDomain: true
     })
       .then(res => res.json())
@@ -77,7 +77,7 @@ export default class CreateProduct extends Component {
         }
       });
       if (!this.state.tagSuggestions.find(x => x.nameOfTag === this.state.tagSearchInput) && this.state.tagSearchInput !== "") {
-        await fetch('http://localhost:4000/v1/tag', {
+        await fetch('https://back-end-for-anystore.herokuapp.com/v1/tag', {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -92,7 +92,7 @@ export default class CreateProduct extends Component {
           .then(result => console.log(result))
           .catch(err => err);
 
-        await fetch(`http://localhost:4000/v1/tag/namelike/${this.state.tagSearchInput}`, {
+        await fetch(`https://back-end-for-anystore.herokuapp.com/v1/tag/namelike/${this.state.tagSearchInput}`, {
           crossDomain: true
         })
           .then(res => res.json())
@@ -121,7 +121,7 @@ export default class CreateProduct extends Component {
       amountOfProduct: this.state.amountOfProduct
     };
     product = JSON.stringify(product);
-    fetch(`http://localhost:4000/v1/product/`, {
+    fetch(`https://back-end-for-anystore.herokuapp.com/v1/product/`, {
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -19,7 +19,7 @@ export default class Product extends React.Component {
     changeRating = (newRating, name) => {
         if (this.props.user.username !== "") {
             if (this.state.rating == null) {
-                axios.put(`http://localhost:4000/v1/product/changeRating/${this.props.id}`, {
+                axios.put(`https://back-end-for-anystore.herokuapp.com/v1/product/changeRating/${this.props.id}`, {
                     // headers: {
                     //     'x-access-token': this.props.user.token
                     // },
@@ -61,7 +61,7 @@ export default class Product extends React.Component {
         return (
             <>
                 <div className={styles.img_block}>
-                    <div className={styles.content_block}><img alt="product" src={`http://localhost:4000/${this.props.images}`} />
+                    <div className={styles.content_block}><img alt="product" src={`https://back-end-for-anystore.herokuapp.com/${this.props.images}`} />
                         <div className={styles.over_block}>
                         </div>
                         {/* {this.props.ratingProduct} */}

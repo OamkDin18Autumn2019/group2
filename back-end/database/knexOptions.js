@@ -3,11 +3,11 @@ require("dotenv").config();
 module.exports = {
   client: "mysql",
   connection: {
-    host: "mothersell.mysql.database.azure.com",
-    user: "motherseller@mothersell",
-    password: "nokiaIsTheBest92",
+    host: "database-2.ckqfrbqbybou.us-east-1.rds.amazonaws.com",
+    user: "admin",
+    password: "adminadmin",
     port: 3306,
-    database: "mothersell",
+    database: "anyStore",
     pool: {
       min: 2,
       max: 10

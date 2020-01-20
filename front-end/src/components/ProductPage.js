@@ -20,7 +20,7 @@ export default class ProductPage extends Component {
     componentDidMount() {
         let idProduct = parseInt(this.props.match.params.id);
         console.log(this.props.user.token)
-        axios.get(`http://localhost:4000/v1/product/${idProduct}`, {
+        axios.get(`https://back-end-for-anystore.herokuapp.com/v1/product/${idProduct}`, {
             headers: {
                 'x-access-token': this.props.user.token
             }
@@ -85,7 +85,7 @@ export default class ProductPage extends Component {
                         <div className="container py-4">
                             <div className={styles.mainCon}>
                                 <div className="d-flex align-content-start flex-wrap p-4">
-                                    <div className="col-md-4 col-s-12 col-lg-5"><img className={styles.productImg} alt="product" src={`http://localhost:4000/${this.state.data.images}`}></img></div>
+                                    <div className="col-md-4 col-s-12 col-lg-5"><img className={styles.productImg} alt="product" src={`https://back-end-for-anystore.herokuapp.com/${this.state.data.images}`}></img></div>
                                     <div className="col-md-8 col-s-12 col-lg-7 pl-5"><div> <h1>{this.state.data.name}</h1></div>
                                         <div className="row"> {this.state.data.description}</div>
                                         <div className="row py-2"><div class='my-auto'>Price:</div>
