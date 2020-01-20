@@ -152,7 +152,7 @@ export default class BasketPage extends Component {
                   <div class="row">
                     <h2 class="text-justify mx-auto  pl-4"> You have nothing in your cart</h2>
                     <div class="col-12">
-                      <img alt="cat" class="img-fluid col-md-5 col-sm-10 mx-auto d-block" src="https://cdn.telegram-site.com/images/stickers/9/6/0/11.jpg"></img>
+                      <img alt="cat" class="img-fluid col-md-5 col-sm-10 mx-auto d-block" src="http://cdn.telegram-site.com/images/stickers/9/6/0/11.jpg"></img>
                       <button class="btn mt-2 btn-md btn-block btn-info" onClick={() => this.props.history.goBack()}>Continue Shopping</button>
                     </div>
                     <div class="col mb-2">
@@ -175,7 +175,7 @@ export default class BasketPage extends Component {
                   <div class="row">
                     <h2 class="text-justify mx-auto  pl-4"> Done successfully</h2>
                     <div class="col-12">
-                      <img alt="cat" class="img-fluid mx-auto d-block my-2 col-md-3 col-sm-10" src="https://www.datakrat.ru/upload/medialibrary/e6d/Безымянный-22.png"></img>
+                      <img alt="cat" class="img-fluid mx-auto d-block my-2 col-md-3 col-sm-10" src="http://www.datakrat.ru/upload/medialibrary/e6d/Безымянный-22.png"></img>
                     </div>
                     <h4 class="text-justify mx-auto pl-4"> Check your <Link to={`/profile`}>profile</Link>  </h4>
              

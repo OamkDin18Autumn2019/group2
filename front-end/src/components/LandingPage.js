@@ -158,7 +158,7 @@ export default class LandingPage extends React.Component {
 
                         <section className={styles.info}>
 
-                            <img src="https://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
+                            <img src="http://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
                             <div>
                                 <h2> Start now</h2>
                                 <p> Just register and use all our lovely 

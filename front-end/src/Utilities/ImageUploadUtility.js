@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL = "http://localhost:4000/v1/uploads/images";
+const URL = "https://back-end-for-anystore.herokuapp.com/v1/uploads/images";
 const config = {
   headers: {
     "content-type": "multipart/form-data"

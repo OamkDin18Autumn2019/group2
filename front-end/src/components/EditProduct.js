@@ -458,7 +458,7 @@ export default class EditProduct extends Component {
                                     <div className="row">
                                         <h2 className="text-justify mx-auto  pl-4"> Done successfully</h2>
                                         <div className="col-12">
-                                            <img alt="cat" className="img-fluid mx-auto d-block my-2 col-md-3 col-sm-10" src="https://www.datakrat.ru/upload/medialibrary/e6d/Безымянный-22.png"></img>
+                                            <img alt="cat" className="img-fluid mx-auto d-block my-2 col-md-3 col-sm-10" src="http://www.datakrat.ru/upload/medialibrary/e6d/Безымянный-22.png"></img>
                                         </div>
                                         <h4 className="text-justify mx-auto pl-4"> Check your <Link to={`/profile`}>profile</Link>  </h4>
                                     </div>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const imgLink =
-  "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  "http://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   ;
 
 export default class Register extends React.Component {
@@ -46,7 +46,7 @@ export default class Register extends React.Component {
       };
 
       axios
-        .post(`http://52.91.20.141:4000/v1/user/register`, { user })
+        .post(`https://back-end-for-anystore.herokuapp.com/v1/user/register`, { user })
         .then(res => {
           // console.log(req);
           console.log(res);
