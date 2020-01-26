@@ -53,10 +53,9 @@ export default function OnSellProducts(props) {
                     !props.currentSaleItems.length ? (
                         <div class="container">
                             <div class="text-center">
-                                <h3>No search results</h3>
-                                <h4> You found only this beautiful cat</h4>
-                                <img src="https://www.pinclipart.com/picdir/big/57-576568_pusheen-cat-clipart.png" class="img img-fluid col-md-6" alt="decoration"></img>
-                                <h6>P.S it's priceless</h6>
+                                <h3>Nothing here yet</h3>
+                                <img src="https://avatars.mds.yandex.net/get-pdb/1658707/a43a9608-3ce0-4943-a25e-fc8ad7302cd3/s1200" class="img img-fluid col-md-6" alt="decoration"></img>
+                                <h6>Just this sleepy beauty</h6>
                             </div>                
                         </div>
                     ) : (

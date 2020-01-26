@@ -186,7 +186,7 @@ export default class EditProduct extends Component {
                 this.setState({
                     isUpdated: true
                 })
-                setTimeout(() => this.props.history.goBack(), 3000);
+                setTimeout(() => this.props.history.goBack(), 500);
             })
             .catch(err => {
                 console.log(err);

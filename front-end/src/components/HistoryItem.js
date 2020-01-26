@@ -26,31 +26,32 @@ export default function HistoryItem(props) {
                 :
                 <p> {props.price - props.price * props.discount / 100} € (-{props.discount}%)</p>
                 }
-                <p className={styles.SoldAt}> Sold at {props.created_at.slice(0, 10)} </p>
+                <p className={styles.SoldAt}> Bought at {props.created_at.slice(0, 10)} </p>
             </div>
             <div className={styles.Rating}>
                 <StarRatings
                     starDimension='30px'
-                    rating={props.rating}
+                    rating={props.ratingProduct}
                     starHoverColor='#6CCF6D'
-                    starRatedColor='#19B51B'
+                    starRatedColor='yellow'
                     starEmptyColor='lightgray'
                     numberOfStars={5}
                     starSpacing='1px'
                 /> 
+                {console.log("Rating:",props.ratingProduct) }
             </div>
             <div className={styles.AmountsOfContainer}>
-                <div className={styles.AmountOfRates}>
+                {/* <div className={styles.AmountOfRates}>
                     <label># of rates</label>
                     <p> {props.amountOfRates} </p>
                 </div>
                 <div className={styles.AmountOfProduct}>
                     <label># of remaining products</label>
                     <p> {props.amountOfProduct} </p>
-                </div>
+                </div> */}
                 <div className={styles.AmountOfSoldProduct}>
-                    <label># of sold products</label>
-                    <p> {props.amountOfSoldProduct} </p>
+                    <label># of bought products : {props.amount}</label>
+                  
                 </div>
             </div>
         </div>

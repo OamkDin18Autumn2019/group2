@@ -230,10 +230,6 @@ export default class App extends React.Component {
               <Profile {...routerProps} user={this.state.user} />
             )}
           />
-          {/* // <Route
-          //   path="/admin"
-          //   exact render={(routerProps ) => <AdminPage  />} />
-          //    */}
         </Router>
       </React.Fragment>
     );

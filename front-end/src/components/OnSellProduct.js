@@ -55,9 +55,9 @@ export default function OnSellProduct(props) {
                 <div className={styles.Rating}>
                     <StarRatings
                         starDimension='35px'
-                        rating={props.rating}
+                        rating={props.ratingProduct}
                         starHoverColor='#6CCF6D'
-                        starRatedColor='#19B51B'
+                        starRatedColor='yellow'
                         starEmptyColor='lightgray'
                         numberOfStars={5}
                         starSpacing='1px'
@@ -74,7 +74,8 @@ export default function OnSellProduct(props) {
                     </div>
                     <div className={styles.AmountOfSoldProduct}>
                         <label># of sold products</label>
-                        <p> {props.amountOfSoldProduct} </p>
+                        <p> {props.amountOfSoldProduct ? props.amountOfSoldProduct : 0} </p>
+                    {console.log('props.amountOfSoldProduct: ', props.amountOfProduct)}
                     </div>
                 </div>
             </div>
