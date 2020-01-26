@@ -104,7 +104,7 @@ export default class App extends React.Component {
     };
 
     axios
-      .post(`http://3.95.149.82:4000/v1/user/login`, { user })
+      .post(`https://back-end-for-anystore.herokuapp.com/v1/user/login`, { user })
       .then(async res => {
         // console.log(res);
 
